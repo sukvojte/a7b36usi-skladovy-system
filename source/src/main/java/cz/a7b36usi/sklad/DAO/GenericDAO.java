@@ -134,6 +134,7 @@ public class GenericDAO implements IGenericDAO {
         if (value == null) {
             e = clazz.cast(getEntityManager().createQuery("FROM " + clazz.getSimpleName() + " WHERE " + property + " IS NULL" ).getSingleResult());
         } else {
+            System.out.println("null "+ getEntityManager()+ ", "+clazz + ", ");
             e = clazz.cast(getEntityManager().createQuery("FROM " + clazz.getSimpleName() + " WHERE " + property + " = :value" ).setParameter("value", value).getSingleResult());
         }
         return e;

@@ -11,5 +11,6 @@ import java.awt.event.ActionListener;
  * @author Peter
  */
 public interface ILoginController {
+    public void showLogForm(String message) ;
     public void doLogin(String username,String password);
 }

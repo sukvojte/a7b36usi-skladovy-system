@@ -4,6 +4,11 @@
  */
 package cz.a7b36usi.sklad.Controller;
 
+<<<<<<< HEAD
+=======
+import cz.a7b36usi.gui.IPrihlaseni;
+import cz.a7b36usi.gui.Prihlaseni;
+>>>>>>> 819b6fbc00aeafacf90cd397be0d059bd461db1e
 import cz.a7b36usi.sklad.Service.IUserService;
 import cz.a7b36usi.sklad.gui.IPrihlaseni;
 import cz.a7b36usi.sklad.gui.Prihlaseni;
@@ -31,13 +36,14 @@ public class LoginController implements ILoginController {
     private IMainController mainController;
     
     public void showLogForm(String message) {
-        p.setVisible(true);
+        System.out.println(message);
+        p.showj(true);
         //TODO zobrazit ze se login vymrdal 
     }
 
     public void doLogin(String username, String password) {
         if (userService.logInUser(username, password)) {
-            p.setVisible(false);
+            p.showj(false);
             mainController.showMainFrame("Login successfull");
         } else {
             showLogForm("Login unsuccessfull");
