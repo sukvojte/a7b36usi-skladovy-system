@@ -23,7 +23,6 @@ public class UserService extends AbstractService implements IUserService {
      * @param acl Uzivatelska role
      * @return Id pridaneho uzivatele
      */
-    @Override
     public Long addUser(String username, String password, UserRole acl) {
         UserBO user = new UserBO();
 
@@ -34,7 +33,6 @@ public class UserService extends AbstractService implements IUserService {
      * Smaze uzivatele s danym identifikatorem z databaze
      * @param userId Identifikator uzivatele ktery ma byt smazan
      */
-    @Override
     public void deleteUser(Long userId) {
         genericDAO.removeById(userId, UserBO.class);
     }
@@ -44,7 +42,6 @@ public class UserService extends AbstractService implements IUserService {
      * @param id Identifikator hledanehop uzivatele
      * @return DTO s informacemi o hledanem uzivateli nebo null pokud nebyl nalezen
      */
-    @Override
     public UserDTO getUserById(Long id) {
         UserBO user = genericDAO.getById(id, UserBO.class);
         return new UserDTO(user.getId(),user.getUsername(), user.getAcl());
@@ -54,7 +51,6 @@ public class UserService extends AbstractService implements IUserService {
      * Vyhleda v databazi uzivatele s danym identifikatorem a vrati jeho DTO
      * @return List obsahujici DTO s informacemi o vsech nalezenych uzivatelich nebo null pokud nebyl nalezen zadny zaznam
      */
-    @Override
     public List<UserDTO> getAllUsers() {
         List<UserBO> bolist = genericDAO.getAll(UserBO.class);
         List<UserDTO> users = new ArrayList<UserDTO>();
@@ -70,7 +66,6 @@ public class UserService extends AbstractService implements IUserService {
      * @param password Heslo
      * @return true pokud je jmeno i heslo spravne, jinak false
      */
-    @Override
     public boolean logInUser(String username, String password) {
         UserBO user = genericDAO.getByPropertyUnique("username", username, UserBO.class);
         if (user == null) {
