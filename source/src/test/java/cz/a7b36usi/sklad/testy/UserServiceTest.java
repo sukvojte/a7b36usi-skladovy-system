@@ -18,6 +18,6 @@ public class UserServiceTest extends AbstractServiceTest
     
     @Test
     public void testAddUserAndRemove(){
-        userService.addUser("lojza", "nevim", UserRole.VEDOUCI);
+        userService.addUser("lojza"+System.currentTimeMillis(), "nevim", UserRole.VEDOUCI);
     }
 }
