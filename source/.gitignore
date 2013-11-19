@@ -1,3 +1,9 @@
 *.class
 *jdbc.properties
 target/*
+.metadata/*
+bin/*
+.project
+.classpath
+.springBeans
+.settings/*
