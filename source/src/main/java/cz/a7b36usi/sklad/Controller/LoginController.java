@@ -24,7 +24,7 @@ public class LoginController implements ILoginController {
     private IUserService userService;
     
     @Autowired
-    private IPrihlaseni p ;
+    private IPrihlaseni p;
 
     @Autowired
     private IMainController mainController;
