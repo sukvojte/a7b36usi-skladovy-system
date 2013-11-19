@@ -23,10 +23,10 @@ public class App
     
     public static void main( String[] args )
     {
-        ApplicationContext ctx = new ClassPathXmlApplicationContext("/applicationContext.xml");
-        
-        Tester t = ctx.getBean(Tester.class);
-        t.print();
+//        ApplicationContext ctx = new ClassPathXmlApplicationContext("/applicationContext.xml");
+//        
+//        Tester t = ctx.getBean(Tester.class);
+//        t.print();
         
         new Prihlaseni().setVisible(true);
     }

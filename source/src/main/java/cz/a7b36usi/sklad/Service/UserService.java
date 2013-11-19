@@ -9,11 +9,13 @@ import cz.a7b36usi.sklad.BO.UserRole;
 import cz.a7b36usi.sklad.DTO.UserDTO;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author Peter
  */
+@Component
 public class UserService extends AbstractService implements IUserService {
 
     /**
@@ -25,7 +27,9 @@ public class UserService extends AbstractService implements IUserService {
      */
     public Long addUser(String username, String password, UserRole acl) {
         UserBO user = new UserBO();
-
+        user.setAcl(acl);
+        user.setPassword(password);
+        user.setUsername(username);
         return genericDAO.saveOrUpdate(user).getId();
     }
 
