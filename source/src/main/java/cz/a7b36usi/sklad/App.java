@@ -1,5 +1,6 @@
 package cz.a7b36usi.sklad;
 
+import cz.a7b36usi.gui.Prihlaseni;
 import cz.a7b36usi.sklad.BO.Test;
 import cz.a7b36usi.sklad.BO.Tester;
 import org.springframework.context.ApplicationContext;
@@ -26,5 +27,7 @@ public class App
         
         Tester t = ctx.getBean(Tester.class);
         t.print();
+        
+        new Prihlaseni().setVisible(true);
     }
 }
