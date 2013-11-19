@@ -4,10 +4,18 @@
  */
 package cz.a7b36usi.sklad.Controller;
 
+import cz.a7b36usi.gui.SkladMainGUI;
+//
 /**
  *
  * @author Peter
  */
-public class MainController {
+public class MainController implements IMainController{
+
+    private SkladMainGUI mainGui;
+    
+    public void showMainFrame(String message) {
+        mainGui.setVisible(true);
+    }
     
 }
