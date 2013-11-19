@@ -4,8 +4,10 @@
  */
 package cz.a7b36usi.sklad.Controller;
 
-import cz.a7b36usi.gui.Prihlaseni;
 import cz.a7b36usi.sklad.Service.IUserService;
+import cz.a7b36usi.sklad.gui.IPrihlaseni;
+import cz.a7b36usi.sklad.gui.Prihlaseni;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -22,7 +24,8 @@ public class LoginController implements ILoginController {
     @Autowired
     private IUserService userService;
     
-    private Prihlaseni p;
+    @Autowired
+    private IPrihlaseni p;
 
     @Autowired
     private IMainController mainController;

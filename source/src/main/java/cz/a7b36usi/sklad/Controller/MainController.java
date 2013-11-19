@@ -4,12 +4,15 @@
  */
 package cz.a7b36usi.sklad.Controller;
 
-import cz.a7b36usi.gui.SkladMainGUI;
+import org.springframework.stereotype.Component;
+
+import cz.a7b36usi.sklad.gui.SkladMainGUI;
 //
 /**
  *
  * @author Peter
  */
+@Component
 public class MainController implements IMainController{
 
     private SkladMainGUI mainGui;

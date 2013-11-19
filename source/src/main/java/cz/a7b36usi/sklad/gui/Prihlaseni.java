@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package cz.a7b36usi.gui;
+package cz.a7b36usi.sklad.gui;
 
 import cz.a7b36usi.sklad.Controller.ILoginController;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
  * @author Lukas Lowinger
  */
 @Component
-public class Prihlaseni extends javax.swing.JFrame {
+public class Prihlaseni extends javax.swing.JFrame implements IPrihlaseni {
 
     @Autowired
     ILoginController controller;
