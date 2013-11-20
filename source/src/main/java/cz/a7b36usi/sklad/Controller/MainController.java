@@ -4,8 +4,10 @@
  */
 package cz.a7b36usi.sklad.Controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import cz.a7b36usi.sklad.gui.SkladMainGUI;
+
+import cz.a7b36usi.sklad.gui.ISkladMainGUI;
 //
 /**
  *
@@ -14,11 +16,12 @@ import cz.a7b36usi.sklad.gui.SkladMainGUI;
 @Component
 public class MainController implements IMainController{
 
-    private SkladMainGUI mainGui;
+	@Autowired
+    private ISkladMainGUI mainGui;
     
     public void showMainFrame(String message) {
-        System.out.println(message);
-        //mainGui.setVisible(true);
+        //System.out.println(message);
+        mainGui.setVisible(true);
     }
     
 }

@@ -4,10 +4,10 @@
  */
 package cz.a7b36usi.sklad.gui;
 
-import cz.a7b36usi.sklad.Controller.ILoginController;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.stereotype.Component;
+
+import cz.a7b36usi.sklad.Controller.ILoginController;
 
 /**
  *
@@ -127,7 +127,4 @@ public class Prihlaseni extends javax.swing.JFrame implements IPrihlaseni {
     private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 
-    public void showj(boolean vis) {
-        setVisible(vis);
-    }
 }

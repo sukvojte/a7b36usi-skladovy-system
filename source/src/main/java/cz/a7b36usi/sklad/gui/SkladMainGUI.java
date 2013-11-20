@@ -4,11 +4,14 @@
  */
 package cz.a7b36usi.sklad.gui;
 
+import org.springframework.stereotype.Component;
+
 /**
  *
  * @author Lukas Lowinger
  */
-public class SkladMainGUI extends javax.swing.JFrame {
+@Component
+public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
 
     /**
      * Creates new form SkladMainGUI
