@@ -27,11 +27,14 @@ public class GenericDAO implements IGenericDAO {
     protected EntityManagerFactory entityManagerfactory;
 
      protected EntityManager getEntityManager() {
-    	EntityManager em = EntityManagerFactoryUtils.getTransactionalEntityManager(entityManagerfactory); //entity manager with @Transactional support
-    	if(em == null){
-    		em = entityManagerfactory.createEntityManager ();
-    		//throw new RuntimeException("No thread-bound EntityManager found! ");
-    	}
+         System.out.println(entityManagerfactory);
+         EntityManager em = EntityManagerFactoryUtils.getTransactionalEntityManager(entityManagerfactory); //entity manager with @Transactional support
+
+//            	if(em == null){
+//    		em = entityManagerfactory.createEntityManager ();
+//    		//throw new RuntimeException("No thread-bound EntityManager found! ");
+//    	}
+                
         return em;
     }
 

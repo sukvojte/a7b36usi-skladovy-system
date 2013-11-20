@@ -6,11 +6,13 @@ package cz.a7b36usi.sklad.Service;
 
 import cz.a7b36usi.sklad.DAO.IGenericDAO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author Peter
  */
+@Transactional
 public abstract class AbstractService {
     @Autowired
     protected IGenericDAO genericDAO;
