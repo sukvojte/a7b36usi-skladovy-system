@@ -4,7 +4,6 @@
  */
 package cz.a7b36usi.sklad.BO;
 
-import org.springframework.stereotype.Component;
 
 /**
  *

@@ -18,7 +18,7 @@ import cz.a7b36usi.sklad.BO.UserRole;
 public class UserDTO extends AbstractDTO{
     
     private String username;
-    UserRole acl;
+    private UserRole acl;
 
     /**
      * Pro jistotu se neprenasi v DTO password

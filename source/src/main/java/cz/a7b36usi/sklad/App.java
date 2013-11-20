@@ -26,11 +26,6 @@ public class App
         LoginController login = ctx.getBean(LoginController.class);
         
         login.showLogForm("login");
-        
-        //Tester t = ctx.getBean(Tester.class);
-        //t.print();
-        
-        //new Prihlaseni().setVisible(true);
 
     }
 }

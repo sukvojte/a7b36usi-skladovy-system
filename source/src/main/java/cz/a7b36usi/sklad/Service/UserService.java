@@ -8,7 +8,11 @@ import cz.a7b36usi.sklad.BO.UserBO;
 import cz.a7b36usi.sklad.BO.UserRole;
 import cz.a7b36usi.sklad.DTO.UserDTO;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+
+import javax.persistence.NoResultException;
+
 import org.springframework.stereotype.Component;
 
 /**
@@ -70,11 +74,25 @@ public class UserService extends AbstractService implements IUserService {
      * @param password Heslo
      * @return true pokud je jmeno i heslo spravne, jinak false
      */
-    public boolean logInUser(String username, String password) {
-        UserBO user = genericDAO.getByPropertyUnique("username", username, UserBO.class);
-        if (user == null) {
-            return false;
-        }
-        return user.getPassword().equals(password);
+    public boolean logInUser(String username, char[] password) {
+    	try{
+	        UserBO user = genericDAO.getByPropertyUnique("username", username, UserBO.class);
+	        if (user == null) {
+	            return false;
+	        }
+	        
+	        boolean state = user.getPassword().equals(new String(password));
+	        Arrays.fill(password, (char)0);
+	        
+	        return state;
+    	}catch(NoResultException e){
+    		return false;
+    	}
+    	
     }
+
+	public boolean logInUser(String username, String password) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

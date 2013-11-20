@@ -7,8 +7,10 @@ package cz.a7b36usi.sklad.Controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import cz.a7b36usi.sklad.Controller.ifaces.ILoginController;
+import cz.a7b36usi.sklad.Controller.ifaces.IMainController;
 import cz.a7b36usi.sklad.Service.IUserService;
-import cz.a7b36usi.sklad.gui.IPrihlaseni;
+import cz.a7b36usi.sklad.gui.login.ifaces.IPrihlaseni;
 
 /**
  *
@@ -21,21 +23,21 @@ public class LoginController implements ILoginController {
     private IUserService userService;
     
     @Autowired
-    private IPrihlaseni p;
+    private IPrihlaseni loginForm;
 
     @Autowired
     private IMainController mainController;
     
     public void showLogForm(String message) {
-        p.setVisible(true);
+        loginForm.setVisible(true);
     }
 
-    public void doLogin(String username, String password) {
+    public void doLogin(String username, char[] password) {
         if (userService.logInUser(username, password)) {
-            p.setVisible(false);
+            loginForm.setVisible(false);
             mainController.showMainFrame("Login successfull");
         } else {
-            showLogForm("Login unsuccessfull");
+        	loginForm.showError("Login unsuccessfull");
         }
     }
 }

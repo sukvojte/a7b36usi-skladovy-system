@@ -7,7 +7,8 @@ package cz.a7b36usi.sklad.Controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import cz.a7b36usi.sklad.gui.ISkladMainGUI;
+import cz.a7b36usi.sklad.Controller.ifaces.IMainController;
+import cz.a7b36usi.sklad.gui.main.ifaces.ISkladMainGUI;
 //
 /**
  *

@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 public interface IUserService {
     
-    public boolean logInUser(String username,String password);
+    public boolean logInUser(String username,char[] password);
     
     public Long addUser(String username,String password, UserRole acl);
 

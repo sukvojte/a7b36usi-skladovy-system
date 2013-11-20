@@ -8,8 +8,9 @@ package cz.a7b36usi.sklad.DAO;
  *
  * @author Peter
  */
-import cz.a7b36usi.sklad.BO.AbstractBO;
 import java.util.List;
+
+import cz.a7b36usi.sklad.BO.AbstractBO;
 
 
 /**

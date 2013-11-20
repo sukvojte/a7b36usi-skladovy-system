@@ -6,8 +6,8 @@ package cz.a7b36usi.sklad.BO;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.orm.jpa.EntityManagerFactoryUtils;
 import org.springframework.stereotype.Component;
 
