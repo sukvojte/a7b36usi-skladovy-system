@@ -17,7 +17,7 @@ public interface IUserService {
     
     public boolean logInUser(String username,char[] password);
     
-    public Long addUser(String username,String password, UserRole acl);
+    public Long addUser(String username,char[] password, UserRole acl);
 
 
     public void deleteUser(Long userId);
@@ -28,5 +28,8 @@ public interface IUserService {
  
     @Transactional(readOnly=true)
     public List<UserDTO> getAllUsers();
+    
+    boolean updateUser(UserDTO user);
+    void updatePassword(UserDTO user, char[] password);
     
 }

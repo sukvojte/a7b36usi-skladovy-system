@@ -7,13 +7,12 @@
 package cz.a7b36usi.sklad.gui.users.ifaces;
 
 import cz.a7b36usi.sklad.DTO.UserDTO;
-import cz.a7b36usi.sklad.tableutils.TableBindingList;
 
 /**
  *
  * @author Vojta
  */
-public interface IUsersGUI {
-	void setVisible(boolean state);
-	void setUsers(TableBindingList<UserDTO> users);
+public interface IUserGUI {
+    void setVisible(boolean state);
+    void setUser(UserDTO user);
 }

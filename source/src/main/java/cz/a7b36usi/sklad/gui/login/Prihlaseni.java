@@ -81,6 +81,8 @@ public class Prihlaseni extends javax.swing.JFrame implements IPrihlaseni {
 
         jLabel4.setText("Přihlašte se prosím");
 
+        tbPassword.setToolTipText("");
+
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(

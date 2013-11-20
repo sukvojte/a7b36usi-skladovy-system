@@ -29,10 +29,11 @@ public class UserService extends AbstractService implements IUserService {
      * @param acl Uzivatelska role
      * @return Id pridaneho uzivatele
      */
-    public Long addUser(String username, String password, UserRole acl) {
+    public Long addUser(String username, char[] password, UserRole acl) {
         UserBO user = new UserBO();
         user.setAcl(acl);
-        user.setPassword(password);
+        user.setPassword(new String(password));
+        Arrays.fill(password, (char)0);
         user.setUsername(username);
         return genericDAO.saveOrUpdate(user).getId();
     }
@@ -91,8 +92,28 @@ public class UserService extends AbstractService implements IUserService {
     	
     }
 
-	public boolean logInUser(String username, String password) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean updateUser(UserDTO user) {
+		//try{
+			UserBO u = new UserBO();
+			
+			u.setUsername(user.getUsername());
+			u.setAcl(user.getAcl());
+			u.setId(user.getId());
+			
+			genericDAO.saveOrUpdate(u);
+	        
+	        return true;
+    	/*}catch(NoResultException e){
+    		return false;
+    	}*/
+	}
+
+	public void updatePassword(UserDTO user, char[] password) {
+		UserBO u = new UserBO();
+		u.setId(user.getId());
+		u.setPassword(new String(password));
+		genericDAO.saveOrUpdate(u);
+		
+		Arrays.fill(password, (char)0);
 	}
 }

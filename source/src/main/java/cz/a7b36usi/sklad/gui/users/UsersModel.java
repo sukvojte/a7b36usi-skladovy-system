@@ -6,13 +6,17 @@
 
 package cz.a7b36usi.sklad.gui.users;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 
+import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
 
 import cz.a7b36usi.sklad.DTO.UserDTO;
+import cz.a7b36usi.sklad.tableutils.TableBindingList;
+import cz.a7b36usi.sklad.tableutils.TableEvent;
+import cz.a7b36usi.sklad.tableutils.TableEvent.Type;
+import cz.a7b36usi.sklad.tableutils.TableListener;
 
 /**
  *
@@ -20,13 +24,36 @@ import cz.a7b36usi.sklad.DTO.UserDTO;
  */
 class UsersModel implements TableModel {
 
-	private List<UserDTO> users;
-	private List<TableModelListener> listeners;
+	class UserModelListener implements TableListener{
+
+		private TableModelListener listener;
+		private TableModel source;
+		
+		public UserModelListener(TableModelListener listener, TableModel source){
+			this.listener = listener;
+			this.source = source;
+		}
+		
+		public void tableChanged(TableEvent e) {
+			
+			TableModelEvent event = null; 
+			if(e.getType() == Type.ALL){
+				event = new TableModelEvent(source);
+			}else{
+				event = new TableModelEvent(source, e.getRowId());
+			}
+			
+			listener.tableChanged(event);
+		}
+		
+	}
 	
+	private TableBindingList<UserDTO> users;
+	private HashMap<TableModelListener, UserModelListener> listeners;
 	
-    public UsersModel(List<UserDTO> users) {
+    public UsersModel(TableBindingList<UserDTO> users) {
     	this.users = users;
-    	this.listeners = new ArrayList<TableModelListener>();
+    	listeners = new HashMap<TableModelListener, UsersModel.UserModelListener>();
     }
 
     public int getRowCount() {
@@ -58,11 +85,19 @@ class UsersModel implements TableModel {
     }
 
     public void addTableModelListener(TableModelListener l) {
-    	this.listeners.add(l);
+    	UserModelListener ul = new UserModelListener(l, this);
+    	listeners.put(l, ul);
+    	this.users.addTableListener(ul);
     }
 
     public void removeTableModelListener(TableModelListener l) {
-    	this.listeners.remove(l);
+    	
+    	UserModelListener ul = listeners.get(l);
+    	this.users.removeTableListener(ul);
+    }
+
+    public UserDTO getUser(int position) {
+        return this.users.get(position);
     }
     
 }

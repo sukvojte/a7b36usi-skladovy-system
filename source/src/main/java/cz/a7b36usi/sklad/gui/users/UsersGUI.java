@@ -6,12 +6,16 @@
 
 package cz.a7b36usi.sklad.gui.users;
 
-import java.util.List;
+import javax.swing.JOptionPane;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import cz.a7b36usi.sklad.Controller.ifaces.IUsersController;
 import cz.a7b36usi.sklad.DTO.UserDTO;
+import cz.a7b36usi.sklad.gui.users.ifaces.IUserGUI;
 import cz.a7b36usi.sklad.gui.users.ifaces.IUsersGUI;
+import cz.a7b36usi.sklad.tableutils.TableBindingList;
 
 /**
  *
@@ -20,6 +24,14 @@ import cz.a7b36usi.sklad.gui.users.ifaces.IUsersGUI;
 @Component
 public class UsersGUI extends javax.swing.JFrame implements IUsersGUI{
 
+	@Autowired
+	private IUserGUI userGui;
+	
+	@Autowired
+	private IUsersController userController;
+	
+	private UsersModel model;
+	
     /**
      * Creates new form UsersGUI
      */
@@ -42,8 +54,6 @@ public class UsersGUI extends javax.swing.JFrame implements IUsersGUI{
         btnAdd = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         tabUsers.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -112,19 +122,38 @@ public class UsersGUI extends javax.swing.JFrame implements IUsersGUI{
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-        // TODO add your handling code here:
+    	UserDTO user = getSelectedUser();
+    	if(user != null){
+    		userController.deleteUser(user);
+    	}
     }//GEN-LAST:event_btnDeleteActionPerformed
 
+    private UserDTO getSelectedUser(){
+    	int selection = tabUsers.getSelectedRow();
+    	if(selection >= 0){
+    		return model.getUser(selection);
+    	}else{
+    		JOptionPane.showMessageDialog(null, "Nejdříve vyberte uživatele");
+    	}
+    	return null;
+    }
+    
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        // TODO add your handling code here:
+   		userGui.setUser(null);
+   		userGui.setVisible(true);
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        // TODO add your handling code here:
+    	UserDTO user = getSelectedUser();
+    	if(user != null){
+    		userGui.setUser(user);
+    		userGui.setVisible(true);
+    	}
     }//GEN-LAST:event_btnUpdateActionPerformed
     
-    public void setUsers(List<UserDTO> users){
-        tabUsers.setModel(new UsersModel(users));
+    public void setUsers(TableBindingList<UserDTO> users){
+    	model = new UsersModel(users);
+        tabUsers.setModel(model);
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
