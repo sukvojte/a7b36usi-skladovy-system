@@ -17,7 +17,7 @@ import cz.a7b36usi.sklad.gui.main.ifaces.ISkladMainGUI;
 @Component
 public class MainController implements IMainController{
 
-	@Autowired
+    @Autowired
     private ISkladMainGUI mainGui;
     
     public void showMainFrame(String message) {
