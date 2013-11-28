@@ -13,5 +13,4 @@ import javax.swing.table.TableModel;
  */
 public interface IMainController {
     public void showMainFrame(String message);
-    public TableModel getTableModel(int index);
 }

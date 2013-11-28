@@ -5,6 +5,7 @@
 package cz.a7b36usi.sklad.gui.main;
 
 import cz.a7b36usi.sklad.Controller.ifaces.IMainController;
+import cz.a7b36usi.sklad.Controller.ifaces.ITabController;
 import cz.a7b36usi.sklad.gui.main.ifaces.InterfaceSkladMainGUI;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -19,7 +20,7 @@ import org.springframework.stereotype.Component;
 public class SkladMainGUI extends javax.swing.JFrame implements InterfaceSkladMainGUI{
     
     @Autowired
-    IMainController mainController;
+    ITabController tabController;
     /**
      * Creates new form SkladMainGUI
      */
@@ -28,7 +29,7 @@ public class SkladMainGUI extends javax.swing.JFrame implements InterfaceSkladMa
         jTabbedPane1.addChangeListener(new ChangeListener() {
 
             public void stateChanged(ChangeEvent e) {
-                jTable1.setModel(mainController.getTableModel(jTabbedPane1.getSelectedIndex()));
+                jTable1.setModel(tabController.getTableModel(jTabbedPane1.getSelectedIndex()));
             }
         });
     }

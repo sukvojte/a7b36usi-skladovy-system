@@ -30,11 +30,4 @@ public class MainController implements IMainController{
         //System.out.println(message);
         mainGui.setVisible(true);
     }
-    public TableModel getTableModel(int indexTab){
-        System.out.println("index"+indexTab);
-        switch(indexTab){
-            case 4 : return new UsersTableModel(userService.getAllUsers());
-        }
-        return null;
-    }
 }
