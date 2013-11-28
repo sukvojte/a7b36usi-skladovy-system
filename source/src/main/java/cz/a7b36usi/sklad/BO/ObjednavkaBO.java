@@ -9,6 +9,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -22,16 +23,16 @@ public class ObjednavkaBO extends AbstractBO{
     @Temporal(TemporalType.DATE)
     private Date datum;
     
-    @OneToMany
+    @ManyToOne
     private DruhBaleniBO druhBaleni;
     
-    @OneToMany
+    @ManyToOne
     private SarzeBO sarze;
     
     @ManyToMany(cascade = {CascadeType.ALL})
     private List<PolozkaBO> polozky;
     
-    @OneToMany
+    @ManyToOne
     private ZakaznikBO zakaznik;
 
     public ObjednavkaBO() {

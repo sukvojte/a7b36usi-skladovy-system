@@ -18,6 +18,10 @@ public class UserServiceTest extends AbstractServiceTest
     
     @Test
     public void testAddUserAndRemove(){
+        System.out.println("TESTUJU");
+        if(userService.getUserById(new Long(1))==null){
+            userService.addUser("admin", "admin".toCharArray(), UserRole.VEDOUCI);
+        }
         userService.addUser("lojza"+System.currentTimeMillis(), "nevim".toCharArray(), UserRole.VEDOUCI);
     }
 }

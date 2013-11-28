@@ -5,6 +5,7 @@
 package cz.a7b36usi.sklad.BO;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 /**
@@ -18,7 +19,7 @@ import javax.persistence.OneToMany;
 @Entity
 public class PolozkaBO extends AbstractBO{
     
-    @OneToMany
+    @ManyToOne
     private ProduktBO produkt;
     
     private int quantity;

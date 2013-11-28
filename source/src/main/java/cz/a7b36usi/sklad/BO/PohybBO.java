@@ -6,6 +6,7 @@ package cz.a7b36usi.sklad.BO;
 
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 /**
@@ -17,19 +18,19 @@ public class PohybBO extends AbstractBO{
     
     private double cena;
     
-    @OneToMany
+    @ManyToOne
     private DruhBaleniBO druhBaleni;
     
-    @OneToMany
+    @ManyToOne
     private SarzeBO sarze;
     
     @Enumerated
     private TypDokladu typDokladu;
     
-    @OneToMany
+    @ManyToOne
     private ProduktBO produkt;
     
-    @OneToMany
+    @ManyToOne
     private ZakaznikBO zakaznik;
 
     public PohybBO() {
