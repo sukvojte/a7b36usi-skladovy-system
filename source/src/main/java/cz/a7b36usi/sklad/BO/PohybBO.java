@@ -76,6 +76,7 @@ public class PohybBO extends AbstractBO{
 
     public void setProdukt(ProduktBO produkt) {
         this.produkt = produkt;
+        this.produkt.addPohyb(this);
     }
 
     public ZakaznikBO getZakaznik() {

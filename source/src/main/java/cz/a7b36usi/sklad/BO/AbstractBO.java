@@ -4,6 +4,7 @@
  */
 package cz.a7b36usi.sklad.BO;
 
+import java.io.Serializable;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,7 +15,7 @@ import javax.persistence.MappedSuperclass;
  * @author Peter
  */
 @MappedSuperclass
-public abstract class AbstractBO {
+public abstract class AbstractBO implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
