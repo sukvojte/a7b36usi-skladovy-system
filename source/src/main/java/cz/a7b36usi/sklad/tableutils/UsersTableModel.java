@@ -9,7 +9,7 @@ import java.util.List;
  *
  * @author Lukas L.
  */
-class UsersTableModel extends javax.swing.table.AbstractTableModel {
+public class UsersTableModel extends javax.swing.table.AbstractTableModel {
     ArrayList<ArrayList> rows;
     public static final  String columns [] = {"Username", "ACL"};
 
@@ -22,6 +22,13 @@ class UsersTableModel extends javax.swing.table.AbstractTableModel {
             rows.add(row);
         }
     }
+
+    @Override
+    public String getColumnName(int column) {
+        return columns[column];
+    }
+    
+    
     
     public int getRowCount() {
         return rows.size();

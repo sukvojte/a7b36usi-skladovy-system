@@ -4,17 +4,33 @@
  */
 package cz.a7b36usi.sklad.gui.main;
 
+import cz.a7b36usi.sklad.Controller.ifaces.IMainController;
+import cz.a7b36usi.sklad.gui.main.ifaces.InterfaceSkladMainGUI;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 /**
  *
  * @author Lukas Lowinger
  */
-public class SkladMainGUI extends javax.swing.JFrame {
-
+@Component
+public class SkladMainGUI extends javax.swing.JFrame implements InterfaceSkladMainGUI{
+    
+    @Autowired
+    IMainController mainController;
     /**
      * Creates new form SkladMainGUI
      */
     public SkladMainGUI() {
         initComponents();
+        jTabbedPane1.addChangeListener(new ChangeListener() {
+
+            public void stateChanged(ChangeEvent e) {
+                jTable1.setModel(mainController.getTableModel(jTabbedPane1.getSelectedIndex()));
+            }
+        });
     }
 
     /**
@@ -209,4 +225,8 @@ public class SkladMainGUI extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
+
+    public void setVis(boolean t) {
+        this.setVisible(t);
+    }
 }
