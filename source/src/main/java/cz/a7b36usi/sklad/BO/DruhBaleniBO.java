@@ -24,6 +24,30 @@ public class DruhBaleniBO extends AbstractBO{
     @OneToMany
     private List<PohybBO> pohyby;
 
+    public ProduktBO getProdukt() {
+        return produkt;
+    }
+
+    public void setProdukt(ProduktBO produkt) {
+        this.produkt = produkt;
+    }
+
+    public List<ObjednavkaBO> getObjednavky() {
+        return objednavky;
+    }
+
+    public void setObjednavky(List<ObjednavkaBO> objednavky) {
+        this.objednavky = objednavky;
+    }
+
+    public List<PohybBO> getPohyby() {
+        return pohyby;
+    }
+
+    public void setPohyby(List<PohybBO> pohyby) {
+        this.pohyby = pohyby;
+    }
+
     public String getNazev() {
         return nazev;
     }

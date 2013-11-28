@@ -20,4 +20,30 @@ public class KategorieBO extends AbstractBO{
     
     @OneToMany(cascade = {CascadeType.ALL})
     private List<ProduktBO> jeVProduktech;
+
+    public String getJmeno() {
+        return jmeno;
+    }
+
+    public void setJmeno(String jmeno) {
+        this.jmeno = jmeno;
+    }
+
+    public List<KategorieBO> getPodkategorie() {
+        return podkategorie;
+    }
+
+    public void setPodkategorie(List<KategorieBO> podkategorie) {
+        this.podkategorie = podkategorie;
+    }
+
+    public List<ProduktBO> getJeVProduktech() {
+        return jeVProduktech;
+    }
+
+    public void setJeVProduktech(List<ProduktBO> jeVProduktech) {
+        this.jeVProduktech = jeVProduktech;
+    }
+        
+    
 }

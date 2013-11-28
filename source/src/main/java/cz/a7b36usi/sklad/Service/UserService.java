@@ -53,6 +53,7 @@ public class UserService extends AbstractService implements IUserService {
      */
     public UserDTO getUserById(Long id) {
         UserBO user = genericDAO.getById(id, UserBO.class);
+        if(user == null) return null;
         return new UserDTO(user.getId(),user.getUsername(), user.getAcl());
     }
 

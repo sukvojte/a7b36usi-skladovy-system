@@ -11,25 +11,23 @@ import java.util.List;
  *
  * @author Peter
  */
-public class ObjednavkaDTO extends AbstractDTO{
-     private Date datum;
+public class ObjednavkaDTO extends AbstractDTO {
+
+    private Date datum;
     private Long druhBaleni;
     private Long sarze;
     private List<Long> polozky;
     private Long zakaznik;
 
-    public ObjednavkaDTO(Long id,Date datum, Long druhBaleni, Long sarze, List<Long> polozky, Long zakaznik) {
+    public ObjednavkaDTO(Long id, Date datum, Long druhBaleni, Long sarze, List<Long> polozky, Long zakaznik) {
         this.datum = datum;
         this.druhBaleni = druhBaleni;
         this.sarze = sarze;
         this.polozky = polozky;
         this.zakaznik = zakaznik;
-        this.id=id;
+        this.id = id;
     }
 
-    
-
-    
     //***************** GETTER SETTER KILOMETER BY PETER ********************************
     public Date getDatum() {
         return datum;
