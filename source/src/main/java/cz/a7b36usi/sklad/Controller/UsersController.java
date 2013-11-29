@@ -14,7 +14,7 @@ import cz.a7b36usi.sklad.BO.UserRole;
 import cz.a7b36usi.sklad.Controller.ifaces.IUsersController;
 import cz.a7b36usi.sklad.DTO.UserDTO;
 import cz.a7b36usi.sklad.Service.IUserService;
-import cz.a7b36usi.sklad.gui.main.ifaces.InterfaceSkladMainGUI;
+import cz.a7b36usi.sklad.gui.main.ifaces.ISkladMainGUI;
 import cz.a7b36usi.sklad.gui.users.ifaces.IUsersGUI;
 import cz.a7b36usi.sklad.tableutils.TableBindingList;
 import cz.a7b36usi.sklad.tableutils.TableEvent;
@@ -34,7 +34,7 @@ public class UsersController implements IUsersController {
     private TableBindingList<UserDTO> model;
     
     @Autowired
-    private InterfaceSkladMainGUI main;
+    private ISkladMainGUI main;
 
     public void showUsersForm() {
         model = new TableBindingList<UserDTO>(userService.getAllUsers()); // TODO: hibernate nejak nechodi 
@@ -42,7 +42,7 @@ public class UsersController implements IUsersController {
 
         usersGui.setUsers(model);
         usersGui.setVisible(true);
-        main.setVis(true);
+        main.setVisible(true);
     }
 
     public void deleteUser(UserDTO user) {

@@ -11,14 +11,10 @@
   <url>http://maven.apache.org</url>
 
   <properties>
-   
-        
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <org.hibernate.version>4.1.7.Final</org.hibernate.version>
         <org.springframework.version>3.1.2.RELEASE</org.springframework.version>
-
-    
   </properties>
 
   <dependencies>
@@ -146,6 +142,11 @@
       <groupId>cglib</groupId>
       <artifactId>cglib</artifactId>
       <version>2.2</version>
+    </dependency>
+    <dependency>
+    	<groupId>log4j</groupId>
+    	<artifactId>log4j</artifactId>
+    	<version>1.2.14</version>
     </dependency>
   </dependencies>
 </project>

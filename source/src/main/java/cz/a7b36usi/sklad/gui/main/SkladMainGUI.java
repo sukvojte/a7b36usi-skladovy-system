@@ -12,9 +12,10 @@ import cz.a7b36usi.sklad.Controller.ifaces.IMainController;
 import cz.a7b36usi.sklad.Controller.ifaces.ITabController;
 import cz.a7b36usi.sklad.DTO.UserDTO;
 import cz.a7b36usi.sklad.gui.main.ifaces.IGuiData;
-import cz.a7b36usi.sklad.gui.main.ifaces.InterfaceSkladMainGUI;
+import cz.a7b36usi.sklad.gui.main.ifaces.ISkladMainGUI;
 import cz.a7b36usi.sklad.gui.main.listeners.IMainGuiListener;
 
+import javax.swing.JTabbedPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -26,14 +27,13 @@ import org.springframework.stereotype.Component;
  * @author Lukas Lowinger
  */
 @Component
-public class SkladMainGUI extends javax.swing.JFrame implements InterfaceSkladMainGUI{
+public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
     
     @Autowired
     ITabController tabController;
     
-    
+    /* Listenery - START */
     private ArrayList<IMainGuiListener> listeners;
-    
     
     public void addListeners(IMainGuiListener listener){
     	listeners.add(listener);
@@ -42,26 +42,27 @@ public class SkladMainGUI extends javax.swing.JFrame implements InterfaceSkladMa
     public void removeListeners(IMainGuiListener listener){
     	listeners.remove(listener);
     }
+    /* Listenery - END */
     
     public boolean switchTab(Tabs tab){
+    	    	
+    	// TODO: switch tab
     	
-    	
+    	// Fire event
     	for(IMainGuiListener ctrl : listeners){
     		ctrl.tabChanged(tab);
     	}
     	
-    	return false;
+    	return true;
     }
     
     public IGuiData getData(){
 		return new IGuiData() {
-
 			public UserDTO getUserData() {
-				
+				// TODO: navrat objekt UserDTO s informacema z formulare
 				return null;
 			}
 		};
-    	
     }
     
     
@@ -74,12 +75,30 @@ public class SkladMainGUI extends javax.swing.JFrame implements InterfaceSkladMa
         jTabbedPane1.addChangeListener(new ChangeListener() {
 
             public void stateChanged(ChangeEvent e) {
-            	
-            	for(IMainGuiListener ctrl : listeners){
-            		ctrl.tabChanged(Tabs.DRUHA);
+            	JTabbedPane source = (JTabbedPane) e.getSource();
+            	if(!(source.getSelectedComponent() instanceof TabsJPanel)){
+            		throw new RuntimeException("Panel "+source.getSelectedIndex()+" isn't instance of TabsJPanel");
             	}
             	
-                //jTable1.setModel(tabController.getTableModel(jTabbedPane1.getSelectedIndex()));
+            	/*
+            	 * TODO: remove this comment
+            	 * Aby tady nemusel byt enum, tak lze v NetBeans vyuzit Custom Creation Code na karte Code, kde si zavolas vlastni konstruktor. 
+            	 * Ja vyuzivam tridy TabsJPanel ktera dedi z JPanel, ale je tam navic informace o aktivnim panelu. Takze tenhle kod nemusis editovat, 
+            	 * kdyz budes editovat zalozky
+            	 */
+            	
+            	TabsJPanel panel = (TabsJPanel) source.getSelectedComponent();
+            	Tabs selectedTab = panel.getTab(); 
+            	
+            	// TODO: akce pri zmene panelu
+            	
+            	
+            	// Fire event tabChanged
+            	for(IMainGuiListener ctrl : listeners){
+            		ctrl.tabChanged(selectedTab);
+            	}
+            	
+               
             }
         });
     }
@@ -94,11 +113,11 @@ public class SkladMainGUI extends javax.swing.JFrame implements InterfaceSkladMa
     private void initComponents() {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
-        jPanel4 = new javax.swing.JPanel();
-        jPanel5 = new javax.swing.JPanel();
+        panelAddress = new TabsJPanel(Tabs.ADDRESS_BOOK);
+        panelOrders = new TabsJPanel(Tabs.ORDERS);
+        panelMovements = new TabsJPanel(Tabs.MOVEMENTS);
+        panelWarehouse = new TabsJPanel(Tabs.WAREHOUSE);
+        panelUsers = new TabsJPanel(Tabs.USERS);
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -108,70 +127,72 @@ public class SkladMainGUI extends javax.swing.JFrame implements InterfaceSkladMa
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        org.jdesktop.layout.GroupLayout jPanel1Layout = new org.jdesktop.layout.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+        panelAddress.setToolTipText("");
+
+        org.jdesktop.layout.GroupLayout panelAddressLayout = new org.jdesktop.layout.GroupLayout(panelAddress);
+        panelAddress.setLayout(panelAddressLayout);
+        panelAddressLayout.setHorizontalGroup(
+            panelAddressLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(0, 726, Short.MAX_VALUE)
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+        panelAddressLayout.setVerticalGroup(
+            panelAddressLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(0, 171, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("Adresář", jPanel1);
+        jTabbedPane1.addTab("Adresář", panelAddress);
 
-        org.jdesktop.layout.GroupLayout jPanel2Layout = new org.jdesktop.layout.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+        org.jdesktop.layout.GroupLayout panelOrdersLayout = new org.jdesktop.layout.GroupLayout(panelOrders);
+        panelOrders.setLayout(panelOrdersLayout);
+        panelOrdersLayout.setHorizontalGroup(
+            panelOrdersLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(0, 726, Short.MAX_VALUE)
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+        panelOrdersLayout.setVerticalGroup(
+            panelOrdersLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(0, 171, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("Objednávky", jPanel2);
+        jTabbedPane1.addTab("Objednávky", panelOrders);
 
-        org.jdesktop.layout.GroupLayout jPanel3Layout = new org.jdesktop.layout.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+        org.jdesktop.layout.GroupLayout panelMovementsLayout = new org.jdesktop.layout.GroupLayout(panelMovements);
+        panelMovements.setLayout(panelMovementsLayout);
+        panelMovementsLayout.setHorizontalGroup(
+            panelMovementsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(0, 726, Short.MAX_VALUE)
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+        panelMovementsLayout.setVerticalGroup(
+            panelMovementsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(0, 171, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("Pohyby", jPanel3);
+        jTabbedPane1.addTab("Pohyby", panelMovements);
 
-        org.jdesktop.layout.GroupLayout jPanel4Layout = new org.jdesktop.layout.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+        org.jdesktop.layout.GroupLayout panelWarehouseLayout = new org.jdesktop.layout.GroupLayout(panelWarehouse);
+        panelWarehouse.setLayout(panelWarehouseLayout);
+        panelWarehouseLayout.setHorizontalGroup(
+            panelWarehouseLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(0, 726, Short.MAX_VALUE)
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+        panelWarehouseLayout.setVerticalGroup(
+            panelWarehouseLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(0, 171, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("Skladové zásoby", jPanel4);
+        jTabbedPane1.addTab("Skladové zásoby", panelWarehouse);
 
-        org.jdesktop.layout.GroupLayout jPanel5Layout = new org.jdesktop.layout.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+        org.jdesktop.layout.GroupLayout panelUsersLayout = new org.jdesktop.layout.GroupLayout(panelUsers);
+        panelUsers.setLayout(panelUsersLayout);
+        panelUsersLayout.setHorizontalGroup(
+            panelUsersLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(0, 726, Short.MAX_VALUE)
         );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+        panelUsersLayout.setVerticalGroup(
+            panelUsersLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(0, 171, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("Uživatelé", jPanel5);
+        jTabbedPane1.addTab("Uživatelé", panelUsers);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -267,14 +288,14 @@ public class SkladMainGUI extends javax.swing.JFrame implements InterfaceSkladMa
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JPanel panelAddress;
+    private javax.swing.JPanel panelMovements;
+    private javax.swing.JPanel panelOrders;
+    private javax.swing.JPanel panelUsers;
+    private javax.swing.JPanel panelWarehouse;
     // End of variables declaration//GEN-END:variables
 
     public void setVis(boolean t) {
