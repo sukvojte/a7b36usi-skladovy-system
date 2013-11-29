@@ -5,6 +5,7 @@ import cz.a7b36usi.sklad.Tabs;
 public interface IMainGuiListener {
 	
 	void tabChanged(Tabs activetTab);
-	void productSave();
+	void editFormSave();
+	void tableSelectedIndex(int index);
 	
 }

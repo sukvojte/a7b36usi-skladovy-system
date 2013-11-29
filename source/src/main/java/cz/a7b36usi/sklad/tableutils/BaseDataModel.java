@@ -38,4 +38,9 @@ public abstract class BaseDataModel<T> extends AbstractTableModel{
 
 	public abstract Object getColumnValue(T row, int index);
 	
+
+	public T getRowByIndex(int index) {
+		return list.get(index);
+	}
+	
 }

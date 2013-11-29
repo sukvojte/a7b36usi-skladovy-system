@@ -33,4 +33,11 @@ class ZakaznikService extends AbstractService implements IZakaznikService {
         zakaznik.setUlice(ulice);
         return genericDAO.saveOrUpdate(zakaznik).getId();
     }
+
+	public boolean saveZakaznik(ZakaznikDTO customer) {
+		// TODO Auto-generated method stub
+		// if customer.id == null, add it into DB!
+		// return true if any data changed
+		return false;
+	}
 }

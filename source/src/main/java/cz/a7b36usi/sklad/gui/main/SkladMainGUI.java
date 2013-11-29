@@ -7,6 +7,7 @@ package cz.a7b36usi.sklad.gui.main;
 import java.util.ArrayList;
 
 import javax.swing.JTabbedPane;
+import javax.swing.JTable;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.table.AbstractTableModel;
@@ -32,6 +33,8 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
 
     @Autowired
     ITabController tabController;
+    
+    private ZakaznikDTO lastZakaznik = null;
     
     /* Listenery - START */
     private ArrayList<IMainGuiListener> listeners;
@@ -65,8 +68,12 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
                 return new UserDTO(null, null, UserRole.VEDOUCI);
             }
             public ZakaznikDTO getZakaznikData() {
-                //TODO: co s ID ? zatim se neresi dodavatel, odberatel
-                return new ZakaznikDTO(null, true, false,uliceTF.getText(), mestoTF.getText(), spolecnostTF.getText(),Integer.parseInt(pscTF.getText()), Integer.parseInt(cisloPopTF.getText()));
+                //TODO: zatim se neresi dodavatel, odberatel
+            	long id = 0;
+            	if(lastZakaznik != null){
+            		id = lastZakaznik.getId();
+            	}
+                return new ZakaznikDTO((id != 0?id:null), true, false,uliceTF.getText(), mestoTF.getText(), spolecnostTF.getText(),Integer.parseInt(pscTF.getText()), Integer.parseInt(cisloPopTF.getText()));
             }
         };
     }
@@ -74,6 +81,27 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
     public void setTableModel(AbstractTableModel model) {
     	jTable1.setModel(model);
 	}
+    
+    public void editCustomer(ZakaznikDTO customer) {
+    	lastZakaznik = customer;
+    	if(lastZakaznik != null){
+    		uliceTF.setText(lastZakaznik.getUlice()); 
+    		mestoTF.setText(lastZakaznik.getMesto());
+    		spolecnostTF.setText(lastZakaznik.getSpolecnost());
+    		pscTF.setText(String.valueOf(lastZakaznik.getPsc())); 
+    		cisloPopTF.setText(String.valueOf(lastZakaznik.getCisloPopisne()));
+    	}else{
+    		uliceTF.setText(""); 
+    		mestoTF.setText("");
+    		spolecnostTF.setText("");
+    		pscTF.setText(""); 
+    		cisloPopTF.setText("");
+    	}
+	}
+    
+    private void nullForms(){
+    	editCustomer(null);
+    }
     
     /**
      * Creates new form SkladMainGUI
@@ -100,7 +128,7 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
             	Tabs selectedTab = panel.getTab(); 
             	
             	// TODO: akce pri zmene panelu
-            	
+            	nullForms();
             	
             	// Fire event tabChanged
             	for(IMainGuiListener ctrl : listeners){
@@ -160,6 +188,11 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
         jLabel5.setText("Číso pop. :");
 
         ulozAdresarTF.setText("Ulož");
+        ulozAdresarTF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ulozAdresarTFActionPerformed(evt);
+            }
+        });
 
         org.jdesktop.layout.GroupLayout panelAddressLayout = new org.jdesktop.layout.GroupLayout(panelAddress);
         panelAddress.setLayout(panelAddressLayout);
@@ -289,6 +322,11 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jMenu1.setText("File");
@@ -332,6 +370,30 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        JTable table = (JTable)evt.getComponent();
+        
+        if(table.getSelectedRowCount() == 1){
+        	int selected = table.getSelectedRow();
+        	
+        	// Fire event
+            for (IMainGuiListener ctrl : listeners) {
+                ctrl.tableSelectedIndex(selected);
+            }
+        	
+        }
+        
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void ulozAdresarTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ulozAdresarTFActionPerformed
+        
+    	// Fire event
+        for (IMainGuiListener ctrl : listeners) {
+            ctrl.editFormSave();
+        }
+    	
+    }//GEN-LAST:event_ulozAdresarTFActionPerformed
 
     /**
      * @param args the command line arguments
@@ -392,9 +454,6 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
     private javax.swing.JTextField uliceTF;
     private javax.swing.JButton ulozAdresarTF;
     // End of variables declaration//GEN-END:variables
-
-    public void setVis(boolean t) {
-        this.setVisible(t);
-    }
+	
 
 }

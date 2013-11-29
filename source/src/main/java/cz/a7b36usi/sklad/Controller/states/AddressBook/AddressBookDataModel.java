@@ -1,4 +1,4 @@
-package cz.a7b36usi.sklad.Controller.states.users;
+package cz.a7b36usi.sklad.Controller.states.AddressBook;
 
 import java.util.List;
 
@@ -26,7 +26,6 @@ public class AddressBookDataModel extends BaseDataModel<ZakaznikDTO>{
 		}
 		return null;
 	}
-
 	
 
 }

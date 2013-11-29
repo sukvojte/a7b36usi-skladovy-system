@@ -38,8 +38,12 @@ public class EmptyState implements IControllerState{
 		controller.getForm().setTableModel(model);
 	}
 	
-	public void save(MainController controller) {
+	public void editFormSave(MainController controller) {
 		logger.warn("Save event");
+	}
+	
+	public void selectedItem(MainController controller, int index) {
+		logger.warn("Selected index " + index + " how is it possible ???");
 	}
 	
 	

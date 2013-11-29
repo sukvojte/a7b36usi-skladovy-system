@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import cz.a7b36usi.sklad.Controller.MainController;
-import cz.a7b36usi.sklad.Controller.states.AddressBookState;
 import cz.a7b36usi.sklad.Controller.states.IControllerState;
+import cz.a7b36usi.sklad.Controller.states.AddressBook.AddressBookState;
 import cz.a7b36usi.sklad.Service.IUserService;
 
 @Component
@@ -33,8 +33,12 @@ public class UsersState implements IControllerState{
 		
 	}
 
-	public void save(MainController controller) {
+	public void editFormSave(MainController controller) {
 		logger.debug("Save event");
+	}
+
+	public void selectedItem(MainController controller, int index) {
+		
 	}
 
 }

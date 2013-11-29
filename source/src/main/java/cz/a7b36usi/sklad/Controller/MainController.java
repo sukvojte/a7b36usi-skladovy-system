@@ -47,9 +47,14 @@ public class MainController implements IMainController{
 				state.activated(ctrl);
 			}
 			
-			public void productSave() {
+			public void editFormSave() {
 				logger.debug("Product save");
-				state.save(ctrl);
+				state.editFormSave(ctrl);
+			}
+
+			public void tableSelectedIndex(int index) {
+				logger.debug("Selected index " + index);
+				state.selectedItem(ctrl, index);
 			}
 		});
     	

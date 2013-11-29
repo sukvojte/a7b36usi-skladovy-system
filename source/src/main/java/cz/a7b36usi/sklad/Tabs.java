@@ -1,6 +1,6 @@
 package cz.a7b36usi.sklad;
 
-import cz.a7b36usi.sklad.Controller.states.AddressBookState;
+import cz.a7b36usi.sklad.Controller.states.AddressBook.AddressBookState;
 import cz.a7b36usi.sklad.Controller.states.users.UsersState;
 
 public enum Tabs {

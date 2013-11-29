@@ -207,6 +207,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Ulo&#x17e;"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ulozAdresarTFActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -330,6 +333,9 @@
               </Table>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTable1MouseClicked"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
