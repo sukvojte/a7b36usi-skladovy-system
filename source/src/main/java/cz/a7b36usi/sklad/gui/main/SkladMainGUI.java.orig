@@ -29,8 +29,9 @@ import org.springframework.stereotype.Component;
  * @author Lukas Lowinger
  */
 @Component
+<<<<<<< HEAD
 public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
-
+    
     @Autowired
     ITabController tabController;
     
@@ -39,37 +40,69 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
     
     public void addListeners(IMainGuiListener listener){
     	listeners.add(listener);
+=======
+public class SkladMainGUI extends javax.swing.JFrame implements InterfaceSkladMainGUI {
+
+    @Autowired
+    ITabController tabController;
+    private ArrayList<IMainGuiListener> listeners;
+
+    public void addListeners(IMainGuiListener listener) {
+        listeners.add(listener);
+>>>>>>> c6cdd933c36e386918cb163f7b7f6925ffbb113d
     }
 
     public void removeListeners(IMainGuiListener listener) {
         listeners.remove(listener);
     }
+<<<<<<< HEAD
     /* Listenery - END */
-
-    public boolean switchTab(Tabs tab) {
+    
+    public boolean switchTab(Tabs tab){
     	    	
     	// TODO: switch tab
-
+    	
     	// Fire event
+    	for(IMainGuiListener ctrl : listeners){
+    		ctrl.tabChanged(tab);
+    	}
+    	
+    	return true;
+    }
+    
+    public IGuiData getData(){
+		return new IGuiData() {
+			public UserDTO getUserData() {
+				// TODO: navrat objekt UserDTO s informacema z formulare
+				return null;
+			}
+		};
+=======
+
+    public boolean switchTab(Tabs tab) {
+
+
         for (IMainGuiListener ctrl : listeners) {
             ctrl.tabChanged(tab);
         }
 
-    	return true;
+        return false;
     }
 
-
-    public IGuiData getData(){
-		return new IGuiData() {
-			public UserDTO getUserData() {
+    public IGuiData getData() {
+        return new IGuiData() {
+            public UserDTO getUserData() {
                 //TODO: co s ID ?
                 return new UserDTO(null, null, UserRole.VEDOUCI);
             }
+
             public ZakaznikDTO getZakaznikData() {
                 //TODO: co s ID ? zatim se neresi dodavatel, odberatel
                 return new ZakaznikDTO(null, true, false,uliceTF.getText(), mestoTF.getText(), spolecnostTF.getText(),Integer.parseInt(pscTF.getText()), Integer.parseInt(cisloPopTF.getText()));
             }
         };
+
+>>>>>>> c6cdd933c36e386918cb163f7b7f6925ffbb113d
     }
 
     /**
@@ -79,8 +112,8 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
         listeners = new ArrayList<IMainGuiListener>();
         initComponents();
         jTabbedPane1.addChangeListener(new ChangeListener() {
-
             public void stateChanged(ChangeEvent e) {
+<<<<<<< HEAD
             	JTabbedPane source = (JTabbedPane) e.getSource();
             	if(!(source.getSelectedComponent() instanceof TabsJPanel)){
             		throw new RuntimeException("Panel "+source.getSelectedIndex()+" isn't instance of TabsJPanel");
@@ -105,6 +138,33 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
             	}
             	
                
+=======
+
+                Tabs tab = null;
+
+                switch (jTabbedPane1.getSelectedIndex()) {
+                    case 0:
+                        tab = Tabs.PRVNI;
+                        break;
+                    case 1:
+                        tab = Tabs.DRUHA;
+                        break;
+                    case 2:
+                        tab = Tabs.TRETI;
+                        break;
+                    case 3:
+                        tab = Tabs.CTVRTA;
+                        break;
+                    case 4:
+                        tab = Tabs.PATA;
+                        break;
+                }
+
+                for (IMainGuiListener listener : listeners) {
+                    listener.tabChanged(tab);
+                }
+
+>>>>>>> c6cdd933c36e386918cb163f7b7f6925ffbb113d
             }
         });
     }
@@ -119,7 +179,14 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
     private void initComponents() {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
+<<<<<<< HEAD
         panelAddress = new TabsJPanel(Tabs.ADDRESS_BOOK);
+        panelOrders = new TabsJPanel(Tabs.ORDERS);
+        panelMovements = new TabsJPanel(Tabs.MOVEMENTS);
+        panelWarehouse = new TabsJPanel(Tabs.WAREHOUSE);
+        panelUsers = new TabsJPanel(Tabs.USERS);
+=======
+        jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         spolecnostTF = new javax.swing.JTextField();
         uliceTF = new javax.swing.JTextField();
@@ -131,10 +198,11 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
         cisloPopTF = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         ulozAdresarTF = new javax.swing.JButton();
-        panelOrders = new TabsJPanel(Tabs.ORDERS);
-        panelMovements = new TabsJPanel(Tabs.MOVEMENTS);
-        panelWarehouse = new TabsJPanel(Tabs.WAREHOUSE);
-        panelUsers = new TabsJPanel(Tabs.USERS);
+        jPanel2 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
+        jPanel5 = new javax.swing.JPanel();
+>>>>>>> c6cdd933c36e386918cb163f7b7f6925ffbb113d
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -144,8 +212,19 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+<<<<<<< HEAD
         panelAddress.setToolTipText("");
 
+        org.jdesktop.layout.GroupLayout panelAddressLayout = new org.jdesktop.layout.GroupLayout(panelAddress);
+        panelAddress.setLayout(panelAddressLayout);
+        panelAddressLayout.setHorizontalGroup(
+            panelAddressLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 726, Short.MAX_VALUE)
+        );
+        panelAddressLayout.setVerticalGroup(
+            panelAddressLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 171, Short.MAX_VALUE)
+=======
         jLabel1.setText("Společnost :");
 
         jLabel2.setText("Ulice :");
@@ -158,67 +237,68 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
 
         ulozAdresarTF.setText("Ulož");
 
-        org.jdesktop.layout.GroupLayout panelAddressLayout = new org.jdesktop.layout.GroupLayout(panelAddress);
-        panelAddress.setLayout(panelAddressLayout);
-        panelAddressLayout.setHorizontalGroup(
-            panelAddressLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(panelAddressLayout.createSequentialGroup()
+        org.jdesktop.layout.GroupLayout jPanel1Layout = new org.jdesktop.layout.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jPanel1Layout.createSequentialGroup()
                 .add(16, 16, 16)
-                .add(panelAddressLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
-                    .add(panelAddressLayout.createSequentialGroup()
+                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
+                    .add(jPanel1Layout.createSequentialGroup()
                         .add(jLabel3)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .add(mestoTF, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 120, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                    .add(org.jdesktop.layout.GroupLayout.LEADING, panelAddressLayout.createSequentialGroup()
+                    .add(org.jdesktop.layout.GroupLayout.LEADING, jPanel1Layout.createSequentialGroup()
                         .add(jLabel2)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .add(uliceTF, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 120, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                    .add(org.jdesktop.layout.GroupLayout.LEADING, panelAddressLayout.createSequentialGroup()
+                    .add(org.jdesktop.layout.GroupLayout.LEADING, jPanel1Layout.createSequentialGroup()
                         .add(jLabel1)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(spolecnostTF, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 120, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                    .add(panelAddressLayout.createSequentialGroup()
-                        .add(panelAddressLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(jPanel1Layout.createSequentialGroup()
+                        .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                             .add(jLabel4)
                             .add(jLabel5))
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .add(panelAddressLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                        .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
                             .add(cisloPopTF, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
                             .add(pscTF))))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 391, Short.MAX_VALUE)
                 .add(ulozAdresarTF, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 110, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
-        panelAddressLayout.setVerticalGroup(
-            panelAddressLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(panelAddressLayout.createSequentialGroup()
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jPanel1Layout.createSequentialGroup()
                 .add(13, 13, 13)
-                .add(panelAddressLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(jLabel1)
                     .add(spolecnostTF, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(panelAddressLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(uliceTF, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(jLabel2))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(panelAddressLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
                     .add(jLabel3)
                     .add(mestoTF, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .add(panelAddressLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(panelAddressLayout.createSequentialGroup()
+                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(panelAddressLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                        .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                             .add(pscTF, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                             .add(jLabel4))
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(panelAddressLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                        .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                             .add(cisloPopTF, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                             .add(jLabel5))
                         .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, panelAddressLayout.createSequentialGroup()
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .add(ulozAdresarTF, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 40, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                         .add(15, 15, 15))))
+>>>>>>> c6cdd933c36e386918cb163f7b7f6925ffbb113d
         );
 
         jTabbedPane1.addTab("Adresář", panelAddress);
@@ -229,9 +309,15 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
             panelOrdersLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(0, 726, Short.MAX_VALUE)
         );
+<<<<<<< HEAD
         panelOrdersLayout.setVerticalGroup(
             panelOrdersLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 171, Short.MAX_VALUE)
+=======
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(0, 183, Short.MAX_VALUE)
+>>>>>>> c6cdd933c36e386918cb163f7b7f6925ffbb113d
         );
 
         jTabbedPane1.addTab("Objednávky", panelOrders);
@@ -242,9 +328,15 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
             panelMovementsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(0, 726, Short.MAX_VALUE)
         );
+<<<<<<< HEAD
         panelMovementsLayout.setVerticalGroup(
             panelMovementsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 171, Short.MAX_VALUE)
+=======
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(0, 183, Short.MAX_VALUE)
+>>>>>>> c6cdd933c36e386918cb163f7b7f6925ffbb113d
         );
 
         jTabbedPane1.addTab("Pohyby", panelMovements);
@@ -255,9 +347,15 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
             panelWarehouseLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(0, 726, Short.MAX_VALUE)
         );
+<<<<<<< HEAD
         panelWarehouseLayout.setVerticalGroup(
             panelWarehouseLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 171, Short.MAX_VALUE)
+=======
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(0, 183, Short.MAX_VALUE)
+>>>>>>> c6cdd933c36e386918cb163f7b7f6925ffbb113d
         );
 
         jTabbedPane1.addTab("Skladové zásoby", panelWarehouse);
@@ -268,9 +366,15 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
             panelUsersLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(0, 726, Short.MAX_VALUE)
         );
+<<<<<<< HEAD
         panelUsersLayout.setVerticalGroup(
             panelUsersLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 171, Short.MAX_VALUE)
+=======
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(0, 183, Short.MAX_VALUE)
+>>>>>>> c6cdd933c36e386918cb163f7b7f6925ffbb113d
         );
 
         jTabbedPane1.addTab("Uživatelé", panelUsers);
@@ -378,16 +482,19 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField mestoTF;
+<<<<<<< HEAD
     private javax.swing.JPanel panelAddress;
     private javax.swing.JPanel panelMovements;
     private javax.swing.JPanel panelOrders;
     private javax.swing.JPanel panelUsers;
     private javax.swing.JPanel panelWarehouse;
+=======
+    private javax.swing.JTextField mestoTF;
     private javax.swing.JTextField pscTF;
     private javax.swing.JTextField spolecnostTF;
     private javax.swing.JTextField uliceTF;
     private javax.swing.JButton ulozAdresarTF;
+>>>>>>> c6cdd933c36e386918cb163f7b7f6925ffbb113d
     // End of variables declaration//GEN-END:variables
 
     public void setVis(boolean t) {
