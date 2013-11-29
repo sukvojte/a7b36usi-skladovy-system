@@ -4,11 +4,20 @@
  */
 package cz.a7b36usi.sklad.gui.main;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import cz.a7b36usi.sklad.Tabs;
 import cz.a7b36usi.sklad.Controller.ifaces.IMainController;
 import cz.a7b36usi.sklad.Controller.ifaces.ITabController;
+import cz.a7b36usi.sklad.DTO.UserDTO;
+import cz.a7b36usi.sklad.gui.main.ifaces.IGuiData;
 import cz.a7b36usi.sklad.gui.main.ifaces.InterfaceSkladMainGUI;
+import cz.a7b36usi.sklad.gui.main.listeners.IMainGuiListener;
+
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -21,15 +30,56 @@ public class SkladMainGUI extends javax.swing.JFrame implements InterfaceSkladMa
     
     @Autowired
     ITabController tabController;
+    
+    
+    private ArrayList<IMainGuiListener> listeners;
+    
+    
+    public void addListeners(IMainGuiListener listener){
+    	listeners.add(listener);
+    }
+    
+    public void removeListeners(IMainGuiListener listener){
+    	listeners.remove(listener);
+    }
+    
+    public boolean switchTab(Tabs tab){
+    	
+    	
+    	for(IMainGuiListener ctrl : listeners){
+    		ctrl.tabChanged(tab);
+    	}
+    	
+    	return false;
+    }
+    
+    public IGuiData getData(){
+		return new IGuiData() {
+
+			public UserDTO getUserData() {
+				
+				return null;
+			}
+		};
+    	
+    }
+    
+    
     /**
      * Creates new form SkladMainGUI
      */
     public SkladMainGUI() {
+    	listeners = new ArrayList<IMainGuiListener>();
         initComponents();
         jTabbedPane1.addChangeListener(new ChangeListener() {
 
             public void stateChanged(ChangeEvent e) {
-                jTable1.setModel(tabController.getTableModel(jTabbedPane1.getSelectedIndex()));
+            	
+            	for(IMainGuiListener ctrl : listeners){
+            		ctrl.tabChanged(Tabs.DRUHA);
+            	}
+            	
+                //jTable1.setModel(tabController.getTableModel(jTabbedPane1.getSelectedIndex()));
             }
         });
     }
