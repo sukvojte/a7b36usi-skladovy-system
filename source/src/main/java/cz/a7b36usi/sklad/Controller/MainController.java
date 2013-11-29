@@ -4,20 +4,19 @@
  */
 package cz.a7b36usi.sklad.Controller;
 
+import javax.annotation.PostConstruct;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import cz.a7b36usi.sklad.App;
 import cz.a7b36usi.sklad.Tabs;
 import cz.a7b36usi.sklad.Controller.ifaces.IMainController;
+import cz.a7b36usi.sklad.Controller.states.IControllerState;
+import cz.a7b36usi.sklad.Controller.states.IStateFactory;
 import cz.a7b36usi.sklad.Service.IUserService;
 import cz.a7b36usi.sklad.gui.main.ifaces.ISkladMainGUI;
-import cz.a7b36usi.sklad.gui.main.ifaces.ISkladMainGUI;
 import cz.a7b36usi.sklad.gui.main.listeners.IMainGuiListener;
-import cz.a7b36usi.sklad.tableutils.UsersTableModel;
-
-import javax.swing.table.TableModel;
 //
 /**
  *
@@ -31,27 +30,40 @@ public class MainController implements IMainController{
     @Autowired
     private ISkladMainGUI mainGui;
 
-    
     @Autowired
     private IUserService userService;
     
-    public void showMainFrame(String message) {
-        //System.out.println(message);
-        mainGui.setVisible(true);
-        
-        mainGui.addListeners(new IMainGuiListener() {
+    @Autowired
+    private IStateFactory stateFactory;
+    
+    private IControllerState state;
+    
+    
+    @PostConstruct
+    public void registerListeners() {
+    	final MainController ctrl = this;
+    	mainGui.addListeners(new IMainGuiListener() {
 			
-			public void tabChanged(Tabs activetTab) {
-				// TODO: action
-				logger.debug("Tab changed to " + activetTab);
+    		public void tabChanged(Tabs activeTab) {
+				logger.debug("Tab changed to " + activeTab);
+				
+				state = stateFactory.getStateByTab(activeTab);
+				state.activated(ctrl);
 			}
 			
 			public void productSave() {
-				// TODO: action				
 				logger.debug("Product save");
+				state.save(ctrl);
 			}
 		});
-       
-        
+    	
+    	state = stateFactory.getDefaultState();
+    	mainGui.switchTab(Tabs.ADDRESS_BOOK);
+    	
     }
+    
+    public void showMainFrame(String message) {
+        mainGui.setVisible(true);
+    }
+    
 }
