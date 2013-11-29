@@ -1,4 +1,4 @@
-package cz.a7b36usi.sklad.Controller.states;
+package cz.a7b36usi.sklad.Controller.states.users;
 
 import javax.annotation.PostConstruct;
 
@@ -7,36 +7,34 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import cz.a7b36usi.sklad.Controller.MainController;
-import cz.a7b36usi.sklad.Controller.states.users.AddressBookDataModel;
-import cz.a7b36usi.sklad.Service.IZakaznikService;
+import cz.a7b36usi.sklad.Controller.states.AddressBookState;
+import cz.a7b36usi.sklad.Controller.states.IControllerState;
+import cz.a7b36usi.sklad.Service.IUserService;
 
 @Component
-public class AddressBookState implements IControllerState{
+public class UsersState implements IControllerState{
 
 	static final Logger logger = Logger.getLogger(AddressBookState.class);
-	
-	
+
 	@Autowired
-    private IZakaznikService zakaznikService;
+    private IUserService userService;
 	
-	private AddressBookDataModel model;
-	
+	private UsersDataModel model;
+		
 	@PostConstruct
     public void registerModel() {
-		model = new AddressBookDataModel(zakaznikService.getAllZakaznik());
+		model = new UsersDataModel(userService.getAllUsers());
 	}
 	
 	public void activated(MainController controller) {
 		logger.debug("Activated event");
-		
+
 		controller.getForm().setTableModel(model);
+		
 	}
-	
+
 	public void save(MainController controller) {
 		logger.debug("Save event");
 	}
-
-	
-	
 
 }

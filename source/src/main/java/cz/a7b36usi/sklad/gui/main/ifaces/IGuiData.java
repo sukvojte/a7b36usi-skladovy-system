@@ -5,5 +5,5 @@ import cz.a7b36usi.sklad.DTO.ZakaznikDTO;
 
 public interface IGuiData {
 	UserDTO getUserData();
-        ZakaznikDTO getZakaznikData();
+	ZakaznikDTO getZakaznikData();
 }

@@ -4,25 +4,24 @@
  */
 package cz.a7b36usi.sklad.gui.main;
 
-import cz.a7b36usi.sklad.BO.UserRole;
 import java.util.ArrayList;
-import java.util.List;
+
+import javax.swing.JTabbedPane;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import javax.swing.table.AbstractTableModel;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import cz.a7b36usi.sklad.Tabs;
-import cz.a7b36usi.sklad.Controller.ifaces.IMainController;
+import cz.a7b36usi.sklad.BO.UserRole;
 import cz.a7b36usi.sklad.Controller.ifaces.ITabController;
 import cz.a7b36usi.sklad.DTO.UserDTO;
 import cz.a7b36usi.sklad.DTO.ZakaznikDTO;
 import cz.a7b36usi.sklad.gui.main.ifaces.IGuiData;
 import cz.a7b36usi.sklad.gui.main.ifaces.ISkladMainGUI;
 import cz.a7b36usi.sklad.gui.main.listeners.IMainGuiListener;
-
-import javax.swing.JTabbedPane;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 /**
  *
@@ -72,6 +71,10 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
         };
     }
 
+    public void setTableModel(AbstractTableModel model) {
+    	jTable1.setModel(model);
+	}
+    
     /**
      * Creates new form SkladMainGUI
      */
@@ -393,4 +396,5 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
     public void setVis(boolean t) {
         this.setVisible(t);
     }
+
 }

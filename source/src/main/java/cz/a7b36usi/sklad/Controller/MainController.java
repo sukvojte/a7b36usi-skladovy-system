@@ -14,7 +14,6 @@ import cz.a7b36usi.sklad.Tabs;
 import cz.a7b36usi.sklad.Controller.ifaces.IMainController;
 import cz.a7b36usi.sklad.Controller.states.IControllerState;
 import cz.a7b36usi.sklad.Controller.states.IStateFactory;
-import cz.a7b36usi.sklad.Service.IUserService;
 import cz.a7b36usi.sklad.gui.main.ifaces.ISkladMainGUI;
 import cz.a7b36usi.sklad.gui.main.listeners.IMainGuiListener;
 //
@@ -29,9 +28,6 @@ public class MainController implements IMainController{
 	
     @Autowired
     private ISkladMainGUI mainGui;
-
-    @Autowired
-    private IUserService userService;
     
     @Autowired
     private IStateFactory stateFactory;
@@ -64,6 +60,10 @@ public class MainController implements IMainController{
     
     public void showMainFrame(String message) {
         mainGui.setVisible(true);
+    }
+    
+    public ISkladMainGUI getForm(){
+    	return mainGui; 
     }
     
 }

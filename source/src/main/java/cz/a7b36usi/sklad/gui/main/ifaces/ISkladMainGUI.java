@@ -1,9 +1,9 @@
 
 package cz.a7b36usi.sklad.gui.main.ifaces;
 
+import javax.swing.table.AbstractTableModel;
+
 import cz.a7b36usi.sklad.Tabs;
-import cz.a7b36usi.sklad.DTO.UserDTO;
-import cz.a7b36usi.sklad.gui.main.listeners.IMainGuiListener;
 import cz.a7b36usi.sklad.ifaces.RecieveListener;
 
 /**
@@ -16,4 +16,6 @@ public interface ISkladMainGUI extends RecieveListener{
     boolean switchTab(Tabs tab); // prehodi na zadanou zalozku
     
     IGuiData getData(); // ziska callback na data z formularu
+    
+    void setTableModel(AbstractTableModel model);
 }
