@@ -19,5 +19,5 @@ public interface IZakaznikService {
 
     public boolean saveZakaznik(ZakaznikDTO customer);
     
-    public void removeZakaznik(Long id);
+    public void removeZakaznik(ZakaznikDTO customer);
 }
