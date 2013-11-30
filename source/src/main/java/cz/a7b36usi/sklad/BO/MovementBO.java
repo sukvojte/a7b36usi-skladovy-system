@@ -8,32 +8,34 @@ import javax.persistence.Entity;
 import javax.persistence.Enumerated;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  *
  * @author Peter
  */
 @Entity
-public class PohybBO extends AbstractBO{
+@Table(name="movement")
+public class MovementBO extends AbstractBO{
     
     private double cena;
     
     @ManyToOne
-    private DruhBaleniBO druhBaleni;
+    private WrappingTypeBO druhBaleni;
     
     @ManyToOne
-    private SarzeBO sarze;
+    private ProductVersionBO sarze;
     
     @Enumerated
-    private TypDokladu typDokladu;
+    private DocumentType typDokladu;
     
     @ManyToOne
-    private ProduktBO produkt;
+    private ProductBO produkt;
     
     @ManyToOne
-    private ZakaznikBO zakaznik;
+    private PartnerBO zakaznik;
 
-    public PohybBO() {
+    public MovementBO() {
     }
 
     //***************** GETTER SETTER KILOMETER BY PETER ********************************
@@ -46,44 +48,44 @@ public class PohybBO extends AbstractBO{
         this.cena = cena;
     }
 
-    public DruhBaleniBO getDruhBaleni() {
+    public WrappingTypeBO getDruhBaleni() {
         return druhBaleni;
     }
 
-    public void setDruhBaleni(DruhBaleniBO druhBaleni) {
+    public void setDruhBaleni(WrappingTypeBO druhBaleni) {
         this.druhBaleni = druhBaleni;
     }
 
-    public SarzeBO getSarze() {
+    public ProductVersionBO getSarze() {
         return sarze;
     }
 
-    public void setSarze(SarzeBO sarze) {
+    public void setSarze(ProductVersionBO sarze) {
         this.sarze = sarze;
     }
 
-    public TypDokladu getTypDokladu() {
+    public DocumentType getTypDokladu() {
         return typDokladu;
     }
 
-    public void setTypDokladu(TypDokladu typDokladu) {
+    public void setTypDokladu(DocumentType typDokladu) {
         this.typDokladu = typDokladu;
     }
 
-    public ProduktBO getProdukt() {
+    public ProductBO getProdukt() {
         return produkt;
     }
 
-    public void setProdukt(ProduktBO produkt) {
+    public void setProdukt(ProductBO produkt) {
         this.produkt = produkt;
         this.produkt.addPohyb(this);
     }
 
-    public ZakaznikBO getZakaznik() {
+    public PartnerBO getZakaznik() {
         return zakaznik;
     }
 
-    public void setZakaznik(ZakaznikBO zakaznik) {
+    public void setZakaznik(PartnerBO zakaznik) {
         this.zakaznik = zakaznik;
     }
 

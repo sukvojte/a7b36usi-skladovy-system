@@ -5,21 +5,23 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  *
  * @author Lukas L.
  */
 @Entity
-public class KategorieBO extends AbstractBO{
+@Table(name="category")
+public class CategoryBO extends AbstractBO{
     
     private String jmeno;
     
     @OneToMany(cascade = {CascadeType.ALL})
-    private List<KategorieBO> podkategorie;
+    private List<CategoryBO> podkategorie;
     
     @OneToMany(cascade = {CascadeType.ALL})
-    private List<ProduktBO> jeVProduktech;
+    private List<ProductBO> jeVProduktech;
 
     public String getJmeno() {
         return jmeno;
@@ -29,19 +31,19 @@ public class KategorieBO extends AbstractBO{
         this.jmeno = jmeno;
     }
 
-    public List<KategorieBO> getPodkategorie() {
+    public List<CategoryBO> getPodkategorie() {
         return podkategorie;
     }
 
-    public void setPodkategorie(List<KategorieBO> podkategorie) {
+    public void setPodkategorie(List<CategoryBO> podkategorie) {
         this.podkategorie = podkategorie;
     }
 
-    public List<ProduktBO> getJeVProduktech() {
+    public List<ProductBO> getJeVProduktech() {
         return jeVProduktech;
     }
 
-    public void setJeVProduktech(List<ProduktBO> jeVProduktech) {
+    public void setJeVProduktech(List<ProductBO> jeVProduktech) {
         this.jeVProduktech = jeVProduktech;
     }
         

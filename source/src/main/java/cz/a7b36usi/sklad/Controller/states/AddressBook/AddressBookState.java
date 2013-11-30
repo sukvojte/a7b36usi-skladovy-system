@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import cz.a7b36usi.sklad.Controller.MainController;
 import cz.a7b36usi.sklad.Controller.states.IControllerState;
 import cz.a7b36usi.sklad.DTO.ZakaznikDTO;
-import cz.a7b36usi.sklad.Service.IZakaznikService;
+import cz.a7b36usi.sklad.Service.IPartnerService;
 
 @Component
 public class AddressBookState implements IControllerState{
@@ -18,7 +18,7 @@ public class AddressBookState implements IControllerState{
 	
 	
 	@Autowired
-    private IZakaznikService zakaznikService;
+    private IPartnerService zakaznikService;
 	
 	private AddressBookDataModel model;
 	

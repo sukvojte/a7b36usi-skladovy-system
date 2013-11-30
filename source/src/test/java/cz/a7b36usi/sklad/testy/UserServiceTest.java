@@ -2,7 +2,7 @@ package cz.a7b36usi.sklad.testy;
 
 import cz.a7b36usi.sklad.BO.UserRole;
 import cz.a7b36usi.sklad.Service.IUserService;
-import cz.a7b36usi.sklad.Service.IZakaznikService;
+import cz.a7b36usi.sklad.Service.IPartnerService;
 import cz.a7b36usi.sklad.Service.UserService;
 //import junit.framework.Test;
 import org.junit.Test;
@@ -18,7 +18,7 @@ public class UserServiceTest extends AbstractServiceTest
     IUserService userService;
     
     @Autowired
-    IZakaznikService zakaznikService;
+    IPartnerService zakaznikService;
     
     @Test
     public void testAddUserAndRemove(){

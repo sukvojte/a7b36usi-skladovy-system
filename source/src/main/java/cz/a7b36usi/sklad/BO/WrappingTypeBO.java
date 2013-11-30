@@ -5,46 +5,48 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  *
  * @author Lukas L.
  */
 @Entity
-public class DruhBaleniBO extends AbstractBO{
+@Table(name="wrapping_type")
+public class WrappingTypeBO extends AbstractBO{
     private String nazev;
     private Double pocet;
     
     @ManyToOne
-    private ProduktBO produkt;
+    private ProductBO produkt;
     
     @OneToMany
-    private List<ObjednavkaBO> objednavky;
+    private List<OrderBO> objednavky;
     
     @OneToMany
-    private List<PohybBO> pohyby;
+    private List<MovementBO> pohyby;
 
-    public ProduktBO getProdukt() {
+    public ProductBO getProdukt() {
         return produkt;
     }
 
-    public void setProdukt(ProduktBO produkt) {
+    public void setProdukt(ProductBO produkt) {
         this.produkt = produkt;
     }
 
-    public List<ObjednavkaBO> getObjednavky() {
+    public List<OrderBO> getObjednavky() {
         return objednavky;
     }
 
-    public void setObjednavky(List<ObjednavkaBO> objednavky) {
+    public void setObjednavky(List<OrderBO> objednavky) {
         this.objednavky = objednavky;
     }
 
-    public List<PohybBO> getPohyby() {
+    public List<MovementBO> getPohyby() {
         return pohyby;
     }
 
-    public void setPohyby(List<PohybBO> pohyby) {
+    public void setPohyby(List<MovementBO> pohyby) {
         this.pohyby = pohyby;
     }
 

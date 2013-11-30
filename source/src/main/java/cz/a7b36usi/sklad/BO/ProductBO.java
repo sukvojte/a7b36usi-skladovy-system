@@ -6,6 +6,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import org.hibernate.annotations.ManyToAny;
 
 /**
@@ -13,7 +14,8 @@ import org.hibernate.annotations.ManyToAny;
  * @author Lukas L.
  */
 @Entity
-public class ProduktBO extends AbstractBO {
+@Table(name="product")
+public class ProductBO extends AbstractBO {
 
     private String jmeno;
     
@@ -22,23 +24,23 @@ public class ProduktBO extends AbstractBO {
     private Integer mnozstvi;
     
     @ManyToOne
-    private KategorieBO kategorie;
+    private CategoryBO kategorie;
     
     @OneToMany(cascade = {CascadeType.ALL})
-    private List<PohybBO> pohyby;
+    private List<MovementBO> pohyby;
     
     @OneToMany(cascade = {CascadeType.ALL})
-    private List<SarzeBO> sarze;
+    private List<ProductVersionBO> sarze;
     
     @OneToMany(cascade = {CascadeType.ALL})
-    private List<DruhBaleniBO> druhyBaleni;
+    private List<WrappingTypeBO> druhyBaleni;
     
     @OneToMany(cascade = {CascadeType.ALL})
-    private List<PolozkaBO> polozky;
+    private List<ArticleBO> polozky;
     
-    public void addPohyb(PohybBO pohyb){
+    public void addPohyb(MovementBO pohyb){
         if(pohyby == null){
-            pohyby = new ArrayList<PohybBO>();
+            pohyby = new ArrayList<MovementBO>();
         }
         if(!pohyby.contains(pohyb)){
             pohyby.add(pohyb);
@@ -69,43 +71,43 @@ public class ProduktBO extends AbstractBO {
         this.mnozstvi = mnozstvi;
     }
 
-    public KategorieBO getKategorie() {
+    public CategoryBO getKategorie() {
         return kategorie;
     }
 
-    public void setKategorie(KategorieBO kategorie) {
+    public void setKategorie(CategoryBO kategorie) {
         this.kategorie = kategorie;
     }
 
-    public List<PohybBO> getPohyby() {
+    public List<MovementBO> getPohyby() {
         return pohyby;
     }
 
-    public void setPohyby(List<PohybBO> pohyby) {
+    public void setPohyby(List<MovementBO> pohyby) {
         this.pohyby = pohyby;
     }
 
-    public List<SarzeBO> getSarze() {
+    public List<ProductVersionBO> getSarze() {
         return sarze;
     }
 
-    public void setSarze(List<SarzeBO> sarze) {
+    public void setSarze(List<ProductVersionBO> sarze) {
         this.sarze = sarze;
     }
 
-    public List<DruhBaleniBO> getDruhyBaleni() {
+    public List<WrappingTypeBO> getDruhyBaleni() {
         return druhyBaleni;
     }
 
-    public void setDruhyBaleni(List<DruhBaleniBO> druhyBaleni) {
+    public void setDruhyBaleni(List<WrappingTypeBO> druhyBaleni) {
         this.druhyBaleni = druhyBaleni;
     }
 
-    public List<PolozkaBO> getPolozky() {
+    public List<ArticleBO> getPolozky() {
         return polozky;
     }
 
-    public void setPolozky(List<PolozkaBO> polozky) {
+    public void setPolozky(List<ArticleBO> polozky) {
         this.polozky = polozky;
     }
 }

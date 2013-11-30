@@ -8,6 +8,6 @@ package cz.a7b36usi.sklad.BO;
  *
  * @author Peter
  */
-public enum TypDokladu {
+public enum DocumentType {
     PRIJEMKA,VYDEJKA
 }

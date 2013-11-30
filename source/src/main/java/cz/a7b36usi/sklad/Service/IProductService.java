@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
  *
  * @author Lukas L.
  */
-public interface IProduktService {
+public interface IProductService {
     
     public Long addProdukt(String jmeno, String kod, Integer mnozstvi);
     
