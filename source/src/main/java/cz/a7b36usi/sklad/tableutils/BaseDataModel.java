@@ -43,4 +43,9 @@ public abstract class BaseDataModel<T> extends AbstractTableModel{
 		return list.get(index);
 	}
 	
+	public void update(List<T> list) {
+		this.list = list;
+		fireTableDataChanged();
+	}
+	
 }

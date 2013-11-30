@@ -37,14 +37,18 @@ public class AddressBookState implements IControllerState{
 		logger.debug("Save event");
 		
 		ZakaznikDTO customer = controller.getForm().getData().getZakaznikData();
-		          System.out.println("customer "+customer);
+		
+		
+		
 		if(customer != null){
 			logger.debug("Save customer " + customer.getId());
 			if(zakaznikService.saveZakaznik(customer)){
-				model.fireTableDataChanged();
+				model.update(zakaznikService.getAllZakaznik());
 			}else{
 				logger.error("Customer " + customer.getId() + " was not saved");
 			}
+		}else{
+			logger.error("Can't save null customer");
 		}
 		
 	}
