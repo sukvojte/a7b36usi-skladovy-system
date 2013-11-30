@@ -37,7 +37,7 @@ public class AddressBookState implements IControllerState{
 		logger.debug("Save event");
 		
 		ZakaznikDTO customer = controller.getForm().getData().getZakaznikData();
-		
+		          System.out.println("customer "+customer);
 		if(customer != null){
 			logger.debug("Save customer " + customer.getId());
 			if(zakaznikService.saveZakaznik(customer)){
