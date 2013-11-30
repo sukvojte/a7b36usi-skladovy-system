@@ -23,6 +23,13 @@ import cz.a7b36usi.sklad.DTO.ZakaznikDTO;
 import cz.a7b36usi.sklad.gui.main.ifaces.IGuiData;
 import cz.a7b36usi.sklad.gui.main.ifaces.ISkladMainGUI;
 import cz.a7b36usi.sklad.gui.main.listeners.IMainGuiListener;
+import cz.a7b36usi.sklad.tableutils.BaseDataModel;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -35,6 +42,7 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
     ITabController tabController;
     
     private ZakaznikDTO lastZakaznik = null;
+    private BaseDataModel baseDataModel;
     
     /* Listenery - START */
     private ArrayList<IMainGuiListener> listeners;
@@ -78,8 +86,10 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
         };
     }
 
-    public void setTableModel(AbstractTableModel model) {
+    public void setTableModel(BaseDataModel model) {
+        baseDataModel = model;
     	jTable1.setModel(model);
+        createFilterPanel();
 	}
     
     public void editCustomer(ZakaznikDTO customer) {
@@ -169,6 +179,8 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
         panelUsers = new TabsJPanel(Tabs.USERS);
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        filtrJP = new javax.swing.JPanel();
+        filtrJB = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -340,6 +352,19 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
         });
         jScrollPane1.setViewportView(jTable1);
 
+        org.jdesktop.layout.GroupLayout filtrJPLayout = new org.jdesktop.layout.GroupLayout(filtrJP);
+        filtrJP.setLayout(filtrJPLayout);
+        filtrJPLayout.setHorizontalGroup(
+            filtrJPLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 630, Short.MAX_VALUE)
+        );
+        filtrJPLayout.setVerticalGroup(
+            filtrJPLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 35, Short.MAX_VALUE)
+        );
+
+        filtrJB.setText("Filtruj");
+
         jMenu1.setText("File");
 
         jMenuItem1.setText("Exit");
@@ -361,8 +386,14 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(org.jdesktop.layout.GroupLayout.TRAILING, jTabbedPane1)
             .add(jScrollPane1)
+            .add(jTabbedPane1)
+            .add(layout.createSequentialGroup()
+                .addContainerGap()
+                .add(filtrJP, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .add(filtrJB)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -370,8 +401,12 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
                 .addContainerGap()
                 .add(jTabbedPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 229, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(filtrJP, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(filtrJB))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 257, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(70, Short.MAX_VALUE))
+                .addContainerGap(74, Short.MAX_VALUE))
         );
 
         pack();
@@ -413,6 +448,26 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
         }
     }//GEN-LAST:event_smazZakaznikJBActionPerformed
 
+    private void createFilterPanel(){
+        int count = this.baseDataModel.getColumnCount();
+        filtrJP.setLayout(new FlowLayout());
+
+        filtrJP.removeAll();
+        filtrJP.updateUI();
+        
+        int help = 0;
+        for (int i = 0; i < count*2; i++) {
+            if(i%2 == 0){
+            JTextField field = new JTextField();
+            field.setPreferredSize(new Dimension(120, 20));
+            filtrJP.add(field);
+            }
+            else{
+                filtrJP.add(new JLabel(this.baseDataModel.getColumnName(help)));
+                help++;
+            }
+        }
+    }
     /**
      * @param args the command line arguments
      */
@@ -449,6 +504,8 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField cisloPopTF;
+    private javax.swing.JButton filtrJB;
+    private javax.swing.JPanel filtrJP;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

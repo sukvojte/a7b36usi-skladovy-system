@@ -6,6 +6,7 @@ import javax.swing.table.AbstractTableModel;
 import cz.a7b36usi.sklad.Tabs;
 import cz.a7b36usi.sklad.DTO.ZakaznikDTO;
 import cz.a7b36usi.sklad.ifaces.RecieveListener;
+import cz.a7b36usi.sklad.tableutils.BaseDataModel;
 
 /**
  *
@@ -18,7 +19,7 @@ public interface ISkladMainGUI extends RecieveListener{
     
     IGuiData getData(); // ziska callback na data z formularu
     
-    void setTableModel(AbstractTableModel model);
+    void setTableModel(BaseDataModel model);
 
 	void editCustomer(ZakaznikDTO customer);
 }

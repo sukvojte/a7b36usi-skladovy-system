@@ -56,6 +56,10 @@ public class MainController implements IMainController{
 				logger.debug("Selected index " + index);
 				state.selectedItem(ctrl, index);
 			}
+
+            public void deleteItem() {
+                throw new UnsupportedOperationException("Not supported yet.");
+            }
 		});
     	
     	state = stateFactory.getDefaultState();
