@@ -28,6 +28,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
@@ -447,25 +448,22 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
             ctrl.deleteItem();
         }
     }//GEN-LAST:event_smazZakaznikJBActionPerformed
-
+    /**
+     * Creates filters fields in JPanel from DataModel
+     */
     private void createFilterPanel(){
         int count = this.baseDataModel.getColumnCount();
         filtrJP.setLayout(new FlowLayout());
 
         filtrJP.removeAll();
         filtrJP.updateUI();
-        
-        int help = 0;
-        for (int i = 0; i < count*2; i++) {
-            if(i%2 == 0){
+        for (int i = 0; i < count; i++) {
+            JPanel pair = new JPanel(new GridLayout(2, 1));
             JTextField field = new JTextField();
             field.setPreferredSize(new Dimension(120, 20));
-            filtrJP.add(field);
-            }
-            else{
-                filtrJP.add(new JLabel(this.baseDataModel.getColumnName(help)));
-                help++;
-            }
+            pair.add(new JLabel(this.baseDataModel.getColumnName(i),JLabel.CENTER),0);
+            pair.add(field, 1);
+            filtrJP.add(pair);
         }
     }
     /**
