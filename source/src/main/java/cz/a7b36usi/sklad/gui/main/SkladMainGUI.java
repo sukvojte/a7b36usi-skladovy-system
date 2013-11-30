@@ -162,6 +162,7 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
         cisloPopTF = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         ulozAdresarTF = new javax.swing.JButton();
+        smazZakaznikJB = new javax.swing.JButton();
         panelOrders = new TabsJPanel(Tabs.ORDERS);
         panelMovements = new TabsJPanel(Tabs.MOVEMENTS);
         panelWarehouse = new TabsJPanel(Tabs.WAREHOUSE);
@@ -194,6 +195,13 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
             }
         });
 
+        smazZakaznikJB.setText("Smaž");
+        smazZakaznikJB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                smazZakaznikJBActionPerformed(evt);
+            }
+        });
+
         org.jdesktop.layout.GroupLayout panelAddressLayout = new org.jdesktop.layout.GroupLayout(panelAddress);
         panelAddress.setLayout(panelAddressLayout);
         panelAddressLayout.setHorizontalGroup(
@@ -221,7 +229,9 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
                         .add(panelAddressLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
                             .add(cisloPopTF, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
                             .add(pscTF))))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 391, Short.MAX_VALUE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 302, Short.MAX_VALUE)
+                .add(smazZakaznikJB)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                 .add(ulozAdresarTF, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 110, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -249,7 +259,8 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(panelAddressLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                             .add(cisloPopTF, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(jLabel5))
+                            .add(jLabel5)
+                            .add(smazZakaznikJB))
                         .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .add(org.jdesktop.layout.GroupLayout.TRAILING, panelAddressLayout.createSequentialGroup()
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -395,6 +406,13 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
     	
     }//GEN-LAST:event_ulozAdresarTFActionPerformed
 
+    private void smazZakaznikJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smazZakaznikJBActionPerformed
+        // 
+        for (IMainGuiListener ctrl : listeners) {
+            ctrl.deleteFromDatabase();
+        }
+    }//GEN-LAST:event_smazZakaznikJBActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -450,6 +468,7 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
     private javax.swing.JPanel panelUsers;
     private javax.swing.JPanel panelWarehouse;
     private javax.swing.JTextField pscTF;
+    private javax.swing.JButton smazZakaznikJB;
     private javax.swing.JTextField spolecnostTF;
     private javax.swing.JTextField uliceTF;
     private javax.swing.JButton ulozAdresarTF;

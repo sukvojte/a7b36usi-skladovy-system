@@ -50,4 +50,9 @@ class ZakaznikService extends AbstractService implements IZakaznikService {
                 genericDAO.saveOrUpdate(zakaznik);
 		return true;
 	}
+
+    public void removeZakaznik(Long id) {
+        genericDAO.removeById(id, ZakaznikBO.class);
+    }
+        
 }

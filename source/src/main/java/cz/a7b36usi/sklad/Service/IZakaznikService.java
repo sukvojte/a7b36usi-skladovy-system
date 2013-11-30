@@ -17,5 +17,7 @@ public interface IZakaznikService {
     
     public Long addZakaznik(boolean isDodavatel, boolean isOdberatel, String ulice, String mesto, String spolecnost, int psc, int cisloPopisne);
 
-	public boolean saveZakaznik(ZakaznikDTO customer);
+    public boolean saveZakaznik(ZakaznikDTO customer);
+    
+    public void removeZakaznik(Long id);
 }
