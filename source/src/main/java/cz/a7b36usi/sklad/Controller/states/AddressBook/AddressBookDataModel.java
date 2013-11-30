@@ -4,6 +4,7 @@ import java.util.List;
 
 import cz.a7b36usi.sklad.DTO.ZakaznikDTO;
 import cz.a7b36usi.sklad.tableutils.BaseDataModel;
+import cz.a7b36usi.sklad.tableutils.Column;
 
 public class AddressBookDataModel extends BaseDataModel<ZakaznikDTO>{
 
@@ -11,7 +12,7 @@ public class AddressBookDataModel extends BaseDataModel<ZakaznikDTO>{
 
 	public AddressBookDataModel(List<ZakaznikDTO> list) {
 		super(list);
-		columns = new String[]{"Spolecnost", "Mesto", "Ulice"};
+		columns = new Column[]{new Column("Spolecnost"), new Column("Mesto"), new Column("Ulice")};
 	}
 
 	@Override

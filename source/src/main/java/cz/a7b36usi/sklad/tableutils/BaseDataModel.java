@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
+import cz.a7b36usi.sklad.tableutils.filters.IFilter;
+
 public abstract class BaseDataModel<T> extends AbstractTableModel{
 
 	/**
@@ -13,15 +15,20 @@ public abstract class BaseDataModel<T> extends AbstractTableModel{
 
 	protected List<T> list;
 	
-	protected String[] columns;
+	protected Column[] columns;
+	
+	protected List<IFilter> filters;
 	
 	public BaseDataModel(List<T> list) {
 		this.list = list;
 	}
 
+	public abstract Object getColumnValue(T row, int index);
+	
+	
 	@Override
     public String getColumnName(int column) {
-        return columns[column];
+        return columns[column].getName();
     }
 	
 	public int getRowCount() {
@@ -36,9 +43,6 @@ public abstract class BaseDataModel<T> extends AbstractTableModel{
 		return getColumnValue(list.get(rowIndex), columnIndex);
 	}
 
-	public abstract Object getColumnValue(T row, int index);
-	
-
 	public T getRowByIndex(int index) {
 		return list.get(index);
 	}
@@ -47,5 +51,18 @@ public abstract class BaseDataModel<T> extends AbstractTableModel{
 		this.list = list;
 		fireTableDataChanged();
 	}
+	
+	public void setFilters(List<IFilter> filters) {
+		this.filters = filters;
+		applyFilters();
+	}
+	
+	public void applyFilters(){
+		
+	}
+	
+    public Column getColumn(int column) {
+        return columns[column];
+    }
 	
 }

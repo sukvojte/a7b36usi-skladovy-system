@@ -4,6 +4,7 @@ import java.util.List;
 
 import cz.a7b36usi.sklad.DTO.UserDTO;
 import cz.a7b36usi.sklad.tableutils.BaseDataModel;
+import cz.a7b36usi.sklad.tableutils.Column;
 
 public class UsersDataModel extends BaseDataModel<UserDTO>{
 
@@ -11,7 +12,7 @@ public class UsersDataModel extends BaseDataModel<UserDTO>{
 	
 	public UsersDataModel(List<UserDTO> list) {
 		super(list);
-		columns = new String[]{"Jmeno","Role"};
+		columns = new Column[]{new Column("Jmeno"), new Column("Role")};
 	}
 
 	@Override
