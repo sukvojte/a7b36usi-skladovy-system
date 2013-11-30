@@ -409,7 +409,7 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
     private void smazZakaznikJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smazZakaznikJBActionPerformed
         // 
         for (IMainGuiListener ctrl : listeners) {
-            ctrl.deleteFromDatabase();
+            ctrl.deleteItem();
         }
     }//GEN-LAST:event_smazZakaznikJBActionPerformed
 
