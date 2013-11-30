@@ -46,6 +46,7 @@ class ZakaznikService extends AbstractService implements IZakaznikService {
                 zakaznik.setPsc(customer.getPsc());
                 zakaznik.setSpolecnost(customer.getSpolecnost());
                 zakaznik.setUlice(customer.getUlice());
+                zakaznik.setId(customer.getId());
                 genericDAO.saveOrUpdate(zakaznik);
 		return true;
 	}
