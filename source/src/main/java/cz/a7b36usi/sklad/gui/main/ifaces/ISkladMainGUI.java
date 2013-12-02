@@ -1,7 +1,6 @@
 
 package cz.a7b36usi.sklad.gui.main.ifaces;
 
-import javax.swing.table.AbstractTableModel;
 
 import cz.a7b36usi.sklad.Tabs;
 import cz.a7b36usi.sklad.DTO.ZakaznikDTO;

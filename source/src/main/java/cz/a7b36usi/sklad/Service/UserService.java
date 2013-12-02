@@ -24,6 +24,7 @@ public class UserService extends AbstractService implements IUserService {
 
     /**
      * Prida uzivatele do databaze
+     *
      * @param username Uzivatelske jmeno
      * @param password Heslo
      * @param acl Uzivatelska role
@@ -33,13 +34,14 @@ public class UserService extends AbstractService implements IUserService {
         UserBO user = new UserBO();
         user.setAcl(acl);
         user.setPassword(new String(password));
-        Arrays.fill(password, (char)0);
+        Arrays.fill(password, (char) 0);
         user.setUsername(username);
         return genericDAO.saveOrUpdate(user).getId();
     }
 
     /**
      * Smaze uzivatele s danym identifikatorem z databaze
+     *
      * @param userId Identifikator uzivatele ktery ma byt smazan
      */
     public void deleteUser(Long userId) {
@@ -48,73 +50,81 @@ public class UserService extends AbstractService implements IUserService {
 
     /**
      * Vyhleda v databazi uzivatele s danym identifikatorem a vrati jeho DTO
+     *
      * @param id Identifikator hledanehop uzivatele
-     * @return DTO s informacemi o hledanem uzivateli nebo null pokud nebyl nalezen
+     * @return DTO s informacemi o hledanem uzivateli nebo null pokud nebyl
+     * nalezen
      */
     public UserDTO getUserById(Long id) {
         UserBO user = genericDAO.getById(id, UserBO.class);
-        if(user == null) return null;
-        return new UserDTO(user.getId(),user.getUsername(), user.getAcl());
+        if (user == null) {
+            return null;
+        }
+        return new UserDTO(user.getId(), user.getUsername(), user.getAcl());
     }
 
     /**
      * Vyhleda v databazi uzivatele s danym identifikatorem a vrati jeho DTO
-     * @return List obsahujici DTO s informacemi o vsech nalezenych uzivatelich nebo null pokud nebyl nalezen zadny zaznam
+     *
+     * @return List obsahujici DTO s informacemi o vsech nalezenych uzivatelich
+     * nebo null pokud nebyl nalezen zadny zaznam
      */
     public List<UserDTO> getAllUsers() {
         List<UserBO> bolist = genericDAO.getAll(UserBO.class);
         List<UserDTO> users = new ArrayList<UserDTO>();
         for (UserBO user : bolist) {
-            users.add( new UserDTO(user.getId(),user.getUsername(), user.getAcl()));
+            users.add(new UserDTO(user.getId(), user.getUsername(), user.getAcl()));
         }
         return users;
     }
 
     /**
-     * Overi zda uzivatel s danym jmenem a heslem existuje a zda je heslo spravne zadano
+     * Overi zda uzivatel s danym jmenem a heslem existuje a zda je heslo
+     * spravne zadano
+     *
      * @param username Uzivatelske jmeno
      * @param password Heslo
      * @return true pokud je jmeno i heslo spravne, jinak false
      */
     public boolean logInUser(String username, char[] password) {
-    	try{
-	        UserBO user = genericDAO.getByPropertyUnique("username", username, UserBO.class);
-	        if (user == null) {
-	            return false;
-	        }
-	        
-	        boolean state = user.getPassword().equals(new String(password));
-	        Arrays.fill(password, (char)0);
-	        
-	        return state;
-    	}catch(NoResultException e){
-    		return false;
-    	}
-    	
+        try {
+            UserBO user = genericDAO.getByPropertyUnique("username", username, UserBO.class);
+            if (user == null) {
+                return false;
+            }
+
+            boolean state = user.getPassword().equals(new String(password));
+            Arrays.fill(password, (char) 0);
+
+            return state;
+        } catch (NoResultException e) {
+            return false;
+        }
+
     }
 
-	public boolean updateUser(UserDTO user) {
-		//try{
-			UserBO u = new UserBO();
-			
-			u.setUsername(user.getUsername());
-			u.setAcl(user.getAcl());
-			u.setId(user.getId());
-			
-			genericDAO.saveOrUpdate(u);
-	        
-	        return true;
-    	/*}catch(NoResultException e){
-    		return false;
-    	}*/
-	}
+    public boolean updateUser(UserDTO user) {
+        //try{
+        UserBO u = new UserBO();
 
-	public void updatePassword(UserDTO user, char[] password) {
-		UserBO u = new UserBO();
-		u.setId(user.getId());
-		u.setPassword(new String(password));
-		genericDAO.saveOrUpdate(u);
-		
-		Arrays.fill(password, (char)0);
-	}
+        u.setUsername(user.getUsername());
+        u.setAcl(user.getAcl());
+        u.setId(user.getId());
+
+        genericDAO.saveOrUpdate(u);
+
+        return true;
+        /*}catch(NoResultException e){
+         return false;
+         }*/
+    }
+
+    public void updatePassword(UserDTO user, char[] password) {
+        UserBO u = new UserBO();
+        u.setId(user.getId());
+        u.setPassword(new String(password));
+        genericDAO.saveOrUpdate(u);
+
+        Arrays.fill(password, (char) 0);
+    }
 }
