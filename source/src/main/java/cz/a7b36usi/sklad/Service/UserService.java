@@ -45,7 +45,7 @@ public class UserService extends AbstractService implements IUserService {
      * @param userId Identifikator uzivatele ktery ma byt smazan
      */
     public void deleteUser(Long userId) {
-        if(userId != null){
+        if (userId != null) {
             genericDAO.removeById(userId, UserBO.class);
         }
     }
@@ -62,7 +62,7 @@ public class UserService extends AbstractService implements IUserService {
         if (user == null) {
             return null;
         }
-        return new UserDTO(user.getId(), user.getUsername(), user.getAcl(),user.getPassword());
+        return new UserDTO(user.getId(), user.getUsername(), user.getAcl(), user.getPassword());
     }
 
     /**
@@ -75,7 +75,7 @@ public class UserService extends AbstractService implements IUserService {
         List<UserBO> bolist = genericDAO.getAll(UserBO.class);
         List<UserDTO> users = new ArrayList<UserDTO>();
         for (UserBO user : bolist) {
-            users.add(new UserDTO(user.getId(), user.getUsername(), user.getAcl(),user.getPassword()));
+            users.add(new UserDTO(user.getId(), user.getUsername(), user.getAcl(), user.getPassword()));
         }
         return users;
     }
@@ -132,10 +132,12 @@ public class UserService extends AbstractService implements IUserService {
     }
 
     public UserDTO getUserByUsername(String username) {
-            UserBO user = genericDAO.getByPropertyUnique("username", username, UserBO.class);
-            if(user == null){
-                return null;
-            }
-            return new UserDTO(user.getId(), user.getUsername(), user.getAcl(), user.getPassword());
+        UserBO user = null;
+        try {
+            user = genericDAO.getByPropertyUnique("username", username, UserBO.class);
+        } catch (NoResultException e) {
+            return null;
+        }
+        return new UserDTO(user.getId(), user.getUsername(), user.getAcl(), user.getPassword());
     }
 }

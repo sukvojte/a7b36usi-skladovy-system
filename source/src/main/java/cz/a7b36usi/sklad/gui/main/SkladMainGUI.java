@@ -24,8 +24,8 @@ import cz.a7b36usi.sklad.gui.main.ifaces.IGuiTextFields;
 import cz.a7b36usi.sklad.gui.main.ifaces.ISkladMainGUI;
 import cz.a7b36usi.sklad.gui.main.listeners.IMainGuiListener;
 import cz.a7b36usi.sklad.tableutils.BaseDataModel;
-import cz.a7b36usi.sklad.validators.NoValueValidator;
 import cz.a7b36usi.sklad.validators.NumberValidator;
+import cz.a7b36usi.sklad.validators.ValueValidator;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
@@ -134,6 +134,7 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
     
     private void nullForms() {
         editCustomer(null);
+        editUser(null);
     }
 
     /**
@@ -188,8 +189,8 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
     private void addInputVerifiers() {
         pscTF.setInputVerifier(new NumberValidator(errorPscJL, "Zadajte PSC jako cislo."));
         cisloPopTF.setInputVerifier(new NumberValidator(errorCisloPopJL, "Zadajte Cislo popisne jako cislo."));
-        spolecnostTF.setInputVerifier(new NoValueValidator(errorSpolecnostJL, "Zadejte nejakou hodnotu."));
-        uzivatelskeJmenoJT.setInputVerifier(new NoValueValidator(errorUzivJmenoJL, "Zadejte nejakou hodnotu."));
+        spolecnostTF.setInputVerifier(new ValueValidator(errorSpolecnostJL,"", "Zadejte nejakou hodnotu."));
+        uzivatelskeJmenoJT.setInputVerifier(new ValueValidator(errorUzivJmenoJL,"", "Zadejte nejakou hodnotu."));
     }
 
     private void addItemsToComboLists() {
@@ -374,6 +375,8 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
         jLabel6.setText("Uživatelské jméno :");
 
         jLabel7.setText("Role :");
+
+        uzivatelskeJmenoJT.setName("uzivatelskeJmeno"); // NOI18N
 
         roleJC.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -568,8 +571,6 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
                 return;
             }
         }
-
-
 
         // Fire event
         for (IMainGuiListener ctrl : listeners) {

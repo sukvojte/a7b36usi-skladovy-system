@@ -1,5 +1,6 @@
 package cz.a7b36usi.sklad.Controller.states.users;
 
+import cz.a7b36usi.sklad.BO.UserBO;
 import javax.annotation.PostConstruct;
 
 import org.apache.log4j.Logger;
@@ -11,8 +12,10 @@ import cz.a7b36usi.sklad.Controller.states.IControllerState;
 import cz.a7b36usi.sklad.Controller.states.AddressBook.AddressBookState;
 import cz.a7b36usi.sklad.DTO.UserDTO;
 import cz.a7b36usi.sklad.Service.IUserService;
+import cz.a7b36usi.sklad.validators.ValueValidator;
 import java.util.List;
 import javax.swing.InputVerifier;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -72,6 +75,12 @@ public class UsersState implements IControllerState{
         boolean correct = true;
         List<JTextField> list = controller.getForm().getTextFields().getUsersTextFields();
         for (JTextField field : list) {
+            if(field.getName().equals("uzivatelskeJmeno")){
+                UserDTO user = userService.getUserByUsername(field.getText());
+                if(user != null){
+                    field.setInputVerifier(new ValueValidator(new JLabel(), field.getText(), "toto uzivatelske jmeno uz exje"));
+                }
+            }
             InputVerifier iv = field.getInputVerifier();
                if(iv == null)continue;
                if(!iv.verify(field)){

@@ -402,6 +402,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="uzivatelskeJmenoJT">
+              <Properties>
+                <Property name="name" type="java.lang.String" value="uzivatelskeJmeno" noResource="true"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JComboBox" name="roleJC">
               <Properties>
