@@ -62,7 +62,7 @@ public class UserService extends AbstractService implements IUserService {
         if (user == null) {
             return null;
         }
-        return new UserDTO(user.getId(), user.getUsername(), user.getAcl());
+        return new UserDTO(user.getId(), user.getUsername(), user.getAcl(),user.getPassword());
     }
 
     /**
@@ -75,7 +75,7 @@ public class UserService extends AbstractService implements IUserService {
         List<UserBO> bolist = genericDAO.getAll(UserBO.class);
         List<UserDTO> users = new ArrayList<UserDTO>();
         for (UserBO user : bolist) {
-            users.add(new UserDTO(user.getId(), user.getUsername(), user.getAcl()));
+            users.add(new UserDTO(user.getId(), user.getUsername(), user.getAcl(),user.getPassword()));
         }
         return users;
     }
@@ -112,6 +112,7 @@ public class UserService extends AbstractService implements IUserService {
         u.setUsername(user.getUsername());
         u.setAcl(user.getAcl());
         u.setId(user.getId());
+        u.setPassword(user.getPassword());
 
         genericDAO.saveOrUpdate(u);
 
@@ -128,5 +129,13 @@ public class UserService extends AbstractService implements IUserService {
         genericDAO.saveOrUpdate(u);
 
         Arrays.fill(password, (char) 0);
+    }
+
+    public UserDTO getUserByUsername(String username) {
+            UserBO user = genericDAO.getByPropertyUnique("username", username, UserBO.class);
+            if(user == null){
+                return null;
+            }
+            return new UserDTO(user.getId(), user.getUsername(), user.getAcl(), user.getPassword());
     }
 }

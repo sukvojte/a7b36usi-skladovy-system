@@ -14,22 +14,23 @@ import org.springframework.transaction.annotation.Transactional;
  * @author Peter
  */
 public interface IUserService {
-    
-    public boolean logInUser(String username,char[] password);
-    
-    public Long addUser(String username,char[] password, UserRole acl);
 
+    public boolean logInUser(String username, char[] password);
+
+    public Long addUser(String username, char[] password, UserRole acl);
 
     public void deleteUser(Long userId);
 
-    @Transactional(readOnly=true)
+    @Transactional(readOnly = true)
     public UserDTO getUserById(Long id);
 
- 
-    @Transactional(readOnly=true)
+    @Transactional(readOnly = true)
+    public UserDTO getUserByUsername(String username);
+
+    @Transactional(readOnly = true)
     public List<UserDTO> getAllUsers();
-    
+
     boolean updateUser(UserDTO user);
+
     void updatePassword(UserDTO user, char[] password);
-    
 }

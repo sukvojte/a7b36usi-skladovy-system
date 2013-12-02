@@ -29,6 +29,8 @@ import cz.a7b36usi.sklad.validators.NumberValidator;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.List;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -40,94 +42,100 @@ import javax.swing.JTextField;
  * @author Lukas Lowinger
  */
 @Component
-public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
-
+public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
+    
     @Autowired
     ITabController tabController;
-    
     private ZakaznikDTO lastZakaznik = null;
     private UserDTO lastUser = null;
     private BaseDataModel baseDataModel;
-    
     /* Listenery - START */
     private ArrayList<IMainGuiListener> listeners;
     
-    public void addListeners(IMainGuiListener listener){
-    	listeners.add(listener);
+    public void addListeners(IMainGuiListener listener) {
+        listeners.add(listener);
     }
-
+    
     public void removeListeners(IMainGuiListener listener) {
         listeners.remove(listener);
     }
     /* Listenery - END */
-
+    
     public boolean switchTab(Tabs tab) {
-    	    	
-    	// TODO: switch tab
 
-    	// Fire event
+        // TODO: switch tab
+
+        // Fire event
         for (IMainGuiListener ctrl : listeners) {
             ctrl.tabChanged(tab);
         }
-
-    	return true;
+        
+        return true;
     }
-
-
-    public IGuiData getData(){
-		return new IGuiData() {
-			public UserDTO getUserData() {
+    
+    public IGuiData getData() {
+        return new IGuiData() {
+            public UserDTO getUserData() {
                 //TODO: co s ID ?
-            	long id = 0;
-            	if(lastUser != null){
-            		id = lastUser.getId();
-            	}                            
-                return new UserDTO((id != 0?id:null), uzivatelskeJmenoJT.getText(), (UserRole)roleJC.getSelectedItem());
+                long id = 0;
+                if (lastUser != null) {
+                    id = lastUser.getId();
+                }                
+                return new UserDTO((id != 0 ? id : null), uzivatelskeJmenoJT.getText(), (UserRole) roleJC.getSelectedItem(), new String(hesloUzivatelJP.getPassword()));
             }
+
             public ZakaznikDTO getZakaznikData() {
                 //TODO: zatim se neresi dodavatel, odberatel
-            	long id = 0;
-            	if(lastZakaznik != null){
-            		id = lastZakaznik.getId();
-            	}
-                return new ZakaznikDTO((id != 0?id:null), true, false,uliceTF.getText(), mestoTF.getText(), spolecnostTF.getText(),Integer.parseInt(pscTF.getText()), Integer.parseInt(cisloPopTF.getText()));
+                long id = 0;
+                if (lastZakaznik != null) {
+                    id = lastZakaznik.getId();
+                }
+                return new ZakaznikDTO((id != 0 ? id : null), true, false, uliceTF.getText(), mestoTF.getText(), spolecnostTF.getText(), Integer.parseInt(pscTF.getText()), Integer.parseInt(cisloPopTF.getText()));
             }
         };
     }
-
+    
     public void setTableModel(BaseDataModel model) {
         baseDataModel = model;
-    	jTable1.setModel(model);
+        jTable1.setModel(model);
         createFilterPanel();
-	}
+    }
     
     public void editCustomer(ZakaznikDTO customer) {
-    	lastZakaznik = customer;
-    	if(lastZakaznik != null){
-    		uliceTF.setText(lastZakaznik.getUlice()); 
-    		mestoTF.setText(lastZakaznik.getMesto());
-    		spolecnostTF.setText(lastZakaznik.getSpolecnost());
-    		pscTF.setText(String.valueOf(lastZakaznik.getPsc())); 
-    		cisloPopTF.setText(String.valueOf(lastZakaznik.getCisloPopisne()));
-    	}else{
-    		uliceTF.setText(""); 
-    		mestoTF.setText("");
-    		spolecnostTF.setText("");
-    		pscTF.setText(""); 
-    		cisloPopTF.setText("");
-    	}
-	}
-  
+        lastZakaznik = customer;
+        if (lastZakaznik != null) {
+            uliceTF.setText(lastZakaznik.getUlice());            
+            mestoTF.setText(lastZakaznik.getMesto());
+            spolecnostTF.setText(lastZakaznik.getSpolecnost());
+            pscTF.setText(String.valueOf(lastZakaznik.getPsc()));            
+            cisloPopTF.setText(String.valueOf(lastZakaznik.getCisloPopisne()));
+        } else {
+            uliceTF.setText("");            
+            mestoTF.setText("");
+            spolecnostTF.setText("");
+            pscTF.setText("");            
+            cisloPopTF.setText("");
+        }
+    }
+    
     public void editUser(UserDTO user) {
         lastUser = user;
+        if(lastUser != null){
         uzivatelskeJmenoJT.setText(user.getUsername());
+        hesloUzivatelJP.setText(user.getPassword());
         roleJC.setSelectedItem(user.getAcl());
+        }
+        else{
+            uzivatelskeJmenoJT.setText("");
+            hesloUzivatelJP.setText("heslo");
+            roleJC.setSelectedItem(UserRole.SKLADNIK);
+        }
     }
     
-    private void nullForms(){
-    	editCustomer(null);
+    private void nullForms() {
+        editCustomer(null);
     }
-    
+
     /**
      * Creates new form SkladMainGUI
      */
@@ -135,32 +143,41 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
         listeners = new ArrayList<IMainGuiListener>();
         initComponents();
         jTabbedPane1.addChangeListener(new ChangeListener() {
-
             public void stateChanged(ChangeEvent e) {
-            	JTabbedPane source = (JTabbedPane) e.getSource();
-            	if(!(source.getSelectedComponent() instanceof TabsJPanel)){
-            		throw new RuntimeException("Panel "+source.getSelectedIndex()+" isn't instance of TabsJPanel");
-            	}
-            	
-            	/*
-            	 * TODO: remove this comment
-            	 * Aby tady nemusel byt enum, tak lze v NetBeans vyuzit Custom Creation Code na karte Code, kde si zavolas vlastni konstruktor. 
-            	 * Ja vyuzivam tridy TabsJPanel ktera dedi z JPanel, ale je tam navic informace o aktivnim panelu. Takze tenhle kod nemusis editovat, 
-            	 * kdyz budes editovat zalozky
-            	 */
-            	
-            	TabsJPanel panel = (TabsJPanel) source.getSelectedComponent();
-            	Tabs selectedTab = panel.getTab(); 
-            	
-            	// TODO: akce pri zmene panelu
-            	nullForms();
-            	
-            	// Fire event tabChanged
-            	for(IMainGuiListener ctrl : listeners){
-            		ctrl.tabChanged(selectedTab);
-            	}
-            	
-               
+                JTabbedPane source = (JTabbedPane) e.getSource();
+                if (!(source.getSelectedComponent() instanceof TabsJPanel)) {
+                    throw new RuntimeException("Panel " + source.getSelectedIndex() + " isn't instance of TabsJPanel");
+                }
+
+                /*
+                 * TODO: remove this comment
+                 * Aby tady nemusel byt enum, tak lze v NetBeans vyuzit Custom Creation Code na karte Code, kde si zavolas vlastni konstruktor. 
+                 * Ja vyuzivam tridy TabsJPanel ktera dedi z JPanel, ale je tam navic informace o aktivnim panelu. Takze tenhle kod nemusis editovat, 
+                 * kdyz budes editovat zalozky
+                 */
+                
+                TabsJPanel panel = (TabsJPanel) source.getSelectedComponent();
+                Tabs selectedTab = panel.getTab();
+
+                // TODO: akce pri zmene panelu
+                nullForms();
+
+                // Fire event tabChanged
+                for (IMainGuiListener ctrl : listeners) {
+                    ctrl.tabChanged(selectedTab);
+                }
+                
+                
+            }
+        });
+        
+        hidePasswordCheckbox.addItemListener(new ItemListener() {
+            public void itemStateChanged(ItemEvent e) {
+                if (e.getStateChange() == ItemEvent.SELECTED) {
+                    hesloUzivatelJP.setEchoChar((char) 0);
+                } else {
+                    hesloUzivatelJP.setEchoChar('*');
+                }
             }
         });
         
@@ -168,13 +185,14 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
         addInputVerifiers();
     }
     
-    private void addInputVerifiers(){
+    private void addInputVerifiers() {
         pscTF.setInputVerifier(new NumberValidator(errorPscJL, "Zadajte PSC jako cislo."));
         cisloPopTF.setInputVerifier(new NumberValidator(errorCisloPopJL, "Zadajte Cislo popisne jako cislo."));
         spolecnostTF.setInputVerifier(new NoValueValidator(errorSpolecnostJL, "Zadejte nejakou hodnotu."));
         uzivatelskeJmenoJT.setInputVerifier(new NoValueValidator(errorUzivJmenoJL, "Zadejte nejakou hodnotu."));
     }
-    private void addItemsToComboLists(){
+
+    private void addItemsToComboLists() {
         roleJC.removeAllItems();
         roleJC.addItem(UserRole.PRODUCT_MANAGER);
         roleJC.addItem(UserRole.SKLADNIK);
@@ -214,6 +232,10 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
         uzivatelskeJmenoJT = new javax.swing.JTextField();
         roleJC = new javax.swing.JComboBox();
         errorUzivJmenoJL = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        hesloUzivatelJP = new javax.swing.JPasswordField();
+        errorHesloJL = new javax.swing.JLabel();
+        hidePasswordCheckbox = new javax.swing.JCheckBox();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         filtrJP = new javax.swing.JPanel();
@@ -277,7 +299,7 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
                     .add(errorPscJL)
                     .add(errorCisloPopJL)
                     .add(errorSpolecnostJL))
-                .addContainerGap(366, Short.MAX_VALUE))
+                .addContainerGap(348, Short.MAX_VALUE))
         );
         panelAddressLayout.setVerticalGroup(
             panelAddressLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -305,7 +327,7 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
                     .add(cisloPopTF, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(jLabel5)
                     .add(errorCisloPopJL))
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Adresář", panelAddress);
@@ -314,11 +336,11 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
         panelOrders.setLayout(panelOrdersLayout);
         panelOrdersLayout.setHorizontalGroup(
             panelOrdersLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 726, Short.MAX_VALUE)
+            .add(0, 708, Short.MAX_VALUE)
         );
         panelOrdersLayout.setVerticalGroup(
             panelOrdersLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 225, Short.MAX_VALUE)
+            .add(0, 246, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Objednávky", panelOrders);
@@ -327,11 +349,11 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
         panelMovements.setLayout(panelMovementsLayout);
         panelMovementsLayout.setHorizontalGroup(
             panelMovementsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 726, Short.MAX_VALUE)
+            .add(0, 708, Short.MAX_VALUE)
         );
         panelMovementsLayout.setVerticalGroup(
             panelMovementsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 225, Short.MAX_VALUE)
+            .add(0, 246, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Pohyby", panelMovements);
@@ -340,11 +362,11 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
         panelWarehouse.setLayout(panelWarehouseLayout);
         panelWarehouseLayout.setHorizontalGroup(
             panelWarehouseLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 726, Short.MAX_VALUE)
+            .add(0, 708, Short.MAX_VALUE)
         );
         panelWarehouseLayout.setVerticalGroup(
             panelWarehouseLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 225, Short.MAX_VALUE)
+            .add(0, 246, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Skladové zásoby", panelWarehouse);
@@ -357,6 +379,15 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
 
         errorUzivJmenoJL.setText("error uz jmeno");
 
+        jLabel8.setText("Heslo :");
+
+        hesloUzivatelJP.setText("jPasswordField1");
+        hesloUzivatelJP.setEchoChar('*');
+
+        errorHesloJL.setText("error heslo");
+
+        hidePasswordCheckbox.setText("Zobrazit");
+
         org.jdesktop.layout.GroupLayout panelUsersLayout = new org.jdesktop.layout.GroupLayout(panelUsers);
         panelUsers.setLayout(panelUsersLayout);
         panelUsersLayout.setHorizontalGroup(
@@ -365,15 +396,23 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
                 .addContainerGap()
                 .add(panelUsersLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(jLabel6)
-                    .add(jLabel7))
+                    .add(jLabel7)
+                    .add(jLabel8))
                 .add(18, 18, 18)
                 .add(panelUsersLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(roleJC, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(panelUsersLayout.createSequentialGroup()
-                        .add(uzivatelskeJmenoJT, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 120, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .add(35, 35, 35)
-                        .add(errorUzivJmenoJL)))
-                .addContainerGap(332, Short.MAX_VALUE))
+                        .add(panelUsersLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
+                            .add(uzivatelskeJmenoJT, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                            .add(hesloUzivatelJP, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
+                        .add(25, 25, 25)
+                        .add(panelUsersLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(panelUsersLayout.createSequentialGroup()
+                                .add(hidePasswordCheckbox)
+                                .add(18, 18, 18)
+                                .add(errorHesloJL))
+                            .add(errorUzivJmenoJL))))
+                .addContainerGap(216, Short.MAX_VALUE))
         );
         panelUsersLayout.setVerticalGroup(
             panelUsersLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -383,11 +422,17 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
                     .add(jLabel6)
                     .add(uzivatelskeJmenoJT, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(errorUzivJmenoJL))
-                .add(18, 18, 18)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(panelUsersLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(jLabel7)
-                    .add(roleJC, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(119, Short.MAX_VALUE))
+                    .add(hesloUzivatelJP, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(jLabel8)
+                    .add(errorHesloJL)
+                    .add(hidePasswordCheckbox))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                .add(panelUsersLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(roleJC, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(jLabel7))
+                .addContainerGap(112, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Uživatelé", panelUsers);
@@ -499,22 +544,22 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
-
+    
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        JTable table = (JTable)evt.getComponent();
+        JTable table = (JTable) evt.getComponent();
         
-        if(table.getSelectedRowCount() == 1){
-        	int selected = table.getSelectedRow();
-        	
-        	// Fire event
+        if (table.getSelectedRowCount() == 1) {
+            int selected = table.getSelectedRow();
+
+            // Fire event
             for (IMainGuiListener ctrl : listeners) {
                 ctrl.tableSelectedIndex(selected);
             }
-        	
+            
         }
         
     }//GEN-LAST:event_jTable1MouseClicked
-
+    
     private void ulozJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ulozJBActionPerformed
         boolean correct = true;
         for (IMainGuiListener ctrl : listeners) {
@@ -523,16 +568,16 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
                 return;
             }
         }
-        
-        
-       
-    	// Fire event
+
+
+
+        // Fire event
         for (IMainGuiListener ctrl : listeners) {
             ctrl.editFormSave();
         }
-    	
+        
     }//GEN-LAST:event_ulozJBActionPerformed
-
+    
     private void smazJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smazJBActionPerformed
         // 
         for (IMainGuiListener ctrl : listeners) {
@@ -542,21 +587,22 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
     /**
      * Creates filters fields in JPanel from DataModel
      */
-    private void createFilterPanel(){
+    private void createFilterPanel() {
         int count = this.baseDataModel.getColumnCount();
         filtrJP.setLayout(new FlowLayout());
-
+        
         filtrJP.removeAll();
         filtrJP.updateUI();
         for (int i = 0; i < count; i++) {
             JPanel pair = new JPanel(new GridLayout(2, 1));
             JTextField field = new JTextField();
             field.setPreferredSize(new Dimension(120, 20));
-            pair.add(new JLabel(this.baseDataModel.getColumnName(i),JLabel.CENTER),0);
+            pair.add(new JLabel(this.baseDataModel.getColumnName(i), JLabel.CENTER), 0);
             pair.add(field, 1);
             filtrJP.add(pair);
         }
     }
+
     /**
      * @param args the command line arguments
      */
@@ -594,11 +640,14 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField cisloPopTF;
     private javax.swing.JLabel errorCisloPopJL;
+    private javax.swing.JLabel errorHesloJL;
     private javax.swing.JLabel errorPscJL;
     private javax.swing.JLabel errorSpolecnostJL;
     private javax.swing.JLabel errorUzivJmenoJL;
     private javax.swing.JButton filtrJB;
     private javax.swing.JPanel filtrJP;
+    private javax.swing.JPasswordField hesloUzivatelJP;
+    private javax.swing.JCheckBox hidePasswordCheckbox;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -606,6 +655,7 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
@@ -628,10 +678,8 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
     private javax.swing.JTextField uzivatelskeJmenoJT;
     // End of variables declaration//GEN-END:variables
 
-
     public IGuiTextFields getTextFields() {
         return new IGuiTextFields() {
-
             public List<JTextField> getAdresBookTextFields() {
                 ArrayList<JTextField> list = new ArrayList<JTextField>();
                 list.add(spolecnostTF);
@@ -641,7 +689,7 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
                 list.add(cisloPopTF);
                 return list;
             }
-
+            
             public List<JTextField> getUsersTextFields() {
                 ArrayList<JTextField> list = new ArrayList<JTextField>();
                 list.add(uzivatelskeJmenoJT);
@@ -649,7 +697,4 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
             }
         };
     }
-
-	
-
 }

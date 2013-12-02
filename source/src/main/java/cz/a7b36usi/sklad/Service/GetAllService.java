@@ -20,7 +20,7 @@ public class GetAllService extends AbstractService implements IGetAllService{
         List<UserBO> bolist = genericDAO.getAll(UserBO.class);
         List<UserDTO> users = new ArrayList<UserDTO>();
         for (UserBO user : bolist) {
-            users.add( new UserDTO(user.getId(),user.getUsername(), user.getAcl()));
+            users.add( new UserDTO(user.getId(),user.getUsername(), user.getAcl(),new String(user.getPassword())));
         }
         return users;
     }        
