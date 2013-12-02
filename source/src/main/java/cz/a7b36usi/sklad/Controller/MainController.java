@@ -58,6 +58,7 @@ public class MainController implements IMainController {
             }
 
             public void deleteItem() {
+                logger.debug("Deleting item");
                 state.deleteItem(ctrl);
             }
         });
