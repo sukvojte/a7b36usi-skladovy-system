@@ -11,6 +11,9 @@ import cz.a7b36usi.sklad.Controller.states.IControllerState;
 import cz.a7b36usi.sklad.Controller.states.AddressBook.AddressBookState;
 import cz.a7b36usi.sklad.DTO.UserDTO;
 import cz.a7b36usi.sklad.Service.IUserService;
+import javax.swing.InputVerifier;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 @Component
 public class UsersState implements IControllerState{
@@ -65,7 +68,19 @@ public class UsersState implements IControllerState{
     }
 
     public boolean validate(MainController controller) {
-        throw new UnsupportedOperationException("Not supported yet.");
+                boolean correct = true;
+        java.awt.Component [] comps= controller.getComponents();
+        for (java.awt.Component c: ((JPanel)comps[4]).getComponents()) {
+           if(c instanceof JTextField){
+               JTextField field = (JTextField)c;
+               InputVerifier iv = field.getInputVerifier();
+               if(iv == null)continue;
+               if(!iv.verify(field)){
+                   correct = false;
+               }
+           }
+        }
+        return correct;
     }
 
 }

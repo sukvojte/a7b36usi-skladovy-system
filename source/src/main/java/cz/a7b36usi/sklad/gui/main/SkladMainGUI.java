@@ -23,6 +23,7 @@ import cz.a7b36usi.sklad.gui.main.ifaces.IGuiData;
 import cz.a7b36usi.sklad.gui.main.ifaces.ISkladMainGUI;
 import cz.a7b36usi.sklad.gui.main.listeners.IMainGuiListener;
 import cz.a7b36usi.sklad.tableutils.BaseDataModel;
+import cz.a7b36usi.sklad.validators.NoValueValidator;
 import cz.a7b36usi.sklad.validators.NumberValidator;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -168,6 +169,8 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
     private void addInputVerifiers(){
         pscTF.setInputVerifier(new NumberValidator(errorPscJL, "Zadajte PSC jako cislo."));
         cisloPopTF.setInputVerifier(new NumberValidator(errorCisloPopJL, "Zadajte Cislo popisne jako cislo."));
+        spolecnostTF.setInputVerifier(new NoValueValidator(errorSpolecnostJL, "Zadejte nejakou hodnotu."));
+        uzivatelskeJmenoJT.setInputVerifier(new NoValueValidator(errorUzivJmenoJL, "Zadejte nejakou hodnotu."));
     }
     private void addItemsToComboLists(){
         roleJC.removeAllItems();
@@ -199,6 +202,7 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
         jLabel5 = new javax.swing.JLabel();
         errorPscJL = new javax.swing.JLabel();
         errorCisloPopJL = new javax.swing.JLabel();
+        errorSpolecnostJL = new javax.swing.JLabel();
         panelOrders = new TabsJPanel(Tabs.ORDERS);
         panelMovements = new TabsJPanel(Tabs.MOVEMENTS);
         panelWarehouse = new TabsJPanel(Tabs.WAREHOUSE);
@@ -207,6 +211,7 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
         jLabel7 = new javax.swing.JLabel();
         uzivatelskeJmenoJT = new javax.swing.JTextField();
         roleJC = new javax.swing.JComboBox();
+        errorUzivJmenoJL = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         filtrJP = new javax.swing.JPanel();
@@ -235,6 +240,8 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
         errorPscJL.setText("error psc");
 
         errorCisloPopJL.setText("error cisloPop");
+
+        errorSpolecnostJL.setText("error spolecnost");
 
         org.jdesktop.layout.GroupLayout panelAddressLayout = new org.jdesktop.layout.GroupLayout(panelAddress);
         panelAddress.setLayout(panelAddressLayout);
@@ -266,8 +273,9 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
                 .add(38, 38, 38)
                 .add(panelAddressLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(errorPscJL)
-                    .add(errorCisloPopJL))
-                .addContainerGap(382, Short.MAX_VALUE))
+                    .add(errorCisloPopJL)
+                    .add(errorSpolecnostJL))
+                .addContainerGap(366, Short.MAX_VALUE))
         );
         panelAddressLayout.setVerticalGroup(
             panelAddressLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -275,7 +283,8 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
                 .add(13, 13, 13)
                 .add(panelAddressLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(jLabel1)
-                    .add(spolecnostTF, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(spolecnostTF, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(errorSpolecnostJL))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(panelAddressLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(uliceTF, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
@@ -344,6 +353,8 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
 
         roleJC.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
+        errorUzivJmenoJL.setText("error uz jmeno");
+
         org.jdesktop.layout.GroupLayout panelUsersLayout = new org.jdesktop.layout.GroupLayout(panelUsers);
         panelUsers.setLayout(panelUsersLayout);
         panelUsersLayout.setHorizontalGroup(
@@ -356,8 +367,11 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
                 .add(18, 18, 18)
                 .add(panelUsersLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(roleJC, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(uzivatelskeJmenoJT, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 120, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(459, Short.MAX_VALUE))
+                    .add(panelUsersLayout.createSequentialGroup()
+                        .add(uzivatelskeJmenoJT, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 120, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(35, 35, 35)
+                        .add(errorUzivJmenoJL)))
+                .addContainerGap(332, Short.MAX_VALUE))
         );
         panelUsersLayout.setVerticalGroup(
             panelUsersLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -365,7 +379,8 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
                 .add(33, 33, 33)
                 .add(panelUsersLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(jLabel6)
-                    .add(uzivatelskeJmenoJT, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(uzivatelskeJmenoJT, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(errorUzivJmenoJL))
                 .add(18, 18, 18)
                 .add(panelUsersLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(jLabel7)
@@ -447,7 +462,7 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(layout.createSequentialGroup()
                         .add(filtrJP, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 24, Short.MAX_VALUE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .add(filtrJB))
                     .add(org.jdesktop.layout.GroupLayout.TRAILING, jScrollPane1)
                     .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
@@ -499,7 +514,6 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void ulozJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ulozJBActionPerformed
-        System.out.println("verify " + ((NumberValidator) pscTF.getInputVerifier()).message);
         boolean correct = true;
         for (IMainGuiListener ctrl : listeners) {
             if (!ctrl.validate()) {
@@ -579,6 +593,8 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
     private javax.swing.JTextField cisloPopTF;
     private javax.swing.JLabel errorCisloPopJL;
     private javax.swing.JLabel errorPscJL;
+    private javax.swing.JLabel errorSpolecnostJL;
+    private javax.swing.JLabel errorUzivJmenoJL;
     private javax.swing.JButton filtrJB;
     private javax.swing.JPanel filtrJP;
     private javax.swing.JLabel jLabel1;
