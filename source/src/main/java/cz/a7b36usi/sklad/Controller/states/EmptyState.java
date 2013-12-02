@@ -45,6 +45,10 @@ public class EmptyState implements IControllerState{
 	public void selectedItem(MainController controller, int index) {
 		logger.warn("Selected index " + index + " how is it possible ???");
 	}
+
+    public void deleteItem(MainController controller) {
+        logger.warn("deleting user");
+    }
 	
 	
 }

@@ -41,6 +41,7 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
     ITabController tabController;
     
     private ZakaznikDTO lastZakaznik = null;
+    private UserDTO lastUser = null;
     private BaseDataModel baseDataModel;
     
     /* Listenery - START */
@@ -72,7 +73,11 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
 		return new IGuiData() {
 			public UserDTO getUserData() {
                 //TODO: co s ID ?
-                return new UserDTO(null, null, UserRole.VEDOUCI);
+            	long id = 0;
+            	if(lastUser != null){
+            		id = lastUser.getId();
+            	}                            
+                return new UserDTO((id != 0?id:null), uzivatelskeJmenoJT.getText(), (UserRole)roleJC.getSelectedItem());
             }
             public ZakaznikDTO getZakaznikData() {
                 //TODO: zatim se neresi dodavatel, odberatel
@@ -107,6 +112,12 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
     		cisloPopTF.setText("");
     	}
 	}
+  
+    public void editUser(UserDTO user) {
+        lastUser = user;
+        uzivatelskeJmenoJT.setText(user.getUsername());
+        roleJC.setSelectedItem(user.getAcl());
+    }
     
     private void nullForms(){
     	editCustomer(null);
@@ -567,6 +578,7 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
     private javax.swing.JButton ulozAdresarTF;
     private javax.swing.JTextField uzivatelskeJmenoJT;
     // End of variables declaration//GEN-END:variables
+
 	
 
 }

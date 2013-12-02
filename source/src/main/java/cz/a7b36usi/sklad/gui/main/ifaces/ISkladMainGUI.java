@@ -2,6 +2,7 @@
 package cz.a7b36usi.sklad.gui.main.ifaces;
 
 
+import cz.a7b36usi.sklad.DTO.UserDTO;
 import cz.a7b36usi.sklad.Tabs;
 import cz.a7b36usi.sklad.DTO.ZakaznikDTO;
 import cz.a7b36usi.sklad.ifaces.RecieveListener;
@@ -20,5 +21,7 @@ public interface ISkladMainGUI extends RecieveListener{
     
     void setTableModel(BaseDataModel model);
 
-	void editCustomer(ZakaznikDTO customer);
+    void editCustomer(ZakaznikDTO customer);
+    
+    void editUser (UserDTO user);
 }
