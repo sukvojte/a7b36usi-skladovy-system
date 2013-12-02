@@ -20,12 +20,12 @@ public interface ISkladMainGUI extends RecieveListener{
     
     IGuiData getData(); // ziska callback na data z formularu
     
+    IGuiTextFields getTextFields(); // ziska list text fieldu, ktere jsou potrebne pro validaci
+    
     void setTableModel(BaseDataModel model);
 
     void editCustomer(ZakaznikDTO customer);
     
     void editUser (UserDTO user);
-    
-    Component[] getMyComponents();
     
 }

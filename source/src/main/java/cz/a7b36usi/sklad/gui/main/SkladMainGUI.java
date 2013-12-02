@@ -20,6 +20,7 @@ import cz.a7b36usi.sklad.Controller.ifaces.ITabController;
 import cz.a7b36usi.sklad.DTO.UserDTO;
 import cz.a7b36usi.sklad.DTO.ZakaznikDTO;
 import cz.a7b36usi.sklad.gui.main.ifaces.IGuiData;
+import cz.a7b36usi.sklad.gui.main.ifaces.IGuiTextFields;
 import cz.a7b36usi.sklad.gui.main.ifaces.ISkladMainGUI;
 import cz.a7b36usi.sklad.gui.main.listeners.IMainGuiListener;
 import cz.a7b36usi.sklad.tableutils.BaseDataModel;
@@ -28,6 +29,7 @@ import cz.a7b36usi.sklad.validators.NumberValidator;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.util.List;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -626,9 +628,26 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
     private javax.swing.JTextField uzivatelskeJmenoJT;
     // End of variables declaration//GEN-END:variables
 
-    @Override
-    public java.awt.Component[] getMyComponents() {
-        return jTabbedPane1.getComponents();
+
+    public IGuiTextFields getTextFields() {
+        return new IGuiTextFields() {
+
+            public List<JTextField> getAdresBookTextFields() {
+                ArrayList<JTextField> list = new ArrayList<JTextField>();
+                list.add(spolecnostTF);
+                list.add(uliceTF);
+                list.add(mestoTF);
+                list.add(pscTF);
+                list.add(cisloPopTF);
+                return list;
+            }
+
+            public List<JTextField> getUsersTextFields() {
+                ArrayList<JTextField> list = new ArrayList<JTextField>();
+                list.add(uzivatelskeJmenoJT);
+                return list;
+            }
+        };
     }
 
 	

@@ -80,7 +80,4 @@ public class MainController implements IMainController {
         return mainGui;
     }
     
-    public java.awt.Component[] getComponents(){
-        return mainGui.getMyComponents();
-    }
 }

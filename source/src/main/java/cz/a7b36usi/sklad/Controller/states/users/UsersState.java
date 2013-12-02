@@ -11,6 +11,7 @@ import cz.a7b36usi.sklad.Controller.states.IControllerState;
 import cz.a7b36usi.sklad.Controller.states.AddressBook.AddressBookState;
 import cz.a7b36usi.sklad.DTO.UserDTO;
 import cz.a7b36usi.sklad.Service.IUserService;
+import java.util.List;
 import javax.swing.InputVerifier;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -68,17 +69,14 @@ public class UsersState implements IControllerState{
     }
 
     public boolean validate(MainController controller) {
-                boolean correct = true;
-        java.awt.Component [] comps= controller.getComponents();
-        for (java.awt.Component c: ((JPanel)comps[4]).getComponents()) {
-           if(c instanceof JTextField){
-               JTextField field = (JTextField)c;
-               InputVerifier iv = field.getInputVerifier();
+        boolean correct = true;
+        List<JTextField> list = controller.getForm().getTextFields().getUsersTextFields();
+        for (JTextField field : list) {
+            InputVerifier iv = field.getInputVerifier();
                if(iv == null)continue;
                if(!iv.verify(field)){
                    correct = false;
                }
-           }
         }
         return correct;
     }
