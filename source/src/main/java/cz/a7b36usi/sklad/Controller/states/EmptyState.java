@@ -49,6 +49,10 @@ public class EmptyState implements IControllerState{
     public void deleteItem(MainController controller) {
         logger.warn("deleting user");
     }
+
+    public boolean validate(MainController controller) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 	
 	
 }

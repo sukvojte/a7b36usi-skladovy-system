@@ -7,4 +7,5 @@ public interface IControllerState {
 	void editFormSave(MainController controller);
 	void selectedItem(MainController controller, int index);
 	void deleteItem(MainController controller);
+        boolean validate(MainController controller);
 }

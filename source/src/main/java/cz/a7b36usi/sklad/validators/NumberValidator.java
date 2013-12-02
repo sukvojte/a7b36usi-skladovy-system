@@ -17,19 +17,17 @@ import org.springframework.validation.Validator;
 public class NumberValidator extends InputVerifier {
 
     private JLabel errorJL;
-    private String message;
+    public String message;
 
     public NumberValidator(JLabel errorJL, String message) {
         this.errorJL = errorJL;
         this.message = message;
+        this.errorJL.setVisible(false);
     }
 
     @Override
     public boolean verify(JComponent c) {
         String text = ((JTextField) c).getText();
-        if (text.equals("")) {
-            return correct(c);
-        }
         try {
             Integer.parseInt(text);
         } catch (NumberFormatException e) {
@@ -39,14 +37,21 @@ public class NumberValidator extends InputVerifier {
     }
 
     private boolean correct(JComponent c) {
-        errorJL.setText(null);
+        errorJL.setVisible(false);
         c.setBackground(Color.WHITE);
         return true;
     }
 
     private boolean incorrect(JComponent c) {
         errorJL.setText(message);
+        errorJL.setVisible(true);
         c.setBackground(Color.pink);
         return false;
     }
+
+    @Override
+    public boolean shouldYieldFocus(JComponent input) {
+        return true;
+    }
+    
 }

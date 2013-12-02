@@ -64,4 +64,8 @@ public class UsersState implements IControllerState{
                 model.update(userService.getAllUsers());
     }
 
+    public boolean validate(MainController controller) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
 }

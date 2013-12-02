@@ -28,6 +28,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -161,14 +162,18 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
         });
         
         addItemsToComboLists();
+        addInputVerifiers();
     }
     
+    private void addInputVerifiers(){
+        pscTF.setInputVerifier(new NumberValidator(errorPscJL, "Zadajte PSC jako cislo."));
+        cisloPopTF.setInputVerifier(new NumberValidator(errorCisloPopJL, "Zadajte Cislo popisne jako cislo."));
+    }
     private void addItemsToComboLists(){
         roleJC.removeAllItems();
         roleJC.addItem(UserRole.PRODUCT_MANAGER);
         roleJC.addItem(UserRole.SKLADNIK);
         roleJC.addItem(UserRole.VEDOUCI);
-        pscTF.setInputVerifier(new NumberValidator(errorPscJL, "Zadajte PSC jako cislo."));
     }
 
     /**
@@ -193,6 +198,7 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
         cisloPopTF = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         errorPscJL = new javax.swing.JLabel();
+        errorCisloPopJL = new javax.swing.JLabel();
         panelOrders = new TabsJPanel(Tabs.ORDERS);
         panelMovements = new TabsJPanel(Tabs.MOVEMENTS);
         panelWarehouse = new TabsJPanel(Tabs.WAREHOUSE);
@@ -226,6 +232,10 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
 
         jLabel5.setText("Číso pop. :");
 
+        errorPscJL.setText("error psc");
+
+        errorCisloPopJL.setText("error cisloPop");
+
         org.jdesktop.layout.GroupLayout panelAddressLayout = new org.jdesktop.layout.GroupLayout(panelAddress);
         panelAddress.setLayout(panelAddressLayout);
         panelAddressLayout.setHorizontalGroup(
@@ -253,9 +263,11 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
                         .add(panelAddressLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
                             .add(cisloPopTF, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
                             .add(pscTF))))
-                .add(18, 18, 18)
-                .add(errorPscJL, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 180, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(309, Short.MAX_VALUE))
+                .add(38, 38, 38)
+                .add(panelAddressLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(errorPscJL)
+                    .add(errorCisloPopJL))
+                .addContainerGap(382, Short.MAX_VALUE))
         );
         panelAddressLayout.setVerticalGroup(
             panelAddressLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -272,16 +284,17 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
                 .add(panelAddressLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
                     .add(jLabel3)
                     .add(mestoTF, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                 .add(panelAddressLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(pscTF, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(jLabel4)
                     .add(errorPscJL))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(12, 12, 12)
                 .add(panelAddressLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(cisloPopTF, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(jLabel5))
-                .addContainerGap(48, Short.MAX_VALUE))
+                    .add(jLabel5)
+                    .add(errorCisloPopJL))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Adresář", panelAddress);
@@ -434,7 +447,7 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(layout.createSequentialGroup()
                         .add(filtrJP, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 24, Short.MAX_VALUE)
                         .add(filtrJB))
                     .add(org.jdesktop.layout.GroupLayout.TRAILING, jScrollPane1)
                     .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
@@ -486,6 +499,15 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void ulozJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ulozJBActionPerformed
+        System.out.println("verify " + ((NumberValidator) pscTF.getInputVerifier()).message);
+        boolean correct = true;
+        for (IMainGuiListener ctrl : listeners) {
+            if (!ctrl.validate()) {
+                JOptionPane.showMessageDialog(panelMovements, "CHYBA se zadanim udaju.");
+                return;
+            }
+        }
+        
         
        
     	// Fire event
@@ -555,6 +577,7 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField cisloPopTF;
+    private javax.swing.JLabel errorCisloPopJL;
     private javax.swing.JLabel errorPscJL;
     private javax.swing.JButton filtrJB;
     private javax.swing.JPanel filtrJP;
@@ -586,6 +609,11 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
     private javax.swing.JButton ulozJB;
     private javax.swing.JTextField uzivatelskeJmenoJT;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public java.awt.Component[] getMyComponents() {
+        return jTabbedPane1.getComponents();
+    }
 
 	
 

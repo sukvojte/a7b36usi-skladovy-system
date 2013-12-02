@@ -7,6 +7,7 @@ import cz.a7b36usi.sklad.Tabs;
 import cz.a7b36usi.sklad.DTO.ZakaznikDTO;
 import cz.a7b36usi.sklad.ifaces.RecieveListener;
 import cz.a7b36usi.sklad.tableutils.BaseDataModel;
+import java.awt.Component;
 
 /**
  *
@@ -24,4 +25,7 @@ public interface ISkladMainGUI extends RecieveListener{
     void editCustomer(ZakaznikDTO customer);
     
     void editUser (UserDTO user);
+    
+    Component[] getMyComponents();
+    
 }

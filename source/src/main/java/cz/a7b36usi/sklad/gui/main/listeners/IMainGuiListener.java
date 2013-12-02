@@ -8,5 +8,5 @@ public interface IMainGuiListener {
 	void editFormSave();
 	void tableSelectedIndex(int index);
         void deleteItem();
-	
+	boolean validate();
 }

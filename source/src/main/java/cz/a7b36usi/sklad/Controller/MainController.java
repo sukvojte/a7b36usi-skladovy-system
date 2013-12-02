@@ -61,6 +61,10 @@ public class MainController implements IMainController {
                 logger.debug("Deleting item");
                 state.deleteItem(ctrl);
             }
+
+            public boolean validate() {
+                return state.validate(ctrl);
+            }
         });
 
         state = stateFactory.getDefaultState();
@@ -75,5 +79,8 @@ public class MainController implements IMainController {
     public ISkladMainGUI getForm() {
         return mainGui;
     }
-
+    
+    public java.awt.Component[] getComponents(){
+        return mainGui.getMyComponents();
+    }
 }
