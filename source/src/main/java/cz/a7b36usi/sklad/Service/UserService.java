@@ -45,7 +45,9 @@ public class UserService extends AbstractService implements IUserService {
      * @param userId Identifikator uzivatele ktery ma byt smazan
      */
     public void deleteUser(Long userId) {
-        genericDAO.removeById(userId, UserBO.class);
+        if(userId != null){
+            genericDAO.removeById(userId, UserBO.class);
+        }
     }
 
     /**

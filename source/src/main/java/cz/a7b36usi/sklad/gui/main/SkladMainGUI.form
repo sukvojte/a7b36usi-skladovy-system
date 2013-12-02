@@ -55,15 +55,15 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="filtrJP" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="24" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                       <Component id="filtrJB" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Component id="jScrollPane1" alignment="1" max="32767" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      <Component id="smazZakaznikJB" min="-2" max="-2" attributes="0"/>
+                      <Component id="smazJB" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="ulozAdresarTF" min="-2" pref="110" max="-2" attributes="0"/>
+                      <Component id="ulozJB" min="-2" pref="110" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -77,8 +77,8 @@
               <Component id="jTabbedPane1" max="32767" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="smazZakaznikJB" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="ulozAdresarTF" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                  <Component id="smazJB" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="ulozJB" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -416,20 +416,20 @@
         <Property name="text" type="java.lang.String" value="Filtruj"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="smazZakaznikJB">
+    <Component class="javax.swing.JButton" name="smazJB">
       <Properties>
         <Property name="text" type="java.lang.String" value="Sma&#x17e;"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="smazZakaznikJBActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="smazJBActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="ulozAdresarTF">
+    <Component class="javax.swing.JButton" name="ulozJB">
       <Properties>
         <Property name="text" type="java.lang.String" value="Ulo&#x17e;"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ulozAdresarTFActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ulozJBActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

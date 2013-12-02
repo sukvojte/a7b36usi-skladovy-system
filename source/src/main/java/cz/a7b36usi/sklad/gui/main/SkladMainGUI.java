@@ -121,6 +121,7 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
     
     private void nullForms(){
     	editCustomer(null);
+        editUser(null);
     }
     
     /**
@@ -202,8 +203,8 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
         jTable1 = new javax.swing.JTable();
         filtrJP = new javax.swing.JPanel();
         filtrJB = new javax.swing.JButton();
-        smazZakaznikJB = new javax.swing.JButton();
-        ulozAdresarTF = new javax.swing.JButton();
+        smazJB = new javax.swing.JButton();
+        ulozJB = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -387,17 +388,17 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
 
         filtrJB.setText("Filtruj");
 
-        smazZakaznikJB.setText("Smaž");
-        smazZakaznikJB.addActionListener(new java.awt.event.ActionListener() {
+        smazJB.setText("Smaž");
+        smazJB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                smazZakaznikJBActionPerformed(evt);
+                smazJBActionPerformed(evt);
             }
         });
 
-        ulozAdresarTF.setText("Ulož");
-        ulozAdresarTF.addActionListener(new java.awt.event.ActionListener() {
+        ulozJB.setText("Ulož");
+        ulozJB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ulozAdresarTFActionPerformed(evt);
+                ulozJBActionPerformed(evt);
             }
         });
 
@@ -428,14 +429,14 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(layout.createSequentialGroup()
                         .add(filtrJP, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 24, Short.MAX_VALUE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .add(filtrJB))
                     .add(org.jdesktop.layout.GroupLayout.TRAILING, jScrollPane1)
                     .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
                         .add(0, 0, Short.MAX_VALUE)
-                        .add(smazZakaznikJB)
+                        .add(smazJB)
                         .add(18, 18, 18)
-                        .add(ulozAdresarTF, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 110, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+                        .add(ulozJB, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 110, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -445,8 +446,8 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
                 .add(jTabbedPane1)
                 .add(18, 18, 18)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(smazZakaznikJB)
-                    .add(ulozAdresarTF, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 40, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(smazJB)
+                    .add(ulozJB, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 40, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .add(23, 23, 23)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(filtrJP, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
@@ -479,21 +480,22 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
         
     }//GEN-LAST:event_jTable1MouseClicked
 
-    private void ulozAdresarTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ulozAdresarTFActionPerformed
+    private void ulozJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ulozJBActionPerformed
         
+       
     	// Fire event
         for (IMainGuiListener ctrl : listeners) {
             ctrl.editFormSave();
         }
     	
-    }//GEN-LAST:event_ulozAdresarTFActionPerformed
+    }//GEN-LAST:event_ulozJBActionPerformed
 
-    private void smazZakaznikJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smazZakaznikJBActionPerformed
+    private void smazJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smazJBActionPerformed
         // 
         for (IMainGuiListener ctrl : listeners) {
             ctrl.deleteItem();
         }
-    }//GEN-LAST:event_smazZakaznikJBActionPerformed
+    }//GEN-LAST:event_smazJBActionPerformed
     /**
      * Creates filters fields in JPanel from DataModel
      */
@@ -572,10 +574,10 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
     private javax.swing.JPanel panelWarehouse;
     private javax.swing.JTextField pscTF;
     private javax.swing.JComboBox roleJC;
-    private javax.swing.JButton smazZakaznikJB;
+    private javax.swing.JButton smazJB;
     private javax.swing.JTextField spolecnostTF;
     private javax.swing.JTextField uliceTF;
-    private javax.swing.JButton ulozAdresarTF;
+    private javax.swing.JButton ulozJB;
     private javax.swing.JTextField uzivatelskeJmenoJT;
     // End of variables declaration//GEN-END:variables
 
