@@ -58,7 +58,7 @@ public class MainController implements IMainController {
             }
 
             public void deleteItem() {
-                throw new UnsupportedOperationException("Not supported yet.");
+                state.deleteItem(ctrl);
             }
         });
 

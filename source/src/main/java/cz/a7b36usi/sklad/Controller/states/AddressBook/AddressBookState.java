@@ -59,6 +59,12 @@ public class AddressBookState implements IControllerState{
 		
 		controller.getForm().editCustomer(customer);		
 	}
+
+    public void deleteItem(MainController controller) {
+        ZakaznikDTO customer = controller.getForm().getData().getZakaznikData();
+        zakaznikService.removeZakaznik(customer);
+        model.update(zakaznikService.getAllZakaznik());
+    }
 		
 
 }

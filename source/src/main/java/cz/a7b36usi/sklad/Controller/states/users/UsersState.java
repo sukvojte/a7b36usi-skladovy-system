@@ -41,4 +41,8 @@ public class UsersState implements IControllerState{
 		
 	}
 
+    public void deleteItem(MainController controller) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
 }
