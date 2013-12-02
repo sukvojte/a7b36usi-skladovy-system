@@ -23,6 +23,7 @@ import cz.a7b36usi.sklad.gui.main.ifaces.IGuiData;
 import cz.a7b36usi.sklad.gui.main.ifaces.ISkladMainGUI;
 import cz.a7b36usi.sklad.gui.main.listeners.IMainGuiListener;
 import cz.a7b36usi.sklad.tableutils.BaseDataModel;
+import cz.a7b36usi.sklad.validators.NumberValidator;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
@@ -167,6 +168,7 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
         roleJC.addItem(UserRole.PRODUCT_MANAGER);
         roleJC.addItem(UserRole.SKLADNIK);
         roleJC.addItem(UserRole.VEDOUCI);
+        pscTF.setInputVerifier(new NumberValidator(errorPscJL, "Zadajte PSC jako cislo."));
     }
 
     /**
@@ -190,6 +192,7 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
         pscTF = new javax.swing.JTextField();
         cisloPopTF = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
+        errorPscJL = new javax.swing.JLabel();
         panelOrders = new TabsJPanel(Tabs.ORDERS);
         panelMovements = new TabsJPanel(Tabs.MOVEMENTS);
         panelWarehouse = new TabsJPanel(Tabs.WAREHOUSE);
@@ -250,7 +253,9 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
                         .add(panelAddressLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
                             .add(cisloPopTF, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
                             .add(pscTF))))
-                .addContainerGap(507, Short.MAX_VALUE))
+                .add(18, 18, 18)
+                .add(errorPscJL, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 180, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(309, Short.MAX_VALUE))
         );
         panelAddressLayout.setVerticalGroup(
             panelAddressLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -270,7 +275,8 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(panelAddressLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(pscTF, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(jLabel4))
+                    .add(jLabel4)
+                    .add(errorPscJL))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(panelAddressLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(cisloPopTF, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
@@ -549,6 +555,7 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI{
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField cisloPopTF;
+    private javax.swing.JLabel errorPscJL;
     private javax.swing.JButton filtrJB;
     private javax.swing.JPanel filtrJP;
     private javax.swing.JLabel jLabel1;
