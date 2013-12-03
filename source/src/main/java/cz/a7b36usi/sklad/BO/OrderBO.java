@@ -19,7 +19,7 @@ import javax.persistence.TemporalType;
  * @author Peter
  */
 @Entity
-@Table(name="order")
+@Table(name="orders")
 public class OrderBO extends AbstractBO{
     @Temporal(TemporalType.DATE)
     private Date datum;

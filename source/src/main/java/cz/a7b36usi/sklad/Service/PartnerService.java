@@ -38,7 +38,7 @@ class PartnerService extends AbstractService implements IPartnerService {
 		// TODO Auto-generated method stub
 		// if customer.id == null, add it into DB!
 		// return true if any data changed
-                ZakaznikBO zakaznik = new ZakaznikBO();
+                PartnerBO zakaznik = new PartnerBO();
                 zakaznik.setCisloPopisne(customer.getCisloPopisne());
                 zakaznik.setIsDodavatel(customer.isIsDodavatel());
                 zakaznik.setIsOdberatel(customer.isIsOdberatel());
@@ -53,7 +53,7 @@ class PartnerService extends AbstractService implements IPartnerService {
 
     public void removeZakaznik(ZakaznikDTO zakaznik) {
         if(zakaznik.getId() != null){        
-                genericDAO.removeById(zakaznik.getId(), ZakaznikBO.class);
+                genericDAO.removeById(zakaznik.getId(), PartnerBO.class);
         }
     }
         

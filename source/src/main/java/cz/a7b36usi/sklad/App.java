@@ -25,7 +25,7 @@ public class App
     	System.setProperty("log4j.configuration", new File(".", "log4j.xml").toURI().toString());
 
     	Logger logger = Logger.getLogger(App.class);
-    	logger.debug("Starting application");
+    	logger.debug("Starting application at " + new File(".").toURI().toString());
     	
         ApplicationContext ctx = new ClassPathXmlApplicationContext("/applicationContext.xml");
 
