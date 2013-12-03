@@ -21,7 +21,7 @@ public abstract class AbstractValidator extends InputVerifier {
         this.errorJL.setVisible(false);
     }
 
-    protected boolean correct(JComponent c) {
+    public boolean correct(JComponent c) {
         errorJL.setVisible(false);
         c.setBackground(Color.WHITE);
         return true;

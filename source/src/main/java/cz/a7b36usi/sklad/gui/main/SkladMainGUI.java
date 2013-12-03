@@ -24,7 +24,9 @@ import cz.a7b36usi.sklad.gui.main.ifaces.IGuiTextFields;
 import cz.a7b36usi.sklad.gui.main.ifaces.ISkladMainGUI;
 import cz.a7b36usi.sklad.gui.main.listeners.IMainGuiListener;
 import cz.a7b36usi.sklad.tableutils.BaseDataModel;
+import cz.a7b36usi.sklad.validators.AbstractValidator;
 import cz.a7b36usi.sklad.validators.NumberValidator;
+import cz.a7b36usi.sklad.validators.PasswordValidator;
 import cz.a7b36usi.sklad.validators.ValueValidator;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -81,7 +83,7 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
                 if (lastUser != null) {
                     id = lastUser.getId();
                 }                
-                return new UserDTO((id != 0 ? id : null), uzivatelskeJmenoJT.getText(), (UserRole) roleJC.getSelectedItem(), new String(hesloUzivatelJP.getPassword()));
+                return new UserDTO((id != 0 ? id : null), uzivatelskeJmenoJT.getText(), (UserRole) roleJC.getSelectedItem(), new String(hesloUzivatelPF.getPassword()));
             }
 
             public ZakaznikDTO getZakaznikData() {
@@ -103,6 +105,7 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
     
     public void editCustomer(ZakaznikDTO customer) {
         lastZakaznik = customer;
+        nullValidators();
         if (lastZakaznik != null) {
             uliceTF.setText(lastZakaznik.getUlice());            
             mestoTF.setText(lastZakaznik.getMesto());
@@ -119,15 +122,19 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
     }
     
     public void editUser(UserDTO user) {
+        ulozJB.setText("Edituj");
         lastUser = user;
+        nullValidators();
         if(lastUser != null){
+        uzivatelskeJmenoJT.setEditable(false);
         uzivatelskeJmenoJT.setText(user.getUsername());
-        hesloUzivatelJP.setText(user.getPassword());
+        hesloUzivatelPF.setText(user.getPassword());
         roleJC.setSelectedItem(user.getAcl());
         }
         else{
+            uzivatelskeJmenoJT.setEditable(true);
             uzivatelskeJmenoJT.setText("");
-            hesloUzivatelJP.setText("heslo");
+            hesloUzivatelPF.setText("heslo");
             roleJC.setSelectedItem(UserRole.SKLADNIK);
         }
     }
@@ -135,6 +142,15 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
     private void nullForms() {
         editCustomer(null);
         editUser(null);
+        ulozJB.setText("Ulož");
+    }
+    
+    private void nullValidators(){
+        ((AbstractValidator)pscTF.getInputVerifier()).correct(pscTF);
+        ((AbstractValidator)cisloPopTF.getInputVerifier()).correct(cisloPopTF);
+        ((AbstractValidator)spolecnostTF.getInputVerifier()).correct(spolecnostTF);
+        ((AbstractValidator)uzivatelskeJmenoJT.getInputVerifier()).correct(uzivatelskeJmenoJT);
+        ((AbstractValidator)hesloUzivatelPF.getInputVerifier()).correct(hesloUzivatelPF);
     }
 
     /**
@@ -175,9 +191,9 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
         hidePasswordCheckbox.addItemListener(new ItemListener() {
             public void itemStateChanged(ItemEvent e) {
                 if (e.getStateChange() == ItemEvent.SELECTED) {
-                    hesloUzivatelJP.setEchoChar((char) 0);
+                    hesloUzivatelPF.setEchoChar((char) 0);
                 } else {
-                    hesloUzivatelJP.setEchoChar('*');
+                    hesloUzivatelPF.setEchoChar('*');
                 }
             }
         });
@@ -191,6 +207,7 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
         cisloPopTF.setInputVerifier(new NumberValidator(errorCisloPopJL, "Zadajte Cislo popisne jako cislo."));
         spolecnostTF.setInputVerifier(new ValueValidator(errorSpolecnostJL,"", "Zadejte nejakou hodnotu."));
         uzivatelskeJmenoJT.setInputVerifier(new ValueValidator(errorUzivJmenoJL,"", "Zadejte nejakou hodnotu."));
+        hesloUzivatelPF.setInputVerifier(new PasswordValidator(errorHesloJL, "Heslo musi obsahovat alespon 1 znak"));
     }
 
     private void addItemsToComboLists() {
@@ -234,7 +251,7 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
         roleJC = new javax.swing.JComboBox();
         errorUzivJmenoJL = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        hesloUzivatelJP = new javax.swing.JPasswordField();
+        hesloUzivatelPF = new javax.swing.JPasswordField();
         errorHesloJL = new javax.swing.JLabel();
         hidePasswordCheckbox = new javax.swing.JCheckBox();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -384,8 +401,8 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
 
         jLabel8.setText("Heslo :");
 
-        hesloUzivatelJP.setText("jPasswordField1");
-        hesloUzivatelJP.setEchoChar('*');
+        hesloUzivatelPF.setText("jPasswordField1");
+        hesloUzivatelPF.setEchoChar('*');
 
         errorHesloJL.setText("error heslo");
 
@@ -407,7 +424,7 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
                     .add(panelUsersLayout.createSequentialGroup()
                         .add(panelUsersLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
                             .add(uzivatelskeJmenoJT, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                            .add(hesloUzivatelJP, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
+                            .add(hesloUzivatelPF, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
                         .add(25, 25, 25)
                         .add(panelUsersLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                             .add(panelUsersLayout.createSequentialGroup()
@@ -427,7 +444,7 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
                     .add(errorUzivJmenoJL))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(panelUsersLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(hesloUzivatelJP, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(hesloUzivatelPF, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(jLabel8)
                     .add(errorHesloJL)
                     .add(hidePasswordCheckbox))
@@ -564,6 +581,10 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
     }//GEN-LAST:event_jTable1MouseClicked
     
     private void ulozJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ulozJBActionPerformed
+        if(!ulozJB.getText().equals("Edituj")){
+            uzivatelskeJmenoJT.setInputVerifier(new ValueValidator(errorUzivJmenoJL,uzivatelskeJmenoJT.getText(), "toto uzivatelske jmeno uz exje"));
+        }
+        addInputVerifiers();
         boolean correct = true;
         for (IMainGuiListener ctrl : listeners) {
             if (!ctrl.validate()) {
@@ -576,7 +597,7 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
         for (IMainGuiListener ctrl : listeners) {
             ctrl.editFormSave();
         }
-        
+        ulozJB.setText("Edituj");
     }//GEN-LAST:event_ulozJBActionPerformed
     
     private void smazJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smazJBActionPerformed
@@ -584,6 +605,7 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
         for (IMainGuiListener ctrl : listeners) {
             ctrl.deleteItem();
         }
+        nullForms();
     }//GEN-LAST:event_smazJBActionPerformed
     /**
      * Creates filters fields in JPanel from DataModel
@@ -647,7 +669,7 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
     private javax.swing.JLabel errorUzivJmenoJL;
     private javax.swing.JButton filtrJB;
     private javax.swing.JPanel filtrJP;
-    private javax.swing.JPasswordField hesloUzivatelJP;
+    private javax.swing.JPasswordField hesloUzivatelPF;
     private javax.swing.JCheckBox hidePasswordCheckbox;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -694,6 +716,7 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
             public List<JTextField> getUsersTextFields() {
                 ArrayList<JTextField> list = new ArrayList<JTextField>();
                 list.add(uzivatelskeJmenoJT);
+                list.add(hesloUzivatelPF);
                 return list;
             }
         };

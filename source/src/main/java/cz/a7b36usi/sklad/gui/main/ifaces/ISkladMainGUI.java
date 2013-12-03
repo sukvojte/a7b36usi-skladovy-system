@@ -28,4 +28,6 @@ public interface ISkladMainGUI extends RecieveListener{
     
     void editUser (UserDTO user);
     
+    
+    
 }

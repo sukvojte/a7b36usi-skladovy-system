@@ -21,10 +21,18 @@ public class ValueValidator extends AbstractValidator {
     @Override
     public boolean verify(JComponent c) {
         String text = ((JTextField) c).getText();
-        if (text.equals(value)) {
+        if (value != null && text.equals(value)) {
             return incorrect(c);
         }
 
         return correct(c);
+    }
+    
+    public String getValue(){
+        return value;
+    }
+    
+    public void setValue(String v){
+        value = v;
     }
 }

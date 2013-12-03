@@ -16,6 +16,7 @@ import cz.a7b36usi.sklad.validators.ValueValidator;
 import java.util.List;
 import javax.swing.InputVerifier;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -75,10 +76,19 @@ public class UsersState implements IControllerState{
         boolean correct = true;
         List<JTextField> list = controller.getForm().getTextFields().getUsersTextFields();
         for (JTextField field : list) {
-            if(field.getName().equals("uzivatelskeJmeno")){
+            if(field.getName()!=null && field.getName().equals("uzivatelskeJmeno")){
                 UserDTO user = userService.getUserByUsername(field.getText());
                 if(user != null){
-                    field.setInputVerifier(new ValueValidator(new JLabel(), field.getText(), "toto uzivatelske jmeno uz exje"));
+                    //field.setInputVerifier(new ValueValidator(new JLabel(), field.getText(), "toto uzivatelske jmeno uz exje"));
+                    if(user.getUsername().equals(((ValueValidator)field.getInputVerifier()).getValue())){
+                        JOptionPane.showMessageDialog(field, "Toto uzivatelske jmeno uz existuje");
+                    }
+                    else{
+                        ((ValueValidator)field.getInputVerifier()).setValue(null);
+                    }
+                }
+                else{
+                    ((ValueValidator)field.getInputVerifier()).setValue(null);
                 }
             }
             InputVerifier iv = field.getInputVerifier();
