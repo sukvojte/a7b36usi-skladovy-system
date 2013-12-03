@@ -15,6 +15,8 @@ import org.springframework.orm.jpa.EntityManagerFactoryUtils;
 import org.springframework.stereotype.Component;
 
 import cz.a7b36usi.sklad.BO.AbstractBO;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 /**
  *
@@ -22,19 +24,18 @@ import cz.a7b36usi.sklad.BO.AbstractBO;
  */
 @Component("genericDAO")
 public class GenericDAO implements IGenericDAO {
-    
+
     @Autowired
     protected EntityManagerFactory entityManagerfactory;
 
-     protected EntityManager getEntityManager() {
-         System.out.println(entityManagerfactory);
-         EntityManager em = EntityManagerFactoryUtils.getTransactionalEntityManager(entityManagerfactory); //entity manager with @Transactional support
+    protected EntityManager getEntityManager() {
+        System.out.println(entityManagerfactory);
+        EntityManager em = EntityManagerFactoryUtils.getTransactionalEntityManager(entityManagerfactory); //entity manager with @Transactional support
 
 //            	if(em == null){
 //    		em = entityManagerfactory.createEntityManager ();
 //    		//throw new RuntimeException("No thread-bound EntityManager found! ");
 //    	}
-                
         return em;
     }
 
@@ -42,7 +43,7 @@ public class GenericDAO implements IGenericDAO {
      * Vrati vsechny objekty dane tridy
      *
      * @return vsechny objekty tridy, jez je injektovana jako clazz, serazene
-     *         dle id sestupne
+     * dle id sestupne
      */
     @SuppressWarnings("unchecked")
     public <ENTITY> List<ENTITY> getAll(Class<ENTITY> clazz) {
@@ -57,7 +58,12 @@ public class GenericDAO implements IGenericDAO {
      */
     @SuppressWarnings("unchecked")
     public <ENTITY> List<ENTITY> getAllOrderedDesc(String property, Class<ENTITY> clazz) {
-        throw new IllegalStateException("Not implemented yet");
+        CriteriaQuery<ENTITY> query = getEntityManager().getCriteriaBuilder().createQuery(clazz);
+        Root root = query.from(clazz);
+        query.select(root);
+        query.orderBy(getEntityManager().getCriteriaBuilder().desc(root.get(property)));
+        return getEntityManager().createQuery(query).getResultList();
+
     }
 
     /**
@@ -68,17 +74,19 @@ public class GenericDAO implements IGenericDAO {
      */
     @SuppressWarnings("unchecked")
     public <ENTITY> List<ENTITY> getAllOrderedAsc(String property, Class<ENTITY> clazz) {
-        throw new IllegalStateException("Not implemented yet");
+        CriteriaQuery<ENTITY> query = getEntityManager().getCriteriaBuilder().createQuery(clazz);
+        Root root = query.from(clazz);
+        query.select(root);
+        query.orderBy(getEntityManager().getCriteriaBuilder().asc(root.get(property)));
+        return getEntityManager().createQuery(query).getResultList();
     }
 
     /**
      * Vrati objekty dane tridy, jejichz property se rovna objektu predanemu v
      * parametru, serazene dle id sestupne
      *
-     * @param property
-     *            property, kterou porovnavame
-     * @param value
-     *            hodnota, se kterou porovnavame
+     * @param property property, kterou porovnavame
+     * @param value hodnota, se kterou porovnavame
      * @return vsechny vyhovujici zaznamy
      */
     @SuppressWarnings("unchecked")
@@ -103,8 +111,7 @@ public class GenericDAO implements IGenericDAO {
     /**
      * smaze danou entitu
      *
-     * @param o
-     *            entita ke smazani
+     * @param o entita ke smazani
      */
     public <ENTITY extends AbstractBO> void remove(ENTITY o) {
         getEntityManager().remove(o);
@@ -113,8 +120,7 @@ public class GenericDAO implements IGenericDAO {
     /**
      * Vrati objekt (pomoci get) dane tridy dle ID
      *
-     * @param id
-     * id objektu k vraceni
+     * @param id id objektu k vraceni
      * @return objekt identifikovany id, @null pokud neexistuje
      */
     @SuppressWarnings("unchecked")
@@ -139,9 +145,9 @@ public class GenericDAO implements IGenericDAO {
     public <ENTITY> ENTITY getByPropertyUnique(String property, Object value, Class<ENTITY> clazz) {
         ENTITY e;
         if (value == null) {
-            e = clazz.cast(getEntityManager().createQuery("FROM " + clazz.getSimpleName() + " WHERE " + property + " IS NULL" ).getSingleResult());
+            e = clazz.cast(getEntityManager().createQuery("FROM " + clazz.getSimpleName() + " WHERE " + property + " IS NULL").getSingleResult());
         } else {
-            e = clazz.cast(getEntityManager().createQuery("FROM " + clazz.getSimpleName() + " WHERE " + property + " = :value" ).setParameter("value", value).getSingleResult());
+            e = clazz.cast(getEntityManager().createQuery("FROM " + clazz.getSimpleName() + " WHERE " + property + " = :value").setParameter("value", value).getSingleResult());
         }
         return e;
     }

@@ -6,3 +6,10 @@
 *.ear
 .metadata/*
 RemoteSystemsTempFiles
+source/nbactions.xml
+source/src/main/java/cz/a7b36usi/sklad/applicationContext.xml
+source/src/main/java/cz/a7b36usi/sklad/properties/jdbc.properties.skeleton
+source/src/main/java/cz/a7b36usi/sklad/properties/jpa.properties
+source/src/main/resources/applicationContext.xml
+source/src/main/resources/properties/jdbc.properties.skeleton
+source/src/main/resources/properties/jpa.properties
