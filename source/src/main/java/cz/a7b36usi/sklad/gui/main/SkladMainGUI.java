@@ -27,6 +27,7 @@ import cz.a7b36usi.sklad.tableutils.BaseDataModel;
 import cz.a7b36usi.sklad.validators.AbstractValidator;
 import cz.a7b36usi.sklad.validators.NumberValidator;
 import cz.a7b36usi.sklad.validators.PasswordValidator;
+import cz.a7b36usi.sklad.validators.UserNameValidator;
 import cz.a7b36usi.sklad.validators.ValueValidator;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -206,7 +207,7 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
         pscTF.setInputVerifier(new NumberValidator(errorPscJL, "Zadajte PSC jako cislo."));
         cisloPopTF.setInputVerifier(new NumberValidator(errorCisloPopJL, "Zadajte Cislo popisne jako cislo."));
         spolecnostTF.setInputVerifier(new ValueValidator(errorSpolecnostJL,"", "Zadejte nejakou hodnotu."));
-        uzivatelskeJmenoJT.setInputVerifier(new ValueValidator(errorUzivJmenoJL,"", "Zadejte nejakou hodnotu."));
+        uzivatelskeJmenoJT.setInputVerifier(new UserNameValidator(errorUzivJmenoJL, "Zadejte nejakou hodnotu nebo se jmeno uz vyskytuje"));
         hesloUzivatelPF.setInputVerifier(new PasswordValidator(errorHesloJL, "Heslo musi obsahovat alespon 1 znak"));
     }
 
@@ -582,9 +583,13 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
     
     private void ulozJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ulozJBActionPerformed
         if(!ulozJB.getText().equals("Edituj")){
-            uzivatelskeJmenoJT.setInputVerifier(new ValueValidator(errorUzivJmenoJL,uzivatelskeJmenoJT.getText(), "toto uzivatelske jmeno uz exje"));
+            System.out.println("nastavuju : "+uzivatelskeJmenoJT.getText());
+            ((UserNameValidator)uzivatelskeJmenoJT.getInputVerifier()).setValue(uzivatelskeJmenoJT.getText());
         }
-        addInputVerifiers();
+        else{
+            ((UserNameValidator)uzivatelskeJmenoJT.getInputVerifier()).setValue("");
+        }
+        
         boolean correct = true;
         for (IMainGuiListener ctrl : listeners) {
             if (!ctrl.validate()) {
@@ -597,6 +602,7 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
         for (IMainGuiListener ctrl : listeners) {
             ctrl.editFormSave();
         }
+        uzivatelskeJmenoJT.setEditable(false);
         ulozJB.setText("Edituj");
     }//GEN-LAST:event_ulozJBActionPerformed
     

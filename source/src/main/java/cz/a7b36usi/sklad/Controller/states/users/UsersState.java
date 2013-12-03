@@ -12,6 +12,7 @@ import cz.a7b36usi.sklad.Controller.states.IControllerState;
 import cz.a7b36usi.sklad.Controller.states.AddressBook.AddressBookState;
 import cz.a7b36usi.sklad.DTO.UserDTO;
 import cz.a7b36usi.sklad.Service.IUserService;
+import cz.a7b36usi.sklad.validators.UserNameValidator;
 import cz.a7b36usi.sklad.validators.ValueValidator;
 import java.util.List;
 import javax.swing.InputVerifier;
@@ -78,17 +79,21 @@ public class UsersState implements IControllerState{
         for (JTextField field : list) {
             if(field.getName()!=null && field.getName().equals("uzivatelskeJmeno")){
                 UserDTO user = userService.getUserByUsername(field.getText());
-                if(user != null){
-                    //field.setInputVerifier(new ValueValidator(new JLabel(), field.getText(), "toto uzivatelske jmeno uz exje"));
-                    if(user.getUsername().equals(((ValueValidator)field.getInputVerifier()).getValue())){
-                        JOptionPane.showMessageDialog(field, "Toto uzivatelske jmeno uz existuje");
-                    }
-                    else{
-                        ((ValueValidator)field.getInputVerifier()).setValue(null);
-                    }
+                if(user != null && user.getUsername().equals(((UserNameValidator)field.getInputVerifier()).getValue())){
+//                    if(user.getUsername().equals(((ValueValidator)field.getInputVerifier()).getValue())){
+//                        correct = false;
+//                    }
+//                    else{
+//                        ((ValueValidator)field.getInputVerifier()).correct(field);
+//                        continue;
+//                    }
+                    ((UserNameValidator)field.getInputVerifier()).incorrect(field);
+                    correct = false;
+                    continue;
                 }
                 else{
-                    ((ValueValidator)field.getInputVerifier()).setValue(null);
+                    ((UserNameValidator)field.getInputVerifier()).correct(field);
+                    continue;
                 }
             }
             InputVerifier iv = field.getInputVerifier();
