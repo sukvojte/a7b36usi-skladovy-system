@@ -5,8 +5,6 @@
 package cz.a7b36usi.sklad.Controller.ifaces;
 //
 
-import javax.swing.table.TableModel;
-
 /**
  *
  * @author Peter

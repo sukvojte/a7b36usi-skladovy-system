@@ -17,5 +17,7 @@ public interface IPartnerService {
     
     public Long addZakaznik(boolean isDodavatel, boolean isOdberatel, String ulice, String mesto, String spolecnost, int psc, int cisloPopisne);
 
-	public boolean saveZakaznik(ZakaznikDTO customer);
+    public boolean saveZakaznik(ZakaznikDTO customer);
+    
+    public void removeZakaznik(ZakaznikDTO customer);
 }

@@ -4,7 +4,6 @@
  */
 package cz.a7b36usi.sklad.Controller.ifaces;
 //
-import java.awt.event.ActionListener;
 
 /**
  *

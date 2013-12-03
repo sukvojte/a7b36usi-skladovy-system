@@ -4,8 +4,6 @@
  */
 package cz.a7b36usi.sklad.Controller;
 
-import java.util.ArrayList;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -67,7 +65,7 @@ public class UsersController implements IUsersController {
     }
 
     public void createUser(String username, char[] password, UserRole acl) {
-        model.add(new UserDTO((long) 0, username, acl)); // TODO: hibernate nejak nechodi
+        model.add(new UserDTO((long) 0, username, acl, new String(password))); // TODO: hibernate nejak nechodi
         userService.addUser(username, password, acl);
         updateModel();
     }

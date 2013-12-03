@@ -10,6 +10,10 @@ import cz.a7b36usi.sklad.Controller.MainController;
 import cz.a7b36usi.sklad.Controller.states.IControllerState;
 import cz.a7b36usi.sklad.DTO.ZakaznikDTO;
 import cz.a7b36usi.sklad.Service.IPartnerService;
+import java.util.List;
+import javax.swing.InputVerifier;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 @Component
 public class AddressBookState implements IControllerState{
@@ -38,13 +42,17 @@ public class AddressBookState implements IControllerState{
 		
 		ZakaznikDTO customer = controller.getForm().getData().getZakaznikData();
 		
+		
+		
 		if(customer != null){
 			logger.debug("Save customer " + customer.getId());
 			if(zakaznikService.saveZakaznik(customer)){
-				model.fireTableDataChanged();
+				model.update(zakaznikService.getAllZakaznik());
 			}else{
 				logger.error("Customer " + customer.getId() + " was not saved");
 			}
+		}else{
+			logger.error("Can't save null customer");
 		}
 		
 	}
@@ -55,6 +63,25 @@ public class AddressBookState implements IControllerState{
 		
 		controller.getForm().editCustomer(customer);		
 	}
+
+    public void deleteItem(MainController controller) {
+        ZakaznikDTO customer = controller.getForm().getData().getZakaznikData();
+        zakaznikService.removeZakaznik(customer);
+        model.update(zakaznikService.getAllZakaznik());
+    }
+
+    public boolean validate(MainController controller) {
+        boolean correct = true;
+        List<JTextField> list = controller.getForm().getTextFields().getAdresBookTextFields();
+        for (JTextField field : list) {
+            InputVerifier iv = field.getInputVerifier();
+               if(iv == null)continue;
+               if(!iv.verify(field)){
+                   correct = false;
+               }
+        }
+        return correct;
+    }
 		
 
 }

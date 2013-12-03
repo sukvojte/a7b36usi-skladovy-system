@@ -1,7 +1,6 @@
 
 package cz.a7b36usi.sklad.tableutils;
 
-import cz.a7b36usi.sklad.DTO.UserDTO;
 import cz.a7b36usi.sklad.DTO.ZakaznikDTO;
 import java.util.ArrayList;
 import java.util.List;

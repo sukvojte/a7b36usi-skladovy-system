@@ -19,16 +19,18 @@ public class UserDTO extends AbstractDTO{
     
     private String username;
     private UserRole acl;
+    private String password;
 
     /**
      * Pro jistotu se neprenasi v DTO password
      * @param acl Uzivatelska role
      * @param username Uzivatelske jmeno
      */
-    public UserDTO(Long id,String username, UserRole acl) {
+    public UserDTO(Long id,String username, UserRole acl, String pass) {
         this.username = username;
         this.acl = acl;
         this.id=id;
+        this.password = pass;
     }
     
     public String getUsername() {
@@ -46,6 +48,14 @@ public class UserDTO extends AbstractDTO{
 
     public void setAcl(UserRole acl) {
         this.acl = acl;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
     
 }

@@ -6,5 +6,6 @@ public interface IControllerState {
 	void activated(MainController controller);
 	void editFormSave(MainController controller);
 	void selectedItem(MainController controller, int index);
-	
+	void deleteItem(MainController controller);
+        boolean validate(MainController controller);
 }
