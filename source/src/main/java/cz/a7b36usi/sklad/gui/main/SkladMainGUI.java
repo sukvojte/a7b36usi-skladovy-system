@@ -56,166 +56,165 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
     private ArrayList<IMainGuiListener> listeners;
     
     public void addListeners(IMainGuiListener listener) {
-        listeners.add(listener);
+	listeners.add(listener);
     }
     
     public void removeListeners(IMainGuiListener listener) {
-        listeners.remove(listener);
+	listeners.remove(listener);
     }
     /* Listenery - END */
     
     public boolean switchTab(Tabs tab) {
 
-        // TODO: switch tab
+	// TODO: switch tab
 
-        // Fire event
-        for (IMainGuiListener ctrl : listeners) {
-            ctrl.tabChanged(tab);
-        }
-        
-        return true;
+	// Fire event
+	for (IMainGuiListener ctrl : listeners) {
+	    ctrl.tabChanged(tab);
+	}
+	
+	return true;
     }
     
     public IGuiData getData() {
-        return new IGuiData() {
-            public UserDTO getUserData() {
-                //TODO: co s ID ?
-                long id = 0;
-                if (lastUser != null) {
-                    id = lastUser.getId();
-                }                
-                return new UserDTO((id != 0 ? id : null), uzivatelskeJmenoJT.getText(), (UserRole) roleJC.getSelectedItem(), new String(hesloUzivatelPF.getPassword()));
-            }
-
-            public ZakaznikDTO getZakaznikData() {
-                //TODO: zatim se neresi dodavatel, odberatel
-                long id = 0;
-                if (lastZakaznik != null) {
-                    id = lastZakaznik.getId();
-                }
-                return new ZakaznikDTO((id != 0 ? id : null), true, false, uliceTF.getText(), mestoTF.getText(), spolecnostTF.getText(), Integer.parseInt(pscTF.getText()), Integer.parseInt(cisloPopTF.getText()));
-            }
-        };
+	return new IGuiData() {
+	    public UserDTO getUserData() {
+		//TODO: co s ID ?
+		long id = 0;
+		if (lastUser != null) {
+		    id = lastUser.getId();
+		}		
+		return new UserDTO((id != 0 ? id : null), uzivatelskeJmenoJT.getText(), (UserRole) roleJC.getSelectedItem(), new String(hesloUzivatelPF.getPassword()));
+	    }
+	    
+	    public ZakaznikDTO getZakaznikData() {
+		//TODO: zatim se neresi dodavatel, odberatel
+		long id = 0;
+		if (lastZakaznik != null) {
+		    id = lastZakaznik.getId();
+		}
+		return new ZakaznikDTO((id != 0 ? id : null), true, false, uliceTF.getText(), mestoTF.getText(), spolecnostTF.getText(), Integer.parseInt(pscTF.getText()), Integer.parseInt(cisloPopTF.getText()));
+	    }
+	};
     }
     
     public void setTableModel(BaseDataModel model) {
-        baseDataModel = model;
-        jTable1.setModel(model);
-        createFilterPanel();
+	baseDataModel = model;
+	jTable1.setModel(model);
+	createFilterPanel();
     }
     
     public void editCustomer(ZakaznikDTO customer) {
-        lastZakaznik = customer;
-        nullValidators();
-        if (lastZakaznik != null) {
-            uliceTF.setText(lastZakaznik.getUlice());            
-            mestoTF.setText(lastZakaznik.getMesto());
-            spolecnostTF.setText(lastZakaznik.getSpolecnost());
-            pscTF.setText(String.valueOf(lastZakaznik.getPsc()));            
-            cisloPopTF.setText(String.valueOf(lastZakaznik.getCisloPopisne()));
-        } else {
-            uliceTF.setText("");            
-            mestoTF.setText("");
-            spolecnostTF.setText("");
-            pscTF.setText("");            
-            cisloPopTF.setText("");
-        }
+	lastZakaznik = customer;
+	nullValidators();
+	if (lastZakaznik != null) {
+	    uliceTF.setText(lastZakaznik.getUlice());	    
+	    mestoTF.setText(lastZakaznik.getMesto());
+	    spolecnostTF.setText(lastZakaznik.getSpolecnost());
+	    pscTF.setText(String.valueOf(lastZakaznik.getPsc()));	    
+	    cisloPopTF.setText(String.valueOf(lastZakaznik.getCisloPopisne()));
+	} else {
+	    uliceTF.setText("");	    
+	    mestoTF.setText("");
+	    spolecnostTF.setText("");
+	    pscTF.setText("");	    
+	    cisloPopTF.setText("");
+	}
     }
     
     public void editUser(UserDTO user) {
-        ulozJB.setText("Edituj");
-        lastUser = user;
-        nullValidators();
-        if(lastUser != null){
-        uzivatelskeJmenoJT.setEditable(false);
-        uzivatelskeJmenoJT.setText(user.getUsername());
-        hesloUzivatelPF.setText(user.getPassword());
-        roleJC.setSelectedItem(user.getAcl());
-        }
-        else{
-            uzivatelskeJmenoJT.setEditable(true);
-            uzivatelskeJmenoJT.setText("");
-            hesloUzivatelPF.setText("heslo");
-            roleJC.setSelectedItem(UserRole.SKLADNIK);
-        }
+	ulozJB.setText("Edituj");
+	lastUser = user;
+	nullValidators();
+	if (lastUser != null) {
+	    uzivatelskeJmenoJT.setEditable(false);
+	    uzivatelskeJmenoJT.setText(user.getUsername());
+	    hesloUzivatelPF.setText(user.getPassword());
+	    roleJC.setSelectedItem(user.getAcl());
+	} else {
+	    uzivatelskeJmenoJT.setEditable(true);
+	    uzivatelskeJmenoJT.setText("");
+	    hesloUzivatelPF.setText("heslo");
+	    roleJC.setSelectedItem(UserRole.SKLADNIK);
+	}
     }
     
     private void nullForms() {
-        editCustomer(null);
-        editUser(null);
-        ulozJB.setText("Ulož");
+	editCustomer(null);
+	editUser(null);
+	ulozJB.setText("Ulož");
     }
     
-    private void nullValidators(){
-        ((AbstractValidator)pscTF.getInputVerifier()).correct(pscTF);
-        ((AbstractValidator)cisloPopTF.getInputVerifier()).correct(cisloPopTF);
-        ((AbstractValidator)spolecnostTF.getInputVerifier()).correct(spolecnostTF);
-        ((AbstractValidator)uzivatelskeJmenoJT.getInputVerifier()).correct(uzivatelskeJmenoJT);
-        ((AbstractValidator)hesloUzivatelPF.getInputVerifier()).correct(hesloUzivatelPF);
+    private void nullValidators() {
+	((AbstractValidator) pscTF.getInputVerifier()).correct(pscTF);
+	((AbstractValidator) cisloPopTF.getInputVerifier()).correct(cisloPopTF);
+	((AbstractValidator) spolecnostTF.getInputVerifier()).correct(spolecnostTF);
+	((AbstractValidator) uzivatelskeJmenoJT.getInputVerifier()).correct(uzivatelskeJmenoJT);
+	((AbstractValidator) hesloUzivatelPF.getInputVerifier()).correct(hesloUzivatelPF);
     }
 
     /**
      * Creates new form SkladMainGUI
      */
     public SkladMainGUI() {
-        listeners = new ArrayList<IMainGuiListener>();
-        initComponents();
-        jTabbedPane1.addChangeListener(new ChangeListener() {
-            public void stateChanged(ChangeEvent e) {
-                JTabbedPane source = (JTabbedPane) e.getSource();
-                if (!(source.getSelectedComponent() instanceof TabsJPanel)) {
-                    throw new RuntimeException("Panel " + source.getSelectedIndex() + " isn't instance of TabsJPanel");
-                }
+	listeners = new ArrayList<IMainGuiListener>();
+	initComponents();
+	jTabbedPane1.addChangeListener(new ChangeListener() {
+	    public void stateChanged(ChangeEvent e) {
+		JTabbedPane source = (JTabbedPane) e.getSource();
+		if (!(source.getSelectedComponent() instanceof TabsJPanel)) {
+		    throw new RuntimeException("Panel " + source.getSelectedIndex() + " isn't instance of TabsJPanel");
+		}
 
-                /*
-                 * TODO: remove this comment
-                 * Aby tady nemusel byt enum, tak lze v NetBeans vyuzit Custom Creation Code na karte Code, kde si zavolas vlastni konstruktor. 
-                 * Ja vyuzivam tridy TabsJPanel ktera dedi z JPanel, ale je tam navic informace o aktivnim panelu. Takze tenhle kod nemusis editovat, 
-                 * kdyz budes editovat zalozky
-                 */
-                
-                TabsJPanel panel = (TabsJPanel) source.getSelectedComponent();
-                Tabs selectedTab = panel.getTab();
+		/*
+		 * TODO: remove this comment
+		 * Aby tady nemusel byt enum, tak lze v NetBeans vyuzit Custom Creation Code na karte Code, kde si zavolas vlastni konstruktor. 
+		 * Ja vyuzivam tridy TabsJPanel ktera dedi z JPanel, ale je tam navic informace o aktivnim panelu. Takze tenhle kod nemusis editovat, 
+		 * kdyz budes editovat zalozky
+		 */
+		
+		TabsJPanel panel = (TabsJPanel) source.getSelectedComponent();
+		Tabs selectedTab = panel.getTab();
 
-                // TODO: akce pri zmene panelu
-                nullForms();
+		// TODO: akce pri zmene panelu
+		nullForms();
 
-                // Fire event tabChanged
-                for (IMainGuiListener ctrl : listeners) {
-                    ctrl.tabChanged(selectedTab);
-                }
-                
-                
-            }
-        });
-        
-        hidePasswordCheckbox.addItemListener(new ItemListener() {
-            public void itemStateChanged(ItemEvent e) {
-                if (e.getStateChange() == ItemEvent.SELECTED) {
-                    hesloUzivatelPF.setEchoChar((char) 0);
-                } else {
-                    hesloUzivatelPF.setEchoChar('*');
-                }
-            }
-        });
-        
-        addItemsToComboLists();
-        addInputVerifiers();
+		// Fire event tabChanged
+		for (IMainGuiListener ctrl : listeners) {
+		    ctrl.tabChanged(selectedTab);
+		}
+		
+		
+	    }
+	});
+	
+	hidePasswordCheckbox.addItemListener(new ItemListener() {
+	    public void itemStateChanged(ItemEvent e) {
+		if (e.getStateChange() == ItemEvent.SELECTED) {
+		    hesloUzivatelPF.setEchoChar((char) 0);
+		} else {
+		    hesloUzivatelPF.setEchoChar('*');
+		}
+	    }
+	});
+	
+	addItemsToComboLists();
+	addInputVerifiers();
     }
     
     private void addInputVerifiers() {
-        pscTF.setInputVerifier(new NumberValidator(errorPscJL, "Zadajte PSC jako cislo."));
-        cisloPopTF.setInputVerifier(new NumberValidator(errorCisloPopJL, "Zadajte Cislo popisne jako cislo."));
-        spolecnostTF.setInputVerifier(new ValueValidator(errorSpolecnostJL,"", "Zadejte nejakou hodnotu."));
-        uzivatelskeJmenoJT.setInputVerifier(new UserNameValidator(errorUzivJmenoJL, "Zadejte nejakou hodnotu nebo se jmeno uz vyskytuje"));
-        hesloUzivatelPF.setInputVerifier(new PasswordValidator(errorHesloJL, "Heslo musi obsahovat alespon 1 znak"));
+	pscTF.setInputVerifier(new NumberValidator(errorPscJL, "Zadajte PSC jako cislo."));
+	cisloPopTF.setInputVerifier(new NumberValidator(errorCisloPopJL, "Zadajte Cislo popisne jako cislo."));
+	spolecnostTF.setInputVerifier(new ValueValidator(errorSpolecnostJL, "", "Zadejte nejakou hodnotu."));
+	uzivatelskeJmenoJT.setInputVerifier(new UserNameValidator(errorUzivJmenoJL, "Zadejte nejakou hodnotu nebo se jmeno uz vyskytuje"));
+	hesloUzivatelPF.setInputVerifier(new PasswordValidator(errorHesloJL, "Heslo musi obsahovat alespon 1 znak"));
     }
-
+    
     private void addItemsToComboLists() {
-        roleJC.removeAllItems();
-        roleJC.addItem(UserRole.PRODUCT_MANAGER);
-        roleJC.addItem(UserRole.SKLADNIK);
-        roleJC.addItem(UserRole.VEDOUCI);
+	roleJC.removeAllItems();
+	roleJC.addItem(UserRole.PRODUCT_MANAGER);
+	roleJC.addItem(UserRole.SKLADNIK);
+	roleJC.addItem(UserRole.VEDOUCI);
     }
 
     /**
@@ -562,109 +561,106 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        // TODO add your handling code here:
-        this.dispose();
+	// TODO add your handling code here:
+	this.dispose();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
     
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        JTable table = (JTable) evt.getComponent();
-        
-        if (table.getSelectedRowCount() == 1) {
-            int selected = table.getSelectedRow();
+	JTable table = (JTable) evt.getComponent();
+	
+	if (table.getSelectedRowCount() == 1) {
+	    int selected = table.getSelectedRow();
 
-            // Fire event
-            for (IMainGuiListener ctrl : listeners) {
-                ctrl.tableSelectedIndex(selected);
-            }
-            
-        }
-        
+	    // Fire event
+	    for (IMainGuiListener ctrl : listeners) {
+		ctrl.tableSelectedIndex(selected);
+	    }
+	    
+	}
+	
     }//GEN-LAST:event_jTable1MouseClicked
     
     private void ulozJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ulozJBActionPerformed
-        if(!ulozJB.getText().equals("Edituj")){
-            System.out.println("nastavuju : "+uzivatelskeJmenoJT.getText());
-            ((UserNameValidator)uzivatelskeJmenoJT.getInputVerifier()).setValue(uzivatelskeJmenoJT.getText());
-        }
-        else{
-            ((UserNameValidator)uzivatelskeJmenoJT.getInputVerifier()).setValue("");
-        }
-        
-        boolean correct = true;
-        for (IMainGuiListener ctrl : listeners) {
-            if (!ctrl.validate()) {
-                JOptionPane.showMessageDialog(panelMovements, "CHYBA se zadanim udaju.");
-                return;
-            }
-        }
+	if (!ulozJB.getText().equals("Edituj")) {
+	    ((UserNameValidator) uzivatelskeJmenoJT.getInputVerifier()).setValue(uzivatelskeJmenoJT.getText());
+	} else {
+	    ((UserNameValidator) uzivatelskeJmenoJT.getInputVerifier()).setValue("");
+	}
+	    
+	for (IMainGuiListener ctrl : listeners) {
+	    if (!ctrl.validate()) {
+		JOptionPane.showMessageDialog(panelMovements, "CHYBA se zadanim udaju.");
+		return;
+	    }
+	}
 
-        // Fire event
-        for (IMainGuiListener ctrl : listeners) {
-            ctrl.editFormSave();
-        }
-        uzivatelskeJmenoJT.setEditable(false);
-        ulozJB.setText("Edituj");
+	// Fire event
+	for (IMainGuiListener ctrl : listeners) {
+	    ctrl.editFormSave();
+	}
+	uzivatelskeJmenoJT.setEditable(false);
+	//ulozJB.setText("Edituj");
     }//GEN-LAST:event_ulozJBActionPerformed
     
     private void smazJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smazJBActionPerformed
-        // 
-        for (IMainGuiListener ctrl : listeners) {
-            ctrl.deleteItem();
-        }
-        nullForms();
+	// 
+	for (IMainGuiListener ctrl : listeners) {
+	    ctrl.deleteItem();
+	}
+	nullForms();
     }//GEN-LAST:event_smazJBActionPerformed
     /**
      * Creates filters fields in JPanel from DataModel
      */
     private void createFilterPanel() {
-        int count = this.baseDataModel.getColumnCount();
-        filtrJP.setLayout(new FlowLayout());
-        
-        filtrJP.removeAll();
-        filtrJP.updateUI();
-        for (int i = 0; i < count; i++) {
-            JPanel pair = new JPanel(new GridLayout(2, 1));
-            JTextField field = new JTextField();
-            field.setPreferredSize(new Dimension(120, 20));
-            pair.add(new JLabel(this.baseDataModel.getColumnName(i), JLabel.CENTER), 0);
-            pair.add(field, 1);
-            filtrJP.add(pair);
-        }
+	int count = this.baseDataModel.getColumnCount();
+	filtrJP.setLayout(new FlowLayout());
+	
+	filtrJP.removeAll();
+	filtrJP.updateUI();
+	for (int i = 0; i < count; i++) {
+	    JPanel pair = new JPanel(new GridLayout(2, 1));
+	    JTextField field = new JTextField();
+	    field.setPreferredSize(new Dimension(120, 20));
+	    pair.add(new JLabel(this.baseDataModel.getColumnName(i), JLabel.CENTER), 0);
+	    pair.add(field, 1);
+	    filtrJP.add(pair);
+	}
     }
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+	/* Set the Nimbus look and feel */
+	//<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(SkladMainGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(SkladMainGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(SkladMainGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(SkladMainGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+	 * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+	 */
+	try {
+	    for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+		if ("Nimbus".equals(info.getName())) {
+		    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+		    break;
+		}
+	    }
+	} catch (ClassNotFoundException ex) {
+	    java.util.logging.Logger.getLogger(SkladMainGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+	} catch (InstantiationException ex) {
+	    java.util.logging.Logger.getLogger(SkladMainGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+	} catch (IllegalAccessException ex) {
+	    java.util.logging.Logger.getLogger(SkladMainGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+	} catch (javax.swing.UnsupportedLookAndFeelException ex) {
+	    java.util.logging.Logger.getLogger(SkladMainGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+	}
+	//</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new SkladMainGUI().setVisible(true);
-            }
-        });
+	/* Create and display the form */
+	java.awt.EventQueue.invokeLater(new Runnable() {
+	    public void run() {
+		new SkladMainGUI().setVisible(true);
+	    }
+	});
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField cisloPopTF;
@@ -708,23 +704,23 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
     // End of variables declaration//GEN-END:variables
 
     public IGuiTextFields getTextFields() {
-        return new IGuiTextFields() {
-            public List<JTextField> getAdresBookTextFields() {
-                ArrayList<JTextField> list = new ArrayList<JTextField>();
-                list.add(spolecnostTF);
-                list.add(uliceTF);
-                list.add(mestoTF);
-                list.add(pscTF);
-                list.add(cisloPopTF);
-                return list;
-            }
-            
-            public List<JTextField> getUsersTextFields() {
-                ArrayList<JTextField> list = new ArrayList<JTextField>();
-                list.add(uzivatelskeJmenoJT);
-                list.add(hesloUzivatelPF);
-                return list;
-            }
-        };
+	return new IGuiTextFields() {
+	    public List<JTextField> getAdresBookTextFields() {
+		ArrayList<JTextField> list = new ArrayList<JTextField>();
+		list.add(spolecnostTF);
+		list.add(uliceTF);
+		list.add(mestoTF);
+		list.add(pscTF);
+		list.add(cisloPopTF);
+		return list;
+	    }
+	    
+	    public List<JTextField> getUsersTextFields() {
+		ArrayList<JTextField> list = new ArrayList<JTextField>();
+		list.add(uzivatelskeJmenoJT);
+		list.add(hesloUzivatelPF);
+		return list;
+	    }
+	};
     }
 }
