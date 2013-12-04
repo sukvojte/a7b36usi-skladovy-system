@@ -10,6 +10,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -18,23 +19,24 @@ import javax.persistence.TemporalType;
  * @author Peter
  */
 @Entity
-public class ObjednavkaBO extends AbstractBO{
+@Table(name="orders")
+public class OrderBO extends AbstractBO{
     @Temporal(TemporalType.DATE)
     private Date datum;
     
     @ManyToOne
-    private DruhBaleniBO druhBaleni;
+    private WrappingTypeBO druhBaleni;
     
     @ManyToOne
-    private SarzeBO sarze;
+    private ProductVersionBO sarze;
     
     @ManyToMany(cascade = {CascadeType.ALL})
-    private List<PolozkaBO> polozky;
+    private List<ArticleBO> polozky;
     
     @ManyToOne
-    private ZakaznikBO zakaznik;
+    private PartnerBO zakaznik;
 
-    public ObjednavkaBO() {
+    public OrderBO() {
     }
 
     
@@ -47,35 +49,35 @@ public class ObjednavkaBO extends AbstractBO{
         this.datum = datum;
     }
 
-    public DruhBaleniBO getDruhBaleni() {
+    public WrappingTypeBO getDruhBaleni() {
         return druhBaleni;
     }
 
-    public void setDruhBaleni(DruhBaleniBO druhBaleni) {
+    public void setDruhBaleni(WrappingTypeBO druhBaleni) {
         this.druhBaleni = druhBaleni;
     }
 
-    public SarzeBO getSarze() {
+    public ProductVersionBO getSarze() {
         return sarze;
     }
 
-    public void setSarze(SarzeBO sarze) {
+    public void setSarze(ProductVersionBO sarze) {
         this.sarze = sarze;
     }
 
-    public List<PolozkaBO> getPolozky() {
+    public List<ArticleBO> getPolozky() {
         return polozky;
     }
 
-    public void setPolozky(List<PolozkaBO> polozky) {
+    public void setPolozky(List<ArticleBO> polozky) {
         this.polozky = polozky;
     }
 
-    public ZakaznikBO getZakaznik() {
+    public PartnerBO getZakaznik() {
         return zakaznik;
     }
 
-    public void setZakaznik(ZakaznikBO zakaznik) {
+    public void setZakaznik(PartnerBO zakaznik) {
         this.zakaznik = zakaznik;
     }
     

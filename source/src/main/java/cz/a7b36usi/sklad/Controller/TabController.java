@@ -2,6 +2,8 @@ package cz.a7b36usi.sklad.Controller;
 
 import cz.a7b36usi.sklad.Controller.ifaces.ITabController;
 import cz.a7b36usi.sklad.Service.IGetAllService;
+import cz.a7b36usi.sklad.Service.IUserService;
+import cz.a7b36usi.sklad.Service.IPartnerService;
 import cz.a7b36usi.sklad.tableutils.AdresarTableModel;
 import cz.a7b36usi.sklad.tableutils.UsersTableModel;
 import javax.swing.table.TableModel;

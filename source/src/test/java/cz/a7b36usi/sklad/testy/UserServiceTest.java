@@ -4,7 +4,7 @@ import cz.a7b36usi.sklad.BO.UserRole;
 import cz.a7b36usi.sklad.DTO.UserDTO;
 import cz.a7b36usi.sklad.DTO.ZakaznikDTO;
 import cz.a7b36usi.sklad.Service.IUserService;
-import cz.a7b36usi.sklad.Service.IZakaznikService;
+import cz.a7b36usi.sklad.Service.IPartnerService;
 import cz.a7b36usi.sklad.Service.UserService;
 import java.util.List;
 import static org.junit.Assert.*;
@@ -22,7 +22,7 @@ public class UserServiceTest extends AbstractServiceTest
     IUserService userService;
     
     @Autowired
-    IZakaznikService zakaznikService;
+    IPartnerService zakaznikService;
     
     @Test
     public void testAddUser(){

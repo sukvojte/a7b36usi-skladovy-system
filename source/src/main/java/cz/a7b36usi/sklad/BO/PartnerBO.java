@@ -5,19 +5,21 @@
 package cz.a7b36usi.sklad.BO;
 
 import javax.persistence.Entity;
+import javax.persistence.Table;
 
 /**
  *
  * @author Peter
  */
 @Entity
-public class ZakaznikBO extends AbstractBO {
+@Table(name="partner")
+public class PartnerBO extends AbstractBO {
 
     private boolean isDodavatel, isOdberatel;
     private String ulice, mesto, spolecnost;
     private int psc, cisloPopisne;
 
-    public ZakaznikBO() {
+    public PartnerBO() {
     }
     
     //***************** GETTER SETTER KILOMETER BY PETER ********************************

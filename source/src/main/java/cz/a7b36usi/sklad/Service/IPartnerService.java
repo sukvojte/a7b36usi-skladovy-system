@@ -10,7 +10,7 @@ import cz.a7b36usi.sklad.DTO.ZakaznikDTO;
  *
  * @author Lukas L.
  */
-public interface IZakaznikService {
+public interface IPartnerService {
 
     @Transactional(readOnly = true)
     public List<ZakaznikDTO> getAllZakaznik();
