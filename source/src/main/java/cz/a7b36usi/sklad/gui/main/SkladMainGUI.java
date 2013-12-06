@@ -37,6 +37,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.List;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -753,19 +754,20 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
 	filtrJP.removeAll();
 	filtrJP.updateUI();
 	for (int i = 0; i < count; i++) {
-	    JPanel pair = new JPanel(new GridLayout(2, 1));
-	    JTextField field = new JTextField();
-	    field.setPreferredSize(new Dimension(120, 20));
-	    pair.add(new JLabel(this.baseDataModel.getColumnName(i), JLabel.CENTER), 0);
-	    pair.add(field, 1);
-	    filtrJP.add(pair);
+
+	    filtrJP.add(getPair(new JTextField(), new JLabel(this.baseDataModel.getColumnName(i),JLabel.CENTER)));
 	}
-	JButton filtr = new JButton("Filtrrr");
+	JButton filtr = new JButton("Filtruj");
 	filtrJB = filtr;
-	JPanel pair = new JPanel(new GridLayout(2, 1));
-	pair.add(new JLabel(""));
-	pair.add(filtr);
-	filtrJP.add(pair);
+	filtrJP.add(getPair(filtr, new JLabel("")));
+    }
+    
+    private JPanel getPair(JComponent field, JComponent comp){ 
+	    JPanel pair = new JPanel(new GridLayout(2, 1));
+	    field.setPreferredSize(new Dimension(120, 20));
+	    pair.add(comp);
+	    pair.add(field, 1);
+	    return pair;
     }
 
     /**
