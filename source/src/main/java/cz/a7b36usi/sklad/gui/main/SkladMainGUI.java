@@ -49,7 +49,7 @@ import javax.swing.JTextField;
  */
 @Component
 public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
-    
+
     @Autowired
     ITabController tabController;
     private ZakaznikDTO lastZakaznik = null;
@@ -58,16 +58,16 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
     public JButton filtrJB;
     /* Listenery - START */
     private ArrayList<IMainGuiListener> listeners;
-    
+
     public void addListeners(IMainGuiListener listener) {
 	listeners.add(listener);
     }
-    
+
     public void removeListeners(IMainGuiListener listener) {
 	listeners.remove(listener);
     }
     /* Listenery - END */
-    
+
     public boolean switchTab(Tabs tab) {
 
 	// TODO: switch tab
@@ -76,10 +76,10 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
 	for (IMainGuiListener ctrl : listeners) {
 	    ctrl.tabChanged(tab);
 	}
-	
+
 	return true;
     }
-    
+
     public IGuiData getData() {
 	return new IGuiData() {
 	    public UserDTO getUserData() {
@@ -87,10 +87,10 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
 		long id = 0;
 		if (lastUser != null) {
 		    id = lastUser.getId();
-		}		
+		}
 		return new UserDTO((id != 0 ? id : null), uzivatelskeJmenoJT.getText(), (UserRole) roleJC.getSelectedItem(), new String(hesloUzivatelPF.getPassword()));
 	    }
-	    
+
 	    public ZakaznikDTO getZakaznikData() {
 		//TODO: zatim se neresi dodavatel, odberatel
 		long id = 0;
@@ -101,32 +101,32 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
 	    }
 	};
     }
-    
+
     public void setTableModel(BaseDataModel model) {
 	baseDataModel = model;
 	jTable1.setModel(model);
 	createFilterPanel();
     }
-    
+
     public void editCustomer(ZakaznikDTO customer) {
 	ulozJB.setText("Edituj");
 	lastZakaznik = customer;
 	nullValidators();
 	if (lastZakaznik != null) {
-	    uliceTF.setText(lastZakaznik.getUlice());	    
+	    uliceTF.setText(lastZakaznik.getUlice());
 	    mestoTF.setText(lastZakaznik.getMesto());
 	    spolecnostTF.setText(lastZakaznik.getSpolecnost());
-	    pscTF.setText(String.valueOf(lastZakaznik.getPsc()));	    
+	    pscTF.setText(String.valueOf(lastZakaznik.getPsc()));
 	    cisloPopTF.setText(String.valueOf(lastZakaznik.getCisloPopisne()));
 	} else {
-	    uliceTF.setText("");	    
+	    uliceTF.setText("");
 	    mestoTF.setText("");
 	    spolecnostTF.setText("");
-	    pscTF.setText("");	    
+	    pscTF.setText("");
 	    cisloPopTF.setText("");
 	}
     }
-    
+
     public void editUser(UserDTO user) {
 	ulozJB.setText("Edituj");
 	lastUser = user;
@@ -143,13 +143,13 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
 	    roleJC.setSelectedItem(UserRole.SKLADNIK);
 	}
     }
-    
+
     private void nullForms() {
 	editCustomer(null);
 	editUser(null);
 	ulozJB.setText("Ulož");
     }
-    
+
     private void nullValidators() {
 	((AbstractValidator) pscTF.getInputVerifier()).correct(pscTF);
 	((AbstractValidator) cisloPopTF.getInputVerifier()).correct(cisloPopTF);
@@ -170,9 +170,9 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
 	addItemsToComboLists();
 	addInputVerifiers();
     }
-    
-    private void addListeners(){
-		jTabbedPane1.addChangeListener(new ChangeListener() {
+
+    private void addListeners() {
+	jTabbedPane1.addChangeListener(new ChangeListener() {
 	    public void stateChanged(ChangeEvent e) {
 		JTabbedPane source = (JTabbedPane) e.getSource();
 		if (!(source.getSelectedComponent() instanceof TabsJPanel)) {
@@ -185,7 +185,7 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
 		 * Ja vyuzivam tridy TabsJPanel ktera dedi z JPanel, ale je tam navic informace o aktivnim panelu. Takze tenhle kod nemusis editovat, 
 		 * kdyz budes editovat zalozky
 		 */
-		
+
 		TabsJPanel panel = (TabsJPanel) source.getSelectedComponent();
 		Tabs selectedTab = panel.getTab();
 
@@ -196,11 +196,11 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
 		for (IMainGuiListener ctrl : listeners) {
 		    ctrl.tabChanged(selectedTab);
 		}
-		
-		
+
+
 	    }
 	});
-	
+
 	hidePasswordCheckbox.addItemListener(new ItemListener() {
 	    public void itemStateChanged(ItemEvent e) {
 		if (e.getStateChange() == ItemEvent.SELECTED) {
@@ -211,6 +211,7 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
 	    }
 	});
     }
+
     private void addInputVerifiers() {
 	pscTF.setInputVerifier(new NumberValidator(errorPscJL, "Zadajte PSC jako cislo."));
 	cisloPopTF.setInputVerifier(new NumberValidator(errorCisloPopJL, "Zadajte Cislo popisne jako cislo."));
@@ -218,13 +219,13 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
 	uzivatelskeJmenoJT.setInputVerifier(new UserNameValidator(errorUzivJmenoJL, "Zadejte nejakou hodnotu nebo se jmeno uz vyskytuje"));
 	hesloUzivatelPF.setInputVerifier(new PasswordValidator(errorHesloJL, "Heslo musi obsahovat alespon 1 znak"));
     }
-    
+
     private void addItemsToComboLists() {
 	roleJC.removeAllItems();
 	roleJC.addItem(UserRole.PRODUCT_MANAGER);
 	roleJC.addItem(UserRole.SKLADNIK);
 	roleJC.addItem(UserRole.VEDOUCI);
-	
+
 	typDokladuJC.removeAllItems();
 	typDokladuJC.addItem(DocumentType.PRIJEMKA);
 	typDokladuJC.addItem(DocumentType.VYDEJKA);
@@ -699,10 +700,10 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
 	// TODO add your handling code here:
 	this.dispose();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
-    
+
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
 	JTable table = (JTable) evt.getComponent();
-	
+
 	if (table.getSelectedRowCount() == 1) {
 	    int selected = table.getSelectedRow();
 
@@ -710,18 +711,18 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
 	    for (IMainGuiListener ctrl : listeners) {
 		ctrl.tableSelectedIndex(selected);
 	    }
-	    
+
 	}
-	
+
     }//GEN-LAST:event_jTable1MouseClicked
-    
+
     private void ulozJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ulozJBActionPerformed
 	if (!ulozJB.getText().equals("Edituj")) {
 	    ((UserNameValidator) uzivatelskeJmenoJT.getInputVerifier()).setValue(uzivatelskeJmenoJT.getText());
 	} else {
 	    ((UserNameValidator) uzivatelskeJmenoJT.getInputVerifier()).setValue("");
 	}
-	    
+
 	for (IMainGuiListener ctrl : listeners) {
 	    if (!ctrl.validate()) {
 		JOptionPane.showMessageDialog(panelMovements, "CHYBA se zadanim udaju.");
@@ -736,7 +737,7 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
 	uzivatelskeJmenoJT.setEditable(false);
 	//ulozJB.setText("Edituj");
     }//GEN-LAST:event_ulozJBActionPerformed
-    
+
     private void smazJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smazJBActionPerformed
 	// 
 	for (IMainGuiListener ctrl : listeners) {
@@ -750,24 +751,23 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
     private void createFilterPanel() {
 	int count = this.baseDataModel.getColumnCount();
 	filtrJP.setLayout(new FlowLayout());
-	
+
 	filtrJP.removeAll();
 	filtrJP.updateUI();
 	for (int i = 0; i < count; i++) {
-
-	    filtrJP.add(getPair(new JTextField(), new JLabel(this.baseDataModel.getColumnName(i),JLabel.CENTER)));
+	    filtrJP.add(getPair(new JTextField(), new JLabel(this.baseDataModel.getColumnName(i), JLabel.CENTER)));
 	}
 	JButton filtr = new JButton("Filtruj");
 	filtrJB = filtr;
 	filtrJP.add(getPair(filtr, new JLabel("")));
     }
-    
-    private JPanel getPair(JComponent field, JComponent comp){ 
-	    JPanel pair = new JPanel(new GridLayout(2, 1));
-	    field.setPreferredSize(new Dimension(120, 20));
-	    pair.add(comp);
-	    pair.add(field, 1);
-	    return pair;
+
+    private JPanel getPair(JComponent field, JComponent comp) {
+	JPanel pair = new JPanel(new GridLayout(2, 1));
+	field.setPreferredSize(new Dimension(120, 20));
+	pair.add(comp);
+	pair.add(field, 1);
+	return pair;
     }
 
     /**
@@ -874,7 +874,7 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
 		list.add(cisloPopTF);
 		return list;
 	    }
-	    
+
 	    public List<JTextField> getUsersTextFields() {
 		ArrayList<JTextField> list = new ArrayList<JTextField>();
 		list.add(uzivatelskeJmenoJT);
