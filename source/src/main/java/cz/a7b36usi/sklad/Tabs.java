@@ -7,6 +7,7 @@ public enum Tabs {
 	ADDRESS_BOOK(AddressBookState.class),
 	ORDERS(null),
 	MOVEMENTS(null),
+	DOCUMENTS(null),
 	WAREHOUSE(null),
 	USERS(UsersState.class);	
 	
