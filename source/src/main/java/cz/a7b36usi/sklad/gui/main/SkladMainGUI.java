@@ -105,6 +105,7 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
     }
     
     public void editCustomer(ZakaznikDTO customer) {
+	ulozJB.setText("Edituj");
 	lastZakaznik = customer;
 	nullValidators();
 	if (lastZakaznik != null) {
@@ -242,8 +243,16 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
         errorCisloPopJL = new javax.swing.JLabel();
         errorSpolecnostJL = new javax.swing.JLabel();
         panelOrders = new TabsJPanel(Tabs.ORDERS);
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
         panelMovements = new TabsJPanel(Tabs.MOVEMENTS);
         panelWarehouse = new TabsJPanel(Tabs.WAREHOUSE);
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jTextField2 = new javax.swing.JTextField();
+        jTextField3 = new javax.swing.JTextField();
         panelUsers = new TabsJPanel(Tabs.USERS);
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -350,15 +359,29 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
 
         jTabbedPane1.addTab("Adresář", panelAddress);
 
+        jLabel9.setText("Druh balení :");
+
+        jLabel10.setText("Šarže :");
+
         org.jdesktop.layout.GroupLayout panelOrdersLayout = new org.jdesktop.layout.GroupLayout(panelOrders);
         panelOrders.setLayout(panelOrdersLayout);
         panelOrdersLayout.setHorizontalGroup(
             panelOrdersLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 708, Short.MAX_VALUE)
+            .add(panelOrdersLayout.createSequentialGroup()
+                .add(33, 33, 33)
+                .add(panelOrdersLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(jLabel10)
+                    .add(jLabel9))
+                .addContainerGap(594, Short.MAX_VALUE))
         );
         panelOrdersLayout.setVerticalGroup(
             panelOrdersLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 246, Short.MAX_VALUE)
+            .add(panelOrdersLayout.createSequentialGroup()
+                .add(36, 36, 36)
+                .add(jLabel9)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                .add(jLabel10)
+                .addContainerGap(166, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Objednávky", panelOrders);
@@ -376,15 +399,45 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
 
         jTabbedPane1.addTab("Pohyby", panelMovements);
 
+        jLabel11.setText("Jméno :");
+
+        jLabel12.setText("Kód :");
+
+        jLabel13.setText("Množství :");
+
         org.jdesktop.layout.GroupLayout panelWarehouseLayout = new org.jdesktop.layout.GroupLayout(panelWarehouse);
         panelWarehouse.setLayout(panelWarehouseLayout);
         panelWarehouseLayout.setHorizontalGroup(
             panelWarehouseLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 708, Short.MAX_VALUE)
+            .add(panelWarehouseLayout.createSequentialGroup()
+                .addContainerGap()
+                .add(panelWarehouseLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(jLabel12)
+                    .add(jLabel11)
+                    .add(jLabel13))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(panelWarehouseLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                    .add(jTextField1)
+                    .add(jTextField2)
+                    .add(jTextField3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE))
+                .addContainerGap(511, Short.MAX_VALUE))
         );
         panelWarehouseLayout.setVerticalGroup(
             panelWarehouseLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 246, Short.MAX_VALUE)
+            .add(panelWarehouseLayout.createSequentialGroup()
+                .add(15, 15, 15)
+                .add(panelWarehouseLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(jLabel11)
+                    .add(jTextField1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                .add(panelWarehouseLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(jLabel12)
+                    .add(jTextField2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                .add(panelWarehouseLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(jLabel13)
+                    .add(jTextField3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(123, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Skladové zásoby", panelWarehouse);
@@ -674,6 +727,10 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
     private javax.swing.JPasswordField hesloUzivatelPF;
     private javax.swing.JCheckBox hidePasswordCheckbox;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -681,6 +738,7 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
@@ -688,6 +746,9 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField mestoTF;
     private javax.swing.JPanel panelAddress;
     private javax.swing.JPanel panelMovements;

@@ -5,8 +5,8 @@
 
 package cz.a7b36usi.sklad.testy;
 import cz.a7b36usi.sklad.DTO.ZakaznikDTO;
+import cz.a7b36usi.sklad.Service.IPartnerService;
 import cz.a7b36usi.sklad.Service.IUserService;
-import cz.a7b36usi.sklad.Service.IZakaznikService;
 import java.util.List;
 import static org.junit.Assert.*;
 import org.junit.Test;
@@ -18,7 +18,7 @@ public class ZakaznikServiceTest  extends AbstractServiceTest{
     IUserService userService;
     
     @Autowired
-    IZakaznikService zakaznikService;
+    IPartnerService zakaznikService;
     
     
     @Test
