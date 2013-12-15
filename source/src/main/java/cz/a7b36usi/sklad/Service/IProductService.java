@@ -1,7 +1,7 @@
 
 package cz.a7b36usi.sklad.Service;
 
-import cz.a7b36usi.sklad.DTO.ProduktDTO;
+import cz.a7b36usi.sklad.DTO.ProductDTO;
 import java.util.List;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,7 +16,7 @@ public interface IProductService {
     public void deleteProdukt(Long produktId);
     
     @Transactional(readOnly=true)
-    public List<ProduktDTO> getAllProdukts();
+    public List<ProductDTO> getAllProdukts();
     
-    boolean updateProdukt(ProduktDTO user);
+    boolean updateProdukt(ProductDTO user);
 }

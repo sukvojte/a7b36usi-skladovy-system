@@ -35,7 +35,7 @@ public class ProductBO extends AbstractBO {
     private List<WrappingTypeBO> druhyBaleni;
     
     @OneToMany(cascade = {CascadeType.ALL})
-    private List<ArticleBO> polozky;
+    private List<OrderItemBO> polozky;
     
     public void addPohyb(MovementBO pohyb){
         if(pohyby == null){
@@ -102,11 +102,11 @@ public class ProductBO extends AbstractBO {
         this.druhyBaleni = druhyBaleni;
     }
 
-    public List<ArticleBO> getPolozky() {
+    public List<OrderItemBO> getPolozky() {
         return polozky;
     }
 
-    public void setPolozky(List<ArticleBO> polozky) {
+    public void setPolozky(List<OrderItemBO> polozky) {
         this.polozky = polozky;
     }
 }

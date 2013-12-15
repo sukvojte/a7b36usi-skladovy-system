@@ -6,7 +6,7 @@ import java.util.List;
  *
  * @author Lukas L.
  */
-public class ProduktDTO extends AbstractDTO {
+public class ProductDTO extends AbstractDTO {
 
     private String jmeno;
     private String kod;
@@ -17,7 +17,7 @@ public class ProduktDTO extends AbstractDTO {
     private List<Long> druhyBaleni;
     private List<Long> polozky;
 
-    public ProduktDTO(String jmeno, String kod, Integer mnozstvi, Long kategorie, List<Long> pohyby, List<Long> sarze, List<Long> druhyBaleni, List<Long> polozky) {
+    public ProductDTO(String jmeno, String kod, Integer mnozstvi, Long kategorie, List<Long> pohyby, List<Long> sarze, List<Long> druhyBaleni, List<Long> polozky) {
         this.jmeno = jmeno;
         this.kod = kod;
         this.mnozstvi = mnozstvi;

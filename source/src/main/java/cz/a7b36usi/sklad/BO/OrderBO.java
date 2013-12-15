@@ -7,9 +7,10 @@ package cz.a7b36usi.sklad.BO;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -22,64 +23,40 @@ import javax.persistence.TemporalType;
 @Table(name="orders")
 public class OrderBO extends AbstractBO{
     @Temporal(TemporalType.DATE)
-    private Date datum;
+    @Column(name = "orderDate",nullable = false)
+    private Date date;
+       
+    @OneToMany(cascade = {CascadeType.ALL})
+    private List<OrderItemBO> items;
     
     @ManyToOne
-    private WrappingTypeBO druhBaleni;
-    
-    @ManyToOne
-    private ProductVersionBO sarze;
-    
-    @ManyToMany(cascade = {CascadeType.ALL})
-    private List<ArticleBO> polozky;
-    
-    @ManyToOne
-    private PartnerBO zakaznik;
+    @Column(nullable = false)
+    private PartnerBO partner;
 
     public OrderBO() {
     }
-
-    
     //***************** GETTER SETTER KILOMETER BY PETER ********************************
-    public Date getDatum() {
-        return datum;
+    public Date getDate() {
+        return date;
     }
 
-    public void setDatum(Date datum) {
-        this.datum = datum;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
-    public WrappingTypeBO getDruhBaleni() {
-        return druhBaleni;
+    public List<OrderItemBO> getItems() {
+        return items;
     }
 
-    public void setDruhBaleni(WrappingTypeBO druhBaleni) {
-        this.druhBaleni = druhBaleni;
+    public void setItems(List<OrderItemBO> items) {
+        this.items = items;
     }
 
-    public ProductVersionBO getSarze() {
-        return sarze;
+    public PartnerBO getPartner() {
+        return partner;
     }
 
-    public void setSarze(ProductVersionBO sarze) {
-        this.sarze = sarze;
-    }
-
-    public List<ArticleBO> getPolozky() {
-        return polozky;
-    }
-
-    public void setPolozky(List<ArticleBO> polozky) {
-        this.polozky = polozky;
-    }
-
-    public PartnerBO getZakaznik() {
-        return zakaznik;
-    }
-
-    public void setZakaznik(PartnerBO zakaznik) {
-        this.zakaznik = zakaznik;
-    }
-    
-    
+    public void setPartner(PartnerBO partner) {
+        this.partner = partner;
+    } 
 }
