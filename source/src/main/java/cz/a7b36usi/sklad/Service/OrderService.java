@@ -28,6 +28,7 @@ public class OrderService extends AbstractService implements IOrderService {
         OrderBO bo = new OrderBO();
         bo.setDate(order.getDate());
         bo.setId(order.getId());
+        bo.setNumber(order.getNumber());
         bo.setPartner(genericDAO.loadById(order.getPartner(), PartnerBO.class));
         List<OrderItemBO> items = new ArrayList<OrderItemBO>();
         for (OrderItemDTO orderItemDTO : order.getItems()) {
@@ -59,7 +60,7 @@ public class OrderService extends AbstractService implements IOrderService {
                 idtos.add(idto);
             }
 
-            OrderDTO dto = new OrderDTO(orderBO.getId(), orderBO.getDate(), idtos, orderBO.getPartner().getId());
+            OrderDTO dto = new OrderDTO(orderBO.getId(), orderBO.getDate(),orderBO.getNumber(), idtos, orderBO.getPartner().getId());
             odtos.add(dto);
         }
         return odtos;

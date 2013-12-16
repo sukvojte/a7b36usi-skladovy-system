@@ -33,6 +33,8 @@ public class OrderBO extends AbstractBO{
     @ManyToOne
     @JoinColumn(nullable = false)
     private PartnerBO partner;
+    
+    private String number;
 
     public OrderBO() {
     }
@@ -60,4 +62,14 @@ public class OrderBO extends AbstractBO{
     public void setPartner(PartnerBO partner) {
         this.partner = partner;
     } 
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
+    
+    
 }
