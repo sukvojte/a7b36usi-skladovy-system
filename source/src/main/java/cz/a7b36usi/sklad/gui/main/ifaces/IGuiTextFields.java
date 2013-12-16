@@ -10,16 +10,22 @@ import javax.swing.JTextField;
  */
 public interface IGuiTextFields {
     /**
-     * Get address book text fields from form for validating
+     * Gets address book text fields from form for validating
      * 
      * @return 
      */
     List<JTextField> getAddressBookTextFields();
     
     /**
-     * Get user's text fields from form for validating
+     * Gets user's text fields from form for validating
      * 
      * @return 
      */    
     List<JTextField> getUsersTextFields();
+    
+    /**
+     * Gets order's text fields from form for validating
+     * @return 
+     */
+    List<JTextField> getOrderTextFields();
 }
