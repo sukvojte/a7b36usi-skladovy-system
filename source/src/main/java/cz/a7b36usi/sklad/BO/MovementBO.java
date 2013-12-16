@@ -4,8 +4,9 @@
  */
 package cz.a7b36usi.sklad.BO;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Enumerated;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -13,62 +14,59 @@ import javax.persistence.Table;
  *
  * @author Peter
  */
+
+/**
+ * Entity representing movement of one product
+ */
 @Entity
-@Table(name="movement")
-public class MovementBO extends AbstractBO{
-    
-    private double cena;
-    
+@Table(name = "movement")
+public class MovementBO extends AbstractBO {
+
+    @Column(nullable = false)
+    private double price;
+
     @ManyToOne
-    private WrappingTypeBO druhBaleni;
-    
+    @JoinColumn(nullable = false)
+    private WrappingTypeBO wrapping;
+
     @ManyToOne
-    private ProductVersionBO sarze;
-    
-    @Enumerated
-    private DocumentType typDokladu;
-    
+    @JoinColumn(nullable = false)
+    private ProductVersionBO version;
+
     @ManyToOne
+    @JoinColumn(nullable = false)
     private ProductBO produkt;
-    
+
     @ManyToOne
-    private PartnerBO zakaznik;
+    @JoinColumn(nullable = false)
+    private DocumentBO document;
 
     public MovementBO() {
     }
 
     //***************** GETTER SETTER KILOMETER BY PETER ********************************
-    
-    public double getCena() {
-        return cena;
+    public double getPrice() {
+        return price;
     }
 
-    public void setCena(double cena) {
-        this.cena = cena;
+    public void setPrice(double price) {
+        this.price = price;
     }
 
-    public WrappingTypeBO getDruhBaleni() {
-        return druhBaleni;
+    public WrappingTypeBO getWrapping() {
+        return wrapping;
     }
 
-    public void setDruhBaleni(WrappingTypeBO druhBaleni) {
-        this.druhBaleni = druhBaleni;
+    public void setWrapping(WrappingTypeBO wrapping) {
+        this.wrapping = wrapping;
     }
 
-    public ProductVersionBO getSarze() {
-        return sarze;
+    public ProductVersionBO getVersion() {
+        return version;
     }
 
-    public void setSarze(ProductVersionBO sarze) {
-        this.sarze = sarze;
-    }
-
-    public DocumentType getTypDokladu() {
-        return typDokladu;
-    }
-
-    public void setTypDokladu(DocumentType typDokladu) {
-        this.typDokladu = typDokladu;
+    public void setVersion(ProductVersionBO version) {
+        this.version = version;
     }
 
     public ProductBO getProdukt() {
@@ -77,16 +75,15 @@ public class MovementBO extends AbstractBO{
 
     public void setProdukt(ProductBO produkt) {
         this.produkt = produkt;
-        this.produkt.addPohyb(this);
     }
 
-    public PartnerBO getZakaznik() {
-        return zakaznik;
+    public DocumentBO getDocument() {
+        return document;
     }
 
-    public void setZakaznik(PartnerBO zakaznik) {
-        this.zakaznik = zakaznik;
+    public void setDocument(DocumentBO document) {
+        this.document = document;
     }
 
-    
+
 }
