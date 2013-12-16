@@ -89,8 +89,7 @@ public class UserService extends AbstractService implements IUserService {
     }
 
     public void updatePassword(UserDTO user, char[] password) {
-        UserBO u = new UserBO();
-        u.setId(user.getId());
+	UserBO u = genericDAO.loadById(user.getId(), UserBO.class);
         u.setPassword(new String(password));
         genericDAO.saveOrUpdate(u);
 
