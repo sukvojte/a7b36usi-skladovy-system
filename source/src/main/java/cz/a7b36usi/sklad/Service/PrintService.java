@@ -32,12 +32,15 @@ IOrderService orderService;
             JasperPrint jp = null;
             Map<String, Object> params = new HashMap<String, Object>();
             //params.put("isK", new Boolean(isKK));
-            List<OrderItemDTO> orderItems = orderService.getAllOrderItems(new OrderDTO(orderId, null, null, null));
-            
+            List<OrderItemDTO> orderItems = orderService.getAllOrderItems(new OrderDTO(orderId, null, null, null, orderId));
+            for (OrderItemDTO orderItemDTO : orderItems) {
+			System.out.println("quant "+orderItemDTO.getQuantity());
+		    }
             jr = (JasperReport) JRLoader.loadObject(new File("order1.jasper"));
             jp = JasperFillManager.fillReport(jr, params, new JRBeanCollectionDataSource(orderItems));
-                JasperPrintManager.printReport(jp,true);
+            JasperPrintManager.printReport(jp,true);
         } catch (JRException ex) {
+	    ex.printStackTrace();
 	     System.out.println("problem s tiskem");
 	     return false;
         }

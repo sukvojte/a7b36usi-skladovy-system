@@ -763,7 +763,7 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
 
     private void tiskObjednavkyJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tiskObjednavkyJBActionPerformed
         // TODO add your handling code here:
-	
+	printService.printOrder(40L);
     }//GEN-LAST:event_tiskObjednavkyJBActionPerformed
     /**
      * Creates filters fields in JPanel from DataModel

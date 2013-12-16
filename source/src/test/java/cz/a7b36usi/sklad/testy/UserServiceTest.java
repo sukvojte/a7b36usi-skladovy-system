@@ -44,6 +44,7 @@ public class UserServiceTest extends AbstractServiceTest
         assertEquals(ur, u2.getAcl());
         assertEquals(id, u1.getId());
         assertEquals(id, u2.getId());
+	userService.addUser("admin", "admin".toCharArray(), UserRole.VEDOUCI);
     }
     
     @Test

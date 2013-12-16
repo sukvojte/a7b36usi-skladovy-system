@@ -29,11 +29,11 @@ public class OrderItemBO extends AbstractBO{
     @Column(nullable = false)
     private int quantity;
     
-    @JoinColumn(name = "wrapping",nullable = false)
+    @JoinColumn(name = "wrapping")
     @ManyToOne
     private WrappingTypeBO wrappingType;
     
-    @JoinColumn(name = "version",nullable = false)
+    @JoinColumn(name = "version")
     @ManyToOne
     private ProductVersionBO productVersion;
     

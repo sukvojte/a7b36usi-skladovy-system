@@ -6,11 +6,13 @@ import cz.a7b36usi.sklad.DTO.CategoryDTO;
 import cz.a7b36usi.sklad.DTO.ProductDTO;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author Lukas L.
  */
+@Component
 public class ProductService extends AbstractService implements IProductService {
 
     public Long saveProduct(ProductDTO product) {

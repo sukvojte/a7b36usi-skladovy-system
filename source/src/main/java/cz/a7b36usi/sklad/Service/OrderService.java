@@ -41,6 +41,7 @@ public class OrderService extends AbstractService implements IOrderService {
             it.setWrappingType(genericDAO.loadById(orderItemDTO.getWrappingType(), WrappingTypeBO.class));
             items.add(it);
         }
+	bo.setItems(items);
 	}
         return genericDAO.saveOrUpdate(bo).getId();
     }
@@ -75,10 +76,10 @@ public class OrderService extends AbstractService implements IOrderService {
     public void saveOrderItem(OrderItemDTO item) {
         OrderItemBO it = new OrderItemBO();
         it.setOrder(genericDAO.loadById(item.getOrder(), OrderBO.class));
-//        it.setProduct(genericDAO.loadById(item.getProduct(), ProductBO.class));
+        it.setProduct(genericDAO.loadById(item.getProduct(), ProductBO.class));
 //        it.setProductVersion(genericDAO.loadById(item.getProductVersion(), ProductVersionBO.class));
         it.setQuantity(item.getQuantity());
-//        it.setWrappingType(genericDAO.loadById(item.getWrappingType(), WrappingTypeBO.class));
+ //       it.setWrappingType(genericDAO.loadById(item.getWrappingType(), WrappingTypeBO.class));
         genericDAO.saveOrUpdate(it);
     }
 
