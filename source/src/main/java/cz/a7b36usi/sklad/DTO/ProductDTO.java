@@ -8,87 +8,50 @@ import java.util.List;
  */
 public class ProductDTO extends AbstractDTO {
 
-    private String jmeno;
-    private String kod;
-    private Integer mnozstvi;
-    private Long kategorie;
-    private List<Long> pohyby;
-    private List<Long> sarze;
-    private List<Long> druhyBaleni;
-    private List<Long> polozky;
+    private String name;
+    private String code;
+    private Integer quantity;
+    private Long category;
 
-    public ProductDTO(String jmeno, String kod, Integer mnozstvi, Long kategorie, List<Long> pohyby, List<Long> sarze, List<Long> druhyBaleni, List<Long> polozky) {
-        this.jmeno = jmeno;
-        this.kod = kod;
-        this.mnozstvi = mnozstvi;
-        this.kategorie = kategorie;
-        this.pohyby = pohyby;
-        this.sarze = sarze;
-        this.druhyBaleni = druhyBaleni;
-        this.polozky = polozky;
+    public ProductDTO(Long id,String name, String code, Integer quantity, Long category) {
+        this.name = name;
+        this.code = code;
+        this.quantity = quantity;
+        this.category = category;
+        this.id=id;
     }
 
-    public String getJmeno() {
-        return jmeno;
+    public String getName() {
+        return name;
     }
 
-    public void setJmeno(String jmeno) {
-        this.jmeno = jmeno;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getKod() {
-        return kod;
+    public String getCode() {
+        return code;
     }
 
-    public void setKod(String kod) {
-        this.kod = kod;
+    public void setCode(String code) {
+        this.code = code;
     }
 
-    public Integer getMnozstvi() {
-        return mnozstvi;
+    public Integer getQuantity() {
+        return quantity;
     }
 
-    public void setMnozstvi(Integer mnozstvi) {
-        this.mnozstvi = mnozstvi;
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
     }
 
-    public Long getKategorie() {
-        return kategorie;
+    public Long getCategory() {
+        return category;
     }
 
-    public void setKategorie(Long kategorie) {
-        this.kategorie = kategorie;
+    public void setCategory(Long category) {
+        this.category = category;
     }
 
-    public List<Long> getPohyby() {
-        return pohyby;
-    }
 
-    public void setPohyby(List<Long> pohyby) {
-        this.pohyby = pohyby;
-    }
-
-    public List<Long> getSarze() {
-        return sarze;
-    }
-
-    public void setSarze(List<Long> sarze) {
-        this.sarze = sarze;
-    }
-
-    public List<Long> getDruhyBaleni() {
-        return druhyBaleni;
-    }
-
-    public void setDruhyBaleni(List<Long> druhyBaleni) {
-        this.druhyBaleni = druhyBaleni;
-    }
-
-    public List<Long> getPolozky() {
-        return polozky;
-    }
-
-    public void setPolozky(List<Long> polozky) {
-        this.polozky = polozky;
-    }
 }

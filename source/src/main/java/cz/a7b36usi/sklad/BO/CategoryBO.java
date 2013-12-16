@@ -1,10 +1,8 @@
 
 package cz.a7b36usi.sklad.BO;
 
-import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -15,37 +13,28 @@ import javax.persistence.Table;
 @Table(name="category")
 public class CategoryBO extends AbstractBO{
     
-    private String jmeno;
+    private String name;
     
-    @OneToMany(cascade = {CascadeType.ALL})
-    private List<CategoryBO> podkategorie;
+    @ManyToOne
+    private CategoryBO parrent;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+ 
+
+    public CategoryBO getParrent() {
+        return parrent;
+    }
+
+    public void setParrent(CategoryBO parrent) {
+        this.parrent = parrent;
+    }
     
-    @OneToMany(cascade = {CascadeType.ALL})
-    private List<ProductBO> jeVProduktech;
 
-    public String getJmeno() {
-        return jmeno;
-    }
-
-    public void setJmeno(String jmeno) {
-        this.jmeno = jmeno;
-    }
-
-    public List<CategoryBO> getPodkategorie() {
-        return podkategorie;
-    }
-
-    public void setPodkategorie(List<CategoryBO> podkategorie) {
-        this.podkategorie = podkategorie;
-    }
-
-    public List<ProductBO> getJeVProduktech() {
-        return jeVProduktech;
-    }
-
-    public void setJeVProduktech(List<ProductBO> jeVProduktech) {
-        this.jeVProduktech = jeVProduktech;
-    }
-        
-    
 }
