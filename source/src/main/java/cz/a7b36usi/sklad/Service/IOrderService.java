@@ -21,7 +21,7 @@ public interface IOrderService {
      *
      * @param order order to be persistedd
      */
-    public void saveOrder(OrderDTO order);
+    public Long saveOrder(OrderDTO order);
 
     /**
      *

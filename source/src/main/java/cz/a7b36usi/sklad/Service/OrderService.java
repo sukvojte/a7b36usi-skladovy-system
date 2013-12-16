@@ -24,13 +24,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class OrderService extends AbstractService implements IOrderService {
 
-    public void saveOrder(OrderDTO order) {
+    public Long saveOrder(OrderDTO order) {
         OrderBO bo = new OrderBO();
         bo.setDate(order.getDate());
         bo.setId(order.getId());
         bo.setNumber(order.getNumber());
         bo.setPartner(genericDAO.loadById(order.getPartner(), PartnerBO.class));
         List<OrderItemBO> items = new ArrayList<OrderItemBO>();
+	if(order.getItems() != null){
         for (OrderItemDTO orderItemDTO : order.getItems()) {
             OrderItemBO it = new OrderItemBO();
             it.setOrder(bo);
@@ -40,7 +41,8 @@ public class OrderService extends AbstractService implements IOrderService {
             it.setWrappingType(genericDAO.loadById(orderItemDTO.getWrappingType(), WrappingTypeBO.class));
             items.add(it);
         }
-        genericDAO.saveOrUpdate(bo);
+	}
+        return genericDAO.saveOrUpdate(bo).getId();
     }
 
     public List<OrderDTO> getAllOrders() {
@@ -73,15 +75,26 @@ public class OrderService extends AbstractService implements IOrderService {
     public void saveOrderItem(OrderItemDTO item) {
         OrderItemBO it = new OrderItemBO();
         it.setOrder(genericDAO.loadById(item.getOrder(), OrderBO.class));
-        it.setProduct(genericDAO.loadById(item.getProduct(), ProductBO.class));
-        it.setProductVersion(genericDAO.loadById(item.getProductVersion(), ProductVersionBO.class));
+//        it.setProduct(genericDAO.loadById(item.getProduct(), ProductBO.class));
+//        it.setProductVersion(genericDAO.loadById(item.getProductVersion(), ProductVersionBO.class));
         it.setQuantity(item.getQuantity());
-        it.setWrappingType(genericDAO.loadById(item.getWrappingType(), WrappingTypeBO.class));
+//        it.setWrappingType(genericDAO.loadById(item.getWrappingType(), WrappingTypeBO.class));
         genericDAO.saveOrUpdate(it);
     }
 
     public List<OrderItemDTO> getAllOrderItems(OrderDTO order) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        OrderBO o = genericDAO.loadById(order.getId(), OrderBO.class);
+	List<OrderItemDTO> ordersDTO = new ArrayList<OrderItemDTO>();
+	for (OrderItemBO orderItemBO : o.getItems()) {
+	    ordersDTO.add(new OrderItemDTO(
+                orderItemBO.getId(),
+                orderItemBO.getProduct().getId(),
+                orderItemBO.getQuantity(),
+                orderItemBO.getWrappingType().getId(),
+                orderItemBO.getProductVersion().getId(),
+                orderItemBO.getOrder().getId()));
+	}
+	return ordersDTO;
     }
 
     public void removeOrderItem(OrderItemDTO item) {

@@ -1,157 +1,284 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+	 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-  <groupId>cz.a7b36usi</groupId>
-  <artifactId>sklad</artifactId>
-  <version>1.0-SNAPSHOT</version>
-  <packaging>jar</packaging>
+    <groupId>cz.a7b36usi</groupId>
+    <artifactId>sklad</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
 
-  <name>sklad</name>
-  <url>http://maven.apache.org</url>
+    <name>sklad</name>
+    <url>http://maven.apache.org</url>
 
-  <properties>
-        <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <org.hibernate.version>4.1.7.Final</org.hibernate.version>
-        <org.springframework.version>3.1.2.RELEASE</org.springframework.version>
-  </properties>
+    <properties>
+	<endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
+	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	<org.hibernate.version>4.1.7.Final</org.hibernate.version>
+	<org.springframework.version>3.1.2.RELEASE</org.springframework.version>
+    </properties>
 
-  <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.8.2</version>
-      <scope>test</scope>
-      <type>jar</type>
-    </dependency>
+    <dependencies>
+	<dependency>
+	    <groupId>junit</groupId>
+	    <artifactId>junit</artifactId>
+	    <version>4.8.2</version>
+	    <scope>test</scope>
+	    <type>jar</type>
+	</dependency>
     
     
-     <!-- 
-            ********************************************************************************************************************************************************
-            *  HIBERNATE - START (http://docs.jboss.org/hibernate/core/4.0/quickstart/en-US/html/hibernate-gsg-obtain.html#hibernate-gsg-setup-mavenRepoArtifacts) * 
-            ********************************************************************************************************************************************************
-        -->            
-        <!-- HIBERNATE - END -->
+	<!-- 
+     ********************************************************************************************************************************************************
+     *  HIBERNATE - START (http://docs.jboss.org/hibernate/core/4.0/quickstart/en-US/html/hibernate-gsg-obtain.html#hibernate-gsg-setup-mavenRepoArtifacts) * 
+     ********************************************************************************************************************************************************
+ -->            
+	<!-- HIBERNATE - END -->
         
    
-         <!-- 
-            ********************************************************************************************************************************************************
-            *  Spring - START (http://blog.springsource.org/2009/12/02/obtaining-spring-3-artifacts-with-maven/)                                                   * 
-            ********************************************************************************************************************************************************
-        -->        
+	<!-- 
+     ********************************************************************************************************************************************************
+     *  Spring - START (http://blog.springsource.org/2009/12/02/obtaining-spring-3-artifacts-with-maven/)                                                   * 
+     ********************************************************************************************************************************************************
+ -->        
         
-        <!--
-            Core utilities used by other modules.
-            Define this if you use Spring Utility APIs (org.springframework.core.*/org.springframework.util.*)
-        -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-core</artifactId>
-            <version>${org.springframework.version}</version>
-        </dependency>
+	<!--
+     Core utilities used by other modules.
+     Define this if you use Spring Utility APIs (org.springframework.core.*/org.springframework.util.*)
+ -->
+	<dependency>
+	    <groupId>org.springframework</groupId>
+	    <artifactId>spring-core</artifactId>
+	    <version>${org.springframework.version}</version>
+	</dependency>
  
 
  
-        <!--
-            Application Context (depends on spring-core, spring-expression, spring-aop, spring-beans)
-            This is the central artifact for Spring's Dependency Injection Container and is generally always defined
-        -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-            <version>${org.springframework.version}</version>
-        </dependency>
+	<!--
+     Application Context (depends on spring-core, spring-expression, spring-aop, spring-beans)
+     This is the central artifact for Spring's Dependency Injection Container and is generally always defined
+ -->
+	<dependency>
+	    <groupId>org.springframework</groupId>
+	    <artifactId>spring-context</artifactId>
+	    <version>${org.springframework.version}</version>
+	</dependency>
  
  
-        <!--
-            Object-to-Relation-Mapping (ORM) integration with Hibernate, JPA, and iBatis.
-            (depends on spring-core, spring-beans, spring-context, spring-tx)
-            Define this if you need ORM (org.springframework.orm.*)
-        -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-orm</artifactId>
-            <version>${org.springframework.version}</version>
-        </dependency>
+	<!--
+     Object-to-Relation-Mapping (ORM) integration with Hibernate, JPA, and iBatis.
+     (depends on spring-core, spring-beans, spring-context, spring-tx)
+     Define this if you need ORM (org.springframework.orm.*)
+ -->
+	<dependency>
+	    <groupId>org.springframework</groupId>
+	    <artifactId>spring-orm</artifactId>
+	    <version>${org.springframework.version}</version>
+	</dependency>
  
-        <!--
-            Web application development utilities applicable to both Servlet and Portlet Environments
-            (depends on spring-core, spring-beans, spring-context)
-            Define this if you use Spring MVC, or wish to use Struts, JSF, or another web framework with Spring (org.springframework.web.*)
-        -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-web</artifactId>
-            <version>${org.springframework.version}</version>
-        </dependency>
+	<!--
+     Web application development utilities applicable to both Servlet and Portlet Environments
+     (depends on spring-core, spring-beans, spring-context)
+     Define this if you use Spring MVC, or wish to use Struts, JSF, or another web framework with Spring (org.springframework.web.*)
+ -->
+	<dependency>
+	    <groupId>org.springframework</groupId>
+	    <artifactId>spring-web</artifactId>
+	    <version>${org.springframework.version}</version>
+	</dependency>
  
  
  
-        <!--
-            Support for testing Spring applications with tools such as JUnit and TestNG
-            This artifact is generally always defined with a 'test' scope for the integration testing framework and unit testing stubs
-        -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-test</artifactId>
-            <version>${org.springframework.version}</version>
-            <scope>test</scope>
-        </dependency>
+	<!--
+     Support for testing Spring applications with tools such as JUnit and TestNG
+     This artifact is generally always defined with a 'test' scope for the integration testing framework and unit testing stubs
+ -->
+	<dependency>
+	    <groupId>org.springframework</groupId>
+	    <artifactId>spring-test</artifactId>
+	    <version>${org.springframework.version}</version>
+	    <scope>test</scope>
+	</dependency>
         
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-aspects</artifactId>
-            <version>${org.springframework.version}</version>
-        </dependency>        
+	<dependency>
+	    <groupId>org.springframework</groupId>
+	    <artifactId>spring-aspects</artifactId>
+	    <version>${org.springframework.version}</version>
+	</dependency>        
         
         
-        <!-- Spring - END -->
-    <dependency>
-      <groupId>aspectj</groupId>
-      <artifactId>aspectjrt</artifactId>
-      <version>1.5.3</version>
-    </dependency>
-    <dependency>
-      <groupId>commons-dbcp</groupId>
-      <artifactId>commons-dbcp</artifactId>
-      <version>1.4</version>
-    </dependency>
-    <dependency>
-      <groupId>org.postgresql</groupId>
-      <artifactId>postgresql</artifactId>
-      <version>9.3-1100-jdbc41</version>
-    </dependency>
-    <dependency>
-      <groupId>org.hibernate</groupId>
-      <artifactId>hibernate-entitymanager</artifactId>
-      <version>4.2.7.Final</version>
-    </dependency>
-    <dependency>
-      <groupId>org.hibernate.javax.persistence</groupId>
-      <artifactId>hibernate-jpa-2.0-api</artifactId>
-      <version>1.0.1.Final</version>
-      <type>jar</type>
-    </dependency>
-    <dependency>
-      <groupId>org.swinglabs</groupId>
-      <artifactId>swing-layout</artifactId>
-      <version>1.0.3</version>
-    </dependency>
-    <dependency>
-      <groupId>cglib</groupId>
-      <artifactId>cglib</artifactId>
-      <version>2.2</version>
-    </dependency>
-    <dependency>
-    	<groupId>log4j</groupId>
-    	<artifactId>log4j</artifactId>
-    	<version>1.2.14</version>
-    </dependency>
-    <dependency>
-    	<groupId>javax.annotation</groupId>
-    	<artifactId>jsr250-api</artifactId>
-    	<version>1.0</version>
-    </dependency>
-  </dependencies>
+	<!-- Spring - END -->
+	<dependency>
+	    <groupId>aspectj</groupId>
+	    <artifactId>aspectjrt</artifactId>
+	    <version>1.5.3</version>
+	</dependency>
+	<dependency>
+	    <groupId>commons-dbcp</groupId>
+	    <artifactId>commons-dbcp</artifactId>
+	    <version>1.4</version>
+	</dependency>
+	<dependency>
+	    <groupId>org.postgresql</groupId>
+	    <artifactId>postgresql</artifactId>
+	    <version>9.3-1100-jdbc41</version>
+	</dependency>
+	<dependency>
+	    <groupId>org.hibernate</groupId>
+	    <artifactId>hibernate-entitymanager</artifactId>
+	    <version>4.2.7.Final</version>
+	</dependency>
+	<dependency>
+	    <groupId>org.hibernate.javax.persistence</groupId>
+	    <artifactId>hibernate-jpa-2.0-api</artifactId>
+	    <version>1.0.1.Final</version>
+	    <type>jar</type>
+	</dependency>
+	<dependency>
+	    <groupId>org.swinglabs</groupId>
+	    <artifactId>swing-layout</artifactId>
+	    <version>1.0.3</version>
+	</dependency>
+	<dependency>
+	    <groupId>cglib</groupId>
+	    <artifactId>cglib</artifactId>
+	    <version>2.2</version>
+	</dependency>
+	<dependency>
+	    <groupId>log4j</groupId>
+	    <artifactId>log4j</artifactId>
+	    <version>1.2.14</version>
+	</dependency>
+	<dependency>
+	    <groupId>javax.annotation</groupId>
+	    <artifactId>jsr250-api</artifactId>
+	    <version>1.0</version>
+	</dependency>
+    
+	<!-- JASPER REPORT -->
+	<dependency>
+
+	    <groupId>net.sf.jasperreports</groupId>
+	    <artifactId>jasperreports</artifactId>
+	    <version>5.0.1</version>
+
+	</dependency>
+
+	<dependency>
+
+	    <groupId>commons-beanutils</groupId>
+	    <artifactId>commons-beanutils-core</artifactId>
+	    <version>1.8.3</version>
+
+	</dependency>
+
+	<dependency>
+
+	    <groupId>commons-collections</groupId>
+	    <artifactId>commons-collections</artifactId>
+	    <version>3.2.1</version>
+
+	</dependency>
+
+	<dependency>
+	    <groupId>commons-logging</groupId>
+	    <artifactId>commons-logging</artifactId>
+	    <version>1.1.1</version>
+	</dependency>
+
+	<dependency>
+
+	    <groupId>org.apache.commons</groupId>
+	    <artifactId>commons-digester3</artifactId>
+	    <version>3.2</version>
+
+	</dependency>
+	<dependency>
+
+	    <groupId>org.eclipse.jdt.core.compiler</groupId>
+	    <artifactId>ecj</artifactId>
+	    <version>4.2.1</version>
+
+	</dependency>
+
+	<dependency>
+
+	    <groupId>org.codehaus.groovy</groupId>
+	    <artifactId>groovy-all</artifactId>
+	    <version>2.1.1</version>
+
+	</dependency>
+
+	<dependency>
+
+	    <groupId>org.mozilla</groupId>
+	    <artifactId>rhino</artifactId>
+	    <version>1.7R4</version>
+
+	</dependency>
+
+	<dependency>
+
+	    <groupId>org.beanshell</groupId>
+	    <artifactId>bsh</artifactId>
+	    <version>2.0b5</version>
+
+	</dependency>
+
+	<dependency>
+
+	    <groupId>com.google.code.maven-play-plugin.org.apache.commons</groupId>
+	    <artifactId>commons-javaflow</artifactId>
+	    <version>1209105</version>
+
+	</dependency>
+
+	<dependency>
+
+	    <groupId>org.jfree</groupId>
+	    <artifactId>jfreechart</artifactId>
+	    <version>1.0.14</version>
+
+	</dependency>
+
+	<dependency>
+
+	    <groupId>org.jfree</groupId>
+	    <artifactId>jcommon</artifactId>
+	    <version>1.0.17</version>
+
+	</dependency>
+
+	<dependency>
+
+	    <groupId>com.itextpdf</groupId>
+	    <artifactId>itextpdf</artifactId>
+	    <version>5.4.0</version>
+
+	</dependency>
+
+	<dependency>
+
+	    <groupId>com.itextpdf.tool</groupId>
+	    <artifactId>xmlworker</artifactId>
+	    <version>1.2.1</version>
+
+	</dependency>
+
+	<dependency>
+
+	    <groupId>org.apache.poi</groupId>
+	    <artifactId>poi</artifactId>
+	    <version>3.9</version>
+
+	</dependency>
+
+	<dependency>
+
+	    <groupId>net.sourceforge.jexcelapi</groupId>
+	    <artifactId>jxl</artifactId>
+	    <version>2.6.12</version>
+
+	</dependency>
+	<!-- JASPER REPORT -->
+    </dependencies>
 </project>
