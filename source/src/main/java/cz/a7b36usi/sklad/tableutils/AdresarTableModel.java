@@ -1,7 +1,7 @@
 
 package cz.a7b36usi.sklad.tableutils;
 
-import cz.a7b36usi.sklad.DTO.ZakaznikDTO;
+import cz.a7b36usi.sklad.DTO.PartnerDTO;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,9 +13,9 @@ public class AdresarTableModel extends javax.swing.table.AbstractTableModel {
     ArrayList<ArrayList> rows;
     public static final  String columns [] = {"Spolecnost", "Mesto", "Ulice"};
 
-    public AdresarTableModel(List<ZakaznikDTO> rowsFromDatabase) {
+    public AdresarTableModel(List<PartnerDTO> rowsFromDatabase) {
         rows = new ArrayList<ArrayList>();
-        for (ZakaznikDTO zakaznikDTO : rowsFromDatabase) {
+        for (PartnerDTO zakaznikDTO : rowsFromDatabase) {
             ArrayList row = new ArrayList<Object>();
             row.add(zakaznikDTO.getSpolecnost());
             row.add(zakaznikDTO.getMesto());

@@ -6,6 +6,7 @@ package cz.a7b36usi.sklad.BO;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -22,21 +23,21 @@ import javax.persistence.Table;
 public class OrderItemBO extends AbstractBO{
     
     @ManyToOne
-    @Column(nullable = false)
+    @JoinColumn(nullable = false)
     private ProductBO product;
     
     @Column(nullable = false)
     private int quantity;
     
-    @Column(name = "wrapping",nullable = false)
+    @JoinColumn(name = "wrapping",nullable = false)
     @ManyToOne
     private WrappingTypeBO wrappingType;
     
-    @Column(name = "version",nullable = false)
+    @JoinColumn(name = "version",nullable = false)
     @ManyToOne
     private ProductVersionBO productVersion;
     
-    @Column(name = "parrentOrder",nullable = false)
+    @JoinColumn(name = "parrentOrder",nullable = false)
     @ManyToOne
     private OrderBO order;
 

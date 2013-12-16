@@ -4,7 +4,7 @@
  */
 
 package cz.a7b36usi.sklad.testy;
-import cz.a7b36usi.sklad.DTO.ZakaznikDTO;
+import cz.a7b36usi.sklad.DTO.PartnerDTO;
 import cz.a7b36usi.sklad.Service.IPartnerService;
 import cz.a7b36usi.sklad.Service.IUserService;
 import java.util.List;
@@ -12,7 +12,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class ZakaznikServiceTest  extends AbstractServiceTest{
+public class PartnerServiceTest  extends AbstractServiceTest{
     
     @Autowired
     IUserService userService;
@@ -30,7 +30,7 @@ public class ZakaznikServiceTest  extends AbstractServiceTest{
         String spolecnost="BLA BLA"+System.currentTimeMillis();
         int psc=90324;
         int cisloPop=43551553;
-        Long id=zakaznikService.addZakaznik(isDod, isOdb, street,mesto ,spolecnost , psc, cisloPop);
+        Long id=zakaznikService.addPartner(isDod, isOdb, street,mesto ,spolecnost , psc, cisloPop);
          boolean isDod2=false;
         boolean isOdb2=true;
         String street2="ULICE2";
@@ -38,14 +38,14 @@ public class ZakaznikServiceTest  extends AbstractServiceTest{
         String spolecnost2="BLA BLA2"+System.currentTimeMillis();
         int psc2=9056754;
         int cisloPop2=4324578;
-        Long id2=zakaznikService.addZakaznik(isDod2, isOdb2, street2,mesto2 ,spolecnost2 , psc2, cisloPop2);
-        List<ZakaznikDTO> list=zakaznikService.getAllZakaznik();
+        Long id2=zakaznikService.addPartner(isDod2, isOdb2, street2,mesto2 ,spolecnost2 , psc2, cisloPop2);
+        List<PartnerDTO> list=zakaznikService.getAllPartners();
         assertFalse(list.isEmpty());
         boolean det1=false;
         boolean det2=false;
         for (int i = 0; i < list.size(); i++) {
             if(list.get(i).getId().equals(id)){
-                ZakaznikDTO zak1=list.get(i);
+                PartnerDTO zak1=list.get(i);
                 assertNotNull(zak1);
                 assertEquals(isDod,zak1.isIsDodavatel());
                 assertEquals(isOdb,zak1.isIsOdberatel());
@@ -56,7 +56,7 @@ public class ZakaznikServiceTest  extends AbstractServiceTest{
                 assertEquals(cisloPop,zak1.getCisloPopisne());
                 det1=true;
             }else if(list.get(i).getId().equals(id2)){
-                ZakaznikDTO zak1=list.get(i);
+                PartnerDTO zak1=list.get(i);
                 assertNotNull(zak1);
                 assertEquals(isDod2,zak1.isIsDodavatel());
                 assertEquals(isOdb2,zak1.isIsOdberatel());
@@ -82,11 +82,11 @@ public class ZakaznikServiceTest  extends AbstractServiceTest{
         String spolecnost="BLA BLA"+System.currentTimeMillis();
         int psc=90324;
         int cisloPop=43551553;
-        Long id=zakaznikService.addZakaznik(isDod, isOdb, street,mesto ,spolecnost , psc, cisloPop);
-        List<ZakaznikDTO> zak = zakaznikService.getAllZakaznik();
+        Long id=zakaznikService.addPartner(isDod, isOdb, street,mesto ,spolecnost , psc, cisloPop);
+        List<PartnerDTO> zak = zakaznikService.getAllPartners();
         assertNotNull(zak);
         assertTrue(!zak.isEmpty());
-        ZakaznikDTO zak1=null;
+        PartnerDTO zak1=null;
         for (int i = 0; i < zak.size(); i++) {
             if(zak.get(i).getId()==id) zak1=zak.get(i);
             
@@ -110,11 +110,11 @@ public class ZakaznikServiceTest  extends AbstractServiceTest{
         String spolecnost="BLA BLA"+System.currentTimeMillis();
         int psc=90324;
         int cisloPop=43551553;
-        Long id=zakaznikService.addZakaznik(isDod, isOdb, street,mesto ,spolecnost , psc, cisloPop);
-        List<ZakaznikDTO> zak = zakaznikService.getAllZakaznik();
+        Long id=zakaznikService.addPartner(isDod, isOdb, street,mesto ,spolecnost , psc, cisloPop);
+        List<PartnerDTO> zak = zakaznikService.getAllPartners();
         assertNotNull(zak);
         assertTrue(!zak.isEmpty());
-        ZakaznikDTO zak1=null;
+        PartnerDTO zak1=null;
         for (int i = 0; i < zak.size(); i++) {
             if(zak.get(i).getId()==id) zak1=zak.get(i);
             
@@ -130,7 +130,7 @@ public class ZakaznikServiceTest  extends AbstractServiceTest{
     }
     
     @Test
-    public void removeZakaznik(){
+    public void removePartner(){
         boolean isDod=true;
         boolean isOdb=false;
         String street="ULICE";
@@ -138,16 +138,16 @@ public class ZakaznikServiceTest  extends AbstractServiceTest{
         String spolecnost="BLA BLA"+System.currentTimeMillis();
         int psc=90324;
         int cisloPop=43551553;
-        Long id=zakaznikService.addZakaznik(isDod, isOdb, street,mesto ,spolecnost , psc, cisloPop);
+        Long id=zakaznikService.addPartner(isDod, isOdb, street,mesto ,spolecnost , psc, cisloPop);
         
-        List<ZakaznikDTO> zak = zakaznikService.getAllZakaznik();
-        ZakaznikDTO zak1=null;
+        List<PartnerDTO> zak = zakaznikService.getAllPartners();
+        PartnerDTO zak1=null;
         for (int i = 0; i < zak.size(); i++) {
             if(zak.get(i).getId()==id) zak1=zak.get(i);
             
         }
-        zakaznikService.removeZakaznik(zak1);
-        zak = zakaznikService.getAllZakaznik();
+        zakaznikService.removePartner(zak1);
+        zak = zakaznikService.getAllPartners();
         zak1=null;
         for (int i = 0; i < zak.size(); i++) {
             if(zak.get(i).getId()==id) zak1=zak.get(i);

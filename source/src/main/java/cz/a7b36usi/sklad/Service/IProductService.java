@@ -10,13 +10,19 @@ import org.springframework.transaction.annotation.Transactional;
  * @author Lukas L.
  */
 public interface IProductService {
+    /**
+     * Persists product to database
+     * @param jmeno
+     * @param kod
+     * @param mnozstvi
+     * @return 
+     */
+    public Long addProduct(String jmeno, String kod, Integer mnozstvi);
     
-    public Long addProdukt(String jmeno, String kod, Integer mnozstvi);
-    
-    public void deleteProdukt(Long produktId);
+    public void deleteProduct(Long produktId);
     
     @Transactional(readOnly=true)
-    public List<ProductDTO> getAllProdukts();
+    public List<ProductDTO> getAllProdukcs();
     
-    boolean updateProdukt(ProductDTO user);
+    boolean updateProduct(ProductDTO user);
 }

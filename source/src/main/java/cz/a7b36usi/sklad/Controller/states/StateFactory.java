@@ -8,7 +8,10 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 import cz.a7b36usi.sklad.Tabs;
-
+/*
+ * StateFacotory is responsible for loading states from 
+ * ApplicationContext and saves them into HashMap for using them later.
+ */
 @Component
 public class StateFactory implements IStateFactory {
 

@@ -51,7 +51,7 @@ public class UsersController implements IUsersController {
 
     public void updateUser(UserDTO user) {
         for (UserDTO u : model) { // TODO: hibernate nejak nechodi
-            if (u.getId() == user.getId()) {
+            if (u.getId().longValue() == user.getId().longValue()) {
                 u.setUsername(user.getUsername());
                 u.setAcl(user.getAcl());
             }

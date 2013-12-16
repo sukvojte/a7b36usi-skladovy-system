@@ -29,33 +29,16 @@ public class GenericDAO implements IGenericDAO {
     protected EntityManagerFactory entityManagerfactory;
 
     protected EntityManager getEntityManager() {
-        System.out.println(entityManagerfactory);
         EntityManager em = EntityManagerFactoryUtils.getTransactionalEntityManager(entityManagerfactory); //entity manager with @Transactional support
-
-//            	if(em == null){
-//    		em = entityManagerfactory.createEntityManager ();
-//    		//throw new RuntimeException("No thread-bound EntityManager found! ");
-//    	}
         return em;
     }
 
-    /**
-     * Vrati vsechny objekty dane tridy
-     *
-     * @return vsechny objekty tridy, jez je injektovana jako clazz, serazene
-     * dle id sestupne
-     */
     @SuppressWarnings("unchecked")
     public <ENTITY> List<ENTITY> getAll(Class<ENTITY> clazz) {
         return getEntityManager().createQuery("SELECT e FROM " + clazz.getSimpleName() + " e").getResultList();
     }
 
-    /**
-     * Vrati vsechny objekty serazene sestupne dle dane property
-     *
-     * @param property
-     * @return
-     */
+
     @SuppressWarnings("unchecked")
     public <ENTITY> List<ENTITY> getAllOrderedDesc(String property, Class<ENTITY> clazz) {
         CriteriaQuery<ENTITY> query = getEntityManager().getCriteriaBuilder().createQuery(clazz);
@@ -66,12 +49,6 @@ public class GenericDAO implements IGenericDAO {
 
     }
 
-    /**
-     * Vrati vsechny objekty serazene vzestupne dle dane property
-     *
-     * @param property
-     * @return
-     */
     @SuppressWarnings("unchecked")
     public <ENTITY> List<ENTITY> getAllOrderedAsc(String property, Class<ENTITY> clazz) {
         CriteriaQuery<ENTITY> query = getEntityManager().getCriteriaBuilder().createQuery(clazz);
@@ -81,25 +58,12 @@ public class GenericDAO implements IGenericDAO {
         return getEntityManager().createQuery(query).getResultList();
     }
 
-    /**
-     * Vrati objekty dane tridy, jejichz property se rovna objektu predanemu v
-     * parametru, serazene dle id sestupne
-     *
-     * @param property property, kterou porovnavame
-     * @param value hodnota, se kterou porovnavame
-     * @return vsechny vyhovujici zaznamy
-     */
     @SuppressWarnings("unchecked")
     public <ENTITY> List<ENTITY> getByProperty(String property, Object value, Class<ENTITY> clazz) {
         String queryString = "SELECT e FROM " + clazz.getSimpleName() + " e WHERE e." + property + " = :value";
         return getEntityManager().createQuery(queryString).setParameter("value", value).getResultList();
     }
 
-    /**
-     * Smaze objekt dle daneho ID
-     *
-     * @param id id objektu je smazani
-     */
     public <ENTITY extends AbstractBO> void removeById(long id, Class<ENTITY> clazz) {
         ENTITY e = getEntityManager().find(clazz, id);
         if (e != null) {
@@ -108,21 +72,10 @@ public class GenericDAO implements IGenericDAO {
         }
     }
 
-    /**
-     * smaze danou entitu
-     *
-     * @param o entita ke smazani
-     */
     public <ENTITY extends AbstractBO> void remove(ENTITY o) {
         getEntityManager().remove(o);
     }
 
-    /**
-     * Vrati objekt (pomoci get) dane tridy dle ID
-     *
-     * @param id id objektu k vraceni
-     * @return objekt identifikovany id, @null pokud neexistuje
-     */
     @SuppressWarnings("unchecked")
     public <ENTITY> ENTITY getById(Long id, Class<ENTITY> clazz) {
         return getEntityManager().find(clazz, id);

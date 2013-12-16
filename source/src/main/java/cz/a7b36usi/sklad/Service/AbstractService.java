@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- *
+ * AbstractService handles genericDao field, which can be used in inherited classes.
  * @author Peter
  */
 @Transactional

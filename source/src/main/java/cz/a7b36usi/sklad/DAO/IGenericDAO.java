@@ -20,9 +20,10 @@ import cz.a7b36usi.sklad.BO.AbstractBO;
 public interface IGenericDAO {
 
     /**
-     * Vrati vsechny entity serazene sestupne dle id
-     * @return vsechny entity pozadovaneho typu
-     * (dle implementace potomka tohoto interfacu)
+     * Returns all objects with type of class parameter sorted descending by id
+     * 
+     * @param clazz
+     * @return all objects from clazz parameter
      */
     public <ENTITY> List<ENTITY> getAll(Class<ENTITY> clazz);
 
@@ -37,8 +38,9 @@ public interface IGenericDAO {
     public <ENTITY> List<ENTITY> getPage(int from, int maxResults, Class<ENTITY> clazz);
 
     /**
-     * Odstrani entitu dle jejiho id
-     * @param id entity k odstraneni
+     * Delete object by id
+     *
+     * @param id objec's id to delete
      */
     public <ENTITY extends AbstractBO> void removeById(long id, Class<ENTITY> clazz);
 
@@ -50,62 +52,74 @@ public interface IGenericDAO {
     public Long getCount(Class clazz);
 
     /**
-     * Odstrani dany objekt
-     * @param o objekt k odstraneni
+     * Delete entity
+     *
+     * @param o entity to delete
      */
     public <ENTITY extends AbstractBO> void remove(ENTITY o);
 
     /**
-     * Ulozi nebo zaktualizuje danou entitu (at jiz je attached nebo detached),
-     * entita bude po navratu teto funkce vzdy attached
+     * Save entity when its id is null, or update otherwise
+     * @param <ENTITY>
      * @param o
-     * @return attached ulozeny (zaktualizovany objekt)
+     * @return attached object
      */
     public <ENTITY extends AbstractBO> ENTITY saveOrUpdate(ENTITY o);
 
     /**
-     * Vrati objekt (pomoci get) dane tridy dle ID
+     * Returns objects (by get) with type of class clazz by id
+     *
      * @param id id objektu k vraceni
      * @return objekt identifikovany id, @null pokud neexistuje
      */
     public <ENTITY> ENTITY getById(Long id, Class<ENTITY> clazz);
 
     /**
-     * Load (proxy objektu) dle identifikatoru
+     * Loads entity from database by id
+     * 
      * @param <ENTITY>
      * @param id
      * @param clazz
-     * @return
+     * @return 
      */
     public <ENTITY> ENTITY loadById(long id, Class<ENTITY> clazz);
 
     /**
-     * Vrati vsechny instance razene sestupne dle property
+     * Returns all objects with type of class parameter sorted descending by property
+     * 
      * @param property
-     * @return
+     * @param clazz
+     * @return 
      */
     public <ENTITY> List<ENTITY> getAllOrderedDesc(String property, Class<ENTITY> clazz);
 
     /**
-     * Vrati vsechny instance razene vzestupne dle property
+     * Returns all objects with type of class parameter sorted ascending by property
+     * 
      * @param property
+     * @param clazz
      * @return
      */
     public <ENTITY> List<ENTITY> getAllOrderedAsc(String property, Class<ENTITY> clazz);
 
     /**
-     * Get all entities by property
-     * @param property the property to select
-     * @param value value of the property
-     * @return
+     * Returns all objects with type of class parameter whose property is equal to object parameter sorted descending by property
+     * 
+     * @param property property, which we compare
+     * @param value value, which we compare
+     * @return all records fulfilling a condition
      */
     public <ENTITY> List<ENTITY> getByProperty(String property, Object value, Class<ENTITY> clazz);
 
+    
     /**
-     * Get all entities by property
-     * @param property the property to select
-     * @param value value of the property
-     * @return
+     * Get unique entity by property which is equal to value
+     * 
+     * @param <ENTITY>
+     * @param property
+     * @param value
+     * @param clazz
+     * @return 
      */
     public <ENTITY> ENTITY getByPropertyUnique(String property, Object value, Class<ENTITY> clazz);
 

@@ -1,5 +1,11 @@
 package cz.a7b36usi.sklad.gui.ifaces;
 
 public interface IDataTableRow {
-	int getFieldCount();
+
+    /**
+     * Returns count of data table fields
+     *
+     * @return count
+     */
+    int getFieldCount();
 }

@@ -10,14 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import cz.a7b36usi.sklad.Controller.ifaces.ILoginController;
-import cz.a7b36usi.sklad.gui.login.ifaces.IPrihlaseni;
+import cz.a7b36usi.sklad.gui.login.ifaces.ILogging;
 
 /**
  *
  * @author Lukas Lowinger
  */
 @Component
-public class Prihlaseni extends javax.swing.JFrame implements IPrihlaseni {
+public class Logging extends javax.swing.JFrame implements ILogging {
 
     @Autowired
     ILoginController controller;
@@ -25,7 +25,7 @@ public class Prihlaseni extends javax.swing.JFrame implements IPrihlaseni {
     /**
      * Creates new form Prihlaseni
      */
-    public Prihlaseni() {
+    public Logging() {
         super("Prihlaseni");
         initComponents();
     }
@@ -62,7 +62,6 @@ public class Prihlaseni extends javax.swing.JFrame implements IPrihlaseni {
         jLabel2.setText("Heslo");
 
         jButton1.setText("Přihlásit");
-        jButton1.setActionCommand("Přihlásit");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);

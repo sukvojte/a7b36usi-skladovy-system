@@ -17,9 +17,8 @@ import org.springframework.stereotype.Component;
 
 import cz.a7b36usi.sklad.Tabs;
 import cz.a7b36usi.sklad.BO.UserRole;
-import cz.a7b36usi.sklad.Controller.ifaces.ITabController;
 import cz.a7b36usi.sklad.DTO.UserDTO;
-import cz.a7b36usi.sklad.DTO.ZakaznikDTO;
+import cz.a7b36usi.sklad.DTO.PartnerDTO;
 import cz.a7b36usi.sklad.gui.main.ifaces.IGuiData;
 import cz.a7b36usi.sklad.gui.main.ifaces.IGuiTextFields;
 import cz.a7b36usi.sklad.gui.main.ifaces.ISkladMainGUI;
@@ -50,9 +49,7 @@ import javax.swing.JTextField;
 @Component
 public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
 
-    @Autowired
-    ITabController tabController;
-    private ZakaznikDTO lastZakaznik = null;
+    private PartnerDTO lastZakaznik = null;
     private UserDTO lastUser = null;
     private BaseDataModel baseDataModel;
     public JButton filtrJB;
@@ -91,13 +88,13 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
 		return new UserDTO((id != 0 ? id : null), uzivatelskeJmenoJT.getText(), (UserRole) roleJC.getSelectedItem(), new String(hesloUzivatelPF.getPassword()));
 	    }
 
-	    public ZakaznikDTO getZakaznikData() {
+	    public PartnerDTO getPartnerData() {
 		//TODO: zatim se neresi dodavatel, odberatel
 		long id = 0;
 		if (lastZakaznik != null) {
 		    id = lastZakaznik.getId();
 		}
-		return new ZakaznikDTO((id != 0 ? id : null), true, false, uliceTF.getText(), mestoTF.getText(), spolecnostTF.getText(), Integer.parseInt(pscTF.getText()), Integer.parseInt(cisloPopTF.getText()));
+		return new PartnerDTO((id != 0 ? id : null), true, false, uliceTF.getText(), mestoTF.getText(), spolecnostTF.getText(), Integer.parseInt(pscTF.getText()), Integer.parseInt(cisloPopTF.getText()));
 	    }
 	};
     }
@@ -108,7 +105,7 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
 	createFilterPanel();
     }
 
-    public void editCustomer(ZakaznikDTO customer) {
+    public void editCustomer(PartnerDTO customer) {
 	ulozJB.setText("Edituj");
 	lastZakaznik = customer;
 	nullValidators();
@@ -761,7 +758,14 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
 	filtrJB = filtr;
 	filtrJP.add(getPair(filtr, new JLabel("")));
     }
-
+    
+    /**
+     * Gets JPanel pair of two JComponent components
+     * 
+     * @param field
+     * @param comp
+     * @return JPanel pair
+     */
     private JPanel getPair(JComponent field, JComponent comp) {
 	JPanel pair = new JPanel(new GridLayout(2, 1));
 	field.setPreferredSize(new Dimension(120, 20));
@@ -865,7 +869,7 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
 
     public IGuiTextFields getTextFields() {
 	return new IGuiTextFields() {
-	    public List<JTextField> getAdresBookTextFields() {
+	    public List<JTextField> getAddressBookTextFields() {
 		ArrayList<JTextField> list = new ArrayList<JTextField>();
 		list.add(spolecnostTF);
 		list.add(uliceTF);

@@ -4,13 +4,23 @@ import cz.a7b36usi.sklad.BO.UserRole;
 import cz.a7b36usi.sklad.DTO.UserDTO;
 
 public interface IUsersController {
-	void showUsersForm();
 
-	void deleteUser(UserDTO user);
+    /**
+     * Method for 
+     *
+     * @param message
+     */
+    void showUsersForm();
 
-	void updateUser(UserDTO user);
+    /**
+     * 
+     * @param user 
+     */ 
+    void deleteUser(UserDTO user);
 
-	void updatePassword(UserDTO user, char[] password);
+    void updateUser(UserDTO user);
 
-	void createUser(String username, char[] password, UserRole acl);
+    void updatePassword(UserDTO user, char[] password);
+
+    void createUser(String username, char[] password, UserRole acl);
 }
