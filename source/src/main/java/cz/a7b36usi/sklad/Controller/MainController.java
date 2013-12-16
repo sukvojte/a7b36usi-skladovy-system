@@ -19,7 +19,7 @@ import cz.a7b36usi.sklad.gui.main.listeners.IMainGuiListener;
 //
 
 /**
- *
+ * This class is useful for changing state object. And for handling methods from ISkladMainGUI.
  * @author Peter
  */
 @Component

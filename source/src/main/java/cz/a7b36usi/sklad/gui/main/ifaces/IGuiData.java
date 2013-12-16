@@ -1,9 +1,21 @@
 package cz.a7b36usi.sklad.gui.main.ifaces;
 
 import cz.a7b36usi.sklad.DTO.UserDTO;
-import cz.a7b36usi.sklad.DTO.ZakaznikDTO;
+import cz.a7b36usi.sklad.DTO.PartnerDTO;
 
 public interface IGuiData {
-	UserDTO getUserData();
-	ZakaznikDTO getZakaznikData();
+
+    /**
+     * Gets user data from form
+     * 
+     * @return created UserDTO from form values
+     */
+    UserDTO getUserData();
+
+    /**
+     * Gets partner data from form
+     * 
+     * @return created UserDTO from form values
+     */    
+    PartnerDTO getPartnerData();
 }

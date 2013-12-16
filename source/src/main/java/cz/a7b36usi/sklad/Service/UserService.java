@@ -22,14 +22,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserService extends AbstractService implements IUserService {
 
-    /**
-     * Prida uzivatele do databaze
-     *
-     * @param username Uzivatelske jmeno
-     * @param password Heslo
-     * @param acl Uzivatelska role
-     * @return Id pridaneho uzivatele
-     */
     public Long addUser(String username, char[] password, UserRole acl) {
         UserBO user = new UserBO();
         user.setAcl(acl);
@@ -39,24 +31,12 @@ public class UserService extends AbstractService implements IUserService {
         return genericDAO.saveOrUpdate(user).getId();
     }
 
-    /**
-     * Smaze uzivatele s danym identifikatorem z databaze
-     *
-     * @param userId Identifikator uzivatele ktery ma byt smazan
-     */
     public void deleteUser(Long userId) {
         if (userId != null) {
             genericDAO.removeById(userId, UserBO.class);
         }
     }
 
-    /**
-     * Vyhleda v databazi uzivatele s danym identifikatorem a vrati jeho DTO
-     *
-     * @param id Identifikator hledanehop uzivatele
-     * @return DTO s informacemi o hledanem uzivateli nebo null pokud nebyl
-     * nalezen
-     */
     public UserDTO getUserById(Long id) {
         UserBO user = genericDAO.getById(id, UserBO.class);
         if (user == null) {
@@ -65,12 +45,6 @@ public class UserService extends AbstractService implements IUserService {
         return new UserDTO(user.getId(), user.getUsername(), user.getAcl(), user.getPassword());
     }
 
-    /**
-     * Vyhleda v databazi uzivatele s danym identifikatorem a vrati jeho DTO
-     *
-     * @return List obsahujici DTO s informacemi o vsech nalezenych uzivatelich
-     * nebo null pokud nebyl nalezen zadny zaznam
-     */
     public List<UserDTO> getAllUsers() {
         List<UserBO> bolist = genericDAO.getAll(UserBO.class);
         List<UserDTO> users = new ArrayList<UserDTO>();
@@ -80,14 +54,6 @@ public class UserService extends AbstractService implements IUserService {
         return users;
     }
 
-    /**
-     * Overi zda uzivatel s danym jmenem a heslem existuje a zda je heslo
-     * spravne zadano
-     *
-     * @param username Uzivatelske jmeno
-     * @param password Heslo
-     * @return true pokud je jmeno i heslo spravne, jinak false
-     */
     public boolean logInUser(String username, char[] password) {
         try {
             UserBO user = genericDAO.getByPropertyUnique("username", username, UserBO.class);

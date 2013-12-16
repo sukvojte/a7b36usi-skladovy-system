@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ * This class is id resolver, which transform list of AbstractBOs to their ID's list.
  * @author Peter
  */
 public class IdResolver {

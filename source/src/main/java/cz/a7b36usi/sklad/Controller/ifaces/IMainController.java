@@ -10,5 +10,9 @@ package cz.a7b36usi.sklad.Controller.ifaces;
  * @author Peter
  */
 public interface IMainController {
+    /**
+     * Method which shows the main frame.
+     * @param message 
+     */
     public void showMainFrame(String message);
 }

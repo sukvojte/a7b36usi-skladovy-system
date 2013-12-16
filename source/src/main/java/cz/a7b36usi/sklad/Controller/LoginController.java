@@ -10,20 +10,21 @@ import org.springframework.stereotype.Component;
 import cz.a7b36usi.sklad.Controller.ifaces.ILoginController;
 import cz.a7b36usi.sklad.Controller.ifaces.IMainController;
 import cz.a7b36usi.sklad.Service.IUserService;
-import cz.a7b36usi.sklad.gui.login.ifaces.IPrihlaseni;
+import cz.a7b36usi.sklad.gui.login.ifaces.ILogging;
 
 /**
- *
+ * This class is created as first object in whole application. It manages logging to application. 
+ * And is responsible for showing an appplication.
  * @author Peter
  */
 @Component
 public class LoginController implements ILoginController {
-//
+
     @Autowired
     private IUserService userService;
     
     @Autowired
-    private IPrihlaseni loginForm;
+    private ILogging loginForm;
 
     @Autowired
     private IMainController mainController;

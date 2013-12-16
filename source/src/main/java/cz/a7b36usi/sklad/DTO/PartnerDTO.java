@@ -8,12 +8,12 @@ package cz.a7b36usi.sklad.DTO;
  *
  * @author Peter
  */
-public class ZakaznikDTO extends AbstractDTO{
+public class PartnerDTO extends AbstractDTO{
      private boolean isDodavatel, isOdberatel;
     private String ulice, mesto, spolecnost;
     private int psc, cisloPopisne;
 
-    public ZakaznikDTO(Long id,boolean isDodavatel, boolean isOdberatel, String ulice, String mesto, String spolecnost, int psc, int cisloPopisne) {
+    public PartnerDTO(Long id,boolean isDodavatel, boolean isOdberatel, String ulice, String mesto, String spolecnost, int psc, int cisloPopisne) {
         this.isDodavatel = isDodavatel;
         this.isOdberatel = isOdberatel;
         this.ulice = ulice;
