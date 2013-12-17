@@ -84,7 +84,7 @@ public class UserServiceTest extends AbstractServiceTest
         String password="nevim";
         UserRole ur=UserRole.VEDOUCI;
         Long id=userService.addUser(name,password.toCharArray() , ur);
-        String name2="lojza"+System.currentTimeMillis();
+        String name2="lojza3"+System.currentTimeMillis();
         String password2="nevim";
         UserRole ur2=UserRole.VEDOUCI;
         Long id2=userService.addUser(name2,password2.toCharArray() , ur2);
