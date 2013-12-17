@@ -280,5 +280,13 @@
 
 	</dependency>
 	<!-- JASPER REPORT -->
+	
+	<dependency>
+		<groupId>net.sourceforge.jdatepicker</groupId>
+		<artifactId>jdatepicker</artifactId>
+		<version>1.3.2</version>
+	</dependency>
+	
+	
     </dependencies>
 </project>
