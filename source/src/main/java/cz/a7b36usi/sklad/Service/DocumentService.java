@@ -6,6 +6,7 @@
 package cz.a7b36usi.sklad.Service;
 
 import cz.a7b36usi.sklad.BO.DocumentBO;
+import cz.a7b36usi.sklad.BO.DocumentType;
 import cz.a7b36usi.sklad.BO.MovementBO;
 import cz.a7b36usi.sklad.BO.PartnerBO;
 import cz.a7b36usi.sklad.BO.ProductBO;
@@ -30,7 +31,7 @@ public class DocumentService extends AbstractService implements IDocumentService
         bo.setDocumentType(document.getDocumentType());
         bo.setId(document.getId());
         bo.setNumber(document.getNumber());
-        bo.setPartner(genericDAO.loadById(document.getPartner(), PartnerBO.class));
+        bo.setPartner(genericDAO.loadById(document.getPartner().getId(), PartnerBO.class));
         return genericDAO.saveOrUpdate(bo).getId();
     }
 
@@ -38,7 +39,7 @@ public class DocumentService extends AbstractService implements IDocumentService
         MovementBO bo = new MovementBO();
         bo.setId(movement.getId());
         bo.setPrice(movement.getPrice());
-        bo.setDocument(genericDAO.loadById(movement.getDocument(), DocumentBO.class));
+        bo.setDocument(genericDAO.loadById(movement.getDocument().getId(), DocumentBO.class));
         bo.setProdukt(genericDAO.loadById(movement.getProdukt().getId(), ProductBO.class));
         bo.setVersion(genericDAO.loadById(movement.getVersion(), ProductVersionBO.class));
         bo.setWrapping(genericDAO.loadById(movement.getWrapping(), WrappingTypeBO.class));
@@ -57,10 +58,21 @@ public class DocumentService extends AbstractService implements IDocumentService
         List<DocumentDTO> dtos = new ArrayList<DocumentDTO>();
         List<DocumentBO> bos = genericDAO.getAll(DocumentBO.class);
         for (DocumentBO documentBO : bos) {
+             PartnerBO pbo = documentBO.getPartner();
+            PartnerDTO partner = new PartnerDTO(
+                    pbo.getId(),
+                    pbo.getIsDodavatel(),
+                    pbo.getIsOdberatel(),
+                    pbo.getUlice(),
+                    pbo.getMesto(),
+                    pbo.getSpolecnost(),
+                    pbo.getPsc(),
+                    pbo.getCisloPopisne());
+            
             DocumentDTO dto = new DocumentDTO(
                     documentBO.getId(),
                     documentBO.getDocumentType(),
-                    documentBO.getPartner().getId(),
+                    partner,
                     documentBO.getNumber(),
                     documentBO.getDate());
             dtos.add(dto);
@@ -86,7 +98,7 @@ public class DocumentService extends AbstractService implements IDocumentService
                     movementBO.getWrapping().getId(),
                     movementBO.getVersion().getId(),
                     product,
-                    movementBO.getDocument().getId());
+                    getDocumentById(movementBO.getDocument().getId()));
             dtos.add(dto);
         }
         return dtos;
@@ -109,7 +121,7 @@ public class DocumentService extends AbstractService implements IDocumentService
                     movementBO.getWrapping().getId(),
                     movementBO.getVersion().getId(),
                     product,
-                    movementBO.getDocument().getId());
+                    getDocumentById(movementBO.getDocument().getId()));
             dtos.add(dto);
         }
         return dtos;
@@ -119,10 +131,21 @@ public class DocumentService extends AbstractService implements IDocumentService
         List<DocumentDTO> dtos = new ArrayList<DocumentDTO>();
         List<DocumentBO> bos = genericDAO.getByProperty("partner", genericDAO.loadById(partnerId, PartnerBO.class), DocumentBO.class);
         for (DocumentBO documentBO : bos) {
+            
+             PartnerBO pbo = documentBO.getPartner();
+            PartnerDTO partner = new PartnerDTO(
+                    pbo.getId(),
+                    pbo.getIsDodavatel(),
+                    pbo.getIsOdberatel(),
+                    pbo.getUlice(),
+                    pbo.getMesto(),
+                    pbo.getSpolecnost(),
+                    pbo.getPsc(),
+                    pbo.getCisloPopisne());
             DocumentDTO dto = new DocumentDTO(
                     documentBO.getId(),
                     documentBO.getDocumentType(),
-                    documentBO.getPartner().getId(),
+                    partner,
                     documentBO.getNumber(),
                     documentBO.getDate());
             dtos.add(dto);
@@ -148,10 +171,26 @@ public class DocumentService extends AbstractService implements IDocumentService
                     movementBO.getWrapping().getId(),
                     movementBO.getVersion().getId(),
                     product,
-                    movementBO.getDocument().getId());
+                    getDocumentById(movementBO.getDocument().getId()));
             dtos.add(dto);
         }
         return dtos;
+    }
+
+    public DocumentDTO getDocumentById(Long documentId) {
+        DocumentBO document = genericDAO.getById(documentId, DocumentBO.class);
+         PartnerBO pbo = document.getPartner();
+            PartnerDTO partner = new PartnerDTO(
+                    pbo.getId(),
+                    pbo.getIsDodavatel(),
+                    pbo.getIsOdberatel(),
+                    pbo.getUlice(),
+                    pbo.getMesto(),
+                    pbo.getSpolecnost(),
+                    pbo.getPsc(),
+                    pbo.getCisloPopisne());
+        
+        return new DocumentDTO(document.getId(), document.getDocumentType(), partner, document.getNumber(),document.getDate()  );
     }
 
 }

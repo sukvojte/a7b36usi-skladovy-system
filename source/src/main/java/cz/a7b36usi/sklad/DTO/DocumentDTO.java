@@ -16,14 +16,14 @@ import java.util.Date;
 public class DocumentDTO extends AbstractDTO{
      private DocumentType documentType;
 
-    private Long partner;
+    private PartnerDTO partner;
     
     private int number;
 
     private Date date;
   
 
-    public DocumentDTO(Long id,DocumentType documentType, Long partner, int number, Date date) {
+    public DocumentDTO(Long id,DocumentType documentType, PartnerDTO partner, int number, Date date) {
         this.documentType = documentType;
         this.partner = partner;
         this.number = number;
@@ -41,11 +41,11 @@ public class DocumentDTO extends AbstractDTO{
         this.documentType = documentType;
     }
 
-    public Long getPartner() {
+    public PartnerDTO getPartner() {
         return partner;
     }
 
-    public void setPartner(Long partner) {
+    public void setPartner(PartnerDTO partner) {
         this.partner = partner;
     }
 

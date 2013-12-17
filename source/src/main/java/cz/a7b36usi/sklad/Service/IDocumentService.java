@@ -51,6 +51,13 @@ public interface IDocumentService {
      * @return all documents from database
      */
     public List<DocumentDTO> getAllDocuments();
+    
+    /**
+     *
+     * @param documentId    identifier of document to be retrieved
+     * @return  documentDTO representing data from document with specified identifier
+     */
+    public DocumentDTO getDocumentById(Long documentId);
 
     /**
      * Retutns all movements from database
