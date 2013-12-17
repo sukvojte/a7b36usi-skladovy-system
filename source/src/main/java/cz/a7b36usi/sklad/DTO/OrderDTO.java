@@ -17,7 +17,7 @@ public class OrderDTO extends AbstractDTO {
 
     private List<OrderItemDTO> items;
 
-    private Long partner;
+    private PartnerDTO partner;
     
     private String number;
 
@@ -30,7 +30,7 @@ public class OrderDTO extends AbstractDTO {
      * @param items list of items contained in the order
      * @param partner   owner of this order
      */
-    public OrderDTO(Long id, Date date,String number, List<OrderItemDTO> items, Long partner) {
+    public OrderDTO(Long id, Date date,String number, List<OrderItemDTO> items, PartnerDTO partner) {
         this.date = date;
         this.items = items;
         this.partner = partner;
@@ -55,11 +55,11 @@ public class OrderDTO extends AbstractDTO {
         this.items = items;
     }
 
-    public Long getPartner() {
+    public PartnerDTO getPartner() {
         return partner;
     }
 
-    public void setPartner(Long partner) {
+    public void setPartner(PartnerDTO partner) {
         this.partner = partner;
     }
 

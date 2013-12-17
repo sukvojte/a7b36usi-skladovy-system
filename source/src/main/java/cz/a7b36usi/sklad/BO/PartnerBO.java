@@ -24,7 +24,7 @@ public class PartnerBO extends AbstractBO {
     
     //***************** GETTER SETTER KILOMETER BY PETER ********************************
 
-    public boolean isIsDodavatel() {
+    public boolean getIsDodavatel() {
         return isDodavatel;
     }
 
@@ -32,7 +32,7 @@ public class PartnerBO extends AbstractBO {
         this.isDodavatel = isDodavatel;
     }
 
-    public boolean isIsOdberatel() {
+    public boolean getIsOdberatel() {
         return isOdberatel;
     }
 

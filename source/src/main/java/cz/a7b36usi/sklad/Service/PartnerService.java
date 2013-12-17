@@ -17,7 +17,7 @@ class PartnerService extends AbstractService implements IPartnerService {
 	List<PartnerBO> bolist = genericDAO.getAll(PartnerBO.class);
 	List<PartnerDTO> partners = new ArrayList<PartnerDTO>();
 	for (PartnerBO zakaznik : bolist) {
-	    partners.add(new PartnerDTO(zakaznik.getId(), zakaznik.isIsDodavatel(), zakaznik.isIsOdberatel(), zakaznik.getUlice(), zakaznik.getMesto(), zakaznik.getSpolecnost(), zakaznik.getPsc(), zakaznik.getCisloPopisne()));
+	    partners.add(new PartnerDTO(zakaznik.getId(), zakaznik.getIsDodavatel(), zakaznik.getIsOdberatel(), zakaznik.getUlice(), zakaznik.getMesto(), zakaznik.getSpolecnost(), zakaznik.getPsc(), zakaznik.getCisloPopisne()));
 	}
 	return partners;
     }

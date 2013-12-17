@@ -13,6 +13,7 @@ import cz.a7b36usi.sklad.BO.ProductVersionBO;
 import cz.a7b36usi.sklad.BO.WrappingTypeBO;
 import cz.a7b36usi.sklad.DTO.OrderDTO;
 import cz.a7b36usi.sklad.DTO.OrderItemDTO;
+import cz.a7b36usi.sklad.DTO.PartnerDTO;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.stereotype.Component;
@@ -29,7 +30,7 @@ public class OrderService extends AbstractService implements IOrderService {
         bo.setDate(order.getDate());
         bo.setId(order.getId());
         bo.setNumber(order.getNumber());
-        bo.setPartner(genericDAO.loadById(order.getPartner(), PartnerBO.class));
+        bo.setPartner(genericDAO.loadById(order.getPartner().getId(), PartnerBO.class));
         List<OrderItemBO> items = new ArrayList<OrderItemBO>();
 	if(order.getItems() != null){
         for (OrderItemDTO orderItemDTO : order.getItems()) {
@@ -51,7 +52,18 @@ public class OrderService extends AbstractService implements IOrderService {
         List<OrderDTO> odtos = new ArrayList<OrderDTO>();
 
         for (OrderBO orderBO : bos) {
-            OrderDTO dto = new OrderDTO(orderBO.getId(), orderBO.getDate(),orderBO.getNumber(), null, orderBO.getPartner().getId());
+            PartnerBO pbo = orderBO.getPartner();
+            PartnerDTO partner = new PartnerDTO(
+                    pbo.getId(),
+                    pbo.getIsDodavatel(),
+                    pbo.getIsOdberatel(),
+                    pbo.getUlice(),
+                    pbo.getMesto(),
+                    pbo.getSpolecnost(),
+                    pbo.getPsc(),
+                    pbo.getCisloPopisne());
+            
+            OrderDTO dto = new OrderDTO(orderBO.getId(), orderBO.getDate(),orderBO.getNumber(), null, partner);
             odtos.add(dto);
         }
         return odtos;

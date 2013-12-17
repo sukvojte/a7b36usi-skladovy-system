@@ -15,11 +15,11 @@ public class MovementDTO extends AbstractDTO{
 
     private Long version;
 
-    private Long produkt;
+    private ProductDTO produkt;
 
     private Long document;
 
-    public MovementDTO(Long id,double price, Long wrapping, Long version, Long produkt, Long document) {
+    public MovementDTO(Long id,double price, Long wrapping, Long version, ProductDTO produkt, Long document) {
         this.price = price;
         this.wrapping = wrapping;
         this.version = version;
@@ -53,11 +53,11 @@ public class MovementDTO extends AbstractDTO{
         this.version = version;
     }
 
-    public Long getProdukt() {
+    public ProductDTO getProdukt() {
         return produkt;
     }
 
-    public void setProdukt(Long produkt) {
+    public void setProdukt(ProductDTO produkt) {
         this.produkt = produkt;
     }
 
