@@ -4,6 +4,7 @@
  */
 package cz.a7b36usi.sklad.BO;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -27,7 +28,7 @@ public class OrderBO extends AbstractBO{
     @Column(name = "orderDate",nullable = false)
     private Date date;
        
-    @OneToMany(cascade = {CascadeType.ALL})
+    @OneToMany(cascade = {CascadeType.ALL}, mappedBy="order")
     private List<OrderItemBO> items;
     
     @ManyToOne
@@ -48,6 +49,10 @@ public class OrderBO extends AbstractBO{
     }
 
     public List<OrderItemBO> getItems() {
+//	if(items == null){
+//	    items = new ArrayList<OrderItemBO>();
+//	    return items;
+//	}
         return items;
     }
 

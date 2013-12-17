@@ -110,7 +110,7 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
 		if(lastOrder != null){
 		    id = lastOrder.getId();
 		}
-		return new OrderDTO(id != 0 ? id:null, new Date(datumObjednavkaTF.getText()), cisloObjednavkaTF.getText(), null, 0l);//TODO: id partnera ? list orderItemu ?
+		return new OrderDTO(id != 0 ? id:null, new Date(datumObjednavkaTF.getText()), cisloObjednavkaTF.getText(),null, 0l);//TODO: id partnera ? list orderItemu ?
 	    }
 	};
     }
@@ -802,7 +802,7 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
 
     private void tiskObjednavkyJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tiskObjednavkyJBActionPerformed
         // TODO add your handling code here:
-	printService.printOrder(40L);
+	printService.printOrder(50L);
     }//GEN-LAST:event_tiskObjednavkyJBActionPerformed
     /**
      * Creates filters fields in JPanel from DataModel

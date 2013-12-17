@@ -19,7 +19,7 @@ import javax.persistence.Table;
  * Entita ktera slouzi pro uchovani informace o poctu pruduktu v jedne objednavce
  */
 @Entity
-@Table(name="article")
+@Table(name="orderitem")
 public class OrderItemBO extends AbstractBO{
     
     @ManyToOne
@@ -37,7 +37,7 @@ public class OrderItemBO extends AbstractBO{
     @ManyToOne
     private ProductVersionBO productVersion;
     
-    @JoinColumn(name = "order",nullable = false)
+    @JoinColumn(nullable = false)
     @ManyToOne
     private OrderBO order;
 
@@ -84,6 +84,7 @@ public class OrderItemBO extends AbstractBO{
     }
 
     public void setOrder(OrderBO order) {
+	//order.getItems().add(this);
         this.order = order;
     }
     
