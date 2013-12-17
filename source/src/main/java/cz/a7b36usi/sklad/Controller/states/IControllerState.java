@@ -11,6 +11,13 @@ public interface IControllerState {
 	void activated(MainController controller);
 	
 	/**
+	 * This method is called, when the tab is deactivated. 
+	 * And deallocate resources
+	 * @param controller 
+	 */
+	void deactivated(MainController controller);
+	
+	/**
 	 * This method is called, when the save button is clicked.
 	 * And it saves data which is taken from controller.
 	 * @param controller 

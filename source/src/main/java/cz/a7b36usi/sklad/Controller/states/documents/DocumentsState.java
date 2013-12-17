@@ -97,6 +97,11 @@ public class DocumentsState implements IControllerState{
 
     public void print(int index) {
     }
+
+	public void deactivated(MainController controller) {
+		// TODO Auto-generated method stub
+		
+	}
 		
 
 }

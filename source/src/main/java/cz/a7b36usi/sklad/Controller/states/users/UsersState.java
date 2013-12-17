@@ -113,4 +113,9 @@ public class UsersState implements IControllerState{
 	throw new UnsupportedOperationException("Not supported yet.");
     }
 
+	public void deactivated(MainController controller) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

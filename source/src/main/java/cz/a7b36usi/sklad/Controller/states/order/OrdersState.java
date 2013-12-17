@@ -19,6 +19,9 @@ import cz.a7b36usi.sklad.DTO.PartnerDTO;
 import cz.a7b36usi.sklad.Service.IOrderService;
 import cz.a7b36usi.sklad.Service.IPartnerService;
 import cz.a7b36usi.sklad.Service.IPrintService;
+import cz.a7b36usi.sklad.gui.main.SkladMainGUI;
+import cz.a7b36usi.sklad.gui.main.ifaces.ISkladMainGUI;
+
 import javax.swing.JOptionPane;
 
 @Component
@@ -37,6 +40,9 @@ public class OrdersState implements IControllerState{
 	
 	private OrdersDataModel model;
 	
+	@Autowired
+	private ISkladMainGUI editForm; 
+	
 	@PostConstruct
     public void registerModel() {
 		model = new OrdersDataModel(orderService.getAllOrders());
@@ -47,7 +53,13 @@ public class OrdersState implements IControllerState{
 		
 		controller.getForm().setTableModel(model);
 		controller.getForm().setPartnerList(partnerService.getAllPartners());
-	}	
+	}
+	
+
+	public void deactivated(MainController controller) {
+		//editForm.setVisible(false);
+		
+	}
 
 	public void editFormSave(MainController controller) {
 		logger.debug("Save event");
@@ -91,6 +103,10 @@ public class OrdersState implements IControllerState{
 	public void itemDoubleClick(MainController controller, int index) {
 		logger.debug("item double click");
 		
+		
+		//editForm = 
+		
+		//editForm.setVisible(true);		
 	}
 
     public void print(int index) {
@@ -98,5 +114,6 @@ public class OrdersState implements IControllerState{
 		    JOptionPane.showMessageDialog(null, "Problem s tiskem.", "Tisk se nezdaril", JOptionPane.ERROR_MESSAGE);
 		}
     }
+
 
 }

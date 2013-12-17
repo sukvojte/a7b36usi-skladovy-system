@@ -91,6 +91,11 @@ public class AddressBookState implements IControllerState{
     public void print(int index) {
 	throw new UnsupportedOperationException("Not supported yet.");
     }
+
+	public void deactivated(MainController controller) {
+		// TODO Auto-generated method stub
+		
+	}
 		
 
 }
