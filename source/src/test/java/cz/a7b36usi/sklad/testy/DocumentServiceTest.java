@@ -42,17 +42,16 @@ public class DocumentServiceTest extends AbstractServiceTest{
         PartnerDTO partId=addPartner();
         Date d=new Date();
         DocumentDTO doc=new DocumentDTO(null,DocumentType.VYDEJKA,partId,5,d);
-	int before = documentService.getAllDocuments().size();
         Long docId=documentService.saveDocument(doc);
         assertNotNull(docId);
         List<DocumentDTO> docList=documentService.getAllDocuments();
-        assertEquals(docList.size(),before+1);
+        assertEquals(1,docList.size());
         boolean objDetected=false;
         for (int i = 0; i < docList.size(); i++) {
             if(docList.get(i).getId().equals(docId)){
                 objDetected=true;
                 assertEquals(DocumentType.VYDEJKA,docList.get(i).getDocumentType());
-               // assertEquals(partId,docList.get(i).getPartner());
+                assertEquals(partId,docList.get(i).getPartner());
                 assertEquals(5,docList.get(i).getNumber());
                 assertEquals(d,docList.get(i).getDate());
             }
@@ -261,10 +260,9 @@ public class DocumentServiceTest extends AbstractServiceTest{
         String spolecnost="BLA BLA"+System.currentTimeMillis();
         int psc=90324;
         int cisloPop=43551553;
-        PartnerDTO p = new PartnerDTO(0L, true, false, street, mesto, spolecnost, psc, cisloPop);
-        Long idPartner = partnerService.addPartner(isDod, isOdb, street,mesto ,spolecnost , psc, cisloPop);
-	p.setId(idPartner);
-        return p;
+        
+        Long id=partnerService.addPartner(isDod, isOdb, street,mesto ,spolecnost , psc, cisloPop);
+        return partnerService.getAllPartners().get(0);
     }
     public Long addWrap(Long productId){
         WrappingTypeDTO wrp=new WrappingTypeDTO(null,"box",30.0,productId);

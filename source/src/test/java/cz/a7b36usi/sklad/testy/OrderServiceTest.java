@@ -34,13 +34,14 @@ public class OrderServiceTest  extends AbstractServiceTest{
     @Test
     public void testSaveOrderItemsAndGet (){
 	Long partner = partnerService.addPartner(true, false, "dsfsdfsd", "fdsfsdf", "NEJAKA", 333, 222);
+        PartnerDTO p1=partnerService.getAllPartners().get(0);
 	Long cat = productService.saveCategory(new CategoryDTO(null, "NEJAKA KATEGORIE", null));
 	Long product = productService.saveProduct(new ProductDTO(null, "PRODUKT1", "nakej posranej kod", 200, cat));
 	List<OrderItemDTO> list = new ArrayList<OrderItemDTO>();
 	list.add(new OrderItemDTO(null, product, 500, null, null, 0L));
 	list.add(new OrderItemDTO(null, product, 700, null, null, 0L));
 	
-	Long order = orderService.saveOrder(new OrderDTO(null, new Date(), "333", null, new PartnerDTO(partner, true, true, null, null, null, 0, 0)));
+	Long order = orderService.saveOrder(new OrderDTO(null, new Date(), "aaaa", null, p1));
 	orderService.saveOrderItem(new OrderItemDTO(null, product, 500, null, null, order));
 	orderService.saveOrderItem(new OrderItemDTO(null, product, 500, null, null, order));
 	

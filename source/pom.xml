@@ -286,11 +286,12 @@
 
 	</dependency>
 	<!-- JASPER REPORT -->
-	
-	<dependency>
+        <dependency>
             <groupId>unknown.binary</groupId>
             <artifactId>DateChooser</artifactId>
             <version>SNAPSHOT</version>
+            
         </dependency>
+	
     </dependencies>
 </project>
