@@ -41,7 +41,7 @@ public class OrderServiceTest  extends AbstractServiceTest{
 	list.add(new OrderItemDTO(null, product, 500, null, null, 0L));
 	list.add(new OrderItemDTO(null, product, 700, null, null, 0L));
 	
-	Long order = orderService.saveOrder(new OrderDTO(null, new Date(), "333", null, p1));
+	Long order = orderService.saveOrder(new OrderDTO(null, new Date(), "aaaa", null, p1));
 	orderService.saveOrderItem(new OrderItemDTO(null, product, 500, null, null, order));
 	orderService.saveOrderItem(new OrderItemDTO(null, product, 500, null, null, order));
 	
