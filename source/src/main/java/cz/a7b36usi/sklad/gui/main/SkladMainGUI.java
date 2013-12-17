@@ -111,7 +111,7 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
 		if (lastOrder != null) {
 		    id = lastOrder.getId();
 		}
-		return new OrderDTO((id != 0 ? id : null), dateChooserCombo1.getSelectedDate().getTime(), cisloObjednavkaTF.getText(), null, ((PartnerDTO) partnersCB.getSelectedItem()).getId());//TODO: id partnera ? list orderItemu ?
+		return new OrderDTO((id != 0 ? id : null), dateChooserCombo1.getSelectedDate().getTime(), cisloObjednavkaTF.getText(), null, ((PartnerDTO) partnersCB.getSelectedItem()));//TODO: id partnera ? list orderItemu ?
 	    }
 
 	    public DocumentDTO getDocumentData() {

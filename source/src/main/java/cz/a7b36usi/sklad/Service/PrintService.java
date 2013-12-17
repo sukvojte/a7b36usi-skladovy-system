@@ -32,7 +32,7 @@ IOrderService orderService;
             JasperPrint jp = null;
             Map<String, Object> params = new HashMap<String, Object>();
             //params.put("isK", new Boolean(isKK));
-            List<OrderItemDTO> orderItems = orderService.getAllOrderItems(new OrderDTO(orderId, null, null, null, orderId));
+            List<OrderItemDTO> orderItems = orderService.getAllOrderItems(new OrderDTO(orderId, null, null, null, null));
             for (OrderItemDTO orderItemDTO : orderItems) {
 			System.out.println("quant "+orderItemDTO.getQuantity());
 		    }

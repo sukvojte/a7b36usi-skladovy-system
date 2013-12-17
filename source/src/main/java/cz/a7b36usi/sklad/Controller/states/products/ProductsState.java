@@ -1,5 +1,6 @@
-package cz.a7b36usi.sklad.Controller.states.documents;
+package cz.a7b36usi.sklad.Controller.states.products;
 
+import cz.a7b36usi.sklad.Controller.states.movements.*;
 import javax.annotation.PostConstruct;
 
 import org.apache.log4j.Logger;
@@ -8,29 +9,30 @@ import org.springframework.stereotype.Component;
 
 import cz.a7b36usi.sklad.Controller.MainController;
 import cz.a7b36usi.sklad.Controller.states.IControllerState;
-import cz.a7b36usi.sklad.Controller.states.documents.DocumentsDataModel;
-import cz.a7b36usi.sklad.DTO.DocumentDTO;
+import cz.a7b36usi.sklad.DTO.MovementDTO;
 import cz.a7b36usi.sklad.DTO.PartnerDTO;
-import cz.a7b36usi.sklad.Service.IDocumentService;
+import cz.a7b36usi.sklad.DTO.ProductDTO;
 import cz.a7b36usi.sklad.Service.IPartnerService;
+import cz.a7b36usi.sklad.Service.IProductService;
 import java.util.List;
 import javax.swing.InputVerifier;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 @Component
-public class DocumentsState implements IControllerState{
+public class ProductsState implements IControllerState{
 
-	static final Logger logger = Logger.getLogger(DocumentsState.class);
+	static final Logger logger = Logger.getLogger(ProductsState.class);
 	
-//    @Autowired
-//    private IDocumentService documentService;
 	
-	private DocumentsDataModel model;
+	@Autowired
+    private IProductService productService;//TODO: get all movements je kde ?
+	
+	private ProductsDataModel model;
 	
 	@PostConstruct
     public void registerModel() {
-		//model = new DocumentsDataModel(documentService.getAllDocuments());
+		model = new ProductsDataModel(null);
 	}
 	
 	public void activated(MainController controller) {
@@ -41,31 +43,20 @@ public class DocumentsState implements IControllerState{
 	
 	public void editFormSave(MainController controller) {
 		logger.debug("Save event");
-		
-		DocumentDTO document = controller.getForm().getData().getDocumentData();
-		
-		
-		
-		if(document != null){
-			logger.debug("Save customer " + document.getId());
-			//	model.update(documentService.getAllDocuments());
-		}else{
-			logger.error("Can't save null customer");
-		}
-		
+		   //TODO: tady asi nic nebude
 	}
 
 	public void selectedItem(MainController controller, int index) {
 		
-		DocumentDTO document = model.getRowByIndex(index); 
+		ProductDTO product = model.getRowByIndex(index); 
 		
-		controller.getForm().editDocument(document);		
+		//controller.getForm().editCustomer(customer);		
 	}
 
     public void deleteItem(MainController controller) {
-        DocumentDTO document = controller.getForm().getData().getDocumentData();
-//        documentService.removeDocument(document.getId());
-//        model.update(documentService.getAllDocuments());
+        //MovementDTO movement = controller.getForm().getData().getMovementData();
+        
+        //model.update(zakaznikService.getAllPartners());
     }
 
     public boolean validate(MainController controller) {
