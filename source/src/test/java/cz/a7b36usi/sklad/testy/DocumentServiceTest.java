@@ -1,0 +1,290 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+package cz.a7b36usi.sklad.testy;
+
+import cz.a7b36usi.sklad.BO.DocumentType;
+import cz.a7b36usi.sklad.DTO.CategoryDTO;
+import cz.a7b36usi.sklad.DTO.DocumentDTO;
+import cz.a7b36usi.sklad.DTO.MovementDTO;
+import cz.a7b36usi.sklad.DTO.PartnerDTO;
+import cz.a7b36usi.sklad.DTO.ProductDTO;
+import cz.a7b36usi.sklad.DTO.ProductVersionDTO;
+import cz.a7b36usi.sklad.DTO.WrappingTypeDTO;
+import cz.a7b36usi.sklad.Service.IDocumentService;
+import cz.a7b36usi.sklad.Service.IOrderService;
+import cz.a7b36usi.sklad.Service.IPartnerService;
+import cz.a7b36usi.sklad.Service.IProductService;
+import java.util.Date;
+import java.util.List;
+import org.junit.Test;
+import static org.junit.Assert.*;
+import org.springframework.beans.factory.annotation.Autowired;
+
+
+public class DocumentServiceTest extends AbstractServiceTest{
+    @Autowired
+    IOrderService orderService;
+    
+    @Autowired
+    IDocumentService documentService;
+    
+    @Autowired
+    IPartnerService partnerService;
+    
+    @Autowired
+    IProductService productService;
+    
+    @Test
+    public void saveDocument(){
+        PartnerDTO partId=addPartner();
+        Date d=new Date();
+        DocumentDTO doc=new DocumentDTO(null,DocumentType.VYDEJKA,partId,5,d);
+	int before = documentService.getAllDocuments().size();
+        Long docId=documentService.saveDocument(doc);
+        assertNotNull(docId);
+        List<DocumentDTO> docList=documentService.getAllDocuments();
+        assertEquals(docList.size(),before+1);
+        boolean objDetected=false;
+        for (int i = 0; i < docList.size(); i++) {
+            if(docList.get(i).getId().equals(docId)){
+                objDetected=true;
+                assertEquals(DocumentType.VYDEJKA,docList.get(i).getDocumentType());
+               // assertEquals(partId,docList.get(i).getPartner());
+                assertEquals(5,docList.get(i).getNumber());
+                assertEquals(d,docList.get(i).getDate());
+            }
+        }
+        assertTrue(objDetected);
+    }
+    
+    @Test
+    public void saveMovement(){
+        PartnerDTO partId=addPartner();
+        Date d=new Date();
+        DocumentDTO doc=new DocumentDTO(null,DocumentType.VYDEJKA,partId,5,d);
+        Long docId=documentService.saveDocument(doc);
+        doc=documentService.getAllDocuments().get(0);
+        ProductDTO prod=addProduct(addCategory().getId());
+        Long wrap=addWrap(prod.getId());
+        Long vers=addVersion(prod.getId());
+        MovementDTO mov=new MovementDTO(null, 21.0, wrap, vers, prod, doc);
+        Long movId=documentService.saveMovement(mov);
+        assertNotNull(movId);
+        List<MovementDTO> movList=documentService.getAllMovements();
+        boolean objDetected=false;
+        for (int i = 0; i < movList.size(); i++) {
+            if(movList.get(i).getId().equals(movId)){
+                objDetected=true;
+                assertTrue(21.0==movList.get(i).getPrice());
+                assertEquals(wrap,movList.get(i).getWrapping());
+                assertEquals(vers,movList.get(i).getVersion());
+                assertEquals(prod,movList.get(i).getProdukt());
+                assertEquals(docId,movList.get(i).getDocument());
+            }
+        }
+        assertTrue(objDetected);
+    }
+    
+    @Test
+    public void removeDocument(){
+        PartnerDTO partId=addPartner();
+        Date d=new Date();
+        DocumentDTO doc=new DocumentDTO(null,DocumentType.VYDEJKA,partId,5,d);
+       Long docId=documentService.saveDocument(doc);
+       documentService.removeDocument(docId);
+        List<DocumentDTO> docList=documentService.getAllDocuments();
+        boolean objNotDetected=true;
+        for (int i = 0; i < docList.size(); i++) {
+            if(docList.get(i).getId().equals(docId)){
+                objNotDetected=false;
+            }
+        }
+        assertTrue(objNotDetected);
+    }
+    
+    @Test
+    public void removeMovement(){
+       PartnerDTO partId=addPartner();
+        Date d=new Date();
+        DocumentDTO doc=new DocumentDTO(null,DocumentType.VYDEJKA,partId,5,d);
+        Long docId=documentService.saveDocument(doc);
+        doc=documentService.getAllDocuments().get(0);
+        ProductDTO prod=addProduct(addCategory().getId());
+        Long wrap=addWrap(prod.getId());
+        Long vers=addVersion(prod.getId());
+        MovementDTO mov=new MovementDTO(null, 21.0, wrap, vers, prod, doc);
+        Long movId=documentService.saveMovement(mov);
+        documentService.removeMovement(movId);
+        List<MovementDTO> movList=documentService.getAllMovements();
+        boolean objNotDetected=true;
+        for (int i = 0; i < movList.size(); i++) {
+            if(movList.get(i).getId().equals(movId)){
+                objNotDetected=false;
+            }
+        }
+        assertTrue(objNotDetected);
+    }
+    
+    @Test
+    public void getAllDocuments(){
+         Date d=new Date();
+         PartnerDTO partId=addPartner();
+        DocumentDTO doc=new DocumentDTO(null,DocumentType.VYDEJKA,partId,5,d);
+       Long docId=documentService.saveDocument(doc);
+        Date d2=new Date();
+        PartnerDTO partId2=addPartner();
+        DocumentDTO doc2=new DocumentDTO(null,DocumentType.PRIJEMKA,partId2,15,d2);
+       Long docId2=documentService.saveDocument(doc2);
+       List<DocumentDTO> docList=documentService.getAllDocuments();
+       assertEquals(2,docList.size());
+       assertEquals(docId,docList.get(0).getId());
+       assertEquals(DocumentType.VYDEJKA,docList.get(0).getDocumentType());
+       assertEquals(partId,docList.get(0).getPartner());
+       assertEquals(5,docList.get(0).getNumber());
+       assertEquals(d,docList.get(0).getDate());
+       
+       assertEquals(docId2,docList.get(1).getId());
+       assertEquals(DocumentType.PRIJEMKA,docList.get(1).getDocumentType());
+       assertEquals(partId2,docList.get(1).getPartner());
+       assertEquals(15,docList.get(1).getNumber());
+       assertEquals(d2,docList.get(1).getDate());
+    }
+
+    @Test
+    public void getAllMovements(){
+        PartnerDTO partId=addPartner();
+        Date d=new Date();
+        DocumentDTO doc=new DocumentDTO(null,DocumentType.VYDEJKA,partId,5,d);
+        Long docId=documentService.saveDocument(doc);
+        ProductDTO prod=addProduct(addCategory().getId());
+        Long wrap=addWrap(prod.getId());
+        Long vers=addVersion(prod.getId());
+        doc=documentService.getAllDocuments().get(0);
+        MovementDTO mov=new MovementDTO(null, 21.0, wrap, vers, prod, doc);
+        MovementDTO mov2=new MovementDTO(null, 22.0, wrap, vers, prod, doc);
+        Long mov1Id=documentService.saveMovement(mov);
+        Long mov2Id=documentService.saveMovement(mov2);
+        List<MovementDTO> movList=documentService.getAllMovements();
+        assertEquals(2,movList.size());
+        
+        assertEquals(mov1Id,movList.get(0).getId());
+        assertTrue(21.0==movList.get(0).getPrice());
+        assertEquals(wrap,movList.get(0).getWrapping());
+        assertEquals(vers,movList.get(0).getVersion());
+        assertEquals(prod,movList.get(0).getProdukt());
+        assertEquals(docId,movList.get(0).getDocument());
+        
+        assertEquals(mov2Id,movList.get(1).getId());
+        assertTrue(22.0==movList.get(1).getPrice());
+        assertEquals(wrap,movList.get(1).getWrapping());
+        assertEquals(vers,movList.get(1).getVersion());
+        assertEquals(prod,movList.get(1).getProdukt());
+        assertEquals(docId,movList.get(1).getDocument());
+    }
+    
+    @Test
+    public void getAllDocumentsMovements(){
+        PartnerDTO partId=addPartner();
+        Date d=new Date();
+        DocumentDTO doc=new DocumentDTO(null,DocumentType.VYDEJKA,partId,5,d);
+        Long docId=documentService.saveDocument(doc);
+        ProductDTO prod=addProduct(addCategory().getId());
+        Long wrap=addWrap(prod.getId());
+        Long vers=addVersion(prod.getId());
+        doc=documentService.getAllDocuments().get(0);
+        MovementDTO mov=new MovementDTO(null, 21.0, wrap, vers, prod, doc);
+        Long movId=documentService.saveMovement(mov);
+        List<MovementDTO> docList=documentService.getAllDocumentsMovements(docId);
+        assertEquals(1,docList.size());
+        
+        assertEquals(movId,docList.get(0).getId());
+        assertTrue(21.0==docList.get(0).getPrice());
+        assertEquals(wrap,docList.get(0).getWrapping());
+        assertEquals(vers,docList.get(0).getVersion());
+        assertEquals(prod,docList.get(0).getProdukt());
+        assertEquals(docId,docList.get(0).getDocument());
+    }
+    
+    @Test
+    public void getAllPartnersDocuments(){
+        PartnerDTO partId=addPartner();
+        Date d=new Date();
+        DocumentDTO doc=new DocumentDTO(null,DocumentType.VYDEJKA,partId,5,d);
+        Long docId=documentService.saveDocument(doc);
+        ProductDTO prod=addProduct(addCategory().getId());
+        Long wrap=addWrap(prod.getId());
+        Long vers=addVersion(prod.getId());
+        doc=documentService.getAllDocuments().get(0);
+        MovementDTO mov=new MovementDTO(null, 21.0, wrap, vers, prod, doc);
+        Long movId=documentService.saveMovement(mov);
+        List<DocumentDTO> docList=documentService.getAllPartnersDocuments(partId.getId());
+        assertEquals(1,docList.size());
+        assertEquals(movId,docList.get(0).getId());
+        assertEquals(DocumentType.VYDEJKA,docList.get(0).getDocumentType());
+        assertEquals(partId,docList.get(0).getPartner());
+        assertEquals(5,docList.get(0).getNumber());
+        assertEquals(d,docList.get(0).getDate());
+    }
+    
+    @Test
+    public void getAllProductsMovements(){
+        PartnerDTO partId=addPartner();
+        Date d=new Date();
+        DocumentDTO doc=new DocumentDTO(null,DocumentType.VYDEJKA,partId,5,d);
+        Long docId=documentService.saveDocument(doc);
+        ProductDTO prod=addProduct(addCategory().getId());
+        Long wrap=addWrap(prod.getId());
+        Long vers=addVersion(prod.getId());
+        doc=documentService.getAllDocuments().get(0);
+        MovementDTO mov=new MovementDTO(null, 21.0, wrap, vers, prod, doc);
+        Long movId=documentService.saveMovement(mov);
+        List<MovementDTO> movList=documentService.getAllProductsMovements(prod.getId());
+        assertEquals(1,movList.size());
+       
+        assertEquals(movId,movList.get(0).getId());
+        assertTrue(21.0==movList.get(0).getPrice());
+        assertEquals(wrap,movList.get(0).getWrapping());
+        assertEquals(vers,movList.get(0).getVersion());
+        assertEquals(prod,movList.get(0).getProdukt());
+        assertEquals(docId,movList.get(0).getDocument());
+    }
+    
+    
+    public PartnerDTO addPartner(){
+         boolean isDod=true;
+        boolean isOdb=false;
+        String street="ULICE";
+        String mesto="mesto"+System.currentTimeMillis();
+        String spolecnost="BLA BLA"+System.currentTimeMillis();
+        int psc=90324;
+        int cisloPop=43551553;
+        PartnerDTO p = new PartnerDTO(0L, true, false, street, mesto, spolecnost, psc, cisloPop);
+        Long idPartner = partnerService.addPartner(isDod, isOdb, street,mesto ,spolecnost , psc, cisloPop);
+	p.setId(idPartner);
+        return p;
+    }
+    public Long addWrap(Long productId){
+        WrappingTypeDTO wrp=new WrappingTypeDTO(null,"box",30.0,productId);
+        return productService.saveWrappingType(wrp);
+    }
+    
+    public ProductDTO addProduct(Long catId){
+        ProductDTO pr=new ProductDTO(null,"kase","FGSVRI",Integer.valueOf(12),catId);
+        productService.saveProduct(pr);
+        return productService.getAllProducts().get(0);
+    }
+    
+    public CategoryDTO addCategory(){
+        CategoryDTO cat=new CategoryDTO(null,"jidlo",null);
+        productService.saveCategory(cat);
+        return productService.getAllCategories().get(0);
+    }
+    
+    public Long addVersion(Long productId){
+        ProductVersionDTO prV=new ProductVersionDTO(null,Long.valueOf(1434),"verze 1", productId);
+        return productService.saveProductVersion(prV);
+    }
+}

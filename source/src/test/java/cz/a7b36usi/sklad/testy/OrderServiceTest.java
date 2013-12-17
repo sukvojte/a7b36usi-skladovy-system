@@ -4,6 +4,7 @@ package cz.a7b36usi.sklad.testy;
 import cz.a7b36usi.sklad.DTO.CategoryDTO;
 import cz.a7b36usi.sklad.DTO.OrderDTO;
 import cz.a7b36usi.sklad.DTO.OrderItemDTO;
+import cz.a7b36usi.sklad.DTO.PartnerDTO;
 import cz.a7b36usi.sklad.DTO.ProductDTO;
 import cz.a7b36usi.sklad.Service.IOrderService;
 import cz.a7b36usi.sklad.Service.IPartnerService;
@@ -39,7 +40,7 @@ public class OrderServiceTest  extends AbstractServiceTest{
 	list.add(new OrderItemDTO(null, product, 500, null, null, 0L));
 	list.add(new OrderItemDTO(null, product, 700, null, null, 0L));
 	
-	Long order = orderService.saveOrder(new OrderDTO(null, new Date(), "333", null, partner));
+	Long order = orderService.saveOrder(new OrderDTO(null, new Date(), "333", null, new PartnerDTO(partner, true, true, null, null, null, 0, 0)));
 	orderService.saveOrderItem(new OrderItemDTO(null, product, 500, null, null, order));
 	orderService.saveOrderItem(new OrderItemDTO(null, product, 500, null, null, order));
 	
