@@ -93,7 +93,7 @@ public class DocumentService extends AbstractService implements IDocumentService
                     pbo.getName(),
                     pbo.getCode(),
                     pbo.getQuantity(),
-                    pbo.getCategory().getId());
+                    (pbo.getCategory()!=null ?  pbo.getCategory().getId() : 0));
 
             MovementDTO dto = new MovementDTO(
                     movementBO.getId(),
