@@ -57,6 +57,10 @@ public class EmptyState implements IControllerState{
 	public void itemDoubleClick(MainController controller, int index) {
 		logger.warn("double click");		
 	}
+
+    public void print(int index) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 	
 	
 }
