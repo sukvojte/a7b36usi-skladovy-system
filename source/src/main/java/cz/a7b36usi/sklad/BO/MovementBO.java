@@ -35,7 +35,7 @@ public class MovementBO extends AbstractBO {
 
     @ManyToOne
     @JoinColumn(nullable = false)
-    private ProductBO produkt;
+    private ProductBO product;
 
     @ManyToOne
     @JoinColumn(nullable = false)
@@ -70,11 +70,11 @@ public class MovementBO extends AbstractBO {
     }
 
     public ProductBO getProdukt() {
-        return produkt;
+        return product;
     }
 
-    public void setProdukt(ProductBO produkt) {
-        this.produkt = produkt;
+    public void setProdukt(ProductBO product) {
+        this.product = product;
     }
 
     public DocumentBO getDocument() {

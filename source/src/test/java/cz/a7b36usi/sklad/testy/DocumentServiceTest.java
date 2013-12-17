@@ -198,18 +198,18 @@ public class DocumentServiceTest extends AbstractServiceTest{
         ProductDTO prod=addProduct(addCategory().getId());
         Long wrap=addWrap(prod.getId());
         Long vers=addVersion(prod.getId());
-        doc=documentService.getAllDocuments().get(0);
+        doc.setId(docId);
         MovementDTO mov=new MovementDTO(null, 21.0, wrap, vers, prod, doc);
         Long movId=documentService.saveMovement(mov);
-        List<MovementDTO> docList=documentService.getAllDocumentsMovements(docId);
-        assertEquals(1,docList.size());
+        List<MovementDTO> movList=documentService.getAllDocumentsMovements(docId);
+        assertEquals(1,movList.size());
         
-        assertEquals(movId,docList.get(0).getId());
-        assertTrue(21.0==docList.get(0).getPrice());
-        assertEquals(wrap,docList.get(0).getWrapping());
-        assertEquals(vers,docList.get(0).getVersion());
-        assertEquals(prod,docList.get(0).getProdukt());
-        assertEquals(docId,docList.get(0).getDocument());
+        assertEquals(movId,movList.get(0).getId());
+        assertTrue(21.0==movList.get(0).getPrice());
+        assertEquals(wrap,movList.get(0).getWrapping());
+        assertEquals(vers,movList.get(0).getVersion());
+        assertEquals(prod.getId(),movList.get(0).getProdukt().getId());
+        assertEquals(docId,movList.get(0).getDocument().getId());
     }
     
     @Test
@@ -226,9 +226,9 @@ public class DocumentServiceTest extends AbstractServiceTest{
         Long movId=documentService.saveMovement(mov);
         List<DocumentDTO> docList=documentService.getAllPartnersDocuments(partId.getId());
         assertEquals(1,docList.size());
-        assertEquals(movId,docList.get(0).getId());
+        assertEquals(docId,docList.get(0).getId());
         assertEquals(DocumentType.VYDEJKA,docList.get(0).getDocumentType());
-        assertEquals(partId,docList.get(0).getPartner());
+        assertEquals(partId.getId(),docList.get(0).getPartner().getId());
         assertEquals(5,docList.get(0).getNumber());
         assertEquals(d,docList.get(0).getDate());
     }
@@ -242,7 +242,7 @@ public class DocumentServiceTest extends AbstractServiceTest{
         ProductDTO prod=addProduct(addCategory().getId());
         Long wrap=addWrap(prod.getId());
         Long vers=addVersion(prod.getId());
-        doc=documentService.getAllDocuments().get(0);
+        doc.setId(docId);
         MovementDTO mov=new MovementDTO(null, 21.0, wrap, vers, prod, doc);
         Long movId=documentService.saveMovement(mov);
         List<MovementDTO> movList=documentService.getAllProductsMovements(prod.getId());
@@ -252,8 +252,8 @@ public class DocumentServiceTest extends AbstractServiceTest{
         assertTrue(21.0==movList.get(0).getPrice());
         assertEquals(wrap,movList.get(0).getWrapping());
         assertEquals(vers,movList.get(0).getVersion());
-        assertEquals(prod,movList.get(0).getProdukt());
-        assertEquals(docId,movList.get(0).getDocument());
+        assertEquals(prod.getId(),movList.get(0).getProdukt().getId());
+        assertEquals(docId,movList.get(0).getDocument().getId());
     }
     
     
