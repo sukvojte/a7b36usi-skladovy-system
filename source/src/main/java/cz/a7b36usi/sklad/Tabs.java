@@ -1,11 +1,12 @@
 package cz.a7b36usi.sklad;
 
 import cz.a7b36usi.sklad.Controller.states.AddressBook.AddressBookState;
+import cz.a7b36usi.sklad.Controller.states.order.OrdersState;
 import cz.a7b36usi.sklad.Controller.states.users.UsersState;
 
 public enum Tabs {
 	ADDRESS_BOOK(AddressBookState.class),
-	ORDERS(null),
+	ORDERS(OrdersState.class),
 	MOVEMENTS(null),
 	DOCUMENTS(null),
 	WAREHOUSE(null),
