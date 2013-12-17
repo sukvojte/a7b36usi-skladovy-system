@@ -25,6 +25,9 @@ public class DocumentsState implements IControllerState{
 	
     @Autowired
     private IDocumentService documentService;
+
+    @Autowired
+    private IPartnerService partnerService;    
 	
 	private DocumentsDataModel model;
 	
@@ -37,6 +40,7 @@ public class DocumentsState implements IControllerState{
 		logger.debug("Activated event");
 		
 		controller.getForm().setTableModel(model);
+		controller.getForm().setPartnerList(partnerService.getAllPartners());
 	}
 	
 	public void editFormSave(MainController controller) {
@@ -48,7 +52,8 @@ public class DocumentsState implements IControllerState{
 		
 		if(document != null){
 			logger.debug("Save document " + document.getId());
-				model.update(documentService.getAllDocuments());
+			documentService.saveDocument(document);
+		        model.update(documentService.getAllDocuments());
 		}else{
 			logger.error("Can't save null document");
 		}

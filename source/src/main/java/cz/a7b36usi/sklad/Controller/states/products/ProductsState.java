@@ -69,7 +69,7 @@ public class ProductsState implements IControllerState{
 
     public void deleteItem(MainController controller) {
         ProductDTO product = controller.getForm().getData().getProductData();
-        
+        productService.deleteProduct(product.getId());
         model.update(productService.getAllProducts());
     }
 

@@ -33,7 +33,8 @@ public class DocumentService extends AbstractService implements IDocumentService
         bo.setDocumentType(document.getDocumentType());
         bo.setId(document.getId());
         bo.setNumber(document.getNumber());
-        bo.setPartner(genericDAO.loadById(document.getPartner().getId(), PartnerBO.class));
+        bo.setPartner(genericDAO.loadById(document.getPartner().getId(), PartnerBO.class)); 
+	//TODO: nemuze se nastavovat, pac partner je null - nemame to ve formulari
         return genericDAO.saveOrUpdate(bo).getId();
     }
 
