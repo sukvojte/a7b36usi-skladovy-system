@@ -19,6 +19,7 @@ import cz.a7b36usi.sklad.DTO.PartnerDTO;
 import cz.a7b36usi.sklad.Service.IOrderService;
 import cz.a7b36usi.sklad.Service.IPartnerService;
 import cz.a7b36usi.sklad.Service.IPrintService;
+import javax.swing.JOptionPane;
 
 @Component
 public class OrdersState implements IControllerState{
@@ -93,7 +94,9 @@ public class OrdersState implements IControllerState{
 	}
 
     public void print(int index) {
-	printService.printOrder(model.getRowByIndex(index).getId());
+	if(!printService.printOrder(model.getRowByIndex(index).getId())){
+	    JOptionPane.showMessageDialog(null, "Problem s tiskem.", "Tisk se nezdaril", JOptionPane.ERROR_MESSAGE);
+	}
     }
 
 }
