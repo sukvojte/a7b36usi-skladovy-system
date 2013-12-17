@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import org.junit.Test;
+import static org.junit.Assert.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -30,7 +31,7 @@ public class OrderServiceTest  extends AbstractServiceTest{
     IProductService productService;
     
     @Test
-    public void test1 (){
+    public void testSaveOrderItemsAndGet (){
 	Long partner = partnerService.addPartner(true, false, "dsfsdfsd", "fdsfsdf", "NEJAKA", 333, 222);
 	Long cat = productService.saveCategory(new CategoryDTO(null, "NEJAKA KATEGORIE", null));
 	Long product = productService.saveProduct(new ProductDTO(null, "PRODUKT1", "nakej posranej kod", 200, cat));
@@ -41,6 +42,14 @@ public class OrderServiceTest  extends AbstractServiceTest{
 	Long order = orderService.saveOrder(new OrderDTO(null, new Date(), "333", null, partner));
 	orderService.saveOrderItem(new OrderItemDTO(null, product, 500, null, null, order));
 	orderService.saveOrderItem(new OrderItemDTO(null, product, 500, null, null, order));
-	System.out.println("order : "+order);
+	
+	int size = orderService.getAllOrderItems(new OrderDTO(order, null, null, null, null)).size();
+	assertEquals(2, size);
     }
+    
+    @Test
+    public void test(){
+	
+    }
+    
 }
