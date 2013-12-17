@@ -56,7 +56,7 @@ public class OrdersState implements IControllerState{
 	public void selectedItem(MainController controller, int index) {
 		OrderDTO order = model.getRowByIndex(index); 
 		
-		//controller.getForm().editOrder(order);	
+		controller.getForm().editOrder(order,null);	
 	}
 
     public void deleteItem(MainController controller) {

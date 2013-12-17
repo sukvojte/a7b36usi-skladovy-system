@@ -183,6 +183,7 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
     private void nullForms() {
 	editCustomer(null);
 	editUser(null);
+	editOrder(null, null);
 	ulozJB.setText("Ulož");
     }
 
