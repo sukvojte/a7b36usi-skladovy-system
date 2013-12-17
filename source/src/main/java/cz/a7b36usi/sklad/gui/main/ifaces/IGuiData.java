@@ -5,6 +5,7 @@ import cz.a7b36usi.sklad.DTO.MovementDTO;
 import cz.a7b36usi.sklad.DTO.OrderDTO;
 import cz.a7b36usi.sklad.DTO.UserDTO;
 import cz.a7b36usi.sklad.DTO.PartnerDTO;
+import cz.a7b36usi.sklad.DTO.ProductDTO;
 
 public interface IGuiData {
 
@@ -33,5 +34,12 @@ public interface IGuiData {
      * @return 
      */
     DocumentDTO getDocumentData();
+    
+    /**
+     * Gets product data from form
+     * @return 
+     */
+    ProductDTO getProductData();    
+    
     
 }

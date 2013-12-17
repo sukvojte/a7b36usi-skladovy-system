@@ -6,6 +6,7 @@ import cz.a7b36usi.sklad.DTO.OrderDTO;
 import cz.a7b36usi.sklad.DTO.UserDTO;
 import cz.a7b36usi.sklad.Tabs;
 import cz.a7b36usi.sklad.DTO.PartnerDTO;
+import cz.a7b36usi.sklad.DTO.ProductDTO;
 import cz.a7b36usi.sklad.ifaces.RecieveListener;
 import cz.a7b36usi.sklad.tableutils.BaseDataModel;
 import java.awt.Component;
@@ -84,12 +85,20 @@ public interface ISkladMainGUI extends RecieveListener {
     void editMovement(MovementDTO movement);
 
     /**
-     * Edits documentÏ
+     * Edits document
      *
      * @param order
      * @param list
      */
     void editDocument(DocumentDTO movement);
+    
+    /**
+     * Edits product
+     *
+     * @param order
+     * @param list
+     */
+    void editProduct(ProductDTO product);    
 
     /**
      * Set list to combolist

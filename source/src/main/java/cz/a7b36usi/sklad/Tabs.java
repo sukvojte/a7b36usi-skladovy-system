@@ -1,15 +1,18 @@
 package cz.a7b36usi.sklad;
 
 import cz.a7b36usi.sklad.Controller.states.AddressBook.AddressBookState;
+import cz.a7b36usi.sklad.Controller.states.documents.DocumentsState;
+import cz.a7b36usi.sklad.Controller.states.movements.MovementsState;
 import cz.a7b36usi.sklad.Controller.states.order.OrdersState;
+import cz.a7b36usi.sklad.Controller.states.products.ProductsState;
 import cz.a7b36usi.sklad.Controller.states.users.UsersState;
 
 public enum Tabs {
 	ADDRESS_BOOK(AddressBookState.class),
 	ORDERS(OrdersState.class),
-	MOVEMENTS(null),
-	DOCUMENTS(null),
-	WAREHOUSE(null),
+	MOVEMENTS(MovementsState.class),
+	DOCUMENTS(DocumentsState.class),
+	WAREHOUSE(ProductsState.class),
 	USERS(UsersState.class);	
 	
 	

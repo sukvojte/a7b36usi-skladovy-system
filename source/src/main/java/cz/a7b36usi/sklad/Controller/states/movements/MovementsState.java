@@ -10,6 +10,7 @@ import cz.a7b36usi.sklad.Controller.MainController;
 import cz.a7b36usi.sklad.Controller.states.IControllerState;
 import cz.a7b36usi.sklad.DTO.MovementDTO;
 import cz.a7b36usi.sklad.DTO.PartnerDTO;
+import cz.a7b36usi.sklad.Service.IDocumentService;
 import cz.a7b36usi.sklad.Service.IPartnerService;
 import cz.a7b36usi.sklad.Service.IProductService;
 import java.util.List;
@@ -24,13 +25,13 @@ public class MovementsState implements IControllerState{
 	
 	
 	@Autowired
-    private IProductService productService;//TODO: get all movements je kde ?
+    private IDocumentService documentService;//TODO: get all movements je kde ?
 	
 	private MovementsDataModel model;
 	
 	@PostConstruct
     public void registerModel() {
-		model = new MovementsDataModel(null);
+		model = new MovementsDataModel(documentService.getAllMovements());
 	}
 	
 	public void activated(MainController controller) {
@@ -46,15 +47,15 @@ public class MovementsState implements IControllerState{
 
 	public void selectedItem(MainController controller, int index) {
 		
-		MovementDTO customer = model.getRowByIndex(index); 
+		MovementDTO movement = model.getRowByIndex(index); 
 		
 		//controller.getForm().editCustomer(customer);		
 	}
 
     public void deleteItem(MainController controller) {
-        //MovementDTO movement = controller.getForm().getData().getMovementData();
-        
-        //model.update(zakaznikService.getAllPartners());
+//        MovementDTO movement = controller.getForm().getData().getMovementData();
+//        
+//        model.update(zakaznikService.getAllPartners());
     }
 
     public boolean validate(MainController controller) {

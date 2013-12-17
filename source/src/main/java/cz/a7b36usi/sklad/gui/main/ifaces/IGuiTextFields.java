@@ -28,4 +28,24 @@ public interface IGuiTextFields {
      * @return 
      */
     List<JTextField> getOrderTextFields();
+    
+    /**
+     * Gets document's text fields from form for validating
+     * @return 
+     */
+    List<JTextField> getDocumentTextFields();  
+    
+    /**
+     * Gets movement's text fields from form for validating
+     * @return 
+     */
+    List<JTextField> getMovementTextFields();    
+    
+    
+    /**
+     * Gets product's text fields from form for validating
+     * @return 
+     */
+    List<JTextField> getProductTextFields();    
+    
 }

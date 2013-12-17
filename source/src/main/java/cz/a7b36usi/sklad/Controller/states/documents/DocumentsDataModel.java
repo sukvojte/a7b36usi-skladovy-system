@@ -22,7 +22,7 @@ public class DocumentsDataModel extends BaseDataModel<DocumentDTO> {
             case 0:
                 return row.getDocumentType();
             case 1:
-                return row.getPartner();
+                return row.getPartner().getSpolecnost();
             case 2:
                 return row.getDate();
             case 3:

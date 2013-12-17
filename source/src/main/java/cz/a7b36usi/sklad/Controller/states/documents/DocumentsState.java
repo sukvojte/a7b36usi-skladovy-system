@@ -23,14 +23,14 @@ public class DocumentsState implements IControllerState{
 
 	static final Logger logger = Logger.getLogger(DocumentsState.class);
 	
-//    @Autowired
-//    private IDocumentService documentService;
+    @Autowired
+    private IDocumentService documentService;
 	
 	private DocumentsDataModel model;
 	
 	@PostConstruct
     public void registerModel() {
-		//model = new DocumentsDataModel(documentService.getAllDocuments());
+		model = new DocumentsDataModel(documentService.getAllDocuments());
 	}
 	
 	public void activated(MainController controller) {
@@ -47,10 +47,10 @@ public class DocumentsState implements IControllerState{
 		
 		
 		if(document != null){
-			logger.debug("Save customer " + document.getId());
-			//	model.update(documentService.getAllDocuments());
+			logger.debug("Save document " + document.getId());
+				model.update(documentService.getAllDocuments());
 		}else{
-			logger.error("Can't save null customer");
+			logger.error("Can't save null document");
 		}
 		
 	}
@@ -64,13 +64,13 @@ public class DocumentsState implements IControllerState{
 
     public void deleteItem(MainController controller) {
         DocumentDTO document = controller.getForm().getData().getDocumentData();
-//        documentService.removeDocument(document.getId());
-//        model.update(documentService.getAllDocuments());
+        documentService.removeDocument(document.getId());
+        model.update(documentService.getAllDocuments());
     }
 
     public boolean validate(MainController controller) {
         boolean correct = true;
-        List<JTextField> list = controller.getForm().getTextFields().getAddressBookTextFields();
+        List<JTextField> list = controller.getForm().getTextFields().getDocumentTextFields();
         for (JTextField field : list) {
             InputVerifier iv = field.getInputVerifier();
                if(iv == null)continue;

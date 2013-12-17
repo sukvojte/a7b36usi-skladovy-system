@@ -32,7 +32,7 @@ public class ProductsState implements IControllerState{
 	
 	@PostConstruct
     public void registerModel() {
-		model = new ProductsDataModel(null);
+		model = new ProductsDataModel(productService.getAllProducts());
 	}
 	
 	public void activated(MainController controller) {
@@ -43,25 +43,39 @@ public class ProductsState implements IControllerState{
 	
 	public void editFormSave(MainController controller) {
 		logger.debug("Save event");
-		   //TODO: tady asi nic nebude
+		
+		ProductDTO product = controller.getForm().getData().getProductData();
+		
+		
+		
+		if(product != null){
+			logger.debug("Save product " + product.getId());
+			if(productService.saveProduct(product)!=null){
+				model.update(productService.getAllProducts());
+			}else{
+				logger.error("Product " + product.getId() + " was not saved");
+			}
+		}else{
+			logger.error("Can't save null customer");
+		}		   
 	}
 
 	public void selectedItem(MainController controller, int index) {
 		
 		ProductDTO product = model.getRowByIndex(index); 
 		
-		//controller.getForm().editCustomer(customer);		
+		controller.getForm().editProduct(product);		
 	}
 
     public void deleteItem(MainController controller) {
-        //MovementDTO movement = controller.getForm().getData().getMovementData();
+        ProductDTO product = controller.getForm().getData().getProductData();
         
-        //model.update(zakaznikService.getAllPartners());
+        model.update(productService.getAllProducts());
     }
 
     public boolean validate(MainController controller) {
         boolean correct = true;
-        List<JTextField> list = controller.getForm().getTextFields().getAddressBookTextFields();
+        List<JTextField> list = controller.getForm().getTextFields().getProductTextFields();
         for (JTextField field : list) {
             InputVerifier iv = field.getInputVerifier();
                if(iv == null)continue;

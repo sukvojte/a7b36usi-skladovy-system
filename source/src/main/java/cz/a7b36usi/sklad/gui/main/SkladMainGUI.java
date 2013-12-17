@@ -22,6 +22,7 @@ import cz.a7b36usi.sklad.DTO.MovementDTO;
 import cz.a7b36usi.sklad.DTO.OrderDTO;
 import cz.a7b36usi.sklad.DTO.UserDTO;
 import cz.a7b36usi.sklad.DTO.PartnerDTO;
+import cz.a7b36usi.sklad.DTO.ProductDTO;
 import cz.a7b36usi.sklad.Service.IPrintService;
 import cz.a7b36usi.sklad.gui.main.ifaces.IGuiData;
 import cz.a7b36usi.sklad.gui.main.ifaces.IGuiTextFields;
@@ -42,6 +43,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -58,6 +60,9 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
     private PartnerDTO lastZakaznik = null;
     private UserDTO lastUser = null;
     private OrderDTO lastOrder = null;
+    private DocumentDTO lastDocument = null;
+    private ProductDTO lastProduct = null;
+    
     private BaseDataModel baseDataModel;
     public JButton filtrJB;
     /* Listenery - START */
@@ -115,7 +120,19 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
 	    }
 
 	    public DocumentDTO getDocumentData() {
-		throw new UnsupportedOperationException("Not supported yet.");
+				long id = 0;
+		if (lastDocument != null) {
+		    id = lastDocument.getId();
+		}
+		return new DocumentDTO((id != 0 ? id : null), (DocumentType)typDokladuJC.getSelectedItem(), null, Integer.parseInt(cisloDokladTF.getText()), dateChooserCombo2.getCurrent().getTime());
+	    }
+
+	    public ProductDTO getProductData() {
+				long id = 0;
+		if (lastProduct != null) {
+		    id = lastProduct.getId();
+		}
+		return new ProductDTO((id != 0 ? id : null),jmenoProduktuTF.getText(), kodProduktuTF.getText(), Integer.parseInt(mnozstviProduktuTF.getText()), null);
 	    }
 	};
     }
@@ -179,6 +196,52 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
 	}
 
     }
+    
+    public void editMovement(MovementDTO movement) {
+    }
+
+    public void editDocument(DocumentDTO document) {
+		ulozJB.setText("Ulož");
+	lastDocument = document;
+	nullValidators();
+	if (lastDocument != null) {
+	    Calendar c = Calendar.getInstance();
+	    c.setTime(document.getDate());
+	    dateChooserCombo2.setCurrent(c);
+	    cisloDokladTF.setText(document.getNumber()+"");
+	    setSelected(typDokladuJC, document.getDocumentType());
+	    
+	} else {
+	     Calendar c = Calendar.getInstance();
+	    dateChooserCombo2.setCurrent(c);
+	    cisloDokladTF.setText(null);
+	    typDokladuJC.setSelectedIndex(0);
+	}
+    }
+    
+    private void setSelected(JComboBox cb, Object field){
+	for (int i = 0; i < cb.getItemCount(); i++) {
+	    if(cb.getItemAt(i).equals(field)){
+		cb.setSelectedIndex(i);
+	    }
+	}
+    }
+
+    public void editProduct(ProductDTO product) {
+		ulozJB.setText("Ulož");
+	lastProduct = product;
+	nullValidators();
+	if (lastProduct != null) {
+	    jmenoProduktuTF.setText(product.getName());
+	    kodProduktuTF.setText(product.getCode());
+	    mnozstviProduktuTF.setText(product.getQuantity()+"");
+	    
+	} else {
+	    jmenoProduktuTF.setText(null);
+	    kodProduktuTF.setText(null);
+	    mnozstviProduktuTF.setText(null);	    
+	}
+    }    
 
     private void nullForms() {
 	editCustomer(null);
@@ -312,9 +375,9 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
+        jmenoProduktuTF = new javax.swing.JTextField();
+        kodProduktuTF = new javax.swing.JTextField();
+        mnozstviProduktuTF = new javax.swing.JTextField();
         panelUsers = new TabsJPanel(Tabs.USERS);
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -558,9 +621,9 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
                     .add(jLabel13))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(panelWarehouseLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
-                    .add(jTextField1)
-                    .add(jTextField2)
-                    .add(jTextField3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE))
+                    .add(jmenoProduktuTF)
+                    .add(kodProduktuTF)
+                    .add(mnozstviProduktuTF, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE))
                 .addContainerGap(424, Short.MAX_VALUE))
         );
         panelWarehouseLayout.setVerticalGroup(
@@ -569,15 +632,15 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
                 .add(15, 15, 15)
                 .add(panelWarehouseLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(jLabel11)
-                    .add(jTextField1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(jmenoProduktuTF, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                 .add(panelWarehouseLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(jLabel12)
-                    .add(jTextField2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(kodProduktuTF, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                 .add(panelWarehouseLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(jLabel13)
-                    .add(jTextField3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(mnozstviProduktuTF, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(133, Short.MAX_VALUE))
         );
 
@@ -917,10 +980,10 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jmenoProduktuTF;
+    private javax.swing.JTextField kodProduktuTF;
     private javax.swing.JTextField mestoTF;
+    private javax.swing.JTextField mnozstviProduktuTF;
     private javax.swing.JPanel panelAddress;
     private javax.swing.JPanel panelDocuments;
     private javax.swing.JPanel panelMovements;
@@ -964,6 +1027,25 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
 		list.add(cisloObjednavkaTF);
 		return list;
 	    }
+
+	    public List<JTextField> getDocumentTextFields() {
+				ArrayList<JTextField> list = new ArrayList<JTextField>();
+		list.add(cisloDokladTF);
+		return list;
+	    }
+
+	    public List<JTextField> getMovementTextFields() {
+		ArrayList<JTextField> list = new ArrayList<JTextField>();
+		return list;		
+	    }
+
+	    public List<JTextField> getProductTextFields() {
+		ArrayList<JTextField> list = new ArrayList<JTextField>();
+		list.add(jmenoProduktuTF);
+		list.add(kodProduktuTF);
+		list.add(mnozstviProduktuTF);
+		return list;
+	    }
 	};
     }
 
@@ -976,11 +1058,4 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
 	}
     }
 
-    public void editMovement(MovementDTO movement) {
-	throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    public void editDocument(DocumentDTO movement) {
-	throw new UnsupportedOperationException("Not supported yet.");
-    }
 }

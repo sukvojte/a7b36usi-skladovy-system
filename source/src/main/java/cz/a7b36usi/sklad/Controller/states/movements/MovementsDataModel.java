@@ -13,14 +13,14 @@ public class MovementsDataModel extends BaseDataModel<MovementDTO> {
 
     public MovementsDataModel(List<MovementDTO> list) {
         super(list);
-        columns = new Column[]{new Column("Neco"), new Column("Jmeno produktu"), new Column("Cena")};
+        columns = new Column[]{new Column("Typ pohybu"), new Column("Jmeno produktu"), new Column("Cena")};
     }
 
     @Override
     public Object getColumnValue(MovementDTO row, int index) {
         switch (index) {
             case 0:
-                return null;
+                return row.getDocument().getDocumentType();
             case 1:
                 return row.getProdukt().getName();
             case 2:

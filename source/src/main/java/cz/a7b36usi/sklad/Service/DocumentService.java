@@ -18,11 +18,13 @@ import cz.a7b36usi.sklad.DTO.PartnerDTO;
 import cz.a7b36usi.sklad.DTO.ProductDTO;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author Peter
  */
+@Component
 public class DocumentService extends AbstractService implements IDocumentService {
 
     public Long saveDocument(DocumentDTO document) {
