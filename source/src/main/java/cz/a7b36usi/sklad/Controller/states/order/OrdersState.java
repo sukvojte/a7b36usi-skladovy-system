@@ -17,6 +17,7 @@ import cz.a7b36usi.sklad.Controller.states.AddressBook.AddressBookState;
 import cz.a7b36usi.sklad.DTO.OrderDTO;
 import cz.a7b36usi.sklad.DTO.PartnerDTO;
 import cz.a7b36usi.sklad.Service.IOrderService;
+import cz.a7b36usi.sklad.Service.IPartnerService;
 
 @Component
 public class OrdersState implements IControllerState{
@@ -25,6 +26,9 @@ public class OrdersState implements IControllerState{
 
 	@Autowired
     private IOrderService orderService;
+	
+	@Autowired
+	private IPartnerService partnerService;
 	
 	private OrdersDataModel model;
 	
@@ -56,7 +60,7 @@ public class OrdersState implements IControllerState{
 	public void selectedItem(MainController controller, int index) {
 		OrderDTO order = model.getRowByIndex(index); 
 		
-		controller.getForm().editOrder(order,null);	
+		controller.getForm().editOrder(order, partnerService.getAllPartners());	
 	}
 
     public void deleteItem(MainController controller) {
@@ -66,7 +70,21 @@ public class OrdersState implements IControllerState{
     }
 
     public boolean validate(MainController controller) {
-    	return true;
+    	boolean correct = true;
+        List<JTextField> list = controller.getForm().getTextFields().getOrderTextFields();
+        for (JTextField field : list) {
+            InputVerifier iv = field.getInputVerifier();
+               if(iv == null)continue;
+               if(!iv.verify(field)){
+                   correct = false;
+               }
+        }
+        return correct;
     }
+
+	public void itemDoubleClick(MainController controller, int index) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

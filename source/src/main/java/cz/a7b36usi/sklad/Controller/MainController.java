@@ -65,6 +65,11 @@ public class MainController implements IMainController {
             public boolean validate() {
                 return state.validate(ctrl);
             }
+
+			public void tableDoubleClickOnIndex(int index) {
+				state.itemDoubleClick(ctrl, index);
+				
+			}
         });
 
         state = stateFactory.getDefaultState();

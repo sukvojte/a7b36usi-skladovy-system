@@ -53,6 +53,10 @@ public class EmptyState implements IControllerState{
     public boolean validate(MainController controller) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+
+	public void itemDoubleClick(MainController controller, int index) {
+		logger.warn("double click");		
+	}
 	
 	
 }

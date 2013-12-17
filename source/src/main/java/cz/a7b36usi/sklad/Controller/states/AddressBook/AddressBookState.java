@@ -82,6 +82,11 @@ public class AddressBookState implements IControllerState{
         }
         return correct;
     }
+
+	public void itemDoubleClick(MainController controller, int index) {
+		// TODO Auto-generated method stub
+		
+	}
 		
 
 }

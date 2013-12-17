@@ -39,4 +39,10 @@ public interface IControllerState {
 	 * @return true when data is correct, false otherwise
 	 */
         boolean validate(MainController controller);
+
+    	/**
+    	 * This method is called, when the item on index is doubleclicked.
+    	 * @param index
+    	 */
+        void itemDoubleClick(MainController controller, int index);
 }
