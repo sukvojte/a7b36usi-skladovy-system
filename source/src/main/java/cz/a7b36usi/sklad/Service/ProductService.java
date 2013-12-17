@@ -59,7 +59,7 @@ public class ProductService extends AbstractService implements IProductService {
         List<CategoryDTO> dtos = new ArrayList<CategoryDTO>();
         List<CategoryBO> bos = genericDAO.getAll(CategoryBO.class);
         for (CategoryBO bo : bos) {
-            CategoryDTO dto = new CategoryDTO(bo.getId(), bo.getName(), bo.getParrent().getId());
+            CategoryDTO dto = new CategoryDTO(bo.getId(), bo.getName(), (bo.getParrent() != null?bo.getParrent().getId():0));
             dtos.add(dto);
         }
         return dtos;
@@ -91,6 +91,7 @@ public class ProductService extends AbstractService implements IProductService {
     public Long saveProductVersion(ProductVersionDTO version) {
         ProductVersionBO bo = new ProductVersionBO();
         bo.setCode(version.getCode());
+        bo.setName(version.getName());
         bo.setId(version.getId());
         bo.setProduct(genericDAO.loadById(version.getProduct(), ProductBO.class));
         return genericDAO.saveOrUpdate(bo).getId();
