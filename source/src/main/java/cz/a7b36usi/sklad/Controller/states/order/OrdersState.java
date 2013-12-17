@@ -89,14 +89,14 @@ public class OrdersState implements IControllerState{
     }
 
 	public void itemDoubleClick(MainController controller, int index) {
-		// TODO Auto-generated method stub
+		logger.debug("item double click");
 		
 	}
 
     public void print(int index) {
-	if(!printService.printOrder(model.getRowByIndex(index).getId())){
-	    JOptionPane.showMessageDialog(null, "Problem s tiskem.", "Tisk se nezdaril", JOptionPane.ERROR_MESSAGE);
-	}
+		if(!printService.printOrder(model.getRowByIndex(index).getId())){
+		    JOptionPane.showMessageDialog(null, "Problem s tiskem.", "Tisk se nezdaril", JOptionPane.ERROR_MESSAGE);
+		}
     }
 
 }

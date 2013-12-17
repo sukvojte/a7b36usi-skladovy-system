@@ -841,27 +841,30 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-	JTable table = (JTable) evt.getComponent();
+		JTable table = (JTable) evt.getComponent();
+	
+		if (table.getSelectedRowCount() == 1) {
+		    int selected = table.getSelectedRow();
+	
+		    
+		    if (evt.getClickCount() == 1) {
+		    
+			    // Fire event
+			    for (IMainGuiListener ctrl : listeners) {
+			    	ctrl.tableSelectedIndex(selected);
+			    }
+			    
+		    }else if (evt.getClickCount() == 2){
+		    
+		    	// Fire event
+			    for (IMainGuiListener ctrl : listeners) {
+			    	ctrl.tableDoubleClickOnIndex(selected);
+			    }
+			    
+		    }
+	
+		}
 
-	if (table.getSelectedRowCount() == 1) {
-	    int selected = table.getSelectedRow();
-
-	    // Fire event
-	    for (IMainGuiListener ctrl : listeners) {
-		ctrl.tableSelectedIndex(selected);
-	    }
-
-	}
-
-	if (table.getSelectedRowCount() == 2) {
-	    int selected = table.getSelectedRow();
-
-	    // Fire event
-	    for (IMainGuiListener ctrl : listeners) {
-		ctrl.tableDoubleClickOnIndex(selected);
-	    }
-
-	}
 
     }//GEN-LAST:event_jTable1MouseClicked
 
