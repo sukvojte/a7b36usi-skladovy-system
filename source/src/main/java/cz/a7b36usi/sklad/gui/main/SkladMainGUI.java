@@ -297,8 +297,8 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
         cisloObjednavkaTF = new javax.swing.JTextField();
         tiskObjednavkyJB = new javax.swing.JButton();
         jLabel18 = new javax.swing.JLabel();
-        dateChooserCombo1 = new datechooser.beans.DateChooserCombo();
         partnersCB = new javax.swing.JComboBox();
+        dateChooserCombo1 = new datechooser.beans.DateChooserCombo();
         panelMovements = new TabsJPanel(Tabs.MOVEMENTS);
         jLabel17 = new javax.swing.JLabel();
         cenaPohybTF = new javax.swing.JTextField();
@@ -453,18 +453,22 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(panelOrdersLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(cisloObjednavkaTF, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 120, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(dateChooserCombo1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(partnersCB, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(partnersCB, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(dateChooserCombo1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(311, Short.MAX_VALUE))
         );
         panelOrdersLayout.setVerticalGroup(
             panelOrdersLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(panelOrdersLayout.createSequentialGroup()
-                .add(36, 36, 36)
                 .add(panelOrdersLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jLabel9)
-                    .add(dateChooserCombo1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                    .add(panelOrdersLayout.createSequentialGroup()
+                        .add(36, 36, 36)
+                        .add(jLabel9)
+                        .add(18, 18, 18))
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, panelOrdersLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .add(dateChooserCombo1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)))
                 .add(panelOrdersLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(jLabel10)
                     .add(cisloObjednavkaTF, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
@@ -743,7 +747,7 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(layout.createSequentialGroup()
                 .addContainerGap()
-                .add(jTabbedPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 302, Short.MAX_VALUE)
+                .add(jTabbedPane1)
                 .add(18, 18, 18)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(smazJB)
