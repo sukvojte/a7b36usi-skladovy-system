@@ -37,7 +37,7 @@ public class OrderItemBO extends AbstractBO{
     @ManyToOne
     private ProductVersionBO productVersion;
     
-    @JoinColumn(name = "parrentOrder",nullable = false)
+    @JoinColumn(name = "order",nullable = false)
     @ManyToOne
     private OrderBO order;
 
