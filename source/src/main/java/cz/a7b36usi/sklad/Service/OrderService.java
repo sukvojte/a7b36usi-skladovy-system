@@ -84,9 +84,9 @@ public class OrderService extends AbstractService implements IOrderService {
     }
 
     public List<OrderItemDTO> getAllOrderItems(OrderDTO order) {
-        OrderBO o = genericDAO.loadById(order.getId(), OrderBO.class);
+        List<OrderItemBO> bos = genericDAO.getByProperty("parrentOrder", genericDAO.loadById(order.getId(), OrderBO.class), OrderItemBO.class);
 	List<OrderItemDTO> ordersDTO = new ArrayList<OrderItemDTO>();
-	for (OrderItemBO orderItemBO : o.getItems()) {
+	for (OrderItemBO orderItemBO : bos) {
 	    ordersDTO.add(new OrderItemDTO(
                 orderItemBO.getId(),
                 orderItemBO.getProduct().getId(),
