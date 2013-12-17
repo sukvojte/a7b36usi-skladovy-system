@@ -10,4 +10,5 @@ public interface IMainGuiListener {
 	void tableDoubleClickOnIndex(int index);
         void deleteItem();
 	boolean validate();
+	void print(int index);
 }

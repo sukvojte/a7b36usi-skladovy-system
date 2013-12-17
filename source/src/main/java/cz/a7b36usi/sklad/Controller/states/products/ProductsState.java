@@ -90,6 +90,9 @@ public class ProductsState implements IControllerState{
 		// TODO Auto-generated method stub
 		
 	}
+
+    public void print(int index) {
+    }
 		
 
 }

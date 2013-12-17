@@ -45,4 +45,11 @@ public interface IControllerState {
     	 * @param index
     	 */
         void itemDoubleClick(MainController controller, int index);
+	
+	/**
+	 * Prints data
+	 * 
+	 * @param index 
+	 */
+	void print(int index);
 }

@@ -18,10 +18,14 @@ import javax.swing.InputVerifier;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+/**
+ *
+ * @author lewi
+ */
 @Component
 public class DocumentsState implements IControllerState{
 
-	static final Logger logger = Logger.getLogger(DocumentsState.class);
+    static final Logger logger = Logger.getLogger(DocumentsState.class);
 	
     @Autowired
     private IDocumentService documentService;
@@ -90,6 +94,9 @@ public class DocumentsState implements IControllerState{
 		// TODO Auto-generated method stub
 		
 	}
+
+    public void print(int index) {
+    }
 		
 
 }

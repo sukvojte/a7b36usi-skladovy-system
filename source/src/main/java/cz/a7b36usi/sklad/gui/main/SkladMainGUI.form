@@ -265,10 +265,14 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="dateChooserCombo1" min="-2" max="-2" attributes="0"/>
-                          <Component id="cisloObjednavkaTF" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="cisloObjednavkaTF" min="-2" pref="120" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
+                              <Component id="errorCisloObjednavkyJL" min="-2" max="-2" attributes="0"/>
+                          </Group>
                           <Component id="partnersObjednavkyCB" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="311" max="32767" attributes="0"/>
+                      <EmptySpace pref="246" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="32767" attributes="0"/>
@@ -295,6 +299,7 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="cisloObjednavkaTF" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="errorCisloObjednavkyJL" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -346,6 +351,11 @@
                     <StringItem index="3" value="Item 4"/>
                   </StringArray>
                 </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="errorCisloObjednavkyJL">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="jLabel17"/>
               </Properties>
             </Component>
           </SubComponents>

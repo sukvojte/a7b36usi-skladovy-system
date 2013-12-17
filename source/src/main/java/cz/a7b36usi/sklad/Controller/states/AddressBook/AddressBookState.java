@@ -87,6 +87,10 @@ public class AddressBookState implements IControllerState{
 		// TODO Auto-generated method stub
 		
 	}
+
+    public void print(int index) {
+	throw new UnsupportedOperationException("Not supported yet.");
+    }
 		
 
 }

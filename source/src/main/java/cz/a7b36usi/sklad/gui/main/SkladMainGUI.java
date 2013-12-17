@@ -68,8 +68,6 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
     public JButton filtrJB;
     /* Listenery - START */
     private ArrayList<IMainGuiListener> listeners;
-    @Autowired
-    IPrintService printService;
 
     public void addListeners(IMainGuiListener listener) {
 	listeners.add(listener);
@@ -199,10 +197,11 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
     }
     
     public void editMovement(MovementDTO movement) {
+	
     }
 
     public void editDocument(DocumentDTO document) {
-		ulozJB.setText("Ulož");
+	ulozJB.setText("Ulož");
 	lastDocument = document;
 	nullValidators();
 	if (lastDocument != null) {
@@ -229,7 +228,7 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
     }
 
     public void editProduct(ProductDTO product) {
-		ulozJB.setText("Ulož");
+	ulozJB.setText("Ulož");
 	lastProduct = product;
 	nullValidators();
 	if (lastProduct != null) {
@@ -322,6 +321,7 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
 	spolecnostTF.setInputVerifier(new ValueValidator(errorSpolecnostJL, "", "Zadejte nejakou hodnotu."));
 	uzivatelskeJmenoJT.setInputVerifier(new UserNameValidator(errorUzivJmenoJL, "Zadejte nejakou hodnotu nebo se jmeno uz vyskytuje"));
 	hesloUzivatelPF.setInputVerifier(new PasswordValidator(errorHesloJL, "Heslo musi obsahovat alespon 1 znak"));
+	cisloObjednavkaTF.setInputVerifier(new NumberValidator(errorCisloObjednavkyJL, "Zadejte ciselnou hodnotu."));
     }
 
     private void addItemsToComboLists() {
@@ -367,6 +367,7 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
         jLabel18 = new javax.swing.JLabel();
         dateChooserCombo1 = new datechooser.beans.DateChooserCombo();
         partnersObjednavkyCB = new javax.swing.JComboBox();
+        errorCisloObjednavkyJL = new javax.swing.JLabel();
         panelMovements = new TabsJPanel(Tabs.MOVEMENTS);
         panelDocuments =  new TabsJPanel(Tabs.DOCUMENTS);
         cisloDokladTF = new javax.swing.JTextField();
@@ -504,6 +505,8 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
 
         partnersObjednavkyCB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
+        errorCisloObjednavkyJL.setText("jLabel17");
+
         org.jdesktop.layout.GroupLayout panelOrdersLayout = new org.jdesktop.layout.GroupLayout(panelOrders);
         panelOrders.setLayout(panelOrdersLayout);
         panelOrdersLayout.setHorizontalGroup(
@@ -517,9 +520,12 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(panelOrdersLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(dateChooserCombo1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(cisloObjednavkaTF, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 120, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(panelOrdersLayout.createSequentialGroup()
+                        .add(cisloObjednavkaTF, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 120, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(47, 47, 47)
+                        .add(errorCisloObjednavkyJL))
                     .add(partnersObjednavkyCB, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(311, Short.MAX_VALUE))
+                .addContainerGap(246, Short.MAX_VALUE))
             .add(org.jdesktop.layout.GroupLayout.TRAILING, panelOrdersLayout.createSequentialGroup()
                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .add(tiskObjednavkyJB)
@@ -539,7 +545,8 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)))
                 .add(panelOrdersLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(jLabel10)
-                    .add(cisloObjednavkaTF, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(cisloObjednavkaTF, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(errorCisloObjednavkyJL))
                 .add(11, 11, 11)
                 .add(panelOrdersLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(jLabel18)
@@ -890,7 +897,13 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
 
     private void tiskObjednavkyJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tiskObjednavkyJBActionPerformed
 	// TODO add your handling code here:
-	printService.printOrder(50L);
+		    // Fire event
+	int selected = jTable1.getSelectedRow();
+	if(selected != -1){ 
+	    for (IMainGuiListener ctrl : listeners) {
+		ctrl.print(selected);
+	    }
+	}
     }//GEN-LAST:event_tiskObjednavkyJBActionPerformed
     /**
      * Creates filters fields in JPanel from DataModel
@@ -964,6 +977,7 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
     private javax.swing.JTextField cisloPopTF;
     private datechooser.beans.DateChooserCombo dateChooserCombo1;
     private datechooser.beans.DateChooserCombo dateChooserCombo2;
+    private javax.swing.JLabel errorCisloObjednavkyJL;
     private javax.swing.JLabel errorCisloPopJL;
     private javax.swing.JLabel errorHesloJL;
     private javax.swing.JLabel errorPscJL;

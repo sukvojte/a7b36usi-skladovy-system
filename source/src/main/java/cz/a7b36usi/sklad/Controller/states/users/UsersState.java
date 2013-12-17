@@ -109,4 +109,8 @@ public class UsersState implements IControllerState{
 	throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    public void print(int index) {
+	throw new UnsupportedOperationException("Not supported yet.");
+    }
+
 }

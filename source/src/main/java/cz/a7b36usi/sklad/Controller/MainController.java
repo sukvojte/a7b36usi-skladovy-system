@@ -70,6 +70,11 @@ public class MainController implements IMainController {
 				state.itemDoubleClick(ctrl, index);
 				
 			}
+
+	    public void print(int index) {
+		logger.debug("Printing data");
+		state.print(index);
+	    }
         });
 
         state = stateFactory.getDefaultState();

@@ -18,6 +18,7 @@ import cz.a7b36usi.sklad.DTO.OrderDTO;
 import cz.a7b36usi.sklad.DTO.PartnerDTO;
 import cz.a7b36usi.sklad.Service.IOrderService;
 import cz.a7b36usi.sklad.Service.IPartnerService;
+import cz.a7b36usi.sklad.Service.IPrintService;
 
 @Component
 public class OrdersState implements IControllerState{
@@ -26,6 +27,9 @@ public class OrdersState implements IControllerState{
 
 	@Autowired
     private IOrderService orderService;
+	
+    @Autowired
+    IPrintService printService;	
 	
 	@Autowired
 	private IPartnerService partnerService;
@@ -87,5 +91,9 @@ public class OrdersState implements IControllerState{
 		// TODO Auto-generated method stub
 		
 	}
+
+    public void print(int index) {
+	printService.printOrder(model.getRowByIndex(index).getId());
+    }
 
 }
