@@ -83,4 +83,11 @@ public class PartnerDTO extends AbstractDTO{
     public void setCisloPopisne(int cisloPopisne) {
         this.cisloPopisne = cisloPopisne;
     }
+
+    @Override
+    public String toString() {
+	return spolecnost;
+    }
+    
+    
 }

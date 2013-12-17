@@ -105,4 +105,8 @@ public class UsersState implements IControllerState{
         return correct;
     }
 
+    public void itemDoubleClick(MainController controller, int index) {
+	throw new UnsupportedOperationException("Not supported yet.");
+    }
+
 }

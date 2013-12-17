@@ -60,7 +60,6 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
     public JButton filtrJB;
     /* Listenery - START */
     private ArrayList<IMainGuiListener> listeners;
-    
     @Autowired
     IPrintService printService;
 
@@ -87,7 +86,6 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
 
     public IGuiData getData() {
 	return new IGuiData() {
-	    
 	    public UserDTO getUserData() {
 		//TODO: co s ID ?
 		long id = 0;
@@ -108,10 +106,10 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
 
 	    public OrderDTO getOrderData() {
 		long id = 0;
-		if(lastOrder != null){
+		if (lastOrder != null) {
 		    id = lastOrder.getId();
 		}
-		return new OrderDTO(id != 0 ? id:null,dateChooserCombo1.getSelectedDate().getTime(), cisloObjednavkaTF.getText(),null,((PartnerDTO) partnersCB.getSelectedItem()).getId());//TODO: id partnera ? list orderItemu ?
+		return new OrderDTO(id != 0 ? id : null, dateChooserCombo1.getSelectedDate().getTime(), cisloObjednavkaTF.getText(), null, ((PartnerDTO) partnersCB.getSelectedItem()).getId());//TODO: id partnera ? list orderItemu ?
 	    }
 	};
     }
@@ -157,33 +155,30 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
 	    roleJC.setSelectedItem(UserRole.SKLADNIK);
 	}
     }
-    
-    public void editOrder(OrderDTO order, List<PartnerDTO> list){
+
+    public void editOrder(OrderDTO order) {
 	ulozJB.setText("Edituj");
 	lastOrder = order;
 	nullValidators();
-	if(lastOrder != null){
+	if (lastOrder != null) {
 	    Calendar c = Calendar.getInstance();
 	    c.setTime(order.getDate());
 	    dateChooserCombo1.setCurrent(c);
 	    cisloObjednavkaTF.setText(order.getNumber());
-	    for (PartnerDTO partnerDTO : list) {
-		partnersCB.addItem(partnerDTO);
-	    }
-	}
-	else{
+	} else {
 	    Calendar c = Calendar.getInstance();
 	    c.setTime(new Date());
-	    dateChooserCombo1.setCurrent(c);	    
+	    dateChooserCombo1.setCurrent(c);
 	    cisloObjednavkaTF.setText(null);
-	    partnersCB.removeAllItems();
+
 	}
+
     }
 
     private void nullForms() {
 	editCustomer(null);
 	editUser(null);
-	editOrder(null, null);
+	editOrder(null);
 	ulozJB.setText("Ulož");
     }
 
@@ -780,7 +775,7 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
 	    }
 
 	}
-	
+
 	if (table.getSelectedRowCount() == 2) {
 	    int selected = table.getSelectedRow();
 
@@ -824,7 +819,7 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
     }//GEN-LAST:event_smazJBActionPerformed
 
     private void tiskObjednavkyJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tiskObjednavkyJBActionPerformed
-        // TODO add your handling code here:
+	// TODO add your handling code here:
 	printService.printOrder(50L);
     }//GEN-LAST:event_tiskObjednavkyJBActionPerformed
     /**
@@ -843,10 +838,10 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
 	filtrJB = filtr;
 	filtrJP.add(getPair(filtr, new JLabel("")));
     }
-    
+
     /**
      * Gets JPanel pair of two JComponent components
-     * 
+     *
      * @param field
      * @param comp
      * @return JPanel pair
@@ -981,5 +976,14 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
 		return list;
 	    }
 	};
+    }
+
+    public void setPartnerList(List<PartnerDTO> list) {
+	partnersCB.removeAllItems();
+	if (list != null) {
+	    for (PartnerDTO partnerDTO : list) {
+		partnersCB.addItem(partnerDTO);
+	    }
+	}
     }
 }

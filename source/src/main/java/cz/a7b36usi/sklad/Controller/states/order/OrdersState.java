@@ -41,6 +41,7 @@ public class OrdersState implements IControllerState{
 		logger.debug("Activated event");
 		
 		controller.getForm().setTableModel(model);
+		controller.getForm().setPartnerList(partnerService.getAllPartners());
 	}	
 
 	public void editFormSave(MainController controller) {
@@ -60,7 +61,7 @@ public class OrdersState implements IControllerState{
 	public void selectedItem(MainController controller, int index) {
 		OrderDTO order = model.getRowByIndex(index); 
 		
-		controller.getForm().editOrder(order, partnerService.getAllPartners());	
+		controller.getForm().editOrder(order);	
 	}
 
     public void deleteItem(MainController controller) {
