@@ -1,5 +1,7 @@
 package cz.a7b36usi.sklad.gui.main.ifaces;
 
+import cz.a7b36usi.sklad.DTO.DocumentDTO;
+import cz.a7b36usi.sklad.DTO.MovementDTO;
 import cz.a7b36usi.sklad.DTO.OrderDTO;
 import cz.a7b36usi.sklad.DTO.UserDTO;
 import cz.a7b36usi.sklad.Tabs;
@@ -46,37 +48,53 @@ public interface ISkladMainGUI extends RecieveListener {
 
     /**
      * Sets table model in view
-     * 
+     *
      * @param model
      */
     void setTableModel(BaseDataModel model);
 
     /**
      * Edits customer
-     * 
-     * @param customer 
+     *
+     * @param customer
      */
     void editCustomer(PartnerDTO customer);
 
     /**
      * Edits user
-     * 
-     * @param user 
+     *
+     * @param user
      */
     void editUser(UserDTO user);
-    
+
     /**
      * Edits order
-     * 
+     *
      * @param order
-     * @param list 
+     * @param list
      */
     void editOrder(OrderDTO order);
-    
+
+    /**
+     * Edits movement
+     *
+     * @param order
+     * @param list
+     */
+    void editMovement(MovementDTO movement);
+
+    /**
+     * Edits documentÏ
+     *
+     * @param order
+     * @param list
+     */
+    void editDocument(DocumentDTO movement);
+
     /**
      * Set list to combolist
-     * 
-     * @param list 
+     *
+     * @param list
      */
     void setPartnerList(List<PartnerDTO> list);
 }

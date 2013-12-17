@@ -1,5 +1,7 @@
 package cz.a7b36usi.sklad.gui.main.ifaces;
 
+import cz.a7b36usi.sklad.DTO.DocumentDTO;
+import cz.a7b36usi.sklad.DTO.MovementDTO;
 import cz.a7b36usi.sklad.DTO.OrderDTO;
 import cz.a7b36usi.sklad.DTO.UserDTO;
 import cz.a7b36usi.sklad.DTO.PartnerDTO;
@@ -25,4 +27,11 @@ public interface IGuiData {
      * @return 
      */
     OrderDTO getOrderData();
+    
+    /**
+     * Gets documents data from form
+     * @return 
+     */
+    DocumentDTO getDocumentData();
+    
 }

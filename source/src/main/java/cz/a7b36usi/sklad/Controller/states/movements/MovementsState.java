@@ -1,4 +1,4 @@
-package cz.a7b36usi.sklad.Controller.states.AddressBook;
+package cz.a7b36usi.sklad.Controller.states.movements;
 
 import javax.annotation.PostConstruct;
 
@@ -8,27 +8,29 @@ import org.springframework.stereotype.Component;
 
 import cz.a7b36usi.sklad.Controller.MainController;
 import cz.a7b36usi.sklad.Controller.states.IControllerState;
+import cz.a7b36usi.sklad.DTO.MovementDTO;
 import cz.a7b36usi.sklad.DTO.PartnerDTO;
 import cz.a7b36usi.sklad.Service.IPartnerService;
+import cz.a7b36usi.sklad.Service.IProductService;
 import java.util.List;
 import javax.swing.InputVerifier;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 @Component
-public class AddressBookState implements IControllerState{
+public class MovementsState implements IControllerState{
 
-	static final Logger logger = Logger.getLogger(AddressBookState.class);
+	static final Logger logger = Logger.getLogger(MovementsState.class);
 	
 	
 	@Autowired
-    private IPartnerService zakaznikService;
-    
-	private AddressBookDataModel model;
+    private IProductService productService;//TODO: get all movements je kde ?
+	
+	private MovementsDataModel model;
 	
 	@PostConstruct
     public void registerModel() {
-		model = new AddressBookDataModel(zakaznikService.getAllPartners());
+		model = new MovementsDataModel(null);
 	}
 	
 	public void activated(MainController controller) {
@@ -39,35 +41,20 @@ public class AddressBookState implements IControllerState{
 	
 	public void editFormSave(MainController controller) {
 		logger.debug("Save event");
-		
-		PartnerDTO customer = controller.getForm().getData().getPartnerData();
-		
-		
-		
-		if(customer != null){
-			logger.debug("Save customer " + customer.getId());
-			if(zakaznikService.savePartner(customer)){
-				model.update(zakaznikService.getAllPartners());
-			}else{
-				logger.error("Customer " + customer.getId() + " was not saved");
-			}
-		}else{
-			logger.error("Can't save null customer");
-		}
-		
+		   //TODO: tady asi nic nebude
 	}
 
 	public void selectedItem(MainController controller, int index) {
 		
-		PartnerDTO customer = model.getRowByIndex(index); 
+		MovementDTO customer = model.getRowByIndex(index); 
 		
-		controller.getForm().editCustomer(customer);		
+		//controller.getForm().editCustomer(customer);		
 	}
 
     public void deleteItem(MainController controller) {
-        PartnerDTO customer = controller.getForm().getData().getPartnerData();
-        zakaznikService.removePartner(customer);
-        model.update(zakaznikService.getAllPartners());
+        //MovementDTO movement = controller.getForm().getData().getMovementData();
+        
+        //model.update(zakaznikService.getAllPartners());
     }
 
     public boolean validate(MainController controller) {

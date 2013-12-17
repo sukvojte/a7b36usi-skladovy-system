@@ -17,6 +17,8 @@ import org.springframework.stereotype.Component;
 
 import cz.a7b36usi.sklad.Tabs;
 import cz.a7b36usi.sklad.BO.UserRole;
+import cz.a7b36usi.sklad.DTO.DocumentDTO;
+import cz.a7b36usi.sklad.DTO.MovementDTO;
 import cz.a7b36usi.sklad.DTO.OrderDTO;
 import cz.a7b36usi.sklad.DTO.UserDTO;
 import cz.a7b36usi.sklad.DTO.PartnerDTO;
@@ -109,7 +111,11 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
 		if (lastOrder != null) {
 		    id = lastOrder.getId();
 		}
-		return new OrderDTO(id != 0 ? id : null, dateChooserCombo1.getSelectedDate().getTime(), cisloObjednavkaTF.getText(), null, ((PartnerDTO) partnersCB.getSelectedItem()).getId());//TODO: id partnera ? list orderItemu ?
+		return new OrderDTO((id != 0 ? id : null), dateChooserCombo1.getSelectedDate().getTime(), cisloObjednavkaTF.getText(), null, ((PartnerDTO) partnersCB.getSelectedItem()).getId());//TODO: id partnera ? list orderItemu ?
+	    }
+
+	    public DocumentDTO getDocumentData() {
+		throw new UnsupportedOperationException("Not supported yet.");
 	    }
 	};
     }
@@ -121,7 +127,7 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
     }
 
     public void editCustomer(PartnerDTO customer) {
-	ulozJB.setText("Edituj");
+	ulozJB.setText("Ulož");
 	lastZakaznik = customer;
 	nullValidators();
 	if (lastZakaznik != null) {
@@ -140,7 +146,7 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
     }
 
     public void editUser(UserDTO user) {
-	ulozJB.setText("Edituj");
+	ulozJB.setText("Ulož");
 	lastUser = user;
 	nullValidators();
 	if (lastUser != null) {
@@ -157,7 +163,7 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
     }
 
     public void editOrder(OrderDTO order) {
-	ulozJB.setText("Edituj");
+	ulozJB.setText("Ulož");
 	lastOrder = order;
 	nullValidators();
 	if (lastOrder != null) {
@@ -170,7 +176,6 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
 	    c.setTime(new Date());
 	    dateChooserCombo1.setCurrent(c);
 	    cisloObjednavkaTF.setText(null);
-
 	}
 
     }
@@ -179,7 +184,7 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
 	editCustomer(null);
 	editUser(null);
 	editOrder(null);
-	ulozJB.setText("Ulož");
+	ulozJB.setText("Vytvoř");
     }
 
     private void nullValidators() {
@@ -296,15 +301,13 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
         partnersCB = new javax.swing.JComboBox();
         dateChooserCombo1 = new datechooser.beans.DateChooserCombo();
         panelMovements = new TabsJPanel(Tabs.MOVEMENTS);
-        jLabel17 = new javax.swing.JLabel();
-        cenaPohybTF = new javax.swing.JTextField();
         panelDocuments =  new TabsJPanel(Tabs.DOCUMENTS);
         cisloDokladTF = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         typDokladuJC = new javax.swing.JComboBox();
-        datumDokladTF = new javax.swing.JTextField();
+        dateChooserCombo2 = new datechooser.beans.DateChooserCombo();
         panelWarehouse = new TabsJPanel(Tabs.WAREHOUSE);
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
@@ -479,27 +482,15 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
 
         jTabbedPane1.addTab("Objednávky", panelOrders);
 
-        jLabel17.setText("Cena :");
-
         org.jdesktop.layout.GroupLayout panelMovementsLayout = new org.jdesktop.layout.GroupLayout(panelMovements);
         panelMovements.setLayout(panelMovementsLayout);
         panelMovementsLayout.setHorizontalGroup(
             panelMovementsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(panelMovementsLayout.createSequentialGroup()
-                .add(29, 29, 29)
-                .add(jLabel17)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                .add(cenaPohybTF, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 120, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(421, Short.MAX_VALUE))
+            .add(0, 621, Short.MAX_VALUE)
         );
         panelMovementsLayout.setVerticalGroup(
             panelMovementsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(panelMovementsLayout.createSequentialGroup()
-                .add(32, 32, 32)
-                .add(panelMovementsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(jLabel17)
-                    .add(cenaPohybTF, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(196, Short.MAX_VALUE))
+            .add(0, 256, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Pohyby", panelMovements);
@@ -524,10 +515,10 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
                     .add(jLabel16))
                 .add(30, 30, 30)
                 .add(panelDocumentsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(datumDokladTF, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 120, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(typDokladuJC, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(cisloDokladTF, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 120, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(358, Short.MAX_VALUE))
+                    .add(cisloDokladTF, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 120, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(dateChooserCombo2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(323, Short.MAX_VALUE))
         );
         panelDocumentsLayout.setVerticalGroup(
             panelDocumentsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -541,9 +532,9 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
                     .add(jLabel15)
                     .add(cisloDokladTF, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(panelDocumentsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                .add(panelDocumentsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(jLabel16)
-                    .add(datumDokladTF, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(dateChooserCombo2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(129, Short.MAX_VALUE))
         );
 
@@ -789,7 +780,7 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void ulozJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ulozJBActionPerformed
-	if (!ulozJB.getText().equals("Edituj")) {
+	if (!ulozJB.getText().equals("Ulož")) {
 	    ((UserNameValidator) uzivatelskeJmenoJT.getInputVerifier()).setValue(uzivatelskeJmenoJT.getText());
 	} else {
 	    ((UserNameValidator) uzivatelskeJmenoJT.getInputVerifier()).setValue("");
@@ -889,12 +880,11 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
 	});
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField cenaPohybTF;
     private javax.swing.JTextField cisloDokladTF;
     private javax.swing.JTextField cisloObjednavkaTF;
     private javax.swing.JTextField cisloPopTF;
     private datechooser.beans.DateChooserCombo dateChooserCombo1;
-    private javax.swing.JTextField datumDokladTF;
+    private datechooser.beans.DateChooserCombo dateChooserCombo2;
     private javax.swing.JLabel errorCisloPopJL;
     private javax.swing.JLabel errorHesloJL;
     private javax.swing.JLabel errorPscJL;
@@ -911,7 +901,6 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -985,5 +974,13 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
 		partnersCB.addItem(partnerDTO);
 	    }
 	}
+    }
+
+    public void editMovement(MovementDTO movement) {
+	throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public void editDocument(DocumentDTO movement) {
+	throw new UnsupportedOperationException("Not supported yet.");
     }
 }
