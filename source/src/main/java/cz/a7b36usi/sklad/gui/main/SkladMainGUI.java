@@ -17,6 +17,7 @@ import org.springframework.stereotype.Component;
 
 import cz.a7b36usi.sklad.Tabs;
 import cz.a7b36usi.sklad.BO.UserRole;
+import cz.a7b36usi.sklad.DTO.OrderDTO;
 import cz.a7b36usi.sklad.DTO.UserDTO;
 import cz.a7b36usi.sklad.DTO.PartnerDTO;
 import cz.a7b36usi.sklad.Service.IPrintService;
@@ -35,6 +36,7 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -52,6 +54,7 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
 
     private PartnerDTO lastZakaznik = null;
     private UserDTO lastUser = null;
+    private OrderDTO lastOrder = null;
     private BaseDataModel baseDataModel;
     public JButton filtrJB;
     /* Listenery - START */
@@ -83,6 +86,7 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
 
     public IGuiData getData() {
 	return new IGuiData() {
+	    
 	    public UserDTO getUserData() {
 		//TODO: co s ID ?
 		long id = 0;
@@ -99,6 +103,14 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
 		    id = lastZakaznik.getId();
 		}
 		return new PartnerDTO((id != 0 ? id : null), true, false, uliceTF.getText(), mestoTF.getText(), spolecnostTF.getText(), Integer.parseInt(pscTF.getText()), Integer.parseInt(cisloPopTF.getText()));
+	    }
+
+	    public OrderDTO getOrderData() {
+		long id = 0;
+		if(lastOrder != null){
+		    id = lastOrder.getId();
+		}
+		return new OrderDTO(id != 0 ? id:null, new Date(datumObjednavkaTF.getText()), cisloObjednavkaTF.getText(), null, 0l);//TODO: id partnera ? list orderItemu ?
 	    }
 	};
     }
@@ -142,6 +154,22 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
 	    uzivatelskeJmenoJT.setText("");
 	    hesloUzivatelPF.setText("heslo");
 	    roleJC.setSelectedItem(UserRole.SKLADNIK);
+	}
+    }
+    
+    public void editOrder(OrderDTO order){
+	ulozJB.setText("Edituj");
+	lastOrder = order;
+	nullValidators();
+	if(lastOrder != null){
+	    datumObjednavkaTF.setText(order.getDate().toString());
+	    cisloObjednavkaTF.setText(order.getNumber());
+	    partnerTF.setText(order.getPartner().toString());
+	}
+	else{
+	    datumObjednavkaTF.setText("Datum v nejakem formatu");
+	    cisloObjednavkaTF.setText(null);
+	    partnerTF.setText(null);
 	}
     }
 
@@ -262,6 +290,8 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
         cisloObjednavkaTF = new javax.swing.JTextField();
         datumObjednavkaTF = new javax.swing.JTextField();
         tiskObjednavkyJB = new javax.swing.JButton();
+        jLabel18 = new javax.swing.JLabel();
+        partnerTF = new javax.swing.JTextField();
         panelMovements = new TabsJPanel(Tabs.MOVEMENTS);
         jLabel17 = new javax.swing.JLabel();
         cenaPohybTF = new javax.swing.JTextField();
@@ -379,7 +409,7 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
                     .add(cisloPopTF, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(jLabel5)
                     .add(errorCisloPopJL))
-                .addContainerGap(57, Short.MAX_VALUE))
+                .addContainerGap(67, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Adresář", panelAddress);
@@ -395,24 +425,29 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
             }
         });
 
+        jLabel18.setText("Partner :");
+
         org.jdesktop.layout.GroupLayout panelOrdersLayout = new org.jdesktop.layout.GroupLayout(panelOrders);
         panelOrders.setLayout(panelOrdersLayout);
         panelOrdersLayout.setHorizontalGroup(
             panelOrdersLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(panelOrdersLayout.createSequentialGroup()
-                .add(33, 33, 33)
-                .add(panelOrdersLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jLabel10)
-                    .add(jLabel9))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(panelOrdersLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
-                    .add(cisloObjednavkaTF)
-                    .add(datumObjednavkaTF, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE))
-                .addContainerGap(346, Short.MAX_VALUE))
             .add(org.jdesktop.layout.GroupLayout.TRAILING, panelOrdersLayout.createSequentialGroup()
                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .add(tiskObjednavkyJB)
                 .addContainerGap())
+            .add(panelOrdersLayout.createSequentialGroup()
+                .add(33, 33, 33)
+                .add(panelOrdersLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(jLabel10)
+                    .add(jLabel9)
+                    .add(jLabel18))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(panelOrdersLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                    .add(partnerTF, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+                    .add(panelOrdersLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                        .add(cisloObjednavkaTF)
+                        .add(datumObjednavkaTF, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)))
+                .addContainerGap(346, Short.MAX_VALUE))
         );
         panelOrdersLayout.setVerticalGroup(
             panelOrdersLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -425,7 +460,11 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
                 .add(panelOrdersLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(jLabel10)
                     .add(cisloObjednavkaTF, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 119, Short.MAX_VALUE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(panelOrdersLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(partnerTF, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(jLabel18))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 95, Short.MAX_VALUE)
                 .add(tiskObjednavkyJB)
                 .addContainerGap())
         );
@@ -452,7 +491,7 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
                 .add(panelMovementsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(jLabel17)
                     .add(cenaPohybTF, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(186, Short.MAX_VALUE))
+                .addContainerGap(196, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Pohyby", panelMovements);
@@ -497,7 +536,7 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
                 .add(panelDocumentsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(jLabel16)
                     .add(datumDokladTF, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(119, Short.MAX_VALUE))
+                .addContainerGap(129, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Doklady", panelDocuments);
@@ -540,7 +579,7 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
                 .add(panelWarehouseLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(jLabel13)
                     .add(jTextField3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(123, Short.MAX_VALUE))
+                .addContainerGap(133, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Skladové zásoby", panelWarehouse);
@@ -608,7 +647,7 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
                 .add(panelUsersLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(roleJC, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(jLabel7))
-                .addContainerGap(112, Short.MAX_VALUE))
+                .addContainerGap(122, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Uživatelé", panelUsers);
@@ -855,6 +894,7 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -880,6 +920,7 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
     private javax.swing.JPanel panelOrders;
     private javax.swing.JPanel panelUsers;
     private javax.swing.JPanel panelWarehouse;
+    private javax.swing.JTextField partnerTF;
     private javax.swing.JTextField pscTF;
     private javax.swing.JComboBox roleJC;
     private javax.swing.JButton smazJB;
@@ -907,6 +948,13 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
 		ArrayList<JTextField> list = new ArrayList<JTextField>();
 		list.add(uzivatelskeJmenoJT);
 		list.add(hesloUzivatelPF);
+		return list;
+	    }
+
+	    public List<JTextField> getOrderTextFields() {
+		ArrayList<JTextField> list = new ArrayList<JTextField>();
+		list.add(datumObjednavkaTF);
+		list.add(cisloObjednavkaTF);
 		return list;
 	    }
 	};
