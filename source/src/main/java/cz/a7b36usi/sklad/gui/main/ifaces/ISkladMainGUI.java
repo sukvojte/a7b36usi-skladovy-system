@@ -71,5 +71,5 @@ public interface ISkladMainGUI extends RecieveListener {
      * @param order
      * @param list 
      */
-    void editOrder(OrderDTO order, List<OrderDTO> list);
+    void editOrder(OrderDTO order, List<PartnerDTO> list);
 }

@@ -111,7 +111,7 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
 		if(lastOrder != null){
 		    id = lastOrder.getId();
 		}
-		return new OrderDTO(id != 0 ? id:null,dateChooserCombo1.getSelectedDate().getTime(), cisloObjednavkaTF.getText(),null,((OrderDTO) partnersCB.getSelectedItem()).getId());//TODO: id partnera ? list orderItemu ?
+		return new OrderDTO(id != 0 ? id:null,dateChooserCombo1.getSelectedDate().getTime(), cisloObjednavkaTF.getText(),null,((PartnerDTO) partnersCB.getSelectedItem()).getId());//TODO: id partnera ? list orderItemu ?
 	    }
 	};
     }
@@ -158,7 +158,7 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
 	}
     }
     
-    public void editOrder(OrderDTO order, List<OrderDTO> list){
+    public void editOrder(OrderDTO order, List<PartnerDTO> list){
 	ulozJB.setText("Edituj");
 	lastOrder = order;
 	nullValidators();
@@ -167,8 +167,8 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
 	    c.setTime(order.getDate());
 	    dateChooserCombo1.setCurrent(c);
 	    cisloObjednavkaTF.setText(order.getNumber());
-	    for (OrderDTO orderDTO : list) {
-		partnersCB.addItem(orderDTO);
+	    for (PartnerDTO partnerDTO : list) {
+		partnersCB.addItem(partnerDTO);
 	    }
 	}
 	else{
