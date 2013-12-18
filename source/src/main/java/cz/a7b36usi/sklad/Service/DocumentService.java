@@ -173,8 +173,8 @@ public class DocumentService extends AbstractService implements IDocumentService
             MovementDTO dto = new MovementDTO(
                     movementBO.getId(),
                     movementBO.getPrice(),
-                    movementBO.getWrapping().getId(),
-                    movementBO.getVersion().getId(),
+                    (movementBO.getWrapping()!=null ? movementBO.getWrapping().getId() : 0),
+                    (movementBO.getVersion()!=null ? movementBO.getVersion().getId() : 0),
                     product,
                     getDocumentById(movementBO.getDocument().getId()));
             dtos.add(dto);

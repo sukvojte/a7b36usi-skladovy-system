@@ -12,6 +12,7 @@ import javax.swing.JTable;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -24,6 +25,7 @@ import cz.a7b36usi.sklad.DTO.UserDTO;
 import cz.a7b36usi.sklad.DTO.PartnerDTO;
 import cz.a7b36usi.sklad.DTO.ProductDTO;
 import cz.a7b36usi.sklad.Service.IPrintService;
+import cz.a7b36usi.sklad.gui.documentitems.DocumentItemsGUI;
 import cz.a7b36usi.sklad.gui.main.ifaces.IGuiData;
 import cz.a7b36usi.sklad.gui.main.ifaces.IGuiTextFields;
 import cz.a7b36usi.sklad.gui.main.ifaces.ISkladMainGUI;
@@ -58,6 +60,8 @@ import javax.swing.JTextField;
 @Component
 public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
 
+	static final Logger logger = Logger.getLogger(SkladMainGUI.class);
+	
     private PartnerDTO lastZakaznik = null;
     private UserDTO lastUser = null;
     private OrderDTO lastOrder = null;
@@ -81,6 +85,20 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
     public boolean switchTab(Tabs tab) {
 
 	// TODO: switch tab
+    	
+    for(int i = 0; i < jTabbedPane1.getTabCount() ; i++){
+    	java.awt.Component c = jTabbedPane1.getComponentAt(i);
+    	if(c instanceof TabsJPanel){
+    		if(tab.equals(((TabsJPanel)c).getTab())){
+    			jTabbedPane1.setSelectedIndex(i);
+    			break;
+    		}
+    	}else{
+			logger.error("Bad panel: "  + c);
+		}
+    	
+    }
+    
 
 	// Fire event
 	for (IMainGuiListener ctrl : listeners) {
