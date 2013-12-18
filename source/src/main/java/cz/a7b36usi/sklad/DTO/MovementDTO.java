@@ -21,13 +21,14 @@ public class MovementDTO extends AbstractDTO{
 
     private DocumentDTO document;
 
-    public MovementDTO(Long id,double price, Long wrapping, Long version, ProductDTO produkt, DocumentDTO document) {
+    public MovementDTO(Long id,double price, Long wrapping, Long version, ProductDTO produkt, DocumentDTO document, int quant) {
         this.price = price;
         this.wrapping = wrapping;
         this.version = version;
         this.produkt = produkt;
         this.document = document;
         this.id=id;
+	this.quantity = quant;
     }
 //**************** GETTERS AND SETTERS ******************************
     

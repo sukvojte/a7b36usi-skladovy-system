@@ -28,13 +28,14 @@ public class OrderItemDTO extends AbstractDTO{
      * @param productVersion    version of product
      * @param order             order in which is this particular item being held
      */
-    public OrderItemDTO(Long id,Long product, int quantity, Long wrappingType, Long productVersion, Long order) {
+    public OrderItemDTO(Long id,Long product, int quantity, Long wrappingType, Long productVersion, Long order, String name) {
         this.productId = product;
         this.quantity = quantity;
         this.wrappingType = wrappingType;
         this.productVersion = productVersion;
         this.order = order;
         this.id=id;
+	productName = name;
     }
 
     public OrderItemDTO() {
