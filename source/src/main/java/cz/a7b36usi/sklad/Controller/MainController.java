@@ -99,7 +99,7 @@ public class MainController implements IMainController {
 		return mainGui;
 	}
 
-	public void FilterMovementsByProduct(ProductDTO product) {
+	public void filterMovementsByProduct(ProductDTO product) {
 		
 		mainGui.switchTab(Tabs.MOVEMENTS);
 		

@@ -86,7 +86,7 @@ public class ProductsState implements IControllerState{
 
 	public void itemDoubleClick(MainController controller, int index) {
 		ProductDTO product = model.getRowByIndex(index); 
-		controller.FilterMovementsByProduct(product);		
+		controller.filterMovementsByProduct(product);		
 	}
 
     public void print(int index) {
