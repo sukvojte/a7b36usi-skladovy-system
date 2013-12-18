@@ -24,7 +24,7 @@ public class ProductServiceTest extends AbstractServiceTest{
     
     
     @Test
-    public void saveProduct(){
+    public void saveAndGetAllProducts(){
         CategoryDTO cat=new CategoryDTO(null,"jidlo",null);
         Long catId=productService.saveCategory(cat);
         ProductDTO pr=new ProductDTO(null,"kase","FGSVRI",Integer.valueOf(12),catId);
@@ -63,8 +63,8 @@ public class ProductServiceTest extends AbstractServiceTest{
         assertFalse(isObjDetected);
     }
     @Test
-    public void saveCategory(){
-        CategoryDTO cat=new CategoryDTO(null,"jidlo",null);
+    public void saveAndGetAllCategories(){
+        CategoryDTO cat=new CategoryDTO(null,"jiidlo",null);
         Long catId=productService.saveCategory(cat);
         List<CategoryDTO> list=productService.getAllCategories();
         boolean isObjDetected=false;
@@ -78,15 +78,15 @@ public class ProductServiceTest extends AbstractServiceTest{
         assertTrue(isObjDetected);
         
         assertEquals(catId,cat.getId());
-        assertEquals("jidlo",cat.getName());
+        assertEquals("jiidlo",cat.getName());
         assertNull(cat.getParrent());
     }
     @Test
     public void removeCategory(){
         CategoryDTO cat=new CategoryDTO(null,"jidlo",null);
         Long catId=productService.saveCategory(cat);
-        List<CategoryDTO> list=productService.getAllCategories();
         productService.removeCategory(catId);
+        List<CategoryDTO> list=productService.getAllCategories();
         boolean isObjDetected=false;
         for (int i = 0; i < list.size(); i++) {
             if(list.get(i).getId().equals(catId)){
@@ -96,36 +96,94 @@ public class ProductServiceTest extends AbstractServiceTest{
         }
         assertFalse(isObjDetected);
     }
+
+    
     @Test
-    public void getAllProducts(){
+    public void saveAndGetAllWrappingTypes(){
+         CategoryDTO cat=new CategoryDTO(null,"jidlo",null);
+        Long catId=productService.saveCategory(cat);
+        ProductDTO pr=new ProductDTO(null,"kase","FGSVRI",Integer.valueOf(12),catId);
+        Long prodId=productService.saveProduct(pr);
+        WrappingTypeDTO wrp=new WrappingTypeDTO(null,"box",30.0,prodId);
+        Long wrapID=productService.saveWrappingType(wrp);
         
-    }
-    @Test
-    public void getAllCategories(){
-        
-    }
-    @Test
-    public void saveWrappingType(){
-        
+        List<WrappingTypeDTO> wrap_list=productService.getAllWrappingTypes();
+        boolean isObjDetected=false;
+        for (int i = 0; i < wrap_list.size(); i++) {
+            if(wrap_list.get(i).getId().equals(wrapID)){
+                isObjDetected=true;
+                wrp=wrap_list.get(i);
+            }
+            
+        }
+        assertTrue(isObjDetected);
+        assertEquals(wrapID,wrp.getId());
+        assertEquals("box",wrp.getName());
+        assertTrue(wrp.getQuantity()==30.0);
+        assertEquals(prodId,wrp.getProduct());
     }
     @Test
     public void removeWrappingType(){
-        
+        CategoryDTO cat=new CategoryDTO(null,"jidlo",null);
+        Long catId=productService.saveCategory(cat);
+        ProductDTO pr=new ProductDTO(null,"kase","FGSVRI",Integer.valueOf(12),catId);
+        Long prodId=productService.saveProduct(pr);
+        WrappingTypeDTO wrp=new WrappingTypeDTO(null,"box",30.0,prodId);
+        Long wrapID=productService.saveWrappingType(wrp);
+        productService.removeWrappingType(wrapID);
+        List<WrappingTypeDTO> wrap_list=productService.getAllWrappingTypes();
+        boolean isObjDetected=false;
+        for (int i = 0; i < wrap_list.size(); i++) {
+            if(wrap_list.get(i).getId().equals(wrapID)){
+                isObjDetected=true;
+            }
+            
+        }
+        assertFalse(isObjDetected);
     }
+    
     @Test
-    public void getAllWrappingTypes(){
+    public void saveAndGetAllProductVersions(){
+        CategoryDTO cat=new CategoryDTO(null,"jidlo",null);
+        Long catId=productService.saveCategory(cat);
+        ProductDTO pr=new ProductDTO(null,"kase","FGSVRI",Integer.valueOf(12),catId);
+        Long prodId=productService.saveProduct(pr);
+        ProductVersionDTO prV=new ProductVersionDTO(null,Long.valueOf(1434),"verze 1", prodId);
+        Long versId=productService.saveProductVersion(prV);
         
-    }
-    @Test
-    public void saveProductVersion(){
+        List<ProductVersionDTO> vers_list=productService.getAllProductVersions();
+        boolean isObjDetected=false;
+        for (int i = 0; i < vers_list.size(); i++) {
+             if(vers_list.get(i).getId().equals(versId)){
+                isObjDetected=true;
+                prV=vers_list.get(i);
+            }
+            
+        }
+        assertTrue(isObjDetected);
+        assertEquals(versId,prV.getId());
+        assertEquals(Long.valueOf(1434),prV.getCode());
+        assertEquals("verze 1",prV.getName());
+        assertEquals(prodId,prV.getProduct());
         
     }
     @Test
     public void removeProductVersion(){
-        
-    }
-    @Test
-    public void getAllProductVersions(){
-        
+        CategoryDTO cat=new CategoryDTO(null,"jidlo",null);
+        Long catId=productService.saveCategory(cat);
+        ProductDTO pr=new ProductDTO(null,"kase","FGSVRI",Integer.valueOf(12),catId);
+        Long prodId=productService.saveProduct(pr);
+        ProductVersionDTO prV=new ProductVersionDTO(null,Long.valueOf(1434),"verze 1", prodId);
+        Long versId=productService.saveProductVersion(prV);
+        productService.removeProductVersion(versId);
+        List<ProductVersionDTO> vers_list=productService.getAllProductVersions();
+        boolean isObjDetected=false;
+        for (int i = 0; i < vers_list.size(); i++) {
+             if(vers_list.get(i).getId().equals(versId)){
+                isObjDetected=true;
+            }
+            
+        }
+        assertFalse(isObjDetected);
     }
 }

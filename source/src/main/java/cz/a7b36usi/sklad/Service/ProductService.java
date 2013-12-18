@@ -47,11 +47,12 @@ public class ProductService extends AbstractService implements IProductService {
         CategoryBO bo = new CategoryBO();
         bo.setId(category.getId());
         bo.setName(category.getName());
-        bo.setParrent(null);
+        
+        bo.setParrent(category.getParrent()!=null ? genericDAO.getById(category.getParrent(), CategoryBO.class) : null);
         return genericDAO.saveOrUpdate(bo).getId();
     }
 
-    public void removeCategory(Long categoryId) {
+    public void removeCategory(Long categoryId) {        
         genericDAO.removeById(categoryId, CategoryBO.class);
     }
 
