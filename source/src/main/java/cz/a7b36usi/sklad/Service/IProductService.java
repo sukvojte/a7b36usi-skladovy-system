@@ -100,7 +100,7 @@ public interface IProductService {
      *
      * @param id identifier of version to be removed
      */
-    public void remevoProductVersion(Long id);
+    public void removeProductVersion(Long id);
 
     /**
      *
