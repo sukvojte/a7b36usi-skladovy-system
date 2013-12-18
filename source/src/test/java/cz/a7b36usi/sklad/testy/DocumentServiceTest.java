@@ -60,12 +60,14 @@ public class DocumentServiceTest extends AbstractServiceTest{
     
     @Test
     public void saveMovement(){
+	System.out.println("save movement");
         PartnerDTO partId=addPartner();
         Date d=new Date();
         DocumentDTO doc=new DocumentDTO(null,DocumentType.VYDEJKA,partId,5,d);
         Long docId=documentService.saveDocument(doc);
         doc.setId(docId);
         ProductDTO prod=addProduct(addCategory().getId());
+	System.out.println(prod);
         Long wrap=addWrap(prod.getId());
         Long vers=addVersion(prod.getId());
         MovementDTO mov=new MovementDTO(null, 21.0, wrap, vers, prod, doc);

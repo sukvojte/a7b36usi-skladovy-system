@@ -26,11 +26,11 @@ public class MovementBO extends AbstractBO {
     private double price;
 
     @ManyToOne
-    @JoinColumn(nullable = true)
+    //@JoinColumn(nullable = true)
     private WrappingTypeBO wrapping;
 
     @ManyToOne
-    @JoinColumn(nullable = true)
+    //@JoinColumn(nullable = true)
     private ProductVersionBO version;
 
     @ManyToOne
@@ -40,6 +40,8 @@ public class MovementBO extends AbstractBO {
     @ManyToOne
     @JoinColumn(nullable = false)
     private DocumentBO document;
+    
+    private int quantity;
 
     public MovementBO() {
     }
@@ -83,6 +85,14 @@ public class MovementBO extends AbstractBO {
 
     public void setDocument(DocumentBO document) {
         this.document = document;
+    }
+
+    public int getQuantity() {
+	return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+	this.quantity = quantity;
     }
 
 
