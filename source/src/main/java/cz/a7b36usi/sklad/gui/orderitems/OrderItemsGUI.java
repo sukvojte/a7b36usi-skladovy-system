@@ -2,19 +2,24 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package cz.a7b36usi.sklad.gui.wizard;
+package cz.a7b36usi.sklad.gui.orderitems;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JTable;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
 
+import cz.a7b36usi.sklad.Controller.states.order.OrdersState;
 import cz.a7b36usi.sklad.DTO.OrderItemDTO;
 import cz.a7b36usi.sklad.DTO.PartnerDTO;
 import cz.a7b36usi.sklad.DTO.ProductDTO;
+import cz.a7b36usi.sklad.gui.ComboBoxProductItem;
+import cz.a7b36usi.sklad.gui.documentitems.ifaces.IDocumentItemsGUI;
 import cz.a7b36usi.sklad.gui.main.listeners.IMainGuiListener;
+import cz.a7b36usi.sklad.gui.orderitems.ifaces.IOrderItemsGuiListener;
 import cz.a7b36usi.sklad.tableutils.BaseDataModel;
 
 /**
@@ -22,8 +27,10 @@ import cz.a7b36usi.sklad.tableutils.BaseDataModel;
  * @author Lukas Lowinger
  */
 @Component
-public class OrderItemsGUI extends javax.swing.JDialog implements IOrderItemsGUI{
+public class OrderItemsGUI extends javax.swing.JDialog implements IDocumentItemsGUI{
 
+	static final Logger logger = Logger.getLogger(OrderItemsGUI.class);
+	
 	private ArrayList<IOrderItemsGuiListener> listeners;
 
 	private OrderItemDTO editedItem;
@@ -41,7 +48,6 @@ public class OrderItemsGUI extends javax.swing.JDialog implements IOrderItemsGUI
     public void editOrderItem(OrderItemDTO orderItem){
     	editedItem = orderItem;
     	
-    	
     	cbProdukt.setSelectedIndex(-1);
     	if(editedItem != null){
     		tbCount.setText(String.valueOf(editedItem.getQuantity()));
@@ -49,8 +55,8 @@ public class OrderItemsGUI extends javax.swing.JDialog implements IOrderItemsGUI
     		int i = 0;
     		if(products != null){
 	    		for(ProductDTO product : products){
-	    			if(product.getId() == editedItem.getProduct()){
-	    				cbProdukt.setSelectedItem(product);
+	    			if(product.getId().equals(editedItem.getProduct())){
+	    				cbProdukt.setSelectedIndex(i);
 	    				break;
 	    			}
 	    			i++;
@@ -67,9 +73,9 @@ public class OrderItemsGUI extends javax.swing.JDialog implements IOrderItemsGUI
     	if(editedItem == null){
     		editedItem = new OrderItemDTO();
     	}
-    	ProductDTO product = (ProductDTO)cbProdukt.getSelectedItem();
+    	ComboBoxProductItem product = (ComboBoxProductItem)cbProdukt.getSelectedItem();
     	if(product != null){
-    		editedItem.setProduct(product.getId());
+    		editedItem.setProduct(product.getProduct().getId());
     	}else{
     		editedItem.setProduct((long) 0);
     	}
@@ -120,10 +126,11 @@ public class OrderItemsGUI extends javax.swing.JDialog implements IOrderItemsGUI
         jScrollPane1 = new javax.swing.JScrollPane();
         tableItems = new javax.swing.JTable();
         btnSave = new javax.swing.JButton();
-        cbProdukt = new javax.swing.JComboBox();
+        cbProdukt = new javax.swing.JComboBox<ComboBoxProductItem>();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         tbCount = new javax.swing.JTextField();
+        btnDelete = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -166,14 +173,17 @@ public class OrderItemsGUI extends javax.swing.JDialog implements IOrderItemsGUI
 
         tbCount.setText("0");
 
+        btnDelete.setText("Smazat");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
+
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(layout.createSequentialGroup()
-                .addContainerGap()
-                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE)
-                .addContainerGap())
             .add(layout.createSequentialGroup()
                 .add(48, 48, 48)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -184,10 +194,16 @@ public class OrderItemsGUI extends javax.swing.JDialog implements IOrderItemsGUI
                     .add(cbProdukt, 0, 108, Short.MAX_VALUE)
                     .add(tbCount))
                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .add(btnSave)
-                .add(36, 36, 36))
+            .add(layout.createSequentialGroup()
+                .addContainerGap()
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE)
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
+                        .add(0, 0, Short.MAX_VALUE)
+                        .add(btnDelete)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                        .add(btnSave, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 85, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -200,8 +216,10 @@ public class OrderItemsGUI extends javax.swing.JDialog implements IOrderItemsGUI
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(jLabel2)
                     .add(tbCount, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 11, Short.MAX_VALUE)
-                .add(btnSave)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(btnSave, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 39, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(btnDelete))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 221, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -232,6 +250,12 @@ public class OrderItemsGUI extends javax.swing.JDialog implements IOrderItemsGUI
 			}
 		}
     }//GEN-LAST:event_tableItemsMouseClicked
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+    	for (IOrderItemsGuiListener ctrl : listeners) {
+    		ctrl.delete();
+    	}
+    }//GEN-LAST:event_btnDeleteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -275,8 +299,9 @@ public class OrderItemsGUI extends javax.swing.JDialog implements IOrderItemsGUI
 	});
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnSave;
-    private javax.swing.JComboBox cbProdukt;
+    private javax.swing.JComboBox<ComboBoxProductItem> cbProdukt;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;

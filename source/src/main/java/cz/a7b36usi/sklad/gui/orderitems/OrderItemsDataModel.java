@@ -1,4 +1,4 @@
-package cz.a7b36usi.sklad.gui.wizard;
+package cz.a7b36usi.sklad.gui.orderitems;
 
 import java.util.List;
 
@@ -20,7 +20,7 @@ public class OrderItemsDataModel extends BaseDataModel<OrderItemDTO> {
 	public Object getColumnValue(OrderItemDTO row, int index) {
 		switch (index) {
 		case 0:
-			return row.getProduct();
+			return row.getProductName();
 		case 1:
 			return row.getQuantity();
 		default:

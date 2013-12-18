@@ -13,8 +13,8 @@ import cz.a7b36usi.sklad.DTO.OrderDTO;
 import cz.a7b36usi.sklad.DTO.OrderItemDTO;
 import cz.a7b36usi.sklad.Service.IOrderService;
 import cz.a7b36usi.sklad.Service.IProductService;
-import cz.a7b36usi.sklad.gui.wizard.IOrderItemsGUI;
-import cz.a7b36usi.sklad.gui.wizard.OrderItemsDataModel;
+import cz.a7b36usi.sklad.gui.documentitems.ifaces.IDocumentItemsGUI;
+import cz.a7b36usi.sklad.gui.orderitems.OrderItemsDataModel;
 
 
 @Component
@@ -23,7 +23,7 @@ public class OrdersItemState implements IOrdersItemState{
 	static final Logger logger = Logger.getLogger(OrdersItemState.class);
 	
 	@Autowired
-	private IOrderItemsGUI orderEditForm; 
+	private IDocumentItemsGUI orderEditForm; 
 	
 	@Autowired
 	private IProductService productService;
@@ -77,21 +77,28 @@ public class OrdersItemState implements IOrdersItemState{
 			return false;
 		}
 		
-		List<OrderItemDTO> items = item.getItems();
+		List<OrderItemDTO> items = orderService.getOrderItems(item);
 		if(items == null){
 			logger.error("Items is null!");
 			return false;
 		}
 		
 		if(model == null){
-			logger.error("Create new model");
+			logger.debug("Create new model");
 			model = new OrderItemsDataModel(items);
 		}else{
-			logger.error("Updating model");
+			logger.debug("Updating model");
 			model.update(items);
 		}
 		
 		return true;
+	}
+
+	public void delete() {
+		OrderItemDTO orderItem = orderEditForm.getEditedOrderItem();
+		logger.debug("Delete item " + orderItem.getId());
+		orderService.removeOrderItem(orderItem);
+		updateModel();
 	}
 
 

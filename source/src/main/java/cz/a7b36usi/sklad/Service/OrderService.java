@@ -14,6 +14,8 @@ import cz.a7b36usi.sklad.BO.WrappingTypeBO;
 import cz.a7b36usi.sklad.DTO.OrderDTO;
 import cz.a7b36usi.sklad.DTO.OrderItemDTO;
 import cz.a7b36usi.sklad.DTO.PartnerDTO;
+import cz.a7b36usi.sklad.DTO.ProductDTO;
+
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.stereotype.Component;
@@ -63,12 +65,7 @@ public class OrderService extends AbstractService implements IOrderService {
                     pbo.getPsc(),
                     pbo.getCisloPopisne());
             
-            List<OrderItemDTO> itemDTO = new ArrayList<OrderItemDTO>();
-            for(OrderItemBO orderItemBO : orderBO.getItems()){
-            	itemDTO.add(new OrderItemDTO(orderItemBO, orderBO.getId()));
-            }
-            
-            OrderDTO dto = new OrderDTO(orderBO.getId(), orderBO.getDate(),orderBO.getNumber(), itemDTO, partner);
+            OrderDTO dto = new OrderDTO(orderBO.getId(), orderBO.getDate(),orderBO.getNumber(), null, partner);
             odtos.add(dto);
         }
         return odtos;
@@ -119,5 +116,15 @@ public class OrderService extends AbstractService implements IOrderService {
                 orderItemBO.getOrder().getId());
         return idto;
     }
+
+	public List<OrderItemDTO> getOrderItems(OrderDTO item) {
+		OrderBO orderBO = genericDAO.getById(item.getId(), OrderBO.class);
+		ArrayList<OrderItemDTO> itemDTO = new ArrayList<OrderItemDTO>();
+        for(OrderItemBO orderItemBO : orderBO.getItems()){
+        	itemDTO.add(new OrderItemDTO(orderItemBO, orderBO.getId()));
+        }
+		
+		return itemDTO;
+	}
 
 }

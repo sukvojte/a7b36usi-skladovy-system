@@ -21,11 +21,11 @@ import cz.a7b36usi.sklad.Service.IOrderService;
 import cz.a7b36usi.sklad.Service.IPartnerService;
 import cz.a7b36usi.sklad.Service.IPrintService;
 import cz.a7b36usi.sklad.Service.IProductService;
+import cz.a7b36usi.sklad.gui.documentitems.ifaces.IDocumentItemsGUI;
 import cz.a7b36usi.sklad.gui.main.SkladMainGUI;
 import cz.a7b36usi.sklad.gui.main.ifaces.ISkladMainGUI;
-import cz.a7b36usi.sklad.gui.wizard.IOrderItemsGUI;
-import cz.a7b36usi.sklad.gui.wizard.IOrderItemsGuiListener;
-import cz.a7b36usi.sklad.gui.wizard.OrderItemsDataModel;
+import cz.a7b36usi.sklad.gui.orderitems.OrderItemsDataModel;
+import cz.a7b36usi.sklad.gui.orderitems.ifaces.IOrderItemsGuiListener;
 
 import javax.swing.JOptionPane;
 

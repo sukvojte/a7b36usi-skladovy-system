@@ -64,4 +64,10 @@ public interface IOrderService {
      */
     public void removeOrderItem(OrderItemDTO item);
 
+    /**
+    *
+    * @return
+    */
+	public List<OrderItemDTO> getOrderItems(OrderDTO item);
+
 }

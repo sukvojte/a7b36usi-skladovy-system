@@ -11,7 +11,8 @@ import cz.a7b36usi.sklad.BO.OrderItemBO;
  * @author Peter
  */
 public class OrderItemDTO extends AbstractDTO{
-    private Long product;
+    private Long productId;
+    private String productName;
     private int quantity;
     private Long wrappingType;
     private Long productVersion;
@@ -28,7 +29,7 @@ public class OrderItemDTO extends AbstractDTO{
      * @param order             order in which is this particular item being held
      */
     public OrderItemDTO(Long id,Long product, int quantity, Long wrappingType, Long productVersion, Long order) {
-        this.product = product;
+        this.productId = product;
         this.quantity = quantity;
         this.wrappingType = wrappingType;
         this.productVersion = productVersion;
@@ -42,8 +43,10 @@ public class OrderItemDTO extends AbstractDTO{
 	
     public OrderItemDTO(OrderItemBO orderItemBO, Long order) {
     	
-    	if(orderItemBO.getProduct() != null)
-    		this.product = orderItemBO.getProduct().getId();
+    	if(orderItemBO.getProduct() != null){
+    		this.productId = orderItemBO.getProduct().getId();
+    		this.productName = orderItemBO.getProduct().getName();
+    	}
     	
         this.quantity = orderItemBO.getQuantity();
         
@@ -60,11 +63,15 @@ public class OrderItemDTO extends AbstractDTO{
 
 	//GETTERS AND SETTERS
     public Long getProduct() {
-        return product;
+        return productId;
+    }
+    
+    public String getProductName() {
+        return productName;
     }
 
     public void setProduct(Long product) {
-        this.product = product;
+        this.productId = product;
     }
 
     public int getQuantity() {
