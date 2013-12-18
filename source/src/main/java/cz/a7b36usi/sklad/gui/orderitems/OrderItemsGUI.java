@@ -19,6 +19,7 @@ import cz.a7b36usi.sklad.DTO.ProductDTO;
 import cz.a7b36usi.sklad.gui.ComboBoxProductItem;
 import cz.a7b36usi.sklad.gui.documentitems.ifaces.IDocumentItemsGUI;
 import cz.a7b36usi.sklad.gui.main.listeners.IMainGuiListener;
+import cz.a7b36usi.sklad.gui.orderitems.ifaces.IOrderItemsGUI;
 import cz.a7b36usi.sklad.gui.orderitems.ifaces.IOrderItemsGuiListener;
 import cz.a7b36usi.sklad.tableutils.BaseDataModel;
 
@@ -27,7 +28,7 @@ import cz.a7b36usi.sklad.tableutils.BaseDataModel;
  * @author Lukas Lowinger
  */
 @Component
-public class OrderItemsGUI extends javax.swing.JDialog implements IDocumentItemsGUI{
+public class OrderItemsGUI extends javax.swing.JDialog implements IOrderItemsGUI{
 
 	static final Logger logger = Logger.getLogger(OrderItemsGUI.class);
 	

@@ -13,8 +13,8 @@ import cz.a7b36usi.sklad.DTO.OrderDTO;
 import cz.a7b36usi.sklad.DTO.OrderItemDTO;
 import cz.a7b36usi.sklad.Service.IOrderService;
 import cz.a7b36usi.sklad.Service.IProductService;
-import cz.a7b36usi.sklad.gui.documentitems.ifaces.IDocumentItemsGUI;
 import cz.a7b36usi.sklad.gui.orderitems.OrderItemsDataModel;
+import cz.a7b36usi.sklad.gui.orderitems.ifaces.IOrderItemsGUI;
 
 
 @Component
@@ -23,7 +23,7 @@ public class OrdersItemState implements IOrdersItemState{
 	static final Logger logger = Logger.getLogger(OrdersItemState.class);
 	
 	@Autowired
-	private IDocumentItemsGUI orderEditForm; 
+	private IOrderItemsGUI orderEditForm; 
 	
 	@Autowired
 	private IProductService productService;

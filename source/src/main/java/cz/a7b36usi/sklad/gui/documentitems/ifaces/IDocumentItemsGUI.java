@@ -11,8 +11,8 @@ import cz.a7b36usi.sklad.tableutils.BaseDataModel;
 
 public interface IDocumentItemsGUI extends RecieveListener<IOrderItemsGuiListener>{
 
-	void editOrderItem(MovementDTO orderItem);
+	void editMovementItem(MovementDTO orderItem);
 	void setTableModel(BaseDataModel<?> model, List<ProductDTO> products);
 	void setVisible(boolean visible);
-	MovementDTO getEditedOrderItem();
+	MovementDTO getMovementItem();
 }

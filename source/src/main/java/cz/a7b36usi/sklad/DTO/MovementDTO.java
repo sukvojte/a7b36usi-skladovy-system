@@ -29,7 +29,11 @@ public class MovementDTO extends AbstractDTO{
     }
 //**************** GETTERS AND SETTERS ******************************
     
-    public double getPrice() {
+    public MovementDTO() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public double getPrice() {
         return price;
     }
 

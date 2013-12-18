@@ -12,14 +12,10 @@ import javax.swing.JTable;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
 
-import cz.a7b36usi.sklad.Controller.states.order.OrdersState;
 import cz.a7b36usi.sklad.DTO.MovementDTO;
-import cz.a7b36usi.sklad.DTO.OrderItemDTO;
-import cz.a7b36usi.sklad.DTO.PartnerDTO;
 import cz.a7b36usi.sklad.DTO.ProductDTO;
 import cz.a7b36usi.sklad.gui.ComboBoxProductItem;
 import cz.a7b36usi.sklad.gui.documentitems.ifaces.IDocumentItemsGUI;
-import cz.a7b36usi.sklad.gui.main.listeners.IMainGuiListener;
 import cz.a7b36usi.sklad.gui.orderitems.ifaces.IOrderItemsGuiListener;
 import cz.a7b36usi.sklad.tableutils.BaseDataModel;
 
@@ -46,11 +42,12 @@ public class DocumentItemsGUI extends javax.swing.JDialog implements IDocumentIt
     	listeners.remove(listener);
     }
 	
-    public void editOrderItem(MovementDTO movementItem){
+    public void editMovementItem(MovementDTO movementItem){
     	editedItem = movementItem;
     	
     	cbProdukt.setSelectedIndex(-1);
     	if(editedItem != null){
+    		/*
     		tbCount.setText(String.valueOf(editedItem.getQuantity()));
     		
     		int i = 0;
@@ -62,18 +59,18 @@ public class DocumentItemsGUI extends javax.swing.JDialog implements IDocumentIt
 	    			}
 	    			i++;
 	    		}
-    		}
+    		}*/
     	}else{
     		tbCount.setText("");
     	}
     	
     }
     
-    public OrderItemDTO getEditedOrderItem(){
+    public MovementDTO getMovementItem(){
     	
     	if(editedItem == null){
-    		editedItem = new OrderItemDTO();
-    	}
+    		editedItem = new MovementDTO();
+    	}/*
     	ComboBoxProductItem product = (ComboBoxProductItem)cbProdukt.getSelectedItem();
     	if(product != null){
     		editedItem.setProduct(product.getProduct().getId());
@@ -82,7 +79,7 @@ public class DocumentItemsGUI extends javax.swing.JDialog implements IDocumentIt
     	}
     	editedItem.setQuantity(Integer.parseInt(tbCount.getText()));
     	
-    	
+    	*/
     	return editedItem;
     }
     
@@ -310,5 +307,6 @@ public class DocumentItemsGUI extends javax.swing.JDialog implements IDocumentIt
     private javax.swing.JTable tableItems;
     private javax.swing.JTextField tbCount;
     // End of variables declaration//GEN-END:variables
+
 
 }
