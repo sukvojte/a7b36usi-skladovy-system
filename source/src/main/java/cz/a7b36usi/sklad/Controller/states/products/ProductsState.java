@@ -46,8 +46,6 @@ public class ProductsState implements IControllerState{
 		
 		ProductDTO product = controller.getForm().getData().getProductData();
 		
-		
-		
 		if(product != null){
 			logger.debug("Save product " + product.getId());
 			if(productService.saveProduct(product)!=null){
@@ -56,7 +54,7 @@ public class ProductsState implements IControllerState{
 				logger.error("Product " + product.getId() + " was not saved");
 			}
 		}else{
-			logger.error("Can't save null customer");
+			logger.error("Can't save null product");
 		}		   
 	}
 

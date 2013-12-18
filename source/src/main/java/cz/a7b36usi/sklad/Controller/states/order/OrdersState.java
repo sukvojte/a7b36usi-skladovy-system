@@ -24,6 +24,7 @@ import cz.a7b36usi.sklad.Service.IProductService;
 import cz.a7b36usi.sklad.gui.main.SkladMainGUI;
 import cz.a7b36usi.sklad.gui.main.ifaces.ISkladMainGUI;
 import cz.a7b36usi.sklad.gui.wizard.IOrderItemsGUI;
+import cz.a7b36usi.sklad.gui.wizard.IOrderItemsGuiListener;
 import cz.a7b36usi.sklad.gui.wizard.OrderItemsDataModel;
 
 import javax.swing.JOptionPane;
@@ -43,12 +44,11 @@ public class OrdersState implements IControllerState{
 	private IPartnerService partnerService;
 	
 	@Autowired
-	private IProductService productService;
+	private IOrdersItemState orderItemsState;
 	
 	private OrdersDataModel model;
 	
-	@Autowired
-	private IOrderItemsGUI orderEditForm; 
+	
 	
 	@PostConstruct
     public void registerModel() {
@@ -64,8 +64,7 @@ public class OrdersState implements IControllerState{
 	
 
 	public void deactivated(MainController controller) {
-		//editForm.setVisible(false);
-		
+		orderItemsState.deactivated(controller, this);
 	}
 
 	public void editFormSave(MainController controller) {
@@ -110,13 +109,7 @@ public class OrdersState implements IControllerState{
 	public void itemDoubleClick(MainController controller, int index) {
 		logger.debug("item double click");
 		
-		List<OrderItemDTO> items = model.getRowByIndex(index).getItems();
-		if(items == null){
-			logger.error("Items is null!");
-			return;
-		}
-		orderEditForm.setTableModel(new OrderItemsDataModel(items),productService.getAllProducts());
-		orderEditForm.setVisible(true);		
+		orderItemsState.openDialog(controller, this, model.getRowByIndex(index));	
 	}
 
     public void print(int index) {
@@ -124,6 +117,5 @@ public class OrdersState implements IControllerState{
 		    JOptionPane.showMessageDialog(null, "Problem s tiskem.", "Tisk se nezdaril", JOptionPane.ERROR_MESSAGE);
 		}
     }
-
 
 }

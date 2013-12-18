@@ -62,6 +62,21 @@ public class OrderItemsGUI extends javax.swing.JDialog implements IOrderItemsGUI
     	
     }
     
+    public OrderItemDTO getEditedOrderItem(){
+    	
+    	if(editedItem != null){
+	    	ProductDTO product = (ProductDTO)cbProdukt.getSelectedItem();
+	    	if(product != null){
+	    		editedItem.setProduct(product.getId());
+	    	}else{
+	    		editedItem.setProduct((long) 0);
+	    	}
+	    	editedItem.setQuantity(Integer.parseInt(tbCount.getText()));
+    	}
+    	
+    	return editedItem;
+    }
+    
     public void setTableModel(BaseDataModel<?> model, List<ProductDTO> products) {
     	this.baseDataModel = model;
     	this.products = products;
@@ -200,7 +215,7 @@ public class OrderItemsGUI extends javax.swing.JDialog implements IOrderItemsGUI
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
     	if(editedItem != null){
 	    	for (IOrderItemsGuiListener ctrl : listeners) {
-	    		ctrl.save(editedItem);
+	    		ctrl.save();
 	    	}
     	}
     }//GEN-LAST:event_btnSaveActionPerformed

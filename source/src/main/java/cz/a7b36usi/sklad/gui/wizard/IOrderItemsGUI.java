@@ -12,4 +12,5 @@ public interface IOrderItemsGUI extends RecieveListener<IOrderItemsGuiListener>{
 	void editOrderItem(OrderItemDTO orderItem);
 	void setTableModel(BaseDataModel<?> model, List<ProductDTO> products);
 	void setVisible(boolean visible);
+	OrderItemDTO getEditedOrderItem();
 }

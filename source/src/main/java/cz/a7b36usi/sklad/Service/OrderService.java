@@ -63,7 +63,12 @@ public class OrderService extends AbstractService implements IOrderService {
                     pbo.getPsc(),
                     pbo.getCisloPopisne());
             
-            OrderDTO dto = new OrderDTO(orderBO.getId(), orderBO.getDate(),orderBO.getNumber(), null, partner);
+            List<OrderItemDTO> itemDTO = new ArrayList<OrderItemDTO>();
+            for(OrderItemBO orderItemBO : orderBO.getItems()){
+            	itemDTO.add(new OrderItemDTO(orderItemBO.getId(), orderItemBO.getProduct().getId(), orderItemBO.getQuantity(), orderItemBO.getWrappingType().getId(), orderItemBO.getProductVersion().getId(), orderBO.getId()));
+            }
+            
+            OrderDTO dto = new OrderDTO(orderBO.getId(), orderBO.getDate(),orderBO.getNumber(), itemDTO, partner);
             odtos.add(dto);
         }
         return odtos;
