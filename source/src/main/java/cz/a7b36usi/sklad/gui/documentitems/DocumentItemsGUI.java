@@ -66,7 +66,7 @@ public class DocumentItemsGUI extends javax.swing.JDialog implements IDocumentIt
     	
     }
     
-    public MovementDTO getMovementItem(){
+    public MovementDTO getEditedMovementItem(){
     	
     	if(editedItem == null){
     		editedItem = new MovementDTO();
