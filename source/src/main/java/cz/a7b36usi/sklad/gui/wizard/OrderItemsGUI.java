@@ -4,17 +4,90 @@
  */
 package cz.a7b36usi.sklad.gui.wizard;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.JTable;
+
+import org.springframework.stereotype.Component;
+
+import cz.a7b36usi.sklad.DTO.OrderItemDTO;
+import cz.a7b36usi.sklad.DTO.PartnerDTO;
+import cz.a7b36usi.sklad.DTO.ProductDTO;
+import cz.a7b36usi.sklad.gui.main.listeners.IMainGuiListener;
+import cz.a7b36usi.sklad.tableutils.BaseDataModel;
+
 /**
  *
  * @author Lukas Lowinger
  */
-public class DocumentWizard extends javax.swing.JDialog {
+@Component
+public class OrderItemsGUI extends javax.swing.JDialog implements IOrderItemsGUI{
 
+	private ArrayList<IOrderItemsGuiListener> listeners;
+
+	private OrderItemDTO editedItem;
+	private List<ProductDTO> products;
+	private BaseDataModel<?> baseDataModel;
+	
+    public void addListeners(IOrderItemsGuiListener listener) {
+    	listeners.add(listener);
+    }
+
+    public void removeListeners(IOrderItemsGuiListener listener) {
+    	listeners.remove(listener);
+    }
+	
+    public void editOrderItem(OrderItemDTO orderItem){
+    	editedItem = orderItem;
+    	
+    	
+    	cbProdukt.setSelectedIndex(-1);
+    	if(editedItem != null){
+    		tbCount.setText(String.valueOf(editedItem.getQuantity()));
+    		
+    		int i = 0;
+    		if(products != null){
+	    		for(ProductDTO product : products){
+	    			if(product.getId() == editedItem.getProduct()){
+	    				cbProdukt.setSelectedItem(product);
+	    				break;
+	    			}
+	    			i++;
+	    		}
+    		}
+    	}else{
+    		tbCount.setText("");
+    	}
+    	
+    }
+    
+    public void setTableModel(BaseDataModel<?> model, List<ProductDTO> products) {
+    	this.baseDataModel = model;
+    	this.products = products;
+    	this.tableItems.setModel(model);
+    	
+    	cbProdukt.removeAllItems();
+    	if (products != null) {
+    	    for (ProductDTO product : products) {
+    	    	cbProdukt.addItem(product);
+    	    }
+        }
+    	
+	}
+
+    public OrderItemsGUI() {
+	super();
+	listeners = new ArrayList<IOrderItemsGuiListener>();
+	initComponents();
+    }
+    
     /**
      * Creates new form DocumentWizard
      */
-    public DocumentWizard(java.awt.Frame parent, boolean modal) {
+    public OrderItemsGUI(java.awt.Frame parent, boolean modal) {
 	super(parent, modal);
+	listeners = new ArrayList<IOrderItemsGuiListener>();
 	initComponents();
     }
 
@@ -28,13 +101,16 @@ public class DocumentWizard extends javax.swing.JDialog {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        typBaleniCB = new javax.swing.JComboBox();
+        tableItems = new javax.swing.JTable();
+        btnSave = new javax.swing.JButton();
+        cbProdukt = new javax.swing.JComboBox();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        tbCount = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tableItems.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -45,11 +121,33 @@ public class DocumentWizard extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        tableItems.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableItemsMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tableItems);
 
-        jButton1.setText("jButton1");
+        btnSave.setText("Uložit");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
 
-        typBaleniCB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbProdukt.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbProdukt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbProduktActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Produkt :");
+
+        jLabel2.setText("Počet :");
+        jLabel2.setToolTipText("");
+
+        tbCount.setText("0");
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -57,31 +155,68 @@ public class DocumentWizard extends javax.swing.JDialog {
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(layout.createSequentialGroup()
                 .addContainerGap()
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE)
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
-                        .add(0, 0, Short.MAX_VALUE)
-                        .add(jButton1)))
+                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE)
                 .addContainerGap())
             .add(layout.createSequentialGroup()
-                .add(97, 97, 97)
-                .add(typBaleniCB, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(48, 48, 48)
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(jLabel1)
+                    .add(jLabel2))
+                .add(18, 18, 18)
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                    .add(cbProdukt, 0, 108, Short.MAX_VALUE)
+                    .add(tbCount))
                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .add(btnSave)
+                .add(36, 36, 36))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
-                .add(48, 48, 48)
-                .add(typBaleniCB, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 245, Short.MAX_VALUE)
-                .add(jButton1)
-                .add(18, 18, 18)
+                .add(35, 35, 35)
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(cbProdukt, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(jLabel1))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(jLabel2)
+                    .add(tbCount, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 11, Short.MAX_VALUE)
+                .add(btnSave)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 221, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void cbProduktActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbProduktActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbProduktActionPerformed
+
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+    	if(editedItem != null){
+	    	for (IOrderItemsGuiListener ctrl : listeners) {
+	    		ctrl.save(editedItem);
+	    	}
+    	}
+    }//GEN-LAST:event_btnSaveActionPerformed
+
+    private void tableItemsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableItemsMouseClicked
+    	
+    	JTable table = (JTable) evt.getComponent();
+    	
+		if (table.getSelectedRowCount() == 1) {
+		    int selected = table.getSelectedRow();
+	    	
+	    	for (IOrderItemsGuiListener ctrl : listeners) {
+				ctrl.click(selected);
+			}
+		}
+    }//GEN-LAST:event_tableItemsMouseClicked
 
     /**
      * @param args the command line arguments
@@ -100,20 +235,20 @@ public class DocumentWizard extends javax.swing.JDialog {
 		}
 	    }
 	} catch (ClassNotFoundException ex) {
-	    java.util.logging.Logger.getLogger(DocumentWizard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+	    java.util.logging.Logger.getLogger(OrderItemsGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 	} catch (InstantiationException ex) {
-	    java.util.logging.Logger.getLogger(DocumentWizard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+	    java.util.logging.Logger.getLogger(OrderItemsGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 	} catch (IllegalAccessException ex) {
-	    java.util.logging.Logger.getLogger(DocumentWizard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+	    java.util.logging.Logger.getLogger(OrderItemsGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 	} catch (javax.swing.UnsupportedLookAndFeelException ex) {
-	    java.util.logging.Logger.getLogger(DocumentWizard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+	    java.util.logging.Logger.getLogger(OrderItemsGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 	}
 	//</editor-fold>
 
 	/* Create and display the dialog */
 	java.awt.EventQueue.invokeLater(new Runnable() {
 	    public void run() {
-		DocumentWizard dialog = new DocumentWizard(new javax.swing.JFrame(), true);
+		OrderItemsGUI dialog = new OrderItemsGUI(new javax.swing.JFrame(), true);
 		dialog.addWindowListener(new java.awt.event.WindowAdapter() {
 		    @Override
 		    public void windowClosing(java.awt.event.WindowEvent e) {
@@ -125,9 +260,13 @@ public class DocumentWizard extends javax.swing.JDialog {
 	});
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnSave;
+    private javax.swing.JComboBox cbProdukt;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JComboBox typBaleniCB;
+    private javax.swing.JTable tableItems;
+    private javax.swing.JTextField tbCount;
     // End of variables declaration//GEN-END:variables
+
 }

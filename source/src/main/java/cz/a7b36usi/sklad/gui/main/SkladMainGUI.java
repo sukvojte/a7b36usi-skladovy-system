@@ -64,7 +64,7 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
     private DocumentDTO lastDocument = null;
     private ProductDTO lastProduct = null;
     
-    private BaseDataModel baseDataModel;
+    private BaseDataModel<?> baseDataModel;
     public JButton filtrJB;
     /* Listenery - START */
     private ArrayList<IMainGuiListener> listeners;

@@ -1,20 +1,18 @@
 package cz.a7b36usi.sklad.ifaces;
 
-import cz.a7b36usi.sklad.gui.main.listeners.IMainGuiListener;
-
-public interface RecieveListener {
+public interface RecieveListener<T> {
 
     /**
      * Adds IMainGuiListener
      *
      * @param listener
      */
-    void addListeners(IMainGuiListener listener);
+    void addListeners(T listener);
 
     /**
      * Removes IMainGuiListener
      *
      * @param listener
      */
-    void removeListeners(IMainGuiListener listener);
+    void removeListeners(T listener);
 }

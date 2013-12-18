@@ -15,12 +15,16 @@ import cz.a7b36usi.sklad.Controller.states.IControllerState;
 import cz.a7b36usi.sklad.Controller.states.AddressBook.AddressBookDataModel;
 import cz.a7b36usi.sklad.Controller.states.AddressBook.AddressBookState;
 import cz.a7b36usi.sklad.DTO.OrderDTO;
+import cz.a7b36usi.sklad.DTO.OrderItemDTO;
 import cz.a7b36usi.sklad.DTO.PartnerDTO;
 import cz.a7b36usi.sklad.Service.IOrderService;
 import cz.a7b36usi.sklad.Service.IPartnerService;
 import cz.a7b36usi.sklad.Service.IPrintService;
+import cz.a7b36usi.sklad.Service.IProductService;
 import cz.a7b36usi.sklad.gui.main.SkladMainGUI;
 import cz.a7b36usi.sklad.gui.main.ifaces.ISkladMainGUI;
+import cz.a7b36usi.sklad.gui.wizard.IOrderItemsGUI;
+import cz.a7b36usi.sklad.gui.wizard.OrderItemsDataModel;
 
 import javax.swing.JOptionPane;
 
@@ -38,10 +42,13 @@ public class OrdersState implements IControllerState{
 	@Autowired
 	private IPartnerService partnerService;
 	
+	@Autowired
+	private IProductService productService;
+	
 	private OrdersDataModel model;
 	
 	@Autowired
-	private ISkladMainGUI editForm; 
+	private IOrderItemsGUI orderEditForm; 
 	
 	@PostConstruct
     public void registerModel() {
@@ -103,10 +110,13 @@ public class OrdersState implements IControllerState{
 	public void itemDoubleClick(MainController controller, int index) {
 		logger.debug("item double click");
 		
-		
-		//editForm = 
-		
-		//editForm.setVisible(true);		
+		List<OrderItemDTO> items = model.getRowByIndex(index).getItems();
+		if(items == null){
+			logger.error("Items is null!");
+			return;
+		}
+		orderEditForm.setTableModel(new OrderItemsDataModel(items),productService.getAllProducts());
+		orderEditForm.setVisible(true);		
 	}
 
     public void print(int index) {
