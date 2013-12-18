@@ -64,15 +64,17 @@ public class OrderItemsGUI extends javax.swing.JDialog implements IOrderItemsGUI
     
     public OrderItemDTO getEditedOrderItem(){
     	
-    	if(editedItem != null){
-	    	ProductDTO product = (ProductDTO)cbProdukt.getSelectedItem();
-	    	if(product != null){
-	    		editedItem.setProduct(product.getId());
-	    	}else{
-	    		editedItem.setProduct((long) 0);
-	    	}
-	    	editedItem.setQuantity(Integer.parseInt(tbCount.getText()));
+    	if(editedItem == null){
+    		editedItem = new OrderItemDTO();
     	}
+    	ProductDTO product = (ProductDTO)cbProdukt.getSelectedItem();
+    	if(product != null){
+    		editedItem.setProduct(product.getId());
+    	}else{
+    		editedItem.setProduct((long) 0);
+    	}
+    	editedItem.setQuantity(Integer.parseInt(tbCount.getText()));
+    	
     	
     	return editedItem;
     }
@@ -85,7 +87,7 @@ public class OrderItemsGUI extends javax.swing.JDialog implements IOrderItemsGUI
     	cbProdukt.removeAllItems();
     	if (products != null) {
     	    for (ProductDTO product : products) {
-    	    	cbProdukt.addItem(product);
+    	    	cbProdukt.addItem(new ComboBoxProductItem(product));
     	    }
         }
     	
@@ -213,10 +215,8 @@ public class OrderItemsGUI extends javax.swing.JDialog implements IOrderItemsGUI
     }//GEN-LAST:event_cbProduktActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-    	if(editedItem != null){
-	    	for (IOrderItemsGuiListener ctrl : listeners) {
-	    		ctrl.save();
-	    	}
+    	for (IOrderItemsGuiListener ctrl : listeners) {
+    		ctrl.save();
     	}
     }//GEN-LAST:event_btnSaveActionPerformed
 

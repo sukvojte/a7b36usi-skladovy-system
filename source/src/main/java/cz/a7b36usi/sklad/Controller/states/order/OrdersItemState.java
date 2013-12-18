@@ -41,16 +41,17 @@ public class OrdersItemState implements IOrdersItemState{
 	
 	public void save() {
 		OrderItemDTO orderItem = orderEditForm.getEditedOrderItem();
-		if(orderItem == null){
-			logger.error("Order item is null, can't save them");
-			return;
-		}
+		
+		orderItem.setOrder(item.getId());
+		
+		logger.debug("Save item " + orderItem.getId());
 		orderService.saveOrderItem(orderItem);
 
 		updateModel();	
 	}
 
 	public void click(int index) {
+		logger.debug("Edit item " + index);
 		OrderItemDTO orderItem = model.getRowByIndex(index);
 		orderEditForm.editOrderItem(orderItem);
 	}
@@ -83,8 +84,10 @@ public class OrdersItemState implements IOrdersItemState{
 		}
 		
 		if(model == null){
+			logger.error("Create new model");
 			model = new OrderItemsDataModel(items);
 		}else{
+			logger.error("Updating model");
 			model.update(items);
 		}
 		

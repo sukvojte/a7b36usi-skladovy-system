@@ -4,6 +4,8 @@
  */
 package cz.a7b36usi.sklad.DTO;
 
+import cz.a7b36usi.sklad.BO.OrderItemBO;
+
 /**
  *
  * @author Peter
@@ -33,7 +35,30 @@ public class OrderItemDTO extends AbstractDTO{
         this.order = order;
         this.id=id;
     }
-//GETTERS AND SETTERS
+
+    public OrderItemDTO() {
+    	this.id = null;
+	}
+	
+    public OrderItemDTO(OrderItemBO orderItemBO, Long order) {
+    	
+    	if(orderItemBO.getProduct() != null)
+    		this.product = orderItemBO.getProduct().getId();
+    	
+        this.quantity = orderItemBO.getQuantity();
+        
+        if(orderItemBO.getWrappingType() != null)
+        	this.wrappingType = orderItemBO.getWrappingType().getId();
+        
+        if(orderItemBO.getProductVersion() != null)
+        	this.productVersion = orderItemBO.getProductVersion().getId();
+        
+        this.order = order;
+        this.id  = orderItemBO.getId();
+
+	}
+
+	//GETTERS AND SETTERS
     public Long getProduct() {
         return product;
     }
