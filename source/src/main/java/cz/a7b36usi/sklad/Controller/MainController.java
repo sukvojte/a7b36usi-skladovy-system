@@ -14,6 +14,8 @@ import cz.a7b36usi.sklad.Tabs;
 import cz.a7b36usi.sklad.Controller.ifaces.IMainController;
 import cz.a7b36usi.sklad.Controller.states.IControllerState;
 import cz.a7b36usi.sklad.Controller.states.IStateFactory;
+import cz.a7b36usi.sklad.Controller.states.movements.MovementsState;
+import cz.a7b36usi.sklad.DTO.ProductDTO;
 import cz.a7b36usi.sklad.gui.main.ifaces.ISkladMainGUI;
 import cz.a7b36usi.sklad.gui.main.listeners.IMainGuiListener;
 
@@ -95,6 +97,20 @@ public class MainController implements IMainController {
 
 	public ISkladMainGUI getForm() {
 		return mainGui;
+	}
+
+	public void FilterMovementsByProduct(ProductDTO product) {
+		
+		mainGui.switchTab(Tabs.MOVEMENTS);
+		
+		if(state instanceof MovementsState){
+			
+			((MovementsState)state).filterByProduct(product);
+			
+		}else{
+			logger.error("Bad state!");
+		}
+		
 	}
 
 }

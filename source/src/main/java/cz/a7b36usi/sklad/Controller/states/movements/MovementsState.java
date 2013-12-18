@@ -10,6 +10,7 @@ import cz.a7b36usi.sklad.Controller.MainController;
 import cz.a7b36usi.sklad.Controller.states.IControllerState;
 import cz.a7b36usi.sklad.DTO.MovementDTO;
 import cz.a7b36usi.sklad.DTO.PartnerDTO;
+import cz.a7b36usi.sklad.DTO.ProductDTO;
 import cz.a7b36usi.sklad.Service.IDocumentService;
 import cz.a7b36usi.sklad.Service.IPartnerService;
 import cz.a7b36usi.sklad.Service.IProductService;
@@ -36,6 +37,8 @@ public class MovementsState implements IControllerState{
 	
 	public void activated(MainController controller) {
 		logger.debug("Activated event");
+		
+		model.update(documentService.getAllMovements());
 		
 		controller.getForm().setTableModel(model);
 	}
@@ -82,6 +85,10 @@ public class MovementsState implements IControllerState{
 	public void deactivated(MainController controller) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public void filterByProduct(ProductDTO product) {
+		model.update(documentService.getAllProductsMovements(product.getId()));
 	}
 		
 

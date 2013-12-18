@@ -85,8 +85,8 @@ public class ProductsState implements IControllerState{
     }
 
 	public void itemDoubleClick(MainController controller, int index) {
-		// TODO Auto-generated method stub
-		
+		ProductDTO product = model.getRowByIndex(index); 
+		controller.FilterMovementsByProduct(product);		
 	}
 
     public void print(int index) {
