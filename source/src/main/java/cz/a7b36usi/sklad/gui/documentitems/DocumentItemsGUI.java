@@ -47,8 +47,11 @@ public class DocumentItemsGUI extends javax.swing.JDialog implements IDocumentIt
     	
     	cbProdukt.setSelectedIndex(-1);
     	if(editedItem != null){
-    		
-    		tbCount.setText(String.valueOf(editedItem.getQuantity()));
+    		try{
+    			tbCount.setText(String.valueOf(editedItem.getQuantity()));
+    		}catch(RuntimeException ex){
+    			tbCount.setText("0");
+    		}
     		
     		int i = 0;
     		if(products != null){
