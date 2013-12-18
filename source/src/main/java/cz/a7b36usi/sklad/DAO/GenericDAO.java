@@ -67,7 +67,6 @@ public class GenericDAO implements IGenericDAO {
     public <ENTITY extends AbstractBO> void removeById(long id, Class<ENTITY> clazz) {
         ENTITY e = getEntityManager().find(clazz, id);
         if (e != null) {
-            System.out.println("removing user");
             getEntityManager().remove(e);
         }
     }
