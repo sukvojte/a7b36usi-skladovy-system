@@ -32,6 +32,9 @@ public class DocumentsState implements IControllerState{
 
     @Autowired
     private IPartnerService partnerService;    
+    
+    @Autowired
+    private IDocumentItemState itemState;
 	
 	private DocumentsDataModel model;
 	
@@ -51,8 +54,6 @@ public class DocumentsState implements IControllerState{
 		logger.debug("Save event");
 		
 		DocumentDTO document = controller.getForm().getData().getDocumentData();
-		
-		
 		
 		if(document != null){
 			logger.debug("Save document " + document.getId());
@@ -91,16 +92,17 @@ public class DocumentsState implements IControllerState{
     }
 
 	public void itemDoubleClick(MainController controller, int index) {
-		// TODO Auto-generated method stub
+		logger.debug("item double click");
 		
+		itemState.openDialog(controller, this, model.getRowByIndex(index));	
 	}
 
     public void print(int index) {
+    	
     }
 
 	public void deactivated(MainController controller) {
-		// TODO Auto-generated method stub
-		
+		itemState.deactivated(controller, this);
 	}
 		
 

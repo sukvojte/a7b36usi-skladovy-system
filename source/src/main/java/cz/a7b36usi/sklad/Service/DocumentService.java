@@ -43,9 +43,10 @@ public class DocumentService extends AbstractService implements IDocumentService
         bo.setId(movement.getId());
         bo.setPrice(movement.getPrice());
         bo.setDocument(genericDAO.loadById(movement.getDocument().getId(), DocumentBO.class));
-        bo.setProdukt(genericDAO.loadById(movement.getProdukt().getId(), ProductBO.class));
-        bo.setVersion(genericDAO.loadById(movement.getVersion(), ProductVersionBO.class));
-        bo.setWrapping(genericDAO.loadById(movement.getWrapping(), WrappingTypeBO.class));
+        ProductBO pbo = genericDAO.loadById(movement.getProdukt().getId(), ProductBO.class);
+        bo.setProdukt(pbo);
+        bo.setVersion(movement.getVersion() != null ? genericDAO.loadById(movement.getVersion(), ProductVersionBO.class) : null);
+        bo.setWrapping(movement.getWrapping() != null ? genericDAO.loadById(movement.getWrapping(), WrappingTypeBO.class) : null);
         return genericDAO.saveOrUpdate(bo).getId();
     }
 

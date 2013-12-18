@@ -132,6 +132,7 @@ public class OrderItemsGUI extends javax.swing.JDialog implements IOrderItemsGUI
         jLabel2 = new javax.swing.JLabel();
         tbCount = new javax.swing.JTextField();
         btnDelete = new javax.swing.JButton();
+        btnNew = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -181,10 +182,29 @@ public class OrderItemsGUI extends javax.swing.JDialog implements IOrderItemsGUI
             }
         });
 
+        btnNew.setText("Nový");
+        btnNew.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNewActionPerformed(evt);
+            }
+        });
+
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(layout.createSequentialGroup()
+                .addContainerGap()
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE)
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
+                        .add(0, 0, Short.MAX_VALUE)
+                        .add(btnNew, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 90, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(272, 272, 272)
+                        .add(btnDelete)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                        .add(btnSave, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 85, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
             .add(layout.createSequentialGroup()
                 .add(48, 48, 48)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -195,16 +215,6 @@ public class OrderItemsGUI extends javax.swing.JDialog implements IOrderItemsGUI
                     .add(cbProdukt, 0, 108, Short.MAX_VALUE)
                     .add(tbCount))
                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .add(layout.createSequentialGroup()
-                .addContainerGap()
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE)
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
-                        .add(0, 0, Short.MAX_VALUE)
-                        .add(btnDelete)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                        .add(btnSave, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 85, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -220,7 +230,8 @@ public class OrderItemsGUI extends javax.swing.JDialog implements IOrderItemsGUI
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(btnSave, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 39, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(btnDelete))
+                    .add(btnDelete)
+                    .add(btnNew, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 42, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 221, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -257,6 +268,10 @@ public class OrderItemsGUI extends javax.swing.JDialog implements IOrderItemsGUI
     		ctrl.delete();
     	}
     }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void btnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewActionPerformed
+        editOrderItem(null);
+    }//GEN-LAST:event_btnNewActionPerformed
 
     /**
      * @param args the command line arguments
@@ -301,6 +316,7 @@ public class OrderItemsGUI extends javax.swing.JDialog implements IOrderItemsGUI
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnNew;
     private javax.swing.JButton btnSave;
     private javax.swing.JComboBox<ComboBoxProductItem> cbProdukt;
     private javax.swing.JLabel jLabel1;

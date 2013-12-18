@@ -47,19 +47,19 @@ public class DocumentItemsGUI extends javax.swing.JDialog implements IDocumentIt
     	
     	cbProdukt.setSelectedIndex(-1);
     	if(editedItem != null){
-    		/*
+    		
     		tbCount.setText(String.valueOf(editedItem.getQuantity()));
     		
     		int i = 0;
     		if(products != null){
 	    		for(ProductDTO product : products){
-	    			if(product.getId().equals(editedItem.getProduct())){
+	    			if(product.getId().equals(editedItem.getProdukt().getId())){
 	    				cbProdukt.setSelectedIndex(i);
 	    				break;
 	    			}
 	    			i++;
 	    		}
-    		}*/
+    		}
     	}else{
     		tbCount.setText("");
     	}
@@ -70,16 +70,16 @@ public class DocumentItemsGUI extends javax.swing.JDialog implements IDocumentIt
     	
     	if(editedItem == null){
     		editedItem = new MovementDTO();
-    	}/*
+    	}
     	ComboBoxProductItem product = (ComboBoxProductItem)cbProdukt.getSelectedItem();
     	if(product != null){
-    		editedItem.setProduct(product.getProduct().getId());
+    		editedItem.setProdukt(product.getProduct());
     	}else{
-    		editedItem.setProduct((long) 0);
+    		editedItem.setProdukt(null);
     	}
     	editedItem.setQuantity(Integer.parseInt(tbCount.getText()));
     	
-    	*/
+    	
     	return editedItem;
     }
     

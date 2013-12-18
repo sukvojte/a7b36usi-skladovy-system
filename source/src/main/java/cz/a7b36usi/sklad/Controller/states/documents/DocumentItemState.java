@@ -47,7 +47,7 @@ public class DocumentItemState implements IDocumentItemState{
 	public void save() {
 		MovementDTO movement = orderEditForm.getEditedMovementItem();
 		
-		//movement.setDocument(item.getId());
+		movement.setDocument(documentService.getDocumentById(item.getId()));
 		
 		logger.debug("Save item " + movement.getId());
 		documentService.saveMovement(movement);
@@ -81,8 +81,8 @@ public class DocumentItemState implements IDocumentItemState{
 			logger.error("Item is null!");
 			return false;
 		}
-		/*
-		List<OrderItemDTO> items = documentService.getMo(item);
+		
+		List<MovementDTO> items = documentService.getAllDocumentsMovements(item.getId());
 		if(items == null){
 			logger.error("Items is null!");
 			return false;
@@ -90,22 +90,22 @@ public class DocumentItemState implements IDocumentItemState{
 		
 		if(model == null){
 			logger.debug("Create new model");
-			model = new OrderItemsDataModel(items);
+			model = new DocumentItemsDataModel(items);
 		}else{
 			logger.debug("Updating model");
 			model.update(items);
 		}
-		*/
+		
 		return true;
 	}
 
 	public void delete() {
-		/*
-		OrderItemDTO orderItem = orderEditForm.getEditedOrderItem();
-		logger.debug("Delete item " + orderItem.getId());
-		orderService.removeOrderItem(orderItem);
+		
+		MovementDTO movement = orderEditForm.getEditedMovementItem();
+		logger.debug("Delete item " + movement.getId());
+		documentService.removeMovement(movement.getId());
 		updateModel();
-		*/
+		
 	}
 
 }

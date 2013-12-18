@@ -26,11 +26,11 @@ public class MovementBO extends AbstractBO {
     private double price;
 
     @ManyToOne
-    @JoinColumn(nullable = false)
+    @JoinColumn(nullable = true)
     private WrappingTypeBO wrapping;
 
     @ManyToOne
-    @JoinColumn(nullable = false)
+    @JoinColumn(nullable = true)
     private ProductVersionBO version;
 
     @ManyToOne

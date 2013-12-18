@@ -14,6 +14,8 @@ public class MovementDTO extends AbstractDTO{
     private Long wrapping;
 
     private Long version;
+    
+    private int quantity;
 
     private ProductDTO produkt;
 
@@ -72,6 +74,20 @@ public class MovementDTO extends AbstractDTO{
     public void setDocument(DocumentDTO document) {
         this.document = document;
     }
+
+	/**
+	 * @return the quantity
+	 */
+	public int getQuantity() {
+		return quantity;
+	}
+
+	/**
+	 * @param quantity the quantity to set
+	 */
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
 
     
     

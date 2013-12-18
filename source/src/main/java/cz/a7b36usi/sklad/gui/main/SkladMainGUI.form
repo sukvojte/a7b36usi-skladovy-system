@@ -33,6 +33,7 @@
   <SyntheticProperties>
     <SyntheticProperty name="menuBar" type="java.lang.String" value="jMenuBar1"/>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
   </SyntheticProperties>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
@@ -53,16 +54,22 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPane1" alignment="1" max="32767" attributes="0"/>
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      <Component id="smazJB" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="ulozJB" min="-2" pref="110" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="jScrollPane1" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
-                      <Component id="filtrJP" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="btnNew" min="-2" pref="97" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="smazJB" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="ulozJB" min="-2" pref="110" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="filtrJP" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -78,6 +85,7 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="smazJB" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="ulozJB" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                  <Component id="btnNew" alignment="3" min="-2" pref="43" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="filtrJP" min="-2" max="-2" attributes="0"/>
@@ -147,7 +155,7 @@
                           <Component id="errorCisloPopJL" min="-2" max="-2" attributes="0"/>
                           <Component id="errorSpolecnostJL" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="261" max="32767" attributes="0"/>
+                      <EmptySpace pref="433" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -182,7 +190,7 @@
                           <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="errorCisloPopJL" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="90" max="32767" attributes="0"/>
+                      <EmptySpace pref="128" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -272,7 +280,7 @@
                           </Group>
                           <Component id="partnersObjednavkyCB" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="246" max="32767" attributes="0"/>
+                      <EmptySpace pref="416" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="32767" attributes="0"/>
@@ -306,7 +314,7 @@
                           <Component id="jLabel18" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="partnersObjednavkyCB" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="108" max="32767" attributes="0"/>
+                      <EmptySpace pref="123" max="32767" attributes="0"/>
                       <Component id="tiskObjednavkyJB" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -375,12 +383,12 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="621" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="748" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="279" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="276" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
@@ -415,7 +423,7 @@
                           <Component id="dateChooserCombo2" min="-2" max="-2" attributes="0"/>
                           <Component id="partnersDokladyCB" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="323" max="32767" attributes="0"/>
+                      <EmptySpace pref="476" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -442,7 +450,7 @@
                           <Component id="jLabel19" min="-2" max="-2" attributes="0"/>
                           <Component id="partnersDokladyCB" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="107" max="32767" attributes="0"/>
+                      <EmptySpace pref="134" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -526,7 +534,7 @@
                           <Component id="kodProduktuTF" alignment="0" max="32767" attributes="0"/>
                           <Component id="mnozstviProduktuTF" alignment="0" pref="120" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="424" max="32767" attributes="0"/>
+                      <EmptySpace pref="565" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -548,7 +556,7 @@
                           <Component id="jLabel13" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="mnozstviProduktuTF" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="156" max="32767" attributes="0"/>
+                      <EmptySpace pref="179" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -618,7 +626,7 @@
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace pref="129" max="32767" attributes="0"/>
+                      <EmptySpace pref="317" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -643,7 +651,7 @@
                           <Component id="roleJC" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="145" max="32767" attributes="0"/>
+                      <EmptySpace pref="166" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -761,6 +769,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ulozJBActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnNew">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Nov&#xfd;"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNewActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
