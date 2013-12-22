@@ -107,7 +107,7 @@ public class DocumentService extends AbstractService implements IDocumentService
                     product,
                     getDocumentById(movementBO.getDocument().getId())
 		    ,movementBO.getQuantity());
-		    );
+		    
             dtos.add(dto);
         }
         return dtos;
