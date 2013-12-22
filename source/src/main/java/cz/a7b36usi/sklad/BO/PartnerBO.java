@@ -8,78 +8,81 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 /**
- *
+ * 
  * @author Peter
  */
 @Entity
-@Table(name="partner")
+@Table(name = "partner")
 public class PartnerBO extends AbstractBO {
 
-    private boolean isDodavatel, isOdberatel;
-    private String ulice, mesto, spolecnost;
-    private int psc, cisloPopisne;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6793268713637817089L;
+	private boolean isDodavatel, isOdberatel;
+	private String ulice, mesto, spolecnost;
+	private int psc, cisloPopisne;
 
-    public PartnerBO() {
-    }
-    
-    //***************** GETTER SETTER KILOMETER BY PETER ********************************
+	public PartnerBO() {
+	}
 
-    public boolean getIsDodavatel() {
-        return isDodavatel;
-    }
+	// ***************** GETTER SETTER KILOMETER BY PETER
+	// ********************************
 
-    public void setIsDodavatel(boolean isDodavatel) {
-        this.isDodavatel = isDodavatel;
-    }
+	public boolean getIsDodavatel() {
+		return isDodavatel;
+	}
 
-    public boolean getIsOdberatel() {
-        return isOdberatel;
-    }
+	public void setIsDodavatel(boolean isDodavatel) {
+		this.isDodavatel = isDodavatel;
+	}
 
-    public void setIsOdberatel(boolean isOdberatel) {
-        this.isOdberatel = isOdberatel;
-    }
+	public boolean getIsOdberatel() {
+		return isOdberatel;
+	}
 
-    public String getUlice() {
-        return ulice;
-    }
+	public void setIsOdberatel(boolean isOdberatel) {
+		this.isOdberatel = isOdberatel;
+	}
 
-    public void setUlice(String ulice) {
-        this.ulice = ulice;
-    }
+	public String getUlice() {
+		return ulice;
+	}
 
-    public String getMesto() {
-        return mesto;
-    }
+	public void setUlice(String ulice) {
+		this.ulice = ulice;
+	}
 
-    public void setMesto(String mesto) {
-        this.mesto = mesto;
-    }
+	public String getMesto() {
+		return mesto;
+	}
 
-    public String getSpolecnost() {
-        return spolecnost;
-    }
+	public void setMesto(String mesto) {
+		this.mesto = mesto;
+	}
 
-    public void setSpolecnost(String spolecnost) {
-        this.spolecnost = spolecnost;
-    }
+	public String getSpolecnost() {
+		return spolecnost;
+	}
 
-    public int getPsc() {
-        return psc;
-    }
+	public void setSpolecnost(String spolecnost) {
+		this.spolecnost = spolecnost;
+	}
 
-    public void setPsc(int psc) {
-        this.psc = psc;
-    }
+	public int getPsc() {
+		return psc;
+	}
 
-    public int getCisloPopisne() {
-        return cisloPopisne;
-    }
+	public void setPsc(int psc) {
+		this.psc = psc;
+	}
 
-    public void setCisloPopisne(int cisloPopisne) {
-        this.cisloPopisne = cisloPopisne;
-    }
-    
-    
-    
+	public int getCisloPopisne() {
+		return cisloPopisne;
+	}
+
+	public void setCisloPopisne(int cisloPopisne) {
+		this.cisloPopisne = cisloPopisne;
+	}
+
 }

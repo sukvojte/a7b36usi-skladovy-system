@@ -8,24 +8,24 @@ import cz.a7b36usi.sklad.tableutils.Column;
 
 public class UsersDataModel extends BaseDataModel<UserDTO> {
 
-    private static final long serialVersionUID = -749847976262513097L;
+	private static final long serialVersionUID = -749847976262513097L;
 
-    public UsersDataModel(List<UserDTO> list) {
-        super(list);
-        columns = new Column[]{new Column("Jmeno"), new Column("Role")};
-    }
+	public UsersDataModel(List<UserDTO> list) {
+		super(list);
+		columns = new Column[] { new Column("Jmeno"), new Column("Role") };
+	}
 
-    @Override
-    public Object getColumnValue(UserDTO row, int index) {
-        switch (index) {
-            case 0:
-                return row.getUsername();
-            case 1:
-                return row.getAcl();
-            default:
-                return null;
-        }
+	@Override
+	public Object getColumnValue(UserDTO row, int index) {
+		switch (index) {
+		case 0:
+			return row.getUsername();
+		case 1:
+			return row.getAcl();
+		default:
+			return null;
+		}
 
-    }
+	}
 
 }

@@ -16,38 +16,37 @@ import cz.a7b36usi.sklad.Service.IProductService;
 import cz.a7b36usi.sklad.gui.orderitems.OrderItemsDataModel;
 import cz.a7b36usi.sklad.gui.orderitems.ifaces.IOrderItemsGUI;
 
-
 @Component
-public class OrdersItemState implements IOrdersItemState{
+public class OrdersItemState implements IOrdersItemState {
 
 	static final Logger logger = Logger.getLogger(OrdersItemState.class);
-	
+
 	@Autowired
-	private IOrderItemsGUI orderEditForm; 
-	
+	private IOrderItemsGUI orderEditForm;
+
 	@Autowired
 	private IProductService productService;
-	
+
 	@Autowired
-    private IOrderService orderService;
-	
+	private IOrderService orderService;
+
 	private OrderItemsDataModel model;
 	private OrderDTO item;
-	
+
 	@PostConstruct
-    public void registerModel() {
+	public void registerModel() {
 		orderEditForm.addListeners(this);
 	}
-	
+
 	public void save() {
 		OrderItemDTO orderItem = orderEditForm.getEditedOrderItem();
-		
+
 		orderItem.setOrder(item.getId());
-		
+
 		logger.debug("Save item " + orderItem.getId());
 		orderService.saveOrderItem(orderItem);
 
-		updateModel();	
+		updateModel();
 	}
 
 	public void click(int index) {
@@ -55,42 +54,43 @@ public class OrdersItemState implements IOrdersItemState{
 		OrderItemDTO orderItem = model.getRowByIndex(index);
 		orderEditForm.editOrderItem(orderItem);
 	}
-	
+
 	public void deactivated(MainController controller, OrdersState state) {
 		orderEditForm.setVisible(false);
 	}
-	
-	public void openDialog(MainController controller, OrdersState state, OrderDTO item){
-		
-		this.item = item; 
-		
-		if(updateModel()){		
+
+	public void openDialog(MainController controller, OrdersState state,
+			OrderDTO item) {
+
+		this.item = item;
+
+		if (updateModel()) {
 			orderEditForm.setTableModel(model, productService.getAllProducts());
 			orderEditForm.setVisible(true);
 		}
 	}
-	
-	private boolean updateModel(){
-		
-		if(item == null){
+
+	private boolean updateModel() {
+
+		if (item == null) {
 			logger.error("Item is null!");
 			return false;
 		}
-		
+
 		List<OrderItemDTO> items = orderService.getOrderItems(item);
-		if(items == null){
+		if (items == null) {
 			logger.error("Items is null!");
 			return false;
 		}
-		
-		if(model == null){
+
+		if (model == null) {
 			logger.debug("Create new model");
 			model = new OrderItemsDataModel(items);
-		}else{
+		} else {
 			logger.debug("Updating model");
 			model.update(items);
 		}
-		
+
 		return true;
 	}
 
@@ -100,6 +100,5 @@ public class OrdersItemState implements IOrdersItemState{
 		orderService.removeOrderItem(orderItem);
 		updateModel();
 	}
-
 
 }

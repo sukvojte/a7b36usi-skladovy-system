@@ -12,9 +12,9 @@ public class TabsJPanel extends JPanel {
 	private static final long serialVersionUID = -5181116522842829853L;
 
 	private Tabs tab;
-	
-	public TabsJPanel(Tabs tab){
-		this.tab = tab;  
+
+	public TabsJPanel(Tabs tab) {
+		this.tab = tab;
 	}
 
 	/**
@@ -23,7 +23,5 @@ public class TabsJPanel extends JPanel {
 	public Tabs getTab() {
 		return tab;
 	}
-	
-	
-	
+
 }

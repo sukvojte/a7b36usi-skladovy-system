@@ -7,44 +7,44 @@
 package cz.a7b36usi.sklad.DTO;
 
 /**
- *
+ * 
  * @author Peter
  */
-public class ProductVersionDTO extends AbstractDTO{
-    private Long code;
-   
-    private String name;
-   
-    private Long product;
+public class ProductVersionDTO extends AbstractDTO {
+	private Long code;
 
-    public ProductVersionDTO(Long id,Long code, String name, Long product) {
-        this.code = code;
-        this.name = name;
-        this.product = product;
-        this.id=id;
-    }
+	private String name;
 
-    public Long getCode() {
-        return code;
-    }
+	private Long product;
 
-    public void setCode(Long code) {
-        this.code = code;
-    }
+	public ProductVersionDTO(Long id, Long code, String name, Long product) {
+		this.code = code;
+		this.name = name;
+		this.product = product;
+		this.id = id;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public Long getCode() {
+		return code;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public void setCode(Long code) {
+		this.code = code;
+	}
 
-    public Long getProduct() {
-        return product;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public void setProduct(Long product) {
-        this.product = product;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Long getProduct() {
+		return product;
+	}
+
+	public void setProduct(Long product) {
+		this.product = product;
+	}
 }

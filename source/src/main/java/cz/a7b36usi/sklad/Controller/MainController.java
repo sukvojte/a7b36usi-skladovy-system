@@ -48,11 +48,10 @@ public class MainController implements IMainController {
 			public void tabChanged(Tabs activeTab) {
 				logger.debug("Tab changed to " + activeTab);
 
-				
-				if(state != null){
+				if (state != null) {
 					state.deactivated(ctrl);
 				}
-				
+
 				state = stateFactory.getStateByTab(activeTab);
 				state.activated(ctrl);
 			}
@@ -100,17 +99,17 @@ public class MainController implements IMainController {
 	}
 
 	public void filterMovementsByProduct(ProductDTO product) {
-		
+
 		mainGui.switchTab(Tabs.MOVEMENTS);
-		
-		if(state instanceof MovementsState){
-			
-			((MovementsState)state).filterByProduct(product);
-			
-		}else{
+
+		if (state instanceof MovementsState) {
+
+			((MovementsState) state).filterByProduct(product);
+
+		} else {
 			logger.error("Bad state!");
 		}
-		
+
 	}
 
 }

@@ -5,18 +5,18 @@
 package cz.a7b36usi.sklad.DTO;
 
 /**
- *
+ * 
  * @author Peter
  */
 public abstract class AbstractDTO {
-    protected Long id;
+	protected Long id;
 
-    public Long getId() {
-        return id;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-    
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 }

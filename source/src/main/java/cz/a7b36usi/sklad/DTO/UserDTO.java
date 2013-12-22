@@ -11,51 +11,53 @@ import cz.a7b36usi.sklad.BO.UserRole;
  * @author Peter
  */
 
-
 /**
- * DTO objekty slouzi k prenaseni dat mezi servisni vrstvou a vyssimi vrstvami aplikace
+ * DTO objekty slouzi k prenaseni dat mezi servisni vrstvou a vyssimi vrstvami
+ * aplikace
  */
-public class UserDTO extends AbstractDTO{
-    
-    private String username;
-    private UserRole acl;
-    private String password;
+public class UserDTO extends AbstractDTO {
 
-    /**
-     * Pro jistotu se neprenasi v DTO password
-     * @param acl Uzivatelska role
-     * @param username Uzivatelske jmeno
-     */
-    public UserDTO(Long id,String username, UserRole acl, String pass) {
-        this.username = username;
-        this.acl = acl;
-        this.id=id;
-        this.password = pass;
-    }
-    
-    public String getUsername() {
-        return username;
-    }
+	private String username;
+	private UserRole acl;
+	private String password;
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
+	/**
+	 * Pro jistotu se neprenasi v DTO password
+	 * 
+	 * @param acl
+	 *            Uzivatelska role
+	 * @param username
+	 *            Uzivatelske jmeno
+	 */
+	public UserDTO(Long id, String username, UserRole acl, String pass) {
+		this.username = username;
+		this.acl = acl;
+		this.id = id;
+		this.password = pass;
+	}
 
+	public String getUsername() {
+		return username;
+	}
 
-    public UserRole getAcl() {
-        return acl;
-    }
+	public void setUsername(String username) {
+		this.username = username;
+	}
 
-    public void setAcl(UserRole acl) {
-        this.acl = acl;
-    }
+	public UserRole getAcl() {
+		return acl;
+	}
 
-    public String getPassword() {
-        return password;
-    }
+	public void setAcl(UserRole acl) {
+		this.acl = acl;
+	}
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-    
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 }

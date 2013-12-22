@@ -4,9 +4,9 @@
  */
 package cz.a7b36usi.sklad.BO;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,63 +18,69 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 /**
- *
+ * 
  * @author Peter
  */
 @Entity
-@Table(name="orders")
-public class OrderBO extends AbstractBO{
-    @Temporal(TemporalType.DATE)
-    @Column(name = "orderDate",nullable = false)
-    private Date date;
-       
-    @OneToMany(cascade = {CascadeType.ALL}, mappedBy="order")
-    private List<OrderItemBO> items;
-    
-    @ManyToOne
-    @JoinColumn(nullable = false)
-    private PartnerBO partner;
-    
-    private String number;
+@Table(name = "orders")
+public class OrderBO extends AbstractBO {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 636941719957632910L;
 
-    public OrderBO() {
-    }
-    //***************** GETTER SETTER KILOMETER BY PETER ********************************
-    public Date getDate() {
-        return date;
-    }
+	@Temporal(TemporalType.DATE)
+	@Column(name = "orderDate", nullable = false)
+	private Date date;
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
+	@OneToMany(cascade = { CascadeType.ALL }, mappedBy = "order")
+	private List<OrderItemBO> items;
 
-    public List<OrderItemBO> getItems() {
-//	if(items == null){
-//	    items = new ArrayList<OrderItemBO>();
-//	    return items;
-//	}
-        return items;
-    }
+	@ManyToOne
+	@JoinColumn(nullable = false)
+	private PartnerBO partner;
 
-    public void setItems(List<OrderItemBO> items) {
-        this.items = items;
-    }
+	private String number;
 
-    public PartnerBO getPartner() {
-        return partner;
-    }
+	public OrderBO() {
+	}
 
-    public void setPartner(PartnerBO partner) {
-        this.partner = partner;
-    } 
+	// ***************** GETTER SETTER KILOMETER BY PETER
+	// ********************************
+	public Date getDate() {
+		return date;
+	}
 
-    public String getNumber() {
-        return number;
-    }
+	public void setDate(Date date) {
+		this.date = date;
+	}
 
-    public void setNumber(String number) {
-        this.number = number;
-    }
-    
-    
+	public List<OrderItemBO> getItems() {
+		// if(items == null){
+		// items = new ArrayList<OrderItemBO>();
+		// return items;
+		// }
+		return items;
+	}
+
+	public void setItems(List<OrderItemBO> items) {
+		this.items = items;
+	}
+
+	public PartnerBO getPartner() {
+		return partner;
+	}
+
+	public void setPartner(PartnerBO partner) {
+		this.partner = partner;
+	}
+
+	public String getNumber() {
+		return number;
+	}
+
+	public void setNumber(String number) {
+		this.number = number;
+	}
+
 }

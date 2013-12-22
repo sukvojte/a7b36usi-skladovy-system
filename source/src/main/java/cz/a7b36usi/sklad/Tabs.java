@@ -8,17 +8,13 @@ import cz.a7b36usi.sklad.Controller.states.products.ProductsState;
 import cz.a7b36usi.sklad.Controller.states.users.UsersState;
 
 public enum Tabs {
-	ADDRESS_BOOK(AddressBookState.class),
-	ORDERS(OrdersState.class),
-	MOVEMENTS(MovementsState.class),
-	DOCUMENTS(DocumentsState.class),
-	WAREHOUSE(ProductsState.class),
-	USERS(UsersState.class);	
-	
-	
+	ADDRESS_BOOK(AddressBookState.class), ORDERS(OrdersState.class), MOVEMENTS(
+			MovementsState.class), DOCUMENTS(DocumentsState.class), WAREHOUSE(
+			ProductsState.class), USERS(UsersState.class);
+
 	private Class<?> stateClass;
-	
-	private Tabs(Class<?> stateClass){
+
+	private Tabs(Class<?> stateClass) {
 		this.stateClass = stateClass;
 	}
 
@@ -28,6 +24,5 @@ public enum Tabs {
 	public Class<?> getStateClass() {
 		return stateClass;
 	}
-	
-	
+
 }

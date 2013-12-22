@@ -13,32 +13,33 @@ import cz.a7b36usi.sklad.Service.IUserService;
 import cz.a7b36usi.sklad.gui.login.ifaces.ILogging;
 
 /**
- * This class is created as first object in whole application. It manages logging to application. 
- * And is responsible for showing an appplication.
+ * This class is created as first object in whole application. It manages
+ * logging to application. And is responsible for showing an appplication.
+ * 
  * @author Peter
  */
 @Component
 public class LoginController implements ILoginController {
 
-    @Autowired
-    private IUserService userService;
-    
-    @Autowired
-    private ILogging loginForm;
+	@Autowired
+	private IUserService userService;
 
-    @Autowired
-    private IMainController mainController;
-    
-    public void showLogForm(String message) {
-        loginForm.setVisible(true);
-    }
+	@Autowired
+	private ILogging loginForm;
 
-    public void doLogin(String username, char[] password) {
-        if (userService.logInUser(username, password)) {
-            loginForm.setVisible(false);
-            mainController.showMainFrame("Login successfull");
-        } else {
-        	loginForm.showError("Login unsuccessfull");
-        }
-    }
+	@Autowired
+	private IMainController mainController;
+
+	public void showLogForm(String message) {
+		loginForm.setVisible(true);
+	}
+
+	public void doLogin(String username, char[] password) {
+		if (userService.logInUser(username, password)) {
+			loginForm.setVisible(false);
+			mainController.showMainFrame("Login successfull");
+		} else {
+			loginForm.showError("Login unsuccessfull");
+		}
+	}
 }

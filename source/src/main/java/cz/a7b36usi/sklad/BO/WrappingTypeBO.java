@@ -1,4 +1,3 @@
-
 package cz.a7b36usi.sklad.BO;
 
 import javax.persistence.Entity;
@@ -7,47 +6,45 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
- *
+ * 
  * @author Lukas L.
  */
 @Entity
-@Table(name="wrapping_type")
-public class WrappingTypeBO extends AbstractBO{
-    private String name;
-    private Double quantity;
-    
-    @ManyToOne
-    @JoinColumn(nullable = false)
-    private ProductBO product;
+@Table(name = "wrapping_type")
+public class WrappingTypeBO extends AbstractBO {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2278514321400246436L;
+	private String name;
+	private Double quantity;
 
-    public String getName() {
-        return name;
-    }
+	@ManyToOne
+	@JoinColumn(nullable = false)
+	private ProductBO product;
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public Double getQuantity() {
-        return quantity;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public void setQuantity(Double quantity) {
-        this.quantity = quantity;
-    }
+	public Double getQuantity() {
+		return quantity;
+	}
 
-    public ProductBO getProduct() {
-        return product;
-    }
+	public void setQuantity(Double quantity) {
+		this.quantity = quantity;
+	}
 
-    public void setProduct(ProductBO product) {
-        this.product = product;
-    }
-    
-    
-    
+	public ProductBO getProduct() {
+		return product;
+	}
 
+	public void setProduct(ProductBO product) {
+		this.product = product;
+	}
 
-    
-    
 }

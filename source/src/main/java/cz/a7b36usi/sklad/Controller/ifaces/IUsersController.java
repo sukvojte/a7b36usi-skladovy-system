@@ -5,22 +5,22 @@ import cz.a7b36usi.sklad.DTO.UserDTO;
 
 public interface IUsersController {
 
-    /**
-     * Method for 
-     *
-     * @param message
-     */
-    void showUsersForm();
+	/**
+	 * Method for
+	 * 
+	 * @param message
+	 */
+	void showUsersForm();
 
-    /**
-     * 
-     * @param user 
-     */ 
-    void deleteUser(UserDTO user);
+	/**
+	 * 
+	 * @param user
+	 */
+	void deleteUser(UserDTO user);
 
-    void updateUser(UserDTO user);
+	void updateUser(UserDTO user);
 
-    void updatePassword(UserDTO user, char[] password);
+	void updatePassword(UserDTO user, char[] password);
 
-    void createUser(String username, char[] password, UserRole acl);
+	void createUser(String username, char[] password, UserRole acl);
 }

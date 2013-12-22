@@ -19,49 +19,53 @@ import javax.persistence.Table;
  * Definuje entitu User pro Hibernate
  */
 @Entity
-@Table(name="users")
-public class UserBO extends AbstractBO{
-    @Column(unique = true)
-    private String username;
-    
-    private String password;
-    
-    /**
-     * Uzivatelska role
-     */
-    @Enumerated(EnumType.STRING)
-    UserRole acl;
-    
-    
-    /**
-     * Defaultni konstruktor nastavi roli na nejakou hodnotu aby nebyla null
-     */
-    public UserBO(){
-    this.acl= UserRole.SKLADNIK;
-    }
+@Table(name = "users")
+public class UserBO extends AbstractBO {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2294763496607217663L;
 
-    public String getUsername() {
-        return username;
-    }
+	@Column(unique = true)
+	private String username;
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
+	private String password;
 
-    public String getPassword() {
-        return password;
-    }
+	/**
+	 * Uzivatelska role
+	 */
+	@Enumerated(EnumType.STRING)
+	UserRole acl;
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+	/**
+	 * Defaultni konstruktor nastavi roli na nejakou hodnotu aby nebyla null
+	 */
+	public UserBO() {
+		this.acl = UserRole.SKLADNIK;
+	}
 
-    public UserRole getAcl() {
-        return acl;
-    }
+	public String getUsername() {
+		return username;
+	}
 
-    public void setAcl(UserRole acl) {
-        this.acl = acl;
-    }
-     
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public UserRole getAcl() {
+		return acl;
+	}
+
+	public void setAcl(UserRole acl) {
+		this.acl = acl;
+	}
+
 }

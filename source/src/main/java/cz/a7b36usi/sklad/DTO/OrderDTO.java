@@ -8,68 +8,74 @@ import java.util.Date;
 import java.util.List;
 
 /**
- *
+ * 
  * @author Peter
  */
 public class OrderDTO extends AbstractDTO {
 
-    private Date date;
+	private Date date;
 
-    private List<OrderItemDTO> items;
+	private List<OrderItemDTO> items;
 
-    private PartnerDTO partner;
-    
-    private String number;
+	private PartnerDTO partner;
 
-    
-    /**
-     * DTO representing order
-     * @param id 
-     * @param date date of creation (not the creation of the world, but creation of this order)
-     * @param number identification number of this order (not database identifier)
-     * @param items list of items contained in the order
-     * @param partner   owner of this order
-     */
-    public OrderDTO(Long id, Date date,String number, List<OrderItemDTO> items, PartnerDTO partner) {
-        this.date = date;
-        this.items = items;
-        this.partner = partner;
-        this.id = id;
-        this.number=number;
-    }
+	private String number;
 
-    //***************** GETTER SETTER KILOMETER BY PETER ********************************
-    public Date getDate() {
-        return date;
-    }
+	/**
+	 * DTO representing order
+	 * 
+	 * @param id
+	 * @param date
+	 *            date of creation (not the creation of the world, but creation
+	 *            of this order)
+	 * @param number
+	 *            identification number of this order (not database identifier)
+	 * @param items
+	 *            list of items contained in the order
+	 * @param partner
+	 *            owner of this order
+	 */
+	public OrderDTO(Long id, Date date, String number,
+			List<OrderItemDTO> items, PartnerDTO partner) {
+		this.date = date;
+		this.items = items;
+		this.partner = partner;
+		this.id = id;
+		this.number = number;
+	}
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
+	// ***************** GETTER SETTER KILOMETER BY PETER
+	// ********************************
+	public Date getDate() {
+		return date;
+	}
 
-    public List<OrderItemDTO> getItems() {
-        return items;
-    }
+	public void setDate(Date date) {
+		this.date = date;
+	}
 
-    public void setItems(List<OrderItemDTO> items) {
-        this.items = items;
-    }
+	public List<OrderItemDTO> getItems() {
+		return items;
+	}
 
-    public PartnerDTO getPartner() {
-        return partner;
-    }
+	public void setItems(List<OrderItemDTO> items) {
+		this.items = items;
+	}
 
-    public void setPartner(PartnerDTO partner) {
-        this.partner = partner;
-    }
+	public PartnerDTO getPartner() {
+		return partner;
+	}
 
-    public String getNumber() {
-        return number;
-    }
+	public void setPartner(PartnerDTO partner) {
+		this.partner = partner;
+	}
 
-    public void setNumber(String number) {
-        this.number = number;
-    }
-    
-    
+	public String getNumber() {
+		return number;
+	}
+
+	public void setNumber(String number) {
+		this.number = number;
+	}
+
 }

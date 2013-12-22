@@ -5,6 +5,11 @@
  */
 package cz.a7b36usi.sklad.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.stereotype.Component;
+
 import cz.a7b36usi.sklad.BO.OrderBO;
 import cz.a7b36usi.sklad.BO.OrderItemBO;
 import cz.a7b36usi.sklad.BO.PartnerBO;
@@ -14,121 +19,114 @@ import cz.a7b36usi.sklad.BO.WrappingTypeBO;
 import cz.a7b36usi.sklad.DTO.OrderDTO;
 import cz.a7b36usi.sklad.DTO.OrderItemDTO;
 import cz.a7b36usi.sklad.DTO.PartnerDTO;
-import cz.a7b36usi.sklad.DTO.ProductDTO;
-
-import java.util.ArrayList;
-import java.util.List;
-import org.springframework.stereotype.Component;
 
 /**
- *
+ * 
  * @author Peter
  */
 @Component
 public class OrderService extends AbstractService implements IOrderService {
 
-    public Long saveOrder(OrderDTO order) {
-        OrderBO bo = new OrderBO();
-        bo.setDate(order.getDate());
-        bo.setId(order.getId());
-        bo.setNumber(order.getNumber());
-        bo.setPartner(genericDAO.loadById(order.getPartner().getId(), PartnerBO.class));
-        List<OrderItemBO> items = new ArrayList<OrderItemBO>();
-	if(order.getItems() != null){
-        for (OrderItemDTO orderItemDTO : order.getItems()) {
-            OrderItemBO it = new OrderItemBO();
-            it.setOrder(bo);
-            it.setProduct(genericDAO.loadById(orderItemDTO.getProduct(), ProductBO.class));
-            it.setProductVersion(genericDAO.loadById(orderItemDTO.getProductVersion(), ProductVersionBO.class));
-            it.setQuantity(orderItemDTO.getQuantity());
-            it.setWrappingType(genericDAO.loadById(orderItemDTO.getWrappingType(), WrappingTypeBO.class));
-            items.add(it);
-        }
-	bo.setItems(items);
+	public Long saveOrder(OrderDTO order) {
+		OrderBO bo = new OrderBO();
+		bo.setDate(order.getDate());
+		bo.setId(order.getId());
+		bo.setNumber(order.getNumber());
+		bo.setPartner(genericDAO.loadById(order.getPartner().getId(),
+				PartnerBO.class));
+		List<OrderItemBO> items = new ArrayList<OrderItemBO>();
+		if (order.getItems() != null) {
+			for (OrderItemDTO orderItemDTO : order.getItems()) {
+				OrderItemBO it = new OrderItemBO();
+				it.setOrder(bo);
+				it.setProduct(genericDAO.loadById(orderItemDTO.getProduct(),
+						ProductBO.class));
+				it.setProductVersion(genericDAO.loadById(
+						orderItemDTO.getProductVersion(),
+						ProductVersionBO.class));
+				it.setQuantity(orderItemDTO.getQuantity());
+				it.setWrappingType(genericDAO.loadById(
+						orderItemDTO.getWrappingType(), WrappingTypeBO.class));
+				items.add(it);
+			}
+			bo.setItems(items);
+		}
+		return genericDAO.saveOrUpdate(bo).getId();
 	}
-        return genericDAO.saveOrUpdate(bo).getId();
-    }
 
-    public List<OrderDTO> getAllOrders() {
-        List<OrderBO> bos = genericDAO.getAll(OrderBO.class);
-        List<OrderDTO> odtos = new ArrayList<OrderDTO>();
+	public List<OrderDTO> getAllOrders() {
+		List<OrderBO> bos = genericDAO.getAll(OrderBO.class);
+		List<OrderDTO> odtos = new ArrayList<OrderDTO>();
 
-        for (OrderBO orderBO : bos) {
-            PartnerBO pbo = orderBO.getPartner();
-            PartnerDTO partner = new PartnerDTO(
-                    pbo.getId(),
-                    pbo.getIsDodavatel(),
-                    pbo.getIsOdberatel(),
-                    pbo.getUlice(),
-                    pbo.getMesto(),
-                    pbo.getSpolecnost(),
-                    pbo.getPsc(),
-                    pbo.getCisloPopisne());
-            
-            OrderDTO dto = new OrderDTO(orderBO.getId(), orderBO.getDate(),orderBO.getNumber(), null, partner);
-            odtos.add(dto);
-        }
-        return odtos;
-    }
+		for (OrderBO orderBO : bos) {
+			PartnerBO pbo = orderBO.getPartner();
+			PartnerDTO partner = new PartnerDTO(pbo.getId(),
+					pbo.getIsDodavatel(), pbo.getIsOdberatel(), pbo.getUlice(),
+					pbo.getMesto(), pbo.getSpolecnost(), pbo.getPsc(),
+					pbo.getCisloPopisne());
 
-    public void removeOrder(OrderDTO order) {
-        genericDAO.removeById(order.getId(), OrderBO.class);
-    }
-
-    public void saveOrderItem(OrderItemDTO item) {
-        OrderItemBO it = new OrderItemBO();
-	it.setId(item.getId());
-        it.setOrder(genericDAO.loadById(item.getOrder(), OrderBO.class));
-        it.setProduct(genericDAO.loadById(item.getProduct(), ProductBO.class));//TODO: odkomentovat
-//        it.setProductVersion(genericDAO.loadById(item.getProductVersion(), ProductVersionBO.class));
-        it.setQuantity(item.getQuantity());
- //       it.setWrappingType(genericDAO.loadById(item.getWrappingType(), WrappingTypeBO.class));
-        genericDAO.saveOrUpdate(it);
-    }
-
-    public List<OrderItemDTO> getAllOrderItems(OrderDTO order) {
-        List<OrderItemBO> bos = genericDAO.getByProperty("order", genericDAO.loadById(order.getId(), OrderBO.class), OrderItemBO.class);
-	List<OrderItemDTO> ordersDTO = new ArrayList<OrderItemDTO>();
-	for (OrderItemBO orderItemBO : bos) {//TODO: NULLY PRYC, pouze kvuli tisku
-	    ordersDTO.add(new OrderItemDTO(
-                orderItemBO.getId(),
-                orderItemBO.getProduct().getId(),
-                orderItemBO.getQuantity(),
-                null,
-                null,
-                orderItemBO.getOrder().getId(),
-		    orderItemBO.getProduct().getName()
-		   ) );
-	    
+			OrderDTO dto = new OrderDTO(orderBO.getId(), orderBO.getDate(),
+					orderBO.getNumber(), null, partner);
+			odtos.add(dto);
+		}
+		return odtos;
 	}
-	return ordersDTO;
-    }
 
-    public void removeOrderItem(OrderItemDTO item) {
-        genericDAO.removeById(item.getId(), OrderItemBO.class);
-    }
+	public void removeOrder(OrderDTO order) {
+		genericDAO.removeById(order.getId(), OrderBO.class);
+	}
 
-    public OrderItemDTO getOrderItemById(Long id) {
-        OrderItemBO orderItemBO = genericDAO.loadById(id, OrderItemBO.class);
-        OrderItemDTO idto = new OrderItemDTO(
-                orderItemBO.getId(),
-                orderItemBO.getProduct().getId(),
-                orderItemBO.getQuantity(),
-                orderItemBO.getWrappingType().getId(),
-                orderItemBO.getProductVersion().getId(),
-                orderItemBO.getOrder().getId(),
-		orderItemBO.getProduct().getName()
-		);
-        return idto;
-    }
+	public void saveOrderItem(OrderItemDTO item) {
+		OrderItemBO it = new OrderItemBO();
+		it.setId(item.getId());
+		it.setOrder(genericDAO.loadById(item.getOrder(), OrderBO.class));
+		it.setProduct(genericDAO.loadById(item.getProduct(), ProductBO.class));// TODO:
+																				// odkomentovat
+		// it.setProductVersion(genericDAO.loadById(item.getProductVersion(),
+		// ProductVersionBO.class));
+		it.setQuantity(item.getQuantity());
+		// it.setWrappingType(genericDAO.loadById(item.getWrappingType(),
+		// WrappingTypeBO.class));
+		genericDAO.saveOrUpdate(it);
+	}
+
+	public List<OrderItemDTO> getAllOrderItems(OrderDTO order) {
+		List<OrderItemBO> bos = genericDAO.getByProperty("order",
+				genericDAO.loadById(order.getId(), OrderBO.class),
+				OrderItemBO.class);
+		List<OrderItemDTO> ordersDTO = new ArrayList<OrderItemDTO>();
+		for (OrderItemBO orderItemBO : bos) {// TODO: NULLY PRYC, pouze kvuli
+												// tisku
+			ordersDTO.add(new OrderItemDTO(orderItemBO.getId(), orderItemBO
+					.getProduct().getId(), orderItemBO.getQuantity(), null,
+					null, orderItemBO.getOrder().getId(), orderItemBO
+							.getProduct().getName()));
+
+		}
+		return ordersDTO;
+	}
+
+	public void removeOrderItem(OrderItemDTO item) {
+		genericDAO.removeById(item.getId(), OrderItemBO.class);
+	}
+
+	public OrderItemDTO getOrderItemById(Long id) {
+		OrderItemBO orderItemBO = genericDAO.loadById(id, OrderItemBO.class);
+		OrderItemDTO idto = new OrderItemDTO(orderItemBO.getId(), orderItemBO
+				.getProduct().getId(), orderItemBO.getQuantity(), orderItemBO
+				.getWrappingType().getId(), orderItemBO.getProductVersion()
+				.getId(), orderItemBO.getOrder().getId(), orderItemBO
+				.getProduct().getName());
+		return idto;
+	}
 
 	public List<OrderItemDTO> getOrderItems(OrderDTO item) {
 		OrderBO orderBO = genericDAO.getById(item.getId(), OrderBO.class);
 		ArrayList<OrderItemDTO> itemDTO = new ArrayList<OrderItemDTO>();
-        for(OrderItemBO orderItemBO : orderBO.getItems()){
-        	itemDTO.add(new OrderItemDTO(orderItemBO, orderBO.getId()));
-        }
-		
+		for (OrderItemBO orderItemBO : orderBO.getItems()) {
+			itemDTO.add(new OrderItemDTO(orderItemBO, orderBO.getId()));
+		}
+
 		return itemDTO;
 	}
 

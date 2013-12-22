@@ -5,9 +5,9 @@
 package cz.a7b36usi.sklad.BO;
 
 /**
- *
+ * 
  * @author Peter
  */
 public enum DocumentType {
-    PRIJEMKA,VYDEJKA
+	PRIJEMKA, VYDEJKA
 }

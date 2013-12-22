@@ -1,4 +1,3 @@
-
 package cz.a7b36usi.sklad.BO;
 
 import javax.persistence.Column;
@@ -7,49 +6,48 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
- *
+ * 
  * @author Lukas L.
  */
 @Entity
-@Table(name="product_version")
-public class ProductVersionBO extends AbstractBO{
-   @Column(nullable = false)
-    private Long code;
-   
-   @Column(nullable = false)
-    private String name;
-    
-    @ManyToOne
-    private ProductBO product;
+@Table(name = "product_version")
+public class ProductVersionBO extends AbstractBO {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5814437849885161347L;
 
-    public Long getCode() {
-        return code;
-    }
+	@Column(nullable = false)
+	private Long code;
 
-    public void setCode(Long code) {
-        this.code = code;
-    }
+	@Column(nullable = false)
+	private String name;
 
-    public String getName() {
-        return name;
-    }
+	@ManyToOne
+	private ProductBO product;
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public Long getCode() {
+		return code;
+	}
 
-    public ProductBO getProduct() {
-        return product;
-    }
+	public void setCode(Long code) {
+		this.code = code;
+	}
 
-    public void setProduct(ProductBO product) {
-        this.product = product;
-    }
-    
+	public String getName() {
+		return name;
+	}
 
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    
-    
-    
-    
+	public ProductBO getProduct() {
+		return product;
+	}
+
+	public void setProduct(ProductBO product) {
+		this.product = product;
+	}
+
 }

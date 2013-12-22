@@ -12,7 +12,7 @@ public class DocumentItemsDataModel extends BaseDataModel<MovementDTO> {
 
 	public DocumentItemsDataModel(List<MovementDTO> list) {
 		super(list);
-		columns = new Column[] { new Column("Produkt"), new Column("Počet")};
+		columns = new Column[] { new Column("Produkt"), new Column("Počet") };
 	}
 
 	@Override

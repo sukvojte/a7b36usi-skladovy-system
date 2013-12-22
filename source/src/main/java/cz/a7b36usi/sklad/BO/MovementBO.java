@@ -22,78 +22,83 @@ import javax.persistence.Table;
 @Table(name = "movement")
 public class MovementBO extends AbstractBO {
 
-    @Column(nullable = false)
-    private double price;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3279304329605562706L;
 
-    @ManyToOne
-    //@JoinColumn(nullable = true)
-    private WrappingTypeBO wrapping;
+	@Column(nullable = false)
+	private double price;
 
-    @ManyToOne
-    //@JoinColumn(nullable = true)
-    private ProductVersionBO version;
+	@ManyToOne
+	// @JoinColumn(nullable = true)
+	private WrappingTypeBO wrapping;
 
-    @ManyToOne
-    @JoinColumn(nullable = false)
-    private ProductBO product;
+	@ManyToOne
+	// @JoinColumn(nullable = true)
+	private ProductVersionBO version;
 
-    @ManyToOne
-    @JoinColumn(nullable = false)
-    private DocumentBO document;
-    
-    private int quantity;
+	@ManyToOne
+	@JoinColumn(nullable = false)
+	private ProductBO product;
 
-    public MovementBO() {
-    }
+	@ManyToOne
+	@JoinColumn(nullable = false)
+	private DocumentBO document;
 
-    //***************** GETTER SETTER KILOMETER BY PETER ********************************
-    public double getPrice() {
-        return price;
-    }
+	private int quantity;
 
-    public void setPrice(double price) {
-        this.price = price;
-    }
+	public MovementBO() {
+	}
 
-    public WrappingTypeBO getWrapping() {
-        return wrapping;
-    }
+	// ***************** GETTER SETTER KILOMETER BY PETER
+	// ********************************
+	public double getPrice() {
+		return price;
+	}
 
-    public void setWrapping(WrappingTypeBO wrapping) {
-        this.wrapping = wrapping;
-    }
+	public void setPrice(double price) {
+		this.price = price;
+	}
 
-    public ProductVersionBO getVersion() {
-        return version;
-    }
+	public WrappingTypeBO getWrapping() {
+		return wrapping;
+	}
 
-    public void setVersion(ProductVersionBO version) {
-        this.version = version;
-    }
+	public void setWrapping(WrappingTypeBO wrapping) {
+		this.wrapping = wrapping;
+	}
 
-    public ProductBO getProdukt() {
-        return product;
-    }
+	public ProductVersionBO getVersion() {
+		return version;
+	}
 
-    public void setProdukt(ProductBO product) {
-        this.product = product;
-    }
+	public void setVersion(ProductVersionBO version) {
+		this.version = version;
+	}
 
-    public DocumentBO getDocument() {
-        return document;
-    }
+	public ProductBO getProdukt() {
+		return product;
+	}
 
-    public void setDocument(DocumentBO document) {
-        this.document = document;
-    }
+	public void setProdukt(ProductBO product) {
+		this.product = product;
+	}
 
-    public int getQuantity() {
-	return quantity;
-    }
+	public DocumentBO getDocument() {
+		return document;
+	}
 
-    public void setQuantity(int quantity) {
-	this.quantity = quantity;
-    }
+	public void setDocument(DocumentBO document) {
+		this.document = document;
+	}
 
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
 
 }

@@ -12,8 +12,7 @@ public class OrderItemsDataModel extends BaseDataModel<OrderItemDTO> {
 
 	public OrderItemsDataModel(List<OrderItemDTO> list) {
 		super(list);
-		columns = new Column[] { new Column("Produkt"),
-				new Column("Počet")};
+		columns = new Column[] { new Column("Produkt"), new Column("Počet") };
 	}
 
 	@Override

@@ -6,62 +6,64 @@
 
 package cz.a7b36usi.sklad.DTO;
 
-import cz.a7b36usi.sklad.BO.DocumentType;
 import java.util.Date;
 
+import cz.a7b36usi.sklad.BO.DocumentType;
+
 /**
- *
+ * 
  * @author Peter
  */
-public class DocumentDTO extends AbstractDTO{
-     private DocumentType documentType;
+public class DocumentDTO extends AbstractDTO {
+	private DocumentType documentType;
 
-    private PartnerDTO partner;
-    
-    private int number;
+	private PartnerDTO partner;
 
-    private Date date;
-  
+	private int number;
 
-    public DocumentDTO(Long id,DocumentType documentType, PartnerDTO partner, int number, Date date) {
-        this.documentType = documentType;
-        this.partner = partner;
-        this.number = number;
-        this.date = date;
-        this.id = id;
-    }
-    
-    //********************* GETTERS AND SETTERS ********************************
-    
-    public DocumentType getDocumentType() {
-        return documentType;
-    }
+	private Date date;
 
-    public void setDocumentType(DocumentType documentType) {
-        this.documentType = documentType;
-    }
+	public DocumentDTO(Long id, DocumentType documentType, PartnerDTO partner,
+			int number, Date date) {
+		this.documentType = documentType;
+		this.partner = partner;
+		this.number = number;
+		this.date = date;
+		this.id = id;
+	}
 
-    public PartnerDTO getPartner() {
-        return partner;
-    }
+	// ********************* GETTERS AND SETTERS
+	// ********************************
 
-    public void setPartner(PartnerDTO partner) {
-        this.partner = partner;
-    }
+	public DocumentType getDocumentType() {
+		return documentType;
+	}
 
-    public int getNumber() {
-        return number;
-    }
+	public void setDocumentType(DocumentType documentType) {
+		this.documentType = documentType;
+	}
 
-    public void setNumber(int number) {
-        this.number = number;
-    }
+	public PartnerDTO getPartner() {
+		return partner;
+	}
 
-    public Date getDate() {
-        return date;
-    }
+	public void setPartner(PartnerDTO partner) {
+		this.partner = partner;
+	}
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
+	public int getNumber() {
+		return number;
+	}
+
+	public void setNumber(int number) {
+		this.number = number;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
 }
