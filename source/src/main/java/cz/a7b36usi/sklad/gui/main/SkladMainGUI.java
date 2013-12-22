@@ -67,7 +67,6 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
     private OrderDTO lastOrder = null;
     private DocumentDTO lastDocument = null;
     private ProductDTO lastProduct = null;
-    
     private BaseDataModel<?> baseDataModel;
     public JButton filtrJB;
     /* Listenery - START */
@@ -137,19 +136,19 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
 	    }
 
 	    public DocumentDTO getDocumentData() {
-				long id = 0;
+		long id = 0;
 		if (lastDocument != null) {
 		    id = lastDocument.getId();
 		}
-		return new DocumentDTO((id != 0 ? id : null), (DocumentType)typDokladuJC.getSelectedItem(), ((PartnerDTO) partnersDokladyCB.getSelectedItem()), Integer.parseInt(cisloDokladTF.getText()), dateChooserCombo2.getCurrent().getTime());
+		return new DocumentDTO((id != 0 ? id : null), (DocumentType) typDokladuJC.getSelectedItem(), ((PartnerDTO) partnersDokladyCB.getSelectedItem()), Integer.parseInt(cisloDokladTF.getText()), dateChooserCombo2.getCurrent().getTime());
 	    }
 
 	    public ProductDTO getProductData() {
-				long id = 0;
+		long id = 0;
 		if (lastProduct != null) {
 		    id = lastProduct.getId();
 		}
-		return new ProductDTO((id != 0 ? id : null),jmenoProduktuTF.getText(), kodProduktuTF.getText(), Integer.parseInt(mnozstviProduktuTF.getText()), null);
+		return new ProductDTO((id != 0 ? id : null), jmenoProduktuTF.getText(), kodProduktuTF.getText(), Integer.parseInt(mnozstviProduktuTF.getText()), null);
 	    }
 	};
     }
@@ -213,9 +212,8 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
 	}
 
     }
-    
+
     public void editMovement(MovementDTO movement) {
-	
     }
 
     public void editDocument(DocumentDTO document) {
@@ -226,20 +224,20 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
 	    Calendar c = Calendar.getInstance();
 	    c.setTime(document.getDate());
 	    dateChooserCombo2.setCurrent(c);
-	    cisloDokladTF.setText(document.getNumber()+"");
+	    cisloDokladTF.setText(document.getNumber() + "");
 	    setSelected(typDokladuJC, document.getDocumentType());
-	    
+
 	} else {
-	     Calendar c = Calendar.getInstance();
+	    Calendar c = Calendar.getInstance();
 	    dateChooserCombo2.setCurrent(c);
 	    cisloDokladTF.setText(null);
 	    typDokladuJC.setSelectedIndex(0);
 	}
     }
-    
-    private void setSelected(JComboBox cb, Object field){
+
+    private void setSelected(JComboBox cb, Object field) {
 	for (int i = 0; i < cb.getItemCount(); i++) {
-	    if(cb.getItemAt(i).equals(field)){
+	    if (cb.getItemAt(i).equals(field)) {
 		cb.setSelectedIndex(i);
 	    }
 	}
@@ -252,14 +250,14 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
 	if (lastProduct != null) {
 	    jmenoProduktuTF.setText(product.getName());
 	    kodProduktuTF.setText(product.getCode());
-	    mnozstviProduktuTF.setText(product.getQuantity()+"");
-	    
+	    mnozstviProduktuTF.setText(product.getQuantity() + "");
+
 	} else {
 	    jmenoProduktuTF.setText(null);
 	    kodProduktuTF.setText(null);
-	    mnozstviProduktuTF.setText(null);	    
+	    mnozstviProduktuTF.setText(null);
 	}
-    }    
+    }
 
     private void nullForms() {
 	editCustomer(null);
@@ -872,29 +870,29 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-		JTable table = (JTable) evt.getComponent();
-	
-		if (table.getSelectedRowCount() == 1) {
-		    int selected = table.getSelectedRow();
-	
-		    
-		    if (evt.getClickCount() == 1) {
-		    
-			    // Fire event
-			    for (IMainGuiListener ctrl : listeners) {
-			    	ctrl.tableSelectedIndex(selected);
-			    }
-			    
-		    }else if (evt.getClickCount() == 2){
-		    
-		    	// Fire event
-			    for (IMainGuiListener ctrl : listeners) {
-			    	ctrl.tableDoubleClickOnIndex(selected);
-			    }
-			    
-		    }
-	
+	JTable table = (JTable) evt.getComponent();
+
+	if (table.getSelectedRowCount() == 1) {
+	    int selected = table.getSelectedRow();
+
+
+	    if (evt.getClickCount() == 1) {
+
+		// Fire event
+		for (IMainGuiListener ctrl : listeners) {
+		    ctrl.tableSelectedIndex(selected);
 		}
+
+	    } else if (evt.getClickCount() == 2) {
+
+		// Fire event
+		for (IMainGuiListener ctrl : listeners) {
+		    ctrl.tableDoubleClickOnIndex(selected);
+		}
+
+	    }
+
+	}
 
 
     }//GEN-LAST:event_jTable1MouseClicked
@@ -931,9 +929,9 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
 
     private void tiskObjednavkyJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tiskObjednavkyJBActionPerformed
 	// TODO add your handling code here:
-		    // Fire event
+	// Fire event
 	int selected = jTable1.getSelectedRow();
-	if(selected != -1){ 
+	if (selected != -1) {
 	    for (IMainGuiListener ctrl : listeners) {
 		ctrl.print(selected);
 	    }
@@ -941,7 +939,7 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
     }//GEN-LAST:event_tiskObjednavkyJBActionPerformed
 
     private void btnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewActionPerformed
-        nullForms();
+	nullForms();
     }//GEN-LAST:event_btnNewActionPerformed
     /**
      * Creates filters fields in JPanel from DataModel
@@ -1100,14 +1098,14 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
 	    }
 
 	    public List<JTextField> getDocumentTextFields() {
-				ArrayList<JTextField> list = new ArrayList<JTextField>();
+		ArrayList<JTextField> list = new ArrayList<JTextField>();
 		list.add(cisloDokladTF);
 		return list;
 	    }
 
 	    public List<JTextField> getMovementTextFields() {
 		ArrayList<JTextField> list = new ArrayList<JTextField>();
-		return list;		
+		return list;
 	    }
 
 	    public List<JTextField> getProductTextFields() {
@@ -1130,5 +1128,4 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
 	    }
 	}
     }
-
 }

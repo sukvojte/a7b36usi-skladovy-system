@@ -20,19 +20,19 @@ public class ComboBoxProductItem {
 	/* (non-Javadoc)
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
-	@Override
-	public boolean equals(Object obj) {
-		
-		if(obj instanceof ProductDTO){
-			return product.equals(obj);
-		}
-		
-		if(obj instanceof Long){
-			return product.getId().equals(obj);
-		}
-		
-		return super.equals(obj);
-	}
+//	@Override
+//	public boolean equals(Object obj) {
+//		
+////		if(obj instanceof ProductDTO){
+////			return product.equals(obj);
+////		}
+////		
+////		if(obj instanceof Long){
+////			return product.getId().equals(obj);
+////		}
+//		
+//		return super.equals(obj);
+//	}
 
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()

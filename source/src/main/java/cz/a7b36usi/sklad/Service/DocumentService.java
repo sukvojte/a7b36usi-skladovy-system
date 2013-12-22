@@ -42,11 +42,13 @@ public class DocumentService extends AbstractService implements IDocumentService
         MovementBO bo = new MovementBO();
         bo.setId(movement.getId());
         bo.setPrice(movement.getPrice());
+	System.out.println("ukladam quantitu "+movement.getQuantity());
+	bo.setQuantity(movement.getQuantity());
         bo.setDocument(genericDAO.loadById(movement.getDocument().getId(), DocumentBO.class));
         ProductBO pbo = genericDAO.loadById(movement.getProdukt().getId(), ProductBO.class);
         bo.setProdukt(pbo);
-        bo.setVersion(movement.getVersion() != null ? genericDAO.loadById(movement.getVersion(), ProductVersionBO.class) : null);
-        bo.setWrapping(movement.getWrapping() != null ? genericDAO.loadById(movement.getWrapping(), WrappingTypeBO.class) : null);
+        //bo.setVersion(movement.getVersion() != null ? genericDAO.loadById(movement.getVersion(), ProductVersionBO.class) : null);
+        //bo.setWrapping(movement.getWrapping() != null ? genericDAO.loadById(movement.getWrapping(), WrappingTypeBO.class) : null);
         return genericDAO.saveOrUpdate(bo).getId();
     }
 
@@ -104,7 +106,7 @@ public class DocumentService extends AbstractService implements IDocumentService
                     (movementBO.getVersion()!=null ?  movementBO.getVersion().getId() : 0),
                     product,
                     getDocumentById(movementBO.getDocument().getId())
-		    
+		    ,movementBO.getQuantity());
 		    );
             dtos.add(dto);
         }
@@ -130,7 +132,7 @@ public class DocumentService extends AbstractService implements IDocumentService
                     (movementBO.getVersion()!=null ?  movementBO.getVersion().getId() : 0),
                     product,
                     getDocumentById(movementBO.getDocument().getId())
-		    );
+		    ,movementBO.getQuantity());
             dtos.add(dto);
         }
         return dtos;
@@ -177,10 +179,11 @@ public class DocumentService extends AbstractService implements IDocumentService
             MovementDTO dto = new MovementDTO(
                     movementBO.getId(),
                     movementBO.getPrice(),
-                    (movementBO.getWrapping()!=null ? movementBO.getWrapping().getId() : 0),
-                    (movementBO.getVersion()!=null ? movementBO.getVersion().getId() : 0),
+                    null,
+                    null,
                     product,
-                    getDocumentById(movementBO.getDocument().getId()));
+                    getDocumentById(movementBO.getDocument().getId()),
+		    movementBO.getQuantity());
             dtos.add(dto);
         }
         return dtos;

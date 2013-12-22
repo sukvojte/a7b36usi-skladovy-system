@@ -12,8 +12,7 @@ public class DocumentItemsDataModel extends BaseDataModel<MovementDTO> {
 
 	public DocumentItemsDataModel(List<MovementDTO> list) {
 		super(list);
-		columns = new Column[] { new Column("Produkt"), new Column("Počet"),
-				new Column("Cena")};
+		columns = new Column[] { new Column("Produkt"), new Column("Počet")};
 	}
 
 	@Override
@@ -22,9 +21,7 @@ public class DocumentItemsDataModel extends BaseDataModel<MovementDTO> {
 		case 0:
 			return row.getProdukt().getName();
 		case 1:
-			return null;
-		case 2:
-			return row.getPrice();
+			return row.getQuantity();
 		default:
 			return null;
 		}

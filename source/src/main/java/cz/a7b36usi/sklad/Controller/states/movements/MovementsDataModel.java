@@ -13,7 +13,7 @@ public class MovementsDataModel extends BaseDataModel<MovementDTO> {
 
     public MovementsDataModel(List<MovementDTO> list) {
         super(list);
-        columns = new Column[]{new Column("Typ pohybu"), new Column("Jmeno produktu"), new Column("Cena")};
+        columns = new Column[]{new Column("Typ pohybu"), new Column("Jmeno produktu"), new Column("Pocet")};
     }
 
     @Override
@@ -24,7 +24,7 @@ public class MovementsDataModel extends BaseDataModel<MovementDTO> {
             case 1:
                 return row.getProdukt().getName();
             case 2:
-                return row.getPrice();
+                return row.getQuantity();
             default:
                 return null;
         }

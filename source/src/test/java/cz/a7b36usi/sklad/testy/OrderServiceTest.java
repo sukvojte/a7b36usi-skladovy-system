@@ -38,12 +38,12 @@ public class OrderServiceTest  extends AbstractServiceTest{
 	Long cat = productService.saveCategory(new CategoryDTO(null, "NEJAKA KATEGORIE", null));
 	Long product = productService.saveProduct(new ProductDTO(null, "PRODUKT1", "nakej posranej kod", 200, cat));
 	List<OrderItemDTO> list = new ArrayList<OrderItemDTO>();
-	list.add(new OrderItemDTO(null, product, 500, null, null, 0L));
-	list.add(new OrderItemDTO(null, product, 700, null, null, 0L));
+	list.add(new OrderItemDTO(null, product, 500, null, null, 0L,""));
+	list.add(new OrderItemDTO(null, product, 700, null, null, 0L,""));
 	
 	Long order = orderService.saveOrder(new OrderDTO(null, new Date(), "aaaa", null, p1));
-	orderService.saveOrderItem(new OrderItemDTO(null, product, 500, null, null, order));
-	orderService.saveOrderItem(new OrderItemDTO(null, product, 500, null, null, order));
+	orderService.saveOrderItem(new OrderItemDTO(null, product, 500, null, null, order,""));
+	orderService.saveOrderItem(new OrderItemDTO(null, product, 500, null, null, order,""));
 	
 	int size = orderService.getAllOrderItems(new OrderDTO(order, null, null, null, null)).size();
 	assertEquals(2, size);

@@ -96,7 +96,10 @@ public class OrderService extends AbstractService implements IOrderService {
                 orderItemBO.getQuantity(),
                 null,
                 null,
-                orderItemBO.getOrder().getId()));
+                orderItemBO.getOrder().getId(),
+		    orderItemBO.getProduct().getName()
+		   ) );
+	    
 	}
 	return ordersDTO;
     }
@@ -113,7 +116,9 @@ public class OrderService extends AbstractService implements IOrderService {
                 orderItemBO.getQuantity(),
                 orderItemBO.getWrappingType().getId(),
                 orderItemBO.getProductVersion().getId(),
-                orderItemBO.getOrder().getId());
+                orderItemBO.getOrder().getId(),
+		orderItemBO.getProduct().getName()
+		);
         return idto;
     }
 

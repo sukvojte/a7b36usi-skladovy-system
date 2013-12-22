@@ -33,9 +33,6 @@ IOrderService orderService;
             Map<String, Object> params = new HashMap<String, Object>();
             //params.put("isK", new Boolean(isKK));
             List<OrderItemDTO> orderItems = orderService.getAllOrderItems(new OrderDTO(orderId, null, null, null, null));
-            for (OrderItemDTO orderItemDTO : orderItems) {
-			System.out.println("quant "+orderItemDTO.getQuantity());
-		    }
             jr = (JasperReport) JRLoader.loadObject(new File("order1.jasper"));
             jp = JasperFillManager.fillReport(jr, params, new JRBeanCollectionDataSource(orderItems));
             JasperPrintManager.printReport(jp,true);
