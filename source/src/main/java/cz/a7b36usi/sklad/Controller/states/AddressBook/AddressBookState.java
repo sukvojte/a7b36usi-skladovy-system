@@ -83,7 +83,7 @@ public class AddressBookState implements IControllerState {
 	}
 
 	public void itemDoubleClick(MainController controller, int index) {
-		// TODO Auto-generated method stub
+		// TODO dodelat
 
 	}
 
@@ -92,7 +92,7 @@ public class AddressBookState implements IControllerState {
 	}
 
 	public void deactivated(MainController controller) {
-		// TODO Auto-generated method stub
+		// TODO dodelat
 
 	}
 

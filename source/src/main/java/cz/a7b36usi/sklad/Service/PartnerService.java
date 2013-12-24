@@ -42,9 +42,6 @@ class PartnerService extends AbstractService implements IPartnerService {
 	}
 
 	public boolean savePartner(PartnerDTO customer) {
-		// TODO Auto-generated method stub
-		// if customer.id == null, add it into DB!
-		// return true if any data changed
 		PartnerBO partner = new PartnerBO();
 		partner.setCisloPopisne(customer.getCisloPopisne());
 		partner.setIsDodavatel(customer.isIsDodavatel());

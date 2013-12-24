@@ -30,11 +30,7 @@ public class GenericDAO implements IGenericDAO {
 
 	protected EntityManager getEntityManager() {
 		EntityManager em = EntityManagerFactoryUtils
-				.getTransactionalEntityManager(entityManagerfactory); // entity
-																		// manager
-																		// with
-																		// @Transactional
-																		// support
+				.getTransactionalEntityManager(entityManagerfactory);
 		return em;
 	}
 

@@ -25,7 +25,7 @@ public class ProductBO extends AbstractBO {
 
 	@ManyToOne
 	private CategoryBO category;
-
+	   //TODO: tady nevim co se stalo
 	// public List<MovementBO> getPohyby() {
 	// return pohyby;
 	// }

@@ -89,7 +89,6 @@ public class OrderItemBO extends AbstractBO {
 	}
 
 	public void setOrder(OrderBO order) {
-		// order.getItems().add(this);
 		this.order = order;
 	}
 

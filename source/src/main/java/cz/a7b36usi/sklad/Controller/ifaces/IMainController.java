@@ -4,8 +4,6 @@
  */
 package cz.a7b36usi.sklad.Controller.ifaces;
 
-//
-
 /**
  * 
  * @author Peter

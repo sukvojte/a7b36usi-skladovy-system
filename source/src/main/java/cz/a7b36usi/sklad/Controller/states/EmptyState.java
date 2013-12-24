@@ -58,20 +58,11 @@ public class EmptyState implements IControllerState {
 	}
 
 	public void print(int index) {
-		throw new UnsupportedOperationException("Not supported yet."); // To
-																		// change
-																		// body
-																		// of
-																		// generated
-																		// methods,
-																		// choose
-																		// Tools
-																		// |
-																		// Templates.
+		throw new UnsupportedOperationException("Not supported yet.");
 	}
 
 	public void deactivated(MainController controller) {
-		// TODO Auto-generated method stub
+		// TODO dodelat
 
 	}
 

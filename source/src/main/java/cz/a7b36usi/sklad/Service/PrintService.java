@@ -18,6 +18,7 @@ import org.springframework.stereotype.Component;
 
 import cz.a7b36usi.sklad.DTO.OrderDTO;
 import cz.a7b36usi.sklad.DTO.OrderItemDTO;
+import org.apache.log4j.Logger;
 
 /**
  * 
@@ -27,13 +28,14 @@ import cz.a7b36usi.sklad.DTO.OrderItemDTO;
 public class PrintService implements IPrintService {
 	@Autowired
 	IOrderService orderService;
-
+	static final Logger logger = Logger.getLogger(PrintService.class);
+	
 	public boolean printOrder(Long orderId) {
 		try {
 			JasperReport jr = null;
 			JasperPrint jp = null;
 			Map<String, Object> params = new HashMap<String, Object>();
-			// params.put("isK", new Boolean(isKK));
+
 			List<OrderItemDTO> orderItems = orderService
 					.getAllOrderItems(new OrderDTO(orderId, null, null, null,
 							null));
@@ -43,7 +45,7 @@ public class PrintService implements IPrintService {
 			JasperPrintManager.printReport(jp, true);
 		} catch (JRException ex) {
 			ex.printStackTrace();
-			System.out.println("problem s tiskem");
+			logger.error("Error while printing");
 			return false;
 		}
 		return true;

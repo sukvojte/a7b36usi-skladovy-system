@@ -79,13 +79,6 @@ public class UsersState implements IControllerState {
 						&& user.getUsername().equals(
 								((UserNameValidator) field.getInputVerifier())
 										.getValue())) {
-					// if(user.getUsername().equals(((ValueValidator)field.getInputVerifier()).getValue())){
-					// correct = false;
-					// }
-					// else{
-					// ((ValueValidator)field.getInputVerifier()).correct(field);
-					// continue;
-					// }
 					((UserNameValidator) field.getInputVerifier())
 							.incorrect(field);
 					correct = false;
@@ -115,7 +108,7 @@ public class UsersState implements IControllerState {
 	}
 
 	public void deactivated(MainController controller) {
-		// TODO Auto-generated method stub
+		// TODO dodelat
 
 	}
 

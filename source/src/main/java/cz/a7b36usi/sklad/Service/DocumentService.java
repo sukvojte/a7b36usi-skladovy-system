@@ -35,8 +35,6 @@ public class DocumentService extends AbstractService implements
 		bo.setNumber(document.getNumber());
 		bo.setPartner(genericDAO.loadById(document.getPartner().getId(),
 				PartnerBO.class));
-		// TODO: nemuze se nastavovat, pac partner je null - nemame to ve
-		// formulari
 		return genericDAO.saveOrUpdate(bo).getId();
 	}
 
@@ -44,13 +42,12 @@ public class DocumentService extends AbstractService implements
 		MovementBO bo = new MovementBO();
 		bo.setId(movement.getId());
 		bo.setPrice(movement.getPrice());
-		System.out.println("ukladam quantitu " + movement.getQuantity());
 		bo.setQuantity(movement.getQuantity());
 		bo.setDocument(genericDAO.loadById(movement.getDocument().getId(),
 				DocumentBO.class));
 		ProductBO pbo = genericDAO.loadById(movement.getProdukt().getId(),
 				ProductBO.class);
-		bo.setProdukt(pbo);
+		bo.setProdukt(pbo);//TODO: UPRAVIT
 		// bo.setVersion(movement.getVersion() != null ?
 		// genericDAO.loadById(movement.getVersion(), ProductVersionBO.class) :
 		// null);

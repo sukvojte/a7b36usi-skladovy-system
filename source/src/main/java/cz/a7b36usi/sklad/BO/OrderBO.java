@@ -56,10 +56,6 @@ public class OrderBO extends AbstractBO {
 	}
 
 	public List<OrderItemBO> getItems() {
-		// if(items == null){
-		// items = new ArrayList<OrderItemBO>();
-		// return items;
-		// }
 		return items;
 	}
 

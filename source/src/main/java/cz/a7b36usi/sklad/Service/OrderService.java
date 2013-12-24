@@ -80,7 +80,7 @@ public class OrderService extends AbstractService implements IOrderService {
 		OrderItemBO it = new OrderItemBO();
 		it.setId(item.getId());
 		it.setOrder(genericDAO.loadById(item.getOrder(), OrderBO.class));
-		it.setProduct(genericDAO.loadById(item.getProduct(), ProductBO.class));// TODO:
+		it.setProduct(genericDAO.loadById(item.getProduct(), ProductBO.class));// TODO: UPRAVIT
 																				// odkomentovat
 		// it.setProductVersion(genericDAO.loadById(item.getProductVersion(),
 		// ProductVersionBO.class));

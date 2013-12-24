@@ -8,7 +8,6 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
-//import junit.framework.Test;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -30,7 +29,6 @@ public class UserServiceTest extends AbstractServiceTest {
 
 	@Test
 	public void testAddUser() {
-		System.out.println("TESTUJU");
 		String name = "lojza" + System.currentTimeMillis();
 		String password = "nevim";
 		UserRole ur = UserRole.VEDOUCI;
@@ -53,7 +51,6 @@ public class UserServiceTest extends AbstractServiceTest {
 
 	@Test
 	public void testDeleteUser() {
-		System.out.println("TESTUJU");
 		String name = "lojza" + System.currentTimeMillis();
 		char password[] = "nevim".toCharArray();
 		UserRole ur = UserRole.VEDOUCI;
@@ -130,10 +127,6 @@ public class UserServiceTest extends AbstractServiceTest {
 		String password2 = "hojza" + System.currentTimeMillis();
 		userService.updatePassword(u1, password2.toCharArray());
 		UserDTO u2 = userService.getUserById(id);
-		System.out.println("USER");
-		System.out.println(u2.getUsername());
-		System.out.println(u2.getPassword());
-		System.out.println(u2.getAcl());
 		assertNotNull(u2);
 		assertEquals(name, u2.getUsername());
 		assertEquals(id, u2.getId());

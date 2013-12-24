@@ -76,7 +76,6 @@ public class UserService extends AbstractService implements IUserService {
 	}
 
 	public boolean updateUser(UserDTO user) {
-		// try{
 		UserBO u = new UserBO();
 
 		u.setUsername(user.getUsername());
@@ -87,9 +86,6 @@ public class UserService extends AbstractService implements IUserService {
 		genericDAO.saveOrUpdate(u);
 
 		return true;
-		/*
-		 * }catch(NoResultException e){ return false; }
-		 */
 	}
 
 	public void updatePassword(UserDTO user, char[] password) {
@@ -97,7 +93,7 @@ public class UserService extends AbstractService implements IUserService {
 		u.setPassword(new String(password));
 		genericDAO.saveOrUpdate(u);
 
-		Arrays.fill(password, (char) 0);
+		Arrays.fill(password, (char) 0);//TODO: Proc to tu je ?
 	}
 
 	public UserDTO getUserByUsername(String username) {

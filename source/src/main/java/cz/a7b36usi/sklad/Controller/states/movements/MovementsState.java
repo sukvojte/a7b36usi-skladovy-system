@@ -22,7 +22,7 @@ public class MovementsState implements IControllerState {
 	static final Logger logger = Logger.getLogger(MovementsState.class);
 
 	@Autowired
-	private IDocumentService documentService;// TODO: get all movements je kde ?
+	private IDocumentService documentService;
 
 	private MovementsDataModel model;
 
@@ -41,17 +41,16 @@ public class MovementsState implements IControllerState {
 
 	public void editFormSave(MainController controller) {
 		logger.debug("Save event");
-		// TODO: tady asi nic nebude
 	}
 
 	public void selectedItem(MainController controller, int index) {
 
 		MovementDTO movement = model.getRowByIndex(index);
-
+		   //TODO: dodelat
 		// controller.getForm().editCustomer(customer);
 	}
 
-	public void deleteItem(MainController controller) {
+	public void deleteItem(MainController controller) {//TODO: dodelat
 		// MovementDTO movement =
 		// controller.getForm().getData().getMovementData();
 		//
@@ -74,7 +73,7 @@ public class MovementsState implements IControllerState {
 	}
 
 	public void itemDoubleClick(MainController controller, int index) {
-		// TODO Auto-generated method stub
+		// TODO dodelat
 
 	}
 
@@ -82,7 +81,7 @@ public class MovementsState implements IControllerState {
 	}
 
 	public void deactivated(MainController controller) {
-		// TODO Auto-generated method stub
+		// TODO dodelat
 
 	}
 

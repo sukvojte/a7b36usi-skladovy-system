@@ -19,7 +19,6 @@ import cz.a7b36usi.sklad.DTO.ProductDTO;
 import cz.a7b36usi.sklad.gui.main.ifaces.ISkladMainGUI;
 import cz.a7b36usi.sklad.gui.main.listeners.IMainGuiListener;
 
-//
 
 /**
  * This class is useful for changing state object. And for handling methods from
