@@ -38,6 +38,7 @@ import cz.a7b36usi.sklad.DTO.OrderDTO;
 import cz.a7b36usi.sklad.DTO.PartnerDTO;
 import cz.a7b36usi.sklad.DTO.ProductDTO;
 import cz.a7b36usi.sklad.DTO.UserDTO;
+import cz.a7b36usi.sklad.gui.ComboBoxPartnerItem;
 import cz.a7b36usi.sklad.gui.main.ifaces.IGuiData;
 import cz.a7b36usi.sklad.gui.main.ifaces.IGuiTextFields;
 import cz.a7b36usi.sklad.gui.main.ifaces.ISkladMainGUI;
@@ -138,7 +139,7 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
 				return new OrderDTO((id != 0 ? id : null), dateChooserCombo1
 						.getSelectedDate().getTime(),
 						cisloObjednavkaTF.getText(), null,
-						((PartnerDTO) partnersObjednavkyCB.getSelectedItem()));// TODO:
+						 ((ComboBoxPartnerItem)partnersObjednavkyCB.getSelectedItem()).getProduct());// TODO:
 																				// id
 																				// partnera
 																				// ?
@@ -154,7 +155,7 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
 				}
 				return new DocumentDTO((id != 0 ? id : null),
 						(DocumentType) typDokladuJC.getSelectedItem(),
-						((PartnerDTO) partnersDokladyCB.getSelectedItem()),
+						((ComboBoxPartnerItem) partnersDokladyCB.getSelectedItem()).getProduct(),
 						Integer.parseInt(cisloDokladTF.getText()),
 						dateChooserCombo2.getCurrent().getTime());
 			}
@@ -389,766 +390,510 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
 	 */
 	@SuppressWarnings("unchecked")
 	// <editor-fold defaultstate="collapsed"
-	// desc="Generated Code">//GEN-BEGIN:initComponents
-	private void initComponents() {
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
 
-		jTabbedPane1 = new javax.swing.JTabbedPane();
-		panelAddress = new TabsJPanel(Tabs.ADDRESS_BOOK);
-		jLabel1 = new javax.swing.JLabel();
-		spolecnostTF = new javax.swing.JTextField();
-		uliceTF = new javax.swing.JTextField();
-		mestoTF = new javax.swing.JTextField();
-		jLabel2 = new javax.swing.JLabel();
-		jLabel3 = new javax.swing.JLabel();
-		jLabel4 = new javax.swing.JLabel();
-		pscTF = new javax.swing.JTextField();
-		cisloPopTF = new javax.swing.JTextField();
-		jLabel5 = new javax.swing.JLabel();
-		errorPscJL = new javax.swing.JLabel();
-		errorCisloPopJL = new javax.swing.JLabel();
-		errorSpolecnostJL = new javax.swing.JLabel();
-		panelOrders = new TabsJPanel(Tabs.ORDERS);
-		jLabel9 = new javax.swing.JLabel();
-		jLabel10 = new javax.swing.JLabel();
-		cisloObjednavkaTF = new javax.swing.JTextField();
-		tiskObjednavkyJB = new javax.swing.JButton();
-		jLabel18 = new javax.swing.JLabel();
-		dateChooserCombo1 = new datechooser.beans.DateChooserCombo();
-		partnersObjednavkyCB = new javax.swing.JComboBox();
-		errorCisloObjednavkyJL = new javax.swing.JLabel();
-		panelMovements = new TabsJPanel(Tabs.MOVEMENTS);
-		panelDocuments = new TabsJPanel(Tabs.DOCUMENTS);
-		cisloDokladTF = new javax.swing.JTextField();
-		jLabel14 = new javax.swing.JLabel();
-		jLabel15 = new javax.swing.JLabel();
-		jLabel16 = new javax.swing.JLabel();
-		typDokladuJC = new javax.swing.JComboBox();
-		dateChooserCombo2 = new datechooser.beans.DateChooserCombo();
-		jLabel19 = new javax.swing.JLabel();
-		partnersDokladyCB = new javax.swing.JComboBox();
-		panelWarehouse = new TabsJPanel(Tabs.WAREHOUSE);
-		jLabel11 = new javax.swing.JLabel();
-		jLabel12 = new javax.swing.JLabel();
-		jLabel13 = new javax.swing.JLabel();
-		jmenoProduktuTF = new javax.swing.JTextField();
-		kodProduktuTF = new javax.swing.JTextField();
-		mnozstviProduktuTF = new javax.swing.JTextField();
-		panelUsers = new TabsJPanel(Tabs.USERS);
-		jLabel6 = new javax.swing.JLabel();
-		jLabel7 = new javax.swing.JLabel();
-		uzivatelskeJmenoJT = new javax.swing.JTextField();
-		roleJC = new javax.swing.JComboBox();
-		errorUzivJmenoJL = new javax.swing.JLabel();
-		jLabel8 = new javax.swing.JLabel();
-		hesloUzivatelPF = new javax.swing.JPasswordField();
-		errorHesloJL = new javax.swing.JLabel();
-		hidePasswordCheckbox = new javax.swing.JCheckBox();
-		jScrollPane1 = new javax.swing.JScrollPane();
-		jTable1 = new javax.swing.JTable();
-		filtrJP = new javax.swing.JPanel();
-		smazJB = new javax.swing.JButton();
-		ulozJB = new javax.swing.JButton();
-		btnNew = new javax.swing.JButton();
-		jMenuBar1 = new javax.swing.JMenuBar();
-		jMenu1 = new javax.swing.JMenu();
-		jMenuItem1 = new javax.swing.JMenuItem();
-		jMenu2 = new javax.swing.JMenu();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        panelAddress = new TabsJPanel(Tabs.ADDRESS_BOOK);
+        jLabel1 = new javax.swing.JLabel();
+        spolecnostTF = new javax.swing.JTextField();
+        uliceTF = new javax.swing.JTextField();
+        mestoTF = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        pscTF = new javax.swing.JTextField();
+        cisloPopTF = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        errorPscJL = new javax.swing.JLabel();
+        errorCisloPopJL = new javax.swing.JLabel();
+        errorSpolecnostJL = new javax.swing.JLabel();
+        panelOrders = new TabsJPanel(Tabs.ORDERS);
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        cisloObjednavkaTF = new javax.swing.JTextField();
+        tiskObjednavkyJB = new javax.swing.JButton();
+        jLabel18 = new javax.swing.JLabel();
+        dateChooserCombo1 = new datechooser.beans.DateChooserCombo();
+        partnersObjednavkyCB = new javax.swing.JComboBox<ComboBoxPartnerItem>();
+        errorCisloObjednavkyJL = new javax.swing.JLabel();
+        panelMovements = new TabsJPanel(Tabs.MOVEMENTS);
+        panelDocuments =  new TabsJPanel(Tabs.DOCUMENTS);
+        cisloDokladTF = new javax.swing.JTextField();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        typDokladuJC = new javax.swing.JComboBox();
+        dateChooserCombo2 = new datechooser.beans.DateChooserCombo();
+        jLabel19 = new javax.swing.JLabel();
+        partnersDokladyCB = new javax.swing.JComboBox<ComboBoxPartnerItem>();
+        panelWarehouse = new TabsJPanel(Tabs.WAREHOUSE);
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jmenoProduktuTF = new javax.swing.JTextField();
+        kodProduktuTF = new javax.swing.JTextField();
+        mnozstviProduktuTF = new javax.swing.JTextField();
+        panelUsers = new TabsJPanel(Tabs.USERS);
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        uzivatelskeJmenoJT = new javax.swing.JTextField();
+        roleJC = new javax.swing.JComboBox();
+        errorUzivJmenoJL = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        hesloUzivatelPF = new javax.swing.JPasswordField();
+        errorHesloJL = new javax.swing.JLabel();
+        hidePasswordCheckbox = new javax.swing.JCheckBox();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        filtrJP = new javax.swing.JPanel();
+        smazJB = new javax.swing.JButton();
+        ulozJB = new javax.swing.JButton();
+        btnNew = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
 
-		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-		panelAddress.setToolTipText("");
+        panelAddress.setToolTipText("");
 
-		jLabel1.setText("Společnost :");
+        jLabel1.setText("Společnost :");
 
-		jLabel2.setText("Ulice :");
+        jLabel2.setText("Ulice :");
 
-		jLabel3.setText("Město :");
+        jLabel3.setText("Město :");
 
-		jLabel4.setText("PSČ :");
+        jLabel4.setText("PSČ :");
 
-		jLabel5.setText("Číso pop. :");
+        jLabel5.setText("Číso pop. :");
 
-		errorPscJL.setText("error psc");
+        errorPscJL.setText("error psc");
 
-		errorCisloPopJL.setText("error cisloPop");
+        errorCisloPopJL.setText("error cisloPop");
 
-		errorSpolecnostJL.setText("error spolecnost");
+        errorSpolecnostJL.setText("error spolecnost");
 
-		org.jdesktop.layout.GroupLayout panelAddressLayout = new org.jdesktop.layout.GroupLayout(
-				panelAddress);
-		panelAddress.setLayout(panelAddressLayout);
-		panelAddressLayout
-				.setHorizontalGroup(panelAddressLayout
-						.createParallelGroup(
-								org.jdesktop.layout.GroupLayout.LEADING)
-						.add(panelAddressLayout
-								.createSequentialGroup()
-								.add(16, 16, 16)
-								.add(panelAddressLayout
-										.createParallelGroup(
-												org.jdesktop.layout.GroupLayout.TRAILING,
-												false)
-										.add(panelAddressLayout
-												.createSequentialGroup()
-												.add(jLabel3)
-												.addPreferredGap(
-														org.jdesktop.layout.LayoutStyle.RELATED,
-														org.jdesktop.layout.GroupLayout.DEFAULT_SIZE,
-														Short.MAX_VALUE)
-												.add(mestoTF,
-														org.jdesktop.layout.GroupLayout.PREFERRED_SIZE,
-														120,
-														org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-										.add(org.jdesktop.layout.GroupLayout.LEADING,
-												panelAddressLayout
-														.createSequentialGroup()
-														.add(jLabel2)
-														.addPreferredGap(
-																org.jdesktop.layout.LayoutStyle.RELATED,
-																org.jdesktop.layout.GroupLayout.DEFAULT_SIZE,
-																Short.MAX_VALUE)
-														.add(uliceTF,
-																org.jdesktop.layout.GroupLayout.PREFERRED_SIZE,
-																120,
-																org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-										.add(org.jdesktop.layout.GroupLayout.LEADING,
-												panelAddressLayout
-														.createSequentialGroup()
-														.add(jLabel1)
-														.addPreferredGap(
-																org.jdesktop.layout.LayoutStyle.RELATED)
-														.add(spolecnostTF,
-																org.jdesktop.layout.GroupLayout.PREFERRED_SIZE,
-																120,
-																org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-										.add(panelAddressLayout
-												.createSequentialGroup()
-												.add(panelAddressLayout
-														.createParallelGroup(
-																org.jdesktop.layout.GroupLayout.LEADING)
-														.add(jLabel4)
-														.add(jLabel5))
-												.addPreferredGap(
-														org.jdesktop.layout.LayoutStyle.RELATED,
-														org.jdesktop.layout.GroupLayout.DEFAULT_SIZE,
-														Short.MAX_VALUE)
-												.add(panelAddressLayout
-														.createParallelGroup(
-																org.jdesktop.layout.GroupLayout.LEADING,
-																false)
-														.add(cisloPopTF,
-																org.jdesktop.layout.GroupLayout.DEFAULT_SIZE,
-																120,
-																Short.MAX_VALUE)
-														.add(pscTF))))
-								.add(38, 38, 38)
-								.add(panelAddressLayout
-										.createParallelGroup(
-												org.jdesktop.layout.GroupLayout.LEADING)
-										.add(errorPscJL).add(errorCisloPopJL)
-										.add(errorSpolecnostJL))
-								.addContainerGap(433, Short.MAX_VALUE)));
-		panelAddressLayout
-				.setVerticalGroup(panelAddressLayout
-						.createParallelGroup(
-								org.jdesktop.layout.GroupLayout.LEADING)
-						.add(panelAddressLayout
-								.createSequentialGroup()
-								.add(13, 13, 13)
-								.add(panelAddressLayout
-										.createParallelGroup(
-												org.jdesktop.layout.GroupLayout.BASELINE)
-										.add(jLabel1)
-										.add(spolecnostTF,
-												org.jdesktop.layout.GroupLayout.PREFERRED_SIZE,
-												org.jdesktop.layout.GroupLayout.DEFAULT_SIZE,
-												org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-										.add(errorSpolecnostJL))
-								.addPreferredGap(
-										org.jdesktop.layout.LayoutStyle.RELATED)
-								.add(panelAddressLayout
-										.createParallelGroup(
-												org.jdesktop.layout.GroupLayout.BASELINE)
-										.add(uliceTF,
-												org.jdesktop.layout.GroupLayout.PREFERRED_SIZE,
-												org.jdesktop.layout.GroupLayout.DEFAULT_SIZE,
-												org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-										.add(jLabel2))
-								.addPreferredGap(
-										org.jdesktop.layout.LayoutStyle.RELATED)
-								.add(panelAddressLayout
-										.createParallelGroup(
-												org.jdesktop.layout.GroupLayout.TRAILING)
-										.add(jLabel3)
-										.add(mestoTF,
-												org.jdesktop.layout.GroupLayout.PREFERRED_SIZE,
-												org.jdesktop.layout.GroupLayout.DEFAULT_SIZE,
-												org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-								.addPreferredGap(
-										org.jdesktop.layout.LayoutStyle.UNRELATED)
-								.add(panelAddressLayout
-										.createParallelGroup(
-												org.jdesktop.layout.GroupLayout.BASELINE)
-										.add(pscTF,
-												org.jdesktop.layout.GroupLayout.PREFERRED_SIZE,
-												org.jdesktop.layout.GroupLayout.DEFAULT_SIZE,
-												org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-										.add(jLabel4).add(errorPscJL))
-								.add(12, 12, 12)
-								.add(panelAddressLayout
-										.createParallelGroup(
-												org.jdesktop.layout.GroupLayout.BASELINE)
-										.add(cisloPopTF,
-												org.jdesktop.layout.GroupLayout.PREFERRED_SIZE,
-												org.jdesktop.layout.GroupLayout.DEFAULT_SIZE,
-												org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-										.add(jLabel5).add(errorCisloPopJL))
-								.addContainerGap(128, Short.MAX_VALUE)));
+        org.jdesktop.layout.GroupLayout panelAddressLayout = new org.jdesktop.layout.GroupLayout(panelAddress);
+        panelAddress.setLayout(panelAddressLayout);
+        panelAddressLayout.setHorizontalGroup(
+            panelAddressLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(panelAddressLayout.createSequentialGroup()
+                .add(16, 16, 16)
+                .add(panelAddressLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
+                    .add(panelAddressLayout.createSequentialGroup()
+                        .add(jLabel3)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .add(mestoTF, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 120, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(org.jdesktop.layout.GroupLayout.LEADING, panelAddressLayout.createSequentialGroup()
+                        .add(jLabel2)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .add(uliceTF, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 120, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(org.jdesktop.layout.GroupLayout.LEADING, panelAddressLayout.createSequentialGroup()
+                        .add(jLabel1)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(spolecnostTF, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 120, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(panelAddressLayout.createSequentialGroup()
+                        .add(panelAddressLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(jLabel4)
+                            .add(jLabel5))
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .add(panelAddressLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                            .add(cisloPopTF, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+                            .add(pscTF))))
+                .add(38, 38, 38)
+                .add(panelAddressLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(errorPscJL)
+                    .add(errorCisloPopJL)
+                    .add(errorSpolecnostJL))
+                .addContainerGap(364, Short.MAX_VALUE))
+        );
+        panelAddressLayout.setVerticalGroup(
+            panelAddressLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(panelAddressLayout.createSequentialGroup()
+                .add(13, 13, 13)
+                .add(panelAddressLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(jLabel1)
+                    .add(spolecnostTF, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(errorSpolecnostJL))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(panelAddressLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(uliceTF, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(jLabel2))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(panelAddressLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                    .add(jLabel3)
+                    .add(mestoTF, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                .add(panelAddressLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(pscTF, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(jLabel4)
+                    .add(errorPscJL))
+                .add(12, 12, 12)
+                .add(panelAddressLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(cisloPopTF, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(jLabel5)
+                    .add(errorCisloPopJL))
+                .addContainerGap(128, Short.MAX_VALUE))
+        );
 
-		jTabbedPane1.addTab("Adresář", panelAddress);
+        jTabbedPane1.addTab("Adresář", panelAddress);
 
-		jLabel9.setText("Datum :");
+        jLabel9.setText("Datum :");
 
-		jLabel10.setText("Číslo objednávky :");
+        jLabel10.setText("Číslo objednávky :");
 
-		tiskObjednavkyJB.setText("Tisk objednavky");
-		tiskObjednavkyJB.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				tiskObjednavkyJBActionPerformed(evt);
-			}
-		});
+        tiskObjednavkyJB.setText("Tisk objednavky");
+        tiskObjednavkyJB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tiskObjednavkyJBActionPerformed(evt);
+            }
+        });
 
-		jLabel18.setText("Partner :");
+        jLabel18.setText("Partner :");
 
-		partnersObjednavkyCB.setModel(new javax.swing.DefaultComboBoxModel(
-				new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        partnersObjednavkyCB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-		errorCisloObjednavkyJL.setText("jLabel17");
+        errorCisloObjednavkyJL.setText("jLabel17");
 
-		org.jdesktop.layout.GroupLayout panelOrdersLayout = new org.jdesktop.layout.GroupLayout(
-				panelOrders);
-		panelOrders.setLayout(panelOrdersLayout);
-		panelOrdersLayout
-				.setHorizontalGroup(panelOrdersLayout
-						.createParallelGroup(
-								org.jdesktop.layout.GroupLayout.LEADING)
-						.add(panelOrdersLayout
-								.createSequentialGroup()
-								.add(33, 33, 33)
-								.add(panelOrdersLayout
-										.createParallelGroup(
-												org.jdesktop.layout.GroupLayout.LEADING)
-										.add(jLabel10).add(jLabel9)
-										.add(jLabel18))
-								.addPreferredGap(
-										org.jdesktop.layout.LayoutStyle.RELATED)
-								.add(panelOrdersLayout
-										.createParallelGroup(
-												org.jdesktop.layout.GroupLayout.LEADING)
-										.add(dateChooserCombo1,
-												org.jdesktop.layout.GroupLayout.PREFERRED_SIZE,
-												org.jdesktop.layout.GroupLayout.DEFAULT_SIZE,
-												org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-										.add(panelOrdersLayout
-												.createSequentialGroup()
-												.add(cisloObjednavkaTF,
-														org.jdesktop.layout.GroupLayout.PREFERRED_SIZE,
-														120,
-														org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-												.add(47, 47, 47)
-												.add(errorCisloObjednavkyJL))
-										.add(partnersObjednavkyCB,
-												org.jdesktop.layout.GroupLayout.PREFERRED_SIZE,
-												org.jdesktop.layout.GroupLayout.DEFAULT_SIZE,
-												org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-								.addContainerGap(416, Short.MAX_VALUE))
-						.add(org.jdesktop.layout.GroupLayout.TRAILING,
-								panelOrdersLayout
-										.createSequentialGroup()
-										.addContainerGap(
-												org.jdesktop.layout.GroupLayout.DEFAULT_SIZE,
-												Short.MAX_VALUE)
-										.add(tiskObjednavkyJB)
-										.addContainerGap()));
-		panelOrdersLayout
-				.setVerticalGroup(panelOrdersLayout
-						.createParallelGroup(
-								org.jdesktop.layout.GroupLayout.LEADING)
-						.add(panelOrdersLayout
-								.createSequentialGroup()
-								.add(panelOrdersLayout
-										.createParallelGroup(
-												org.jdesktop.layout.GroupLayout.LEADING)
-										.add(panelOrdersLayout
-												.createSequentialGroup()
-												.add(36, 36, 36).add(jLabel9)
-												.add(18, 18, 18))
-										.add(org.jdesktop.layout.GroupLayout.TRAILING,
-												panelOrdersLayout
-														.createSequentialGroup()
-														.addContainerGap()
-														.add(dateChooserCombo1,
-																org.jdesktop.layout.GroupLayout.PREFERRED_SIZE,
-																org.jdesktop.layout.GroupLayout.DEFAULT_SIZE,
-																org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-														.addPreferredGap(
-																org.jdesktop.layout.LayoutStyle.UNRELATED)))
-								.add(panelOrdersLayout
-										.createParallelGroup(
-												org.jdesktop.layout.GroupLayout.BASELINE)
-										.add(jLabel10)
-										.add(cisloObjednavkaTF,
-												org.jdesktop.layout.GroupLayout.PREFERRED_SIZE,
-												org.jdesktop.layout.GroupLayout.DEFAULT_SIZE,
-												org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-										.add(errorCisloObjednavkyJL))
-								.add(11, 11, 11)
-								.add(panelOrdersLayout
-										.createParallelGroup(
-												org.jdesktop.layout.GroupLayout.BASELINE)
-										.add(jLabel18)
-										.add(partnersObjednavkyCB,
-												org.jdesktop.layout.GroupLayout.PREFERRED_SIZE,
-												org.jdesktop.layout.GroupLayout.DEFAULT_SIZE,
-												org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-								.addPreferredGap(
-										org.jdesktop.layout.LayoutStyle.RELATED,
-										123, Short.MAX_VALUE)
-								.add(tiskObjednavkyJB).addContainerGap()));
+        org.jdesktop.layout.GroupLayout panelOrdersLayout = new org.jdesktop.layout.GroupLayout(panelOrders);
+        panelOrders.setLayout(panelOrdersLayout);
+        panelOrdersLayout.setHorizontalGroup(
+            panelOrdersLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(panelOrdersLayout.createSequentialGroup()
+                .add(33, 33, 33)
+                .add(panelOrdersLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(jLabel10)
+                    .add(jLabel9)
+                    .add(jLabel18))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(panelOrdersLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(dateChooserCombo1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(panelOrdersLayout.createSequentialGroup()
+                        .add(cisloObjednavkaTF, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 120, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(47, 47, 47)
+                        .add(errorCisloObjednavkyJL))
+                    .add(partnersObjednavkyCB, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(349, Short.MAX_VALUE))
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, panelOrdersLayout.createSequentialGroup()
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .add(tiskObjednavkyJB)
+                .addContainerGap())
+        );
+        panelOrdersLayout.setVerticalGroup(
+            panelOrdersLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(panelOrdersLayout.createSequentialGroup()
+                .add(panelOrdersLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(panelOrdersLayout.createSequentialGroup()
+                        .add(36, 36, 36)
+                        .add(jLabel9)
+                        .add(18, 18, 18))
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, panelOrdersLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .add(dateChooserCombo1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)))
+                .add(panelOrdersLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(jLabel10)
+                    .add(cisloObjednavkaTF, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(errorCisloObjednavkyJL))
+                .add(11, 11, 11)
+                .add(panelOrdersLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(jLabel18)
+                    .add(partnersObjednavkyCB, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 146, Short.MAX_VALUE)
+                .add(tiskObjednavkyJB)
+                .addContainerGap())
+        );
 
-		jTabbedPane1.addTab("Objednávky", panelOrders);
+        jTabbedPane1.addTab("Objednávky", panelOrders);
 
-		org.jdesktop.layout.GroupLayout panelMovementsLayout = new org.jdesktop.layout.GroupLayout(
-				panelMovements);
-		panelMovements.setLayout(panelMovementsLayout);
-		panelMovementsLayout.setHorizontalGroup(panelMovementsLayout
-				.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-				.add(0, 748, Short.MAX_VALUE));
-		panelMovementsLayout.setVerticalGroup(panelMovementsLayout
-				.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-				.add(0, 276, Short.MAX_VALUE));
+        org.jdesktop.layout.GroupLayout panelMovementsLayout = new org.jdesktop.layout.GroupLayout(panelMovements);
+        panelMovements.setLayout(panelMovementsLayout);
+        panelMovementsLayout.setHorizontalGroup(
+            panelMovementsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 724, Short.MAX_VALUE)
+        );
+        panelMovementsLayout.setVerticalGroup(
+            panelMovementsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 317, Short.MAX_VALUE)
+        );
 
-		jTabbedPane1.addTab("Pohyby", panelMovements);
+        jTabbedPane1.addTab("Pohyby", panelMovements);
 
-		jLabel14.setText("Typ dokladu :");
+        jLabel14.setText("Typ dokladu :");
 
-		jLabel15.setText("Číslo dokladu :");
+        jLabel15.setText("Číslo dokladu :");
 
-		jLabel16.setText("Datum :");
+        jLabel16.setText("Datum :");
 
-		typDokladuJC.setModel(new javax.swing.DefaultComboBoxModel(
-				new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        typDokladuJC.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-		jLabel19.setText("Partner :");
+        jLabel19.setText("Partner :");
 
-		partnersDokladyCB.setModel(new javax.swing.DefaultComboBoxModel(
-				new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        partnersDokladyCB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-		org.jdesktop.layout.GroupLayout panelDocumentsLayout = new org.jdesktop.layout.GroupLayout(
-				panelDocuments);
-		panelDocuments.setLayout(panelDocumentsLayout);
-		panelDocumentsLayout
-				.setHorizontalGroup(panelDocumentsLayout
-						.createParallelGroup(
-								org.jdesktop.layout.GroupLayout.LEADING)
-						.add(panelDocumentsLayout
-								.createSequentialGroup()
-								.add(18, 18, 18)
-								.add(panelDocumentsLayout
-										.createParallelGroup(
-												org.jdesktop.layout.GroupLayout.LEADING)
-										.add(jLabel15).add(jLabel14)
-										.add(jLabel16).add(jLabel19))
-								.add(30, 30, 30)
-								.add(panelDocumentsLayout
-										.createParallelGroup(
-												org.jdesktop.layout.GroupLayout.LEADING)
-										.add(typDokladuJC,
-												org.jdesktop.layout.GroupLayout.PREFERRED_SIZE,
-												org.jdesktop.layout.GroupLayout.DEFAULT_SIZE,
-												org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-										.add(cisloDokladTF,
-												org.jdesktop.layout.GroupLayout.PREFERRED_SIZE,
-												120,
-												org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-										.add(dateChooserCombo2,
-												org.jdesktop.layout.GroupLayout.PREFERRED_SIZE,
-												org.jdesktop.layout.GroupLayout.DEFAULT_SIZE,
-												org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-										.add(partnersDokladyCB,
-												org.jdesktop.layout.GroupLayout.PREFERRED_SIZE,
-												org.jdesktop.layout.GroupLayout.DEFAULT_SIZE,
-												org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-								.addContainerGap(476, Short.MAX_VALUE)));
-		panelDocumentsLayout
-				.setVerticalGroup(panelDocumentsLayout
-						.createParallelGroup(
-								org.jdesktop.layout.GroupLayout.LEADING)
-						.add(panelDocumentsLayout
-								.createSequentialGroup()
-								.add(32, 32, 32)
-								.add(panelDocumentsLayout
-										.createParallelGroup(
-												org.jdesktop.layout.GroupLayout.BASELINE)
-										.add(jLabel14)
-										.add(typDokladuJC,
-												org.jdesktop.layout.GroupLayout.PREFERRED_SIZE,
-												org.jdesktop.layout.GroupLayout.DEFAULT_SIZE,
-												org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-								.addPreferredGap(
-										org.jdesktop.layout.LayoutStyle.RELATED)
-								.add(panelDocumentsLayout
-										.createParallelGroup(
-												org.jdesktop.layout.GroupLayout.BASELINE)
-										.add(jLabel15)
-										.add(cisloDokladTF,
-												org.jdesktop.layout.GroupLayout.PREFERRED_SIZE,
-												org.jdesktop.layout.GroupLayout.DEFAULT_SIZE,
-												org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-								.addPreferredGap(
-										org.jdesktop.layout.LayoutStyle.RELATED)
-								.add(panelDocumentsLayout
-										.createParallelGroup(
-												org.jdesktop.layout.GroupLayout.LEADING)
-										.add(jLabel16)
-										.add(dateChooserCombo2,
-												org.jdesktop.layout.GroupLayout.PREFERRED_SIZE,
-												org.jdesktop.layout.GroupLayout.DEFAULT_SIZE,
-												org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-								.add(18, 18, 18)
-								.add(panelDocumentsLayout
-										.createParallelGroup(
-												org.jdesktop.layout.GroupLayout.LEADING)
-										.add(jLabel19)
-										.add(partnersDokladyCB,
-												org.jdesktop.layout.GroupLayout.PREFERRED_SIZE,
-												org.jdesktop.layout.GroupLayout.DEFAULT_SIZE,
-												org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-								.addContainerGap(134, Short.MAX_VALUE)));
+        org.jdesktop.layout.GroupLayout panelDocumentsLayout = new org.jdesktop.layout.GroupLayout(panelDocuments);
+        panelDocuments.setLayout(panelDocumentsLayout);
+        panelDocumentsLayout.setHorizontalGroup(
+            panelDocumentsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(panelDocumentsLayout.createSequentialGroup()
+                .add(18, 18, 18)
+                .add(panelDocumentsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(jLabel15)
+                    .add(jLabel14)
+                    .add(jLabel16)
+                    .add(jLabel19))
+                .add(30, 30, 30)
+                .add(panelDocumentsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(typDokladuJC, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(cisloDokladTF, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 120, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(dateChooserCombo2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(partnersDokladyCB, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(426, Short.MAX_VALUE))
+        );
+        panelDocumentsLayout.setVerticalGroup(
+            panelDocumentsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(panelDocumentsLayout.createSequentialGroup()
+                .add(32, 32, 32)
+                .add(panelDocumentsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(jLabel14)
+                    .add(typDokladuJC, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(panelDocumentsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(jLabel15)
+                    .add(cisloDokladTF, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(panelDocumentsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(jLabel16)
+                    .add(dateChooserCombo2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .add(18, 18, 18)
+                .add(panelDocumentsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(jLabel19)
+                    .add(partnersDokladyCB, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(145, Short.MAX_VALUE))
+        );
 
-		jTabbedPane1.addTab("Doklady", panelDocuments);
+        jTabbedPane1.addTab("Doklady", panelDocuments);
 
-		jLabel11.setText("Jméno :");
+        jLabel11.setText("Jméno :");
 
-		jLabel12.setText("Kód :");
+        jLabel12.setText("Kód :");
 
-		jLabel13.setText("Množství :");
+        jLabel13.setText("Množství :");
 
-		org.jdesktop.layout.GroupLayout panelWarehouseLayout = new org.jdesktop.layout.GroupLayout(
-				panelWarehouse);
-		panelWarehouse.setLayout(panelWarehouseLayout);
-		panelWarehouseLayout
-				.setHorizontalGroup(panelWarehouseLayout
-						.createParallelGroup(
-								org.jdesktop.layout.GroupLayout.LEADING)
-						.add(panelWarehouseLayout
-								.createSequentialGroup()
-								.addContainerGap()
-								.add(panelWarehouseLayout
-										.createParallelGroup(
-												org.jdesktop.layout.GroupLayout.LEADING)
-										.add(jLabel12).add(jLabel11)
-										.add(jLabel13))
-								.addPreferredGap(
-										org.jdesktop.layout.LayoutStyle.RELATED)
-								.add(panelWarehouseLayout
-										.createParallelGroup(
-												org.jdesktop.layout.GroupLayout.LEADING,
-												false)
-										.add(jmenoProduktuTF)
-										.add(kodProduktuTF)
-										.add(mnozstviProduktuTF,
-												org.jdesktop.layout.GroupLayout.DEFAULT_SIZE,
-												120, Short.MAX_VALUE))
-								.addContainerGap(565, Short.MAX_VALUE)));
-		panelWarehouseLayout
-				.setVerticalGroup(panelWarehouseLayout
-						.createParallelGroup(
-								org.jdesktop.layout.GroupLayout.LEADING)
-						.add(panelWarehouseLayout
-								.createSequentialGroup()
-								.add(15, 15, 15)
-								.add(panelWarehouseLayout
-										.createParallelGroup(
-												org.jdesktop.layout.GroupLayout.BASELINE)
-										.add(jLabel11)
-										.add(jmenoProduktuTF,
-												org.jdesktop.layout.GroupLayout.PREFERRED_SIZE,
-												org.jdesktop.layout.GroupLayout.DEFAULT_SIZE,
-												org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-								.addPreferredGap(
-										org.jdesktop.layout.LayoutStyle.UNRELATED)
-								.add(panelWarehouseLayout
-										.createParallelGroup(
-												org.jdesktop.layout.GroupLayout.BASELINE)
-										.add(jLabel12)
-										.add(kodProduktuTF,
-												org.jdesktop.layout.GroupLayout.PREFERRED_SIZE,
-												org.jdesktop.layout.GroupLayout.DEFAULT_SIZE,
-												org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-								.addPreferredGap(
-										org.jdesktop.layout.LayoutStyle.UNRELATED)
-								.add(panelWarehouseLayout
-										.createParallelGroup(
-												org.jdesktop.layout.GroupLayout.BASELINE)
-										.add(jLabel13)
-										.add(mnozstviProduktuTF,
-												org.jdesktop.layout.GroupLayout.PREFERRED_SIZE,
-												org.jdesktop.layout.GroupLayout.DEFAULT_SIZE,
-												org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-								.addContainerGap(179, Short.MAX_VALUE)));
+        org.jdesktop.layout.GroupLayout panelWarehouseLayout = new org.jdesktop.layout.GroupLayout(panelWarehouse);
+        panelWarehouse.setLayout(panelWarehouseLayout);
+        panelWarehouseLayout.setHorizontalGroup(
+            panelWarehouseLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(panelWarehouseLayout.createSequentialGroup()
+                .addContainerGap()
+                .add(panelWarehouseLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(jLabel12)
+                    .add(jLabel11)
+                    .add(jLabel13))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(panelWarehouseLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                    .add(jmenoProduktuTF)
+                    .add(kodProduktuTF)
+                    .add(mnozstviProduktuTF, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE))
+                .addContainerGap(527, Short.MAX_VALUE))
+        );
+        panelWarehouseLayout.setVerticalGroup(
+            panelWarehouseLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(panelWarehouseLayout.createSequentialGroup()
+                .add(15, 15, 15)
+                .add(panelWarehouseLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(jLabel11)
+                    .add(jmenoProduktuTF, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                .add(panelWarehouseLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(jLabel12)
+                    .add(kodProduktuTF, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                .add(panelWarehouseLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(jLabel13)
+                    .add(mnozstviProduktuTF, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(194, Short.MAX_VALUE))
+        );
 
-		jTabbedPane1.addTab("Skladové zásoby", panelWarehouse);
+        jTabbedPane1.addTab("Skladové zásoby", panelWarehouse);
 
-		jLabel6.setText("Uživatelské jméno :");
+        jLabel6.setText("Uživatelské jméno :");
 
-		jLabel7.setText("Role :");
+        jLabel7.setText("Role :");
 
-		uzivatelskeJmenoJT.setName("uzivatelskeJmeno"); // NOI18N
+        uzivatelskeJmenoJT.setName("uzivatelskeJmeno"); // NOI18N
 
-		roleJC.setModel(new javax.swing.DefaultComboBoxModel(new String[] {
-				"Item 1", "Item 2", "Item 3", "Item 4" }));
+        roleJC.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-		errorUzivJmenoJL.setText("error uz jmeno");
+        errorUzivJmenoJL.setText("error uz jmeno");
 
-		jLabel8.setText("Heslo :");
+        jLabel8.setText("Heslo :");
 
-		hesloUzivatelPF.setText("jPasswordField1");
-		hesloUzivatelPF.setEchoChar('*');
+        hesloUzivatelPF.setText("jPasswordField1");
+        hesloUzivatelPF.setEchoChar('*');
 
-		errorHesloJL.setText("error heslo");
+        errorHesloJL.setText("error heslo");
 
-		hidePasswordCheckbox.setText("Zobrazit");
+        hidePasswordCheckbox.setText("Zobrazit");
 
-		org.jdesktop.layout.GroupLayout panelUsersLayout = new org.jdesktop.layout.GroupLayout(
-				panelUsers);
-		panelUsers.setLayout(panelUsersLayout);
-		panelUsersLayout
-				.setHorizontalGroup(panelUsersLayout
-						.createParallelGroup(
-								org.jdesktop.layout.GroupLayout.LEADING)
-						.add(panelUsersLayout
-								.createSequentialGroup()
-								.addContainerGap()
-								.add(panelUsersLayout
-										.createParallelGroup(
-												org.jdesktop.layout.GroupLayout.LEADING)
-										.add(jLabel6).add(jLabel7).add(jLabel8))
-								.add(18, 18, 18)
-								.add(panelUsersLayout
-										.createParallelGroup(
-												org.jdesktop.layout.GroupLayout.LEADING)
-										.add(roleJC,
-												org.jdesktop.layout.GroupLayout.PREFERRED_SIZE,
-												org.jdesktop.layout.GroupLayout.DEFAULT_SIZE,
-												org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-										.add(panelUsersLayout
-												.createSequentialGroup()
-												.add(panelUsersLayout
-														.createParallelGroup(
-																org.jdesktop.layout.GroupLayout.TRAILING,
-																false)
-														.add(uzivatelskeJmenoJT,
-																org.jdesktop.layout.GroupLayout.DEFAULT_SIZE,
-																150,
-																Short.MAX_VALUE)
-														.add(hesloUzivatelPF,
-																org.jdesktop.layout.GroupLayout.DEFAULT_SIZE,
-																150,
-																Short.MAX_VALUE))
-												.add(25, 25, 25)
-												.add(panelUsersLayout
-														.createParallelGroup(
-																org.jdesktop.layout.GroupLayout.LEADING)
-														.add(panelUsersLayout
-																.createSequentialGroup()
-																.add(hidePasswordCheckbox)
-																.add(18, 18, 18)
-																.add(errorHesloJL))
-														.add(errorUzivJmenoJL))))
-								.addContainerGap(317, Short.MAX_VALUE)));
-		panelUsersLayout
-				.setVerticalGroup(panelUsersLayout
-						.createParallelGroup(
-								org.jdesktop.layout.GroupLayout.LEADING)
-						.add(panelUsersLayout
-								.createSequentialGroup()
-								.add(33, 33, 33)
-								.add(panelUsersLayout
-										.createParallelGroup(
-												org.jdesktop.layout.GroupLayout.BASELINE)
-										.add(jLabel6)
-										.add(uzivatelskeJmenoJT,
-												org.jdesktop.layout.GroupLayout.PREFERRED_SIZE,
-												org.jdesktop.layout.GroupLayout.DEFAULT_SIZE,
-												org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-										.add(errorUzivJmenoJL))
-								.addPreferredGap(
-										org.jdesktop.layout.LayoutStyle.RELATED)
-								.add(panelUsersLayout
-										.createParallelGroup(
-												org.jdesktop.layout.GroupLayout.BASELINE)
-										.add(hesloUzivatelPF,
-												org.jdesktop.layout.GroupLayout.PREFERRED_SIZE,
-												org.jdesktop.layout.GroupLayout.DEFAULT_SIZE,
-												org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-										.add(jLabel8).add(errorHesloJL)
-										.add(hidePasswordCheckbox))
-								.addPreferredGap(
-										org.jdesktop.layout.LayoutStyle.UNRELATED)
-								.add(panelUsersLayout
-										.createParallelGroup(
-												org.jdesktop.layout.GroupLayout.BASELINE)
-										.add(roleJC,
-												org.jdesktop.layout.GroupLayout.PREFERRED_SIZE,
-												org.jdesktop.layout.GroupLayout.DEFAULT_SIZE,
-												org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-										.add(jLabel7))
-								.addContainerGap(166, Short.MAX_VALUE)));
+        org.jdesktop.layout.GroupLayout panelUsersLayout = new org.jdesktop.layout.GroupLayout(panelUsers);
+        panelUsers.setLayout(panelUsersLayout);
+        panelUsersLayout.setHorizontalGroup(
+            panelUsersLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(panelUsersLayout.createSequentialGroup()
+                .addContainerGap()
+                .add(panelUsersLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(jLabel6)
+                    .add(jLabel7)
+                    .add(jLabel8))
+                .add(18, 18, 18)
+                .add(panelUsersLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(roleJC, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(panelUsersLayout.createSequentialGroup()
+                        .add(panelUsersLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
+                            .add(uzivatelskeJmenoJT, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                            .add(hesloUzivatelPF, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
+                        .add(25, 25, 25)
+                        .add(panelUsersLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(panelUsersLayout.createSequentialGroup()
+                                .add(hidePasswordCheckbox)
+                                .add(18, 18, 18)
+                                .add(errorHesloJL))
+                            .add(errorUzivJmenoJL))))
+                .addContainerGap(232, Short.MAX_VALUE))
+        );
+        panelUsersLayout.setVerticalGroup(
+            panelUsersLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(panelUsersLayout.createSequentialGroup()
+                .add(33, 33, 33)
+                .add(panelUsersLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(jLabel6)
+                    .add(uzivatelskeJmenoJT, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(errorUzivJmenoJL))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(panelUsersLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(hesloUzivatelPF, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(jLabel8)
+                    .add(errorHesloJL)
+                    .add(hidePasswordCheckbox))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                .add(panelUsersLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(roleJC, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(jLabel7))
+                .addContainerGap(183, Short.MAX_VALUE))
+        );
 
-		jTabbedPane1.addTab("Uživatelé", panelUsers);
+        jTabbedPane1.addTab("Uživatelé", panelUsers);
 
-		jTable1.setModel(new javax.swing.table.DefaultTableModel(
-				new Object[][] { { null, null, null, null },
-						{ null, null, null, null }, { null, null, null, null },
-						{ null, null, null, null } }, new String[] { "Title 1",
-						"Title 2", "Title 3", "Title 4" }));
-		jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mouseClicked(java.awt.event.MouseEvent evt) {
-				jTable1MouseClicked(evt);
-			}
-		});
-		jScrollPane1.setViewportView(jTable1);
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jTable1);
 
-		org.jdesktop.layout.GroupLayout filtrJPLayout = new org.jdesktop.layout.GroupLayout(
-				filtrJP);
-		filtrJP.setLayout(filtrJPLayout);
-		filtrJPLayout.setHorizontalGroup(filtrJPLayout.createParallelGroup(
-				org.jdesktop.layout.GroupLayout.LEADING).add(0, 630,
-				Short.MAX_VALUE));
-		filtrJPLayout.setVerticalGroup(filtrJPLayout.createParallelGroup(
-				org.jdesktop.layout.GroupLayout.LEADING).add(0, 35,
-				Short.MAX_VALUE));
+        org.jdesktop.layout.GroupLayout filtrJPLayout = new org.jdesktop.layout.GroupLayout(filtrJP);
+        filtrJP.setLayout(filtrJPLayout);
+        filtrJPLayout.setHorizontalGroup(
+            filtrJPLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 630, Short.MAX_VALUE)
+        );
+        filtrJPLayout.setVerticalGroup(
+            filtrJPLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 35, Short.MAX_VALUE)
+        );
 
-		smazJB.setText("Smaž");
-		smazJB.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				smazJBActionPerformed(evt);
-			}
-		});
+        smazJB.setText("Smaž");
+        smazJB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                smazJBActionPerformed(evt);
+            }
+        });
 
-		ulozJB.setText("Ulož");
-		ulozJB.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				ulozJBActionPerformed(evt);
-			}
-		});
+        ulozJB.setText("Ulož");
+        ulozJB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ulozJBActionPerformed(evt);
+            }
+        });
 
-		btnNew.setText("Nový");
-		btnNew.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				btnNewActionPerformed(evt);
-			}
-		});
+        btnNew.setText("Nový");
+        btnNew.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNewActionPerformed(evt);
+            }
+        });
 
-		jMenu1.setText("File");
+        jMenu1.setText("File");
 
-		jMenuItem1.setText("Exit");
-		jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jMenuItem1ActionPerformed(evt);
-			}
-		});
-		jMenu1.add(jMenuItem1);
+        jMenuItem1.setText("Exit");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
 
-		jMenuBar1.add(jMenu1);
+        jMenuBar1.add(jMenu1);
 
-		jMenu2.setText("Edit");
-		jMenuBar1.add(jMenu2);
+        jMenu2.setText("Edit");
+        jMenuBar1.add(jMenu2);
 
-		setJMenuBar(jMenuBar1);
+        setJMenuBar(jMenuBar1);
 
-		org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(
-				getContentPane());
-		getContentPane().setLayout(layout);
-		layout.setHorizontalGroup(layout
-				.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-				.add(org.jdesktop.layout.GroupLayout.TRAILING, jTabbedPane1,
-						org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 0,
-						Short.MAX_VALUE)
-				.add(layout
-						.createSequentialGroup()
-						.addContainerGap()
-						.add(layout
-								.createParallelGroup(
-										org.jdesktop.layout.GroupLayout.LEADING)
-								.add(jScrollPane1)
-								.add(layout
-										.createSequentialGroup()
-										.add(btnNew,
-												org.jdesktop.layout.GroupLayout.PREFERRED_SIZE,
-												97,
-												org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(
-												org.jdesktop.layout.LayoutStyle.RELATED)
-										.add(layout
-												.createParallelGroup(
-														org.jdesktop.layout.GroupLayout.LEADING)
-												.add(layout
-														.createSequentialGroup()
-														.addPreferredGap(
-																org.jdesktop.layout.LayoutStyle.RELATED,
-																org.jdesktop.layout.GroupLayout.DEFAULT_SIZE,
-																Short.MAX_VALUE)
-														.add(smazJB)
-														.add(18, 18, 18)
-														.add(ulozJB,
-																org.jdesktop.layout.GroupLayout.PREFERRED_SIZE,
-																110,
-																org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-												.add(layout
-														.createSequentialGroup()
-														.add(filtrJP,
-																org.jdesktop.layout.GroupLayout.PREFERRED_SIZE,
-																org.jdesktop.layout.GroupLayout.DEFAULT_SIZE,
-																org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-														.add(0, 0,
-																Short.MAX_VALUE)))))
-						.addContainerGap()));
-		layout.setVerticalGroup(layout
-				.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-				.add(layout
-						.createSequentialGroup()
-						.addContainerGap()
-						.add(jTabbedPane1)
-						.add(18, 18, 18)
-						.add(layout
-								.createParallelGroup(
-										org.jdesktop.layout.GroupLayout.BASELINE)
-								.add(smazJB)
-								.add(ulozJB,
-										org.jdesktop.layout.GroupLayout.PREFERRED_SIZE,
-										40,
-										org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-								.add(btnNew,
-										org.jdesktop.layout.GroupLayout.PREFERRED_SIZE,
-										43,
-										org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-						.add(18, 18, 18)
-						.add(filtrJP,
-								org.jdesktop.layout.GroupLayout.PREFERRED_SIZE,
-								org.jdesktop.layout.GroupLayout.DEFAULT_SIZE,
-								org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(
-								org.jdesktop.layout.LayoutStyle.RELATED)
-						.add(jScrollPane1,
-								org.jdesktop.layout.GroupLayout.PREFERRED_SIZE,
-								317,
-								org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-						.add(37, 37, 37)));
+        org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, jTabbedPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .add(layout.createSequentialGroup()
+                .addContainerGap()
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(jScrollPane1)
+                    .add(layout.createSequentialGroup()
+                        .add(btnNew, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 97, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(layout.createSequentialGroup()
+                                .add(smazJB)
+                                .add(18, 18, 18)
+                                .add(ulozJB, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 110, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                            .add(filtrJP, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                        .add(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(layout.createSequentialGroup()
+                .addContainerGap()
+                .add(jTabbedPane1)
+                .add(18, 18, 18)
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(smazJB)
+                    .add(ulozJB, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 40, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(btnNew, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 43, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .add(18, 18, 18)
+                .add(filtrJP, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 317, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(37, 37, 37))
+        );
 
-		pack();
-	}// </editor-fold>//GEN-END:initComponents
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
 
 	private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jMenuItem1ActionPerformed
 		// TODO add your handling code here:
@@ -1308,70 +1053,69 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
 		});
 	}
 
-	// Variables declaration - do not modify//GEN-BEGIN:variables
-	private javax.swing.JButton btnNew;
-	private javax.swing.JTextField cisloDokladTF;
-	private javax.swing.JTextField cisloObjednavkaTF;
-	private javax.swing.JTextField cisloPopTF;
-	private datechooser.beans.DateChooserCombo dateChooserCombo1;
-	private datechooser.beans.DateChooserCombo dateChooserCombo2;
-	private javax.swing.JLabel errorCisloObjednavkyJL;
-	private javax.swing.JLabel errorCisloPopJL;
-	private javax.swing.JLabel errorHesloJL;
-	private javax.swing.JLabel errorPscJL;
-	private javax.swing.JLabel errorSpolecnostJL;
-	private javax.swing.JLabel errorUzivJmenoJL;
-	private javax.swing.JPanel filtrJP;
-	private javax.swing.JPasswordField hesloUzivatelPF;
-	private javax.swing.JCheckBox hidePasswordCheckbox;
-	private javax.swing.JLabel jLabel1;
-	private javax.swing.JLabel jLabel10;
-	private javax.swing.JLabel jLabel11;
-	private javax.swing.JLabel jLabel12;
-	private javax.swing.JLabel jLabel13;
-	private javax.swing.JLabel jLabel14;
-	private javax.swing.JLabel jLabel15;
-	private javax.swing.JLabel jLabel16;
-	private javax.swing.JLabel jLabel18;
-	private javax.swing.JLabel jLabel19;
-	private javax.swing.JLabel jLabel2;
-	private javax.swing.JLabel jLabel3;
-	private javax.swing.JLabel jLabel4;
-	private javax.swing.JLabel jLabel5;
-	private javax.swing.JLabel jLabel6;
-	private javax.swing.JLabel jLabel7;
-	private javax.swing.JLabel jLabel8;
-	private javax.swing.JLabel jLabel9;
-	private javax.swing.JMenu jMenu1;
-	private javax.swing.JMenu jMenu2;
-	private javax.swing.JMenuBar jMenuBar1;
-	private javax.swing.JMenuItem jMenuItem1;
-	private javax.swing.JScrollPane jScrollPane1;
-	private javax.swing.JTabbedPane jTabbedPane1;
-	private javax.swing.JTable jTable1;
-	private javax.swing.JTextField jmenoProduktuTF;
-	private javax.swing.JTextField kodProduktuTF;
-	private javax.swing.JTextField mestoTF;
-	private javax.swing.JTextField mnozstviProduktuTF;
-	private javax.swing.JPanel panelAddress;
-	private javax.swing.JPanel panelDocuments;
-	private javax.swing.JPanel panelMovements;
-	private javax.swing.JPanel panelOrders;
-	private javax.swing.JPanel panelUsers;
-	private javax.swing.JPanel panelWarehouse;
-	private javax.swing.JComboBox partnersDokladyCB;
-	private javax.swing.JComboBox partnersObjednavkyCB;
-	private javax.swing.JTextField pscTF;
-	private javax.swing.JComboBox roleJC;
-	private javax.swing.JButton smazJB;
-	private javax.swing.JTextField spolecnostTF;
-	private javax.swing.JButton tiskObjednavkyJB;
-	private javax.swing.JComboBox typDokladuJC;
-	private javax.swing.JTextField uliceTF;
-	private javax.swing.JButton ulozJB;
-	private javax.swing.JTextField uzivatelskeJmenoJT;
-
-	// End of variables declaration//GEN-END:variables
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnNew;
+    private javax.swing.JTextField cisloDokladTF;
+    private javax.swing.JTextField cisloObjednavkaTF;
+    private javax.swing.JTextField cisloPopTF;
+    private datechooser.beans.DateChooserCombo dateChooserCombo1;
+    private datechooser.beans.DateChooserCombo dateChooserCombo2;
+    private javax.swing.JLabel errorCisloObjednavkyJL;
+    private javax.swing.JLabel errorCisloPopJL;
+    private javax.swing.JLabel errorHesloJL;
+    private javax.swing.JLabel errorPscJL;
+    private javax.swing.JLabel errorSpolecnostJL;
+    private javax.swing.JLabel errorUzivJmenoJL;
+    private javax.swing.JPanel filtrJP;
+    private javax.swing.JPasswordField hesloUzivatelPF;
+    private javax.swing.JCheckBox hidePasswordCheckbox;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTextField jmenoProduktuTF;
+    private javax.swing.JTextField kodProduktuTF;
+    private javax.swing.JTextField mestoTF;
+    private javax.swing.JTextField mnozstviProduktuTF;
+    private javax.swing.JPanel panelAddress;
+    private javax.swing.JPanel panelDocuments;
+    private javax.swing.JPanel panelMovements;
+    private javax.swing.JPanel panelOrders;
+    private javax.swing.JPanel panelUsers;
+    private javax.swing.JPanel panelWarehouse;
+    private javax.swing.JComboBox<ComboBoxPartnerItem> partnersDokladyCB;
+    private javax.swing.JComboBox<ComboBoxPartnerItem> partnersObjednavkyCB;
+    private javax.swing.JTextField pscTF;
+    private javax.swing.JComboBox roleJC;
+    private javax.swing.JButton smazJB;
+    private javax.swing.JTextField spolecnostTF;
+    private javax.swing.JButton tiskObjednavkyJB;
+    private javax.swing.JComboBox typDokladuJC;
+    private javax.swing.JTextField uliceTF;
+    private javax.swing.JButton ulozJB;
+    private javax.swing.JTextField uzivatelskeJmenoJT;
+    // End of variables declaration//GEN-END:variables
 
 	public IGuiTextFields getTextFields() {
 		return new IGuiTextFields() {
@@ -1425,8 +1169,8 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
 		partnersObjednavkyCB.removeAllItems();
 		if (list != null) {
 			for (PartnerDTO partnerDTO : list) {
-				partnersObjednavkyCB.addItem(partnerDTO);
-				partnersDokladyCB.addItem(partnerDTO);
+				partnersObjednavkyCB.addItem(new ComboBoxPartnerItem(partnerDTO));
+				partnersDokladyCB.addItem(new ComboBoxPartnerItem(partnerDTO));
 			}
 		}
 	}

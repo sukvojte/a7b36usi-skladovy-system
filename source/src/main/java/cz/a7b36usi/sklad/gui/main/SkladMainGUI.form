@@ -63,11 +63,9 @@
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="ulozJB" min="-2" pref="110" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="filtrJP" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          </Group>
+                          <Component id="filtrJP" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -358,6 +356,10 @@
                   </StringArray>
                 </Property>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JComboBox&lt;ComboBoxPartnerItem&gt;()"/>
+                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;ComboBoxPartnerItem&gt;"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="errorCisloObjednavkyJL">
               <Properties>
@@ -501,6 +503,9 @@
                   </StringArray>
                 </Property>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;ComboBoxPartnerItem&gt;"/>
+              </AuxValues>
             </Component>
           </SubComponents>
         </Container>
