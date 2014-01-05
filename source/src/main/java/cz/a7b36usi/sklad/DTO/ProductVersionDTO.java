@@ -47,4 +47,8 @@ public class ProductVersionDTO extends AbstractDTO {
 	public void setProduct(Long product) {
 		this.product = product;
 	}
+        
+        public String toString(){
+            return this.name+" - "+this.code;
+        }
 }

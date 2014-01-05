@@ -46,5 +46,10 @@ public class WrappingTypeDTO extends AbstractDTO {
 	public void setProduct(Long product) {
 		this.product = product;
 	}
+        
+        @Override
+        public String toString(){
+            return this.name+" "+this.quantity+"ks";
+        }
 
 }

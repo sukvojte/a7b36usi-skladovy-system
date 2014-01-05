@@ -52,5 +52,10 @@ public class ProductDTO extends AbstractDTO {
 	public void setCategory(Long category) {
 		this.category = category;
 	}
+        
+        @Override
+        public String toString(){
+            return name;
+        }
 
 }
