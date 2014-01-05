@@ -1,7 +1,6 @@
 package cz.a7b36usi.sklad;
 
 import java.io.File;
-import java.io.IOException;
 
 import org.apache.log4j.Logger;
 import org.springframework.context.ApplicationContext;
