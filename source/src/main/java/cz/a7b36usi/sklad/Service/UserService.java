@@ -65,10 +65,7 @@ public class UserService extends AbstractService implements IUserService {
 				return false;
 			}
 
-			boolean state = user.getPassword().equals(new String(password));
-			Arrays.fill(password, (char) 0);
-
-			return state;
+			return user.checkPassword(new String(password));
 		} catch (NoResultException e) {
 			return false;
 		}
