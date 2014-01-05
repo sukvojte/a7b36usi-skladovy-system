@@ -48,11 +48,11 @@ public class OrderBO extends AbstractBO {
 	// ***************** GETTER SETTER KILOMETER BY PETER
 	// ********************************
 	public Date getDate() {
-		return date;
+		return new Date(date.getTime());
 	}
 
 	public void setDate(Date date) {
-		this.date = date;
+		this.date =new Date(date.getTime());
 	}
 
 	public List<OrderItemBO> getItems() {

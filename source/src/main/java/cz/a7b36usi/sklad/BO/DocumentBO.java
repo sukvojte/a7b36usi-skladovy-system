@@ -77,10 +77,10 @@ public class DocumentBO extends AbstractBO {
 	}
 
 	public Date getDate() {
-		return date;
+		return new Date(date.getTime());
 	}
 
 	public void setDate(Date date) {
-		this.date = date;
+		this.date = new Date(date.getTime());
 	}
 }
