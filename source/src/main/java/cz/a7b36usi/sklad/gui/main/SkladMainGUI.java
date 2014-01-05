@@ -727,8 +727,18 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
         errorMnozstviSkladoveZasobyJL.setText("error mnozstvi skladove zasoby");
 
         sarzeJB.setText("Sarze");
+        sarzeJB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sarzeJBActionPerformed(evt);
+            }
+        });
 
         druhBaleniJB.setText("Druh baleni");
+        druhBaleniJB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                druhBaleniJBActionPerformed(evt);
+            }
+        });
 
         org.jdesktop.layout.GroupLayout panelWarehouseLayout = new org.jdesktop.layout.GroupLayout(panelWarehouse);
         panelWarehouse.setLayout(panelWarehouseLayout);
@@ -959,6 +969,14 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void sarzeJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sarzeJBActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_sarzeJBActionPerformed
+
+    private void druhBaleniJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_druhBaleniJBActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_druhBaleniJBActionPerformed
 
 	private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jMenuItem1ActionPerformed
 		// TODO add your handling code here:
