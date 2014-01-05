@@ -14,6 +14,8 @@ import org.springframework.stereotype.Component;
 
 import cz.a7b36usi.sklad.DTO.OrderItemDTO;
 import cz.a7b36usi.sklad.DTO.ProductDTO;
+import cz.a7b36usi.sklad.DTO.ProductVersionDTO;
+import cz.a7b36usi.sklad.DTO.WrappingTypeDTO;
 import cz.a7b36usi.sklad.gui.ComboBoxProductItem;
 import cz.a7b36usi.sklad.gui.orderitems.ifaces.IOrderItemsGUI;
 import cz.a7b36usi.sklad.gui.orderitems.ifaces.IOrderItemsGuiListener;
@@ -88,7 +90,7 @@ public class OrderItemsGUI extends javax.swing.JDialog implements
 		return editedItem;
 	}
 
-	public void setTableModel(BaseDataModel<?> model, List<ProductDTO> products) {
+	public void setTableModel(BaseDataModel<?> model, List<ProductDTO> products, List<ProductVersionDTO> productVersions, List<WrappingTypeDTO> wrappings) {
 		this.baseDataModel = model;
 		this.products = products;
 		this.tableItems.setModel(model);
@@ -136,6 +138,10 @@ public class OrderItemsGUI extends javax.swing.JDialog implements
         tbCount = new javax.swing.JTextField();
         btnDelete = new javax.swing.JButton();
         btnNew = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        sarzeCB = new javax.swing.JComboBox();
+        jLabel4 = new javax.swing.JLabel();
+        druhBaleniCB = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -192,6 +198,14 @@ public class OrderItemsGUI extends javax.swing.JDialog implements
             }
         });
 
+        jLabel3.setText("Sarze :");
+
+        sarzeCB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel4.setText("Druh baleni :");
+
+        druhBaleniCB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -212,11 +226,15 @@ public class OrderItemsGUI extends javax.swing.JDialog implements
                 .add(48, 48, 48)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(jLabel1)
-                    .add(jLabel2))
+                    .add(jLabel2)
+                    .add(jLabel3)
+                    .add(jLabel4))
                 .add(18, 18, 18)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
                     .add(cbProdukt, 0, 108, Short.MAX_VALUE)
-                    .add(tbCount))
+                    .add(tbCount)
+                    .add(sarzeCB, 0, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .add(druhBaleniCB, 0, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -230,7 +248,15 @@ public class OrderItemsGUI extends javax.swing.JDialog implements
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(jLabel2)
                     .add(tbCount, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(jLabel3)
+                    .add(sarzeCB, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(jLabel4)
+                    .add(druhBaleniCB, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 30, Short.MAX_VALUE)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(btnSave, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 39, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(btnDelete)
@@ -334,9 +360,13 @@ public class OrderItemsGUI extends javax.swing.JDialog implements
     private javax.swing.JButton btnNew;
     private javax.swing.JButton btnSave;
     private javax.swing.JComboBox<ComboBoxProductItem> cbProdukt;
+    private javax.swing.JComboBox druhBaleniCB;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JComboBox sarzeCB;
     private javax.swing.JTable tableItems;
     private javax.swing.JTextField tbCount;
     // End of variables declaration//GEN-END:variables
