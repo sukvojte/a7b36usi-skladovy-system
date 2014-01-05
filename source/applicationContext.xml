@@ -10,8 +10,8 @@
     <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 	<property name="locations">
 	    <list>
-		<value>/properties/jpa.properties</value>
-		<value>/properties/jdbc.properties</value>
+		<value>file:properties/jpa.properties</value>
+		<value>file:properties/jdbc.properties</value>
 	    </list>
 	</property>
     </bean>        

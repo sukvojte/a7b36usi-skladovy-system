@@ -32,7 +32,6 @@ public class PasswordHasher implements IHashProvider{
         return builder.toString();
     }
 
-    @Override
     public String computeHash(String password, String salt) {
         MessageDigest md = null;
         String salted = password + ":salt:" + salt;
