@@ -17,6 +17,10 @@ public class ProductVersionDTO extends AbstractDTO {
 
 	private Long product;
 
+	public ProductVersionDTO() {
+		
+	}
+	
 	public ProductVersionDTO(Long id, Long code, String name, Long product) {
 		this.code = code;
 		this.name = name;
