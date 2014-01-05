@@ -4,68 +4,80 @@
  */
 package cz.a7b36usi.sklad.BO;
 
+import cz.a7b36usi.sklad.provider.IHashProvider;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Table;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Configurable;
 
 /**
  *
  * @author Peter
  */
-
 /**
  * Definuje entitu User pro Hibernate
  */
 @Entity
 @Table(name = "users")
+@Configurable(preConstruction = true)
 public class UserBO extends AbstractBO {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 2294763496607217663L;
 
-	@Column(unique = true)
-	private String username;
+    /**
+     *
+     */
+    private static final long serialVersionUID = 2294763496607217663L;
 
-	private String password;
+    @Column(unique = true)
+    private String username;
 
-	/**
-	 * Uzivatelska role
-	 */
-	@Enumerated(EnumType.STRING)
-	UserRole acl;
+    private String password, salt;
 
-	/**
-	 * Defaultni konstruktor nastavi roli na nejakou hodnotu aby nebyla null
-	 */
-	public UserBO() {
-		this.acl = UserRole.SKLADNIK;
-	}
+    /**
+     * Uzivatelska role
+     */
+    @Enumerated(EnumType.STRING)
+    UserRole acl;
 
-	public String getUsername() {
-		return username;
-	}
+    @Autowired
+    private transient IHashProvider hasher;
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+    /**
+     * Defaultni konstruktor nastavi roli na nejakou hodnotu aby nebyla null
+     */
+    public UserBO() {
+        this.acl = UserRole.SKLADNIK;
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    public String getUsername() {
+        return username;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
-	public UserRole getAcl() {
-		return acl;
-	}
+    public String getPassword() {
+        return password;
+    }
 
-	public void setAcl(UserRole acl) {
-		this.acl = acl;
-	}
+    public void setPassword(String password) {
+        this.salt = "salty" + System.currentTimeMillis();
+        this.password = this.hasher.computeHash(password, salt);
+    }
+
+    public UserRole getAcl() {
+        return acl;
+    }
+
+    public void setAcl(UserRole acl) {
+        this.acl = acl;
+    }
+
+    public boolean checkPassword(String password) {
+        return this.password.equals(this.hasher.computeHash(password, this.salt));
+    }
 
 }
