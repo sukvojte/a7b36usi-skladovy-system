@@ -124,165 +124,124 @@ public class OrderItemsGUI extends javax.swing.JDialog implements
 	 */
 	@SuppressWarnings("unchecked")
 	// <editor-fold defaultstate="collapsed"
-	// desc="Generated Code">//GEN-BEGIN:initComponents
-	private void initComponents() {
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
 
-		jScrollPane1 = new javax.swing.JScrollPane();
-		tableItems = new javax.swing.JTable();
-		btnSave = new javax.swing.JButton();
-		cbProdukt = new javax.swing.JComboBox<ComboBoxProductItem>();
-		jLabel1 = new javax.swing.JLabel();
-		jLabel2 = new javax.swing.JLabel();
-		tbCount = new javax.swing.JTextField();
-		btnDelete = new javax.swing.JButton();
-		btnNew = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tableItems = new javax.swing.JTable();
+        btnSave = new javax.swing.JButton();
+        cbProdukt = new javax.swing.JComboBox<ComboBoxProductItem>();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        tbCount = new javax.swing.JTextField();
+        btnDelete = new javax.swing.JButton();
+        btnNew = new javax.swing.JButton();
 
-		setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-		tableItems.setModel(new javax.swing.table.DefaultTableModel(
-				new Object[][] { { null, null, null, null },
-						{ null, null, null, null }, { null, null, null, null },
-						{ null, null, null, null } }, new String[] { "Title 1",
-						"Title 2", "Title 3", "Title 4" }));
-		tableItems.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mouseClicked(java.awt.event.MouseEvent evt) {
-				tableItemsMouseClicked(evt);
-			}
-		});
-		jScrollPane1.setViewportView(tableItems);
+        tableItems.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tableItems.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableItemsMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tableItems);
 
-		btnSave.setText("Uložit");
-		btnSave.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				btnSaveActionPerformed(evt);
-			}
-		});
+        btnSave.setText("Uložit");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
 
-		cbProdukt.setModel(new javax.swing.DefaultComboBoxModel(new String[] {
-				"Item 1", "Item 2", "Item 3", "Item 4" }));
-		cbProdukt.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				cbProduktActionPerformed(evt);
-			}
-		});
+        cbProdukt.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbProdukt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbProduktActionPerformed(evt);
+            }
+        });
 
-		jLabel1.setText("Produkt :");
+        jLabel1.setText("Produkt :");
 
-		jLabel2.setText("Počet :");
-		jLabel2.setToolTipText("");
+        jLabel2.setText("Počet :");
+        jLabel2.setToolTipText("");
 
-		tbCount.setText("0");
+        tbCount.setText("0");
 
-		btnDelete.setText("Smazat");
-		btnDelete.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				btnDeleteActionPerformed(evt);
-			}
-		});
+        btnDelete.setText("Smazat");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
 
-		btnNew.setText("Nový");
-		btnNew.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				btnNewActionPerformed(evt);
-			}
-		});
+        btnNew.setText("Nový");
+        btnNew.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNewActionPerformed(evt);
+            }
+        });
 
-		org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(
-				getContentPane());
-		getContentPane().setLayout(layout);
-		layout.setHorizontalGroup(layout
-				.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-				.add(layout
-						.createSequentialGroup()
-						.addContainerGap()
-						.add(layout
-								.createParallelGroup(
-										org.jdesktop.layout.GroupLayout.LEADING)
-								.add(jScrollPane1,
-										org.jdesktop.layout.GroupLayout.DEFAULT_SIZE,
-										533, Short.MAX_VALUE)
-								.add(org.jdesktop.layout.GroupLayout.TRAILING,
-										layout.createSequentialGroup()
-												.add(0, 0, Short.MAX_VALUE)
-												.add(btnNew,
-														org.jdesktop.layout.GroupLayout.PREFERRED_SIZE,
-														90,
-														org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-												.add(272, 272, 272)
-												.add(btnDelete)
-												.addPreferredGap(
-														org.jdesktop.layout.LayoutStyle.UNRELATED)
-												.add(btnSave,
-														org.jdesktop.layout.GroupLayout.PREFERRED_SIZE,
-														85,
-														org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
-						.addContainerGap())
-				.add(layout
-						.createSequentialGroup()
-						.add(48, 48, 48)
-						.add(layout
-								.createParallelGroup(
-										org.jdesktop.layout.GroupLayout.LEADING)
-								.add(jLabel1).add(jLabel2))
-						.add(18, 18, 18)
-						.add(layout
-								.createParallelGroup(
-										org.jdesktop.layout.GroupLayout.LEADING,
-										false)
-								.add(cbProdukt, 0, 108, Short.MAX_VALUE)
-								.add(tbCount))
-						.addContainerGap(
-								org.jdesktop.layout.GroupLayout.DEFAULT_SIZE,
-								Short.MAX_VALUE)));
-		layout.setVerticalGroup(layout
-				.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-				.add(org.jdesktop.layout.GroupLayout.TRAILING,
-						layout.createSequentialGroup()
-								.add(35, 35, 35)
-								.add(layout
-										.createParallelGroup(
-												org.jdesktop.layout.GroupLayout.BASELINE)
-										.add(cbProdukt,
-												org.jdesktop.layout.GroupLayout.PREFERRED_SIZE,
-												org.jdesktop.layout.GroupLayout.DEFAULT_SIZE,
-												org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-										.add(jLabel1))
-								.addPreferredGap(
-										org.jdesktop.layout.LayoutStyle.RELATED)
-								.add(layout
-										.createParallelGroup(
-												org.jdesktop.layout.GroupLayout.BASELINE)
-										.add(jLabel2)
-										.add(tbCount,
-												org.jdesktop.layout.GroupLayout.PREFERRED_SIZE,
-												org.jdesktop.layout.GroupLayout.DEFAULT_SIZE,
-												org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-								.addPreferredGap(
-										org.jdesktop.layout.LayoutStyle.RELATED,
-										org.jdesktop.layout.GroupLayout.DEFAULT_SIZE,
-										Short.MAX_VALUE)
-								.add(layout
-										.createParallelGroup(
-												org.jdesktop.layout.GroupLayout.BASELINE)
-										.add(btnSave,
-												org.jdesktop.layout.GroupLayout.PREFERRED_SIZE,
-												39,
-												org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-										.add(btnDelete)
-										.add(btnNew,
-												org.jdesktop.layout.GroupLayout.PREFERRED_SIZE,
-												42,
-												org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-								.addPreferredGap(
-										org.jdesktop.layout.LayoutStyle.RELATED)
-								.add(jScrollPane1,
-										org.jdesktop.layout.GroupLayout.PREFERRED_SIZE,
-										221,
-										org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-								.addContainerGap()));
+        org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(layout.createSequentialGroup()
+                .addContainerGap()
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(jScrollPane1)
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
+                        .add(0, 0, Short.MAX_VALUE)
+                        .add(btnNew, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 90, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(272, 272, 272)
+                        .add(btnDelete)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                        .add(btnSave, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 85, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+            .add(layout.createSequentialGroup()
+                .add(48, 48, 48)
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(jLabel1)
+                    .add(jLabel2))
+                .add(18, 18, 18)
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                    .add(cbProdukt, 0, 108, Short.MAX_VALUE)
+                    .add(tbCount))
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
+                .add(35, 35, 35)
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(cbProdukt, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(jLabel1))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(jLabel2)
+                    .add(tbCount, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(btnSave, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 39, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(btnDelete)
+                    .add(btnNew, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 42, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 221, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
 
-		pack();
-	}// </editor-fold>//GEN-END:initComponents
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
 
 	private void cbProduktActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_cbProduktActionPerformed
 		// TODO add your handling code here:
@@ -370,16 +329,16 @@ public class OrderItemsGUI extends javax.swing.JDialog implements
 		});
 	}
 
-	// Variables declaration - do not modify//GEN-BEGIN:variables
-	private javax.swing.JButton btnDelete;
-	private javax.swing.JButton btnNew;
-	private javax.swing.JButton btnSave;
-	private javax.swing.JComboBox<ComboBoxProductItem> cbProdukt;
-	private javax.swing.JLabel jLabel1;
-	private javax.swing.JLabel jLabel2;
-	private javax.swing.JScrollPane jScrollPane1;
-	private javax.swing.JTable tableItems;
-	private javax.swing.JTextField tbCount;
-	// End of variables declaration//GEN-END:variables
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnNew;
+    private javax.swing.JButton btnSave;
+    private javax.swing.JComboBox<ComboBoxProductItem> cbProdukt;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tableItems;
+    private javax.swing.JTextField tbCount;
+    // End of variables declaration//GEN-END:variables
 
 }
