@@ -4,6 +4,8 @@
  */
 package cz.a7b36usi.sklad.gui.panels;
 
+import javax.swing.JTextField;
+
 /**
  *
  * @author Lukas Lowinger
@@ -15,6 +17,14 @@ public class WrappingTypePanel extends javax.swing.JPanel {
      */
     public WrappingTypePanel() {
 	initComponents();
+    }
+
+    public JTextField getJmenoTF() {
+	return jmenoTF;
+    }
+
+    public JTextField getMnozstviTF() {
+	return mnozstviTF;
     }
 
     /**
@@ -50,7 +60,7 @@ public class WrappingTypePanel extends javax.swing.JPanel {
                         .add(jLabel1)
                         .add(18, 18, 18)
                         .add(jmenoTF, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 100, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(159, Short.MAX_VALUE))
+                .addContainerGap(142, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)

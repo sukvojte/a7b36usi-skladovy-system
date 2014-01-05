@@ -4,6 +4,8 @@
  */
 package cz.a7b36usi.sklad.gui.panels;
 
+import javax.swing.JTextField;
+
 /**
  *
  * @author Lukas Lowinger
@@ -16,6 +18,15 @@ public class ProductVersionPanel extends javax.swing.JPanel {
     public ProductVersionPanel() {
 	initComponents();
     }
+
+    public JTextField getJmenoTF() {
+	return jmenoTF;
+    }
+
+    public JTextField getKodTF() {
+	return kodTF;
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
