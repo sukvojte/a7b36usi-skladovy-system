@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package cz.a7b36usi.sklad.gui.orderitems;
+package cz.a7b36usi.sklad.gui;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +26,7 @@ import cz.a7b36usi.sklad.tableutils.BaseDataModel;
  * @author Lukas Lowinger
  */
 @Component
-public class OrderItemsGUI extends javax.swing.JDialog implements
+public class EditWindowGUI extends javax.swing.JDialog implements
 		IOrderItemsGUI {
 
 	/**
@@ -34,7 +34,7 @@ public class OrderItemsGUI extends javax.swing.JDialog implements
 	 */
 	private static final long serialVersionUID = -3509027706405436616L;
 
-	static final Logger logger = Logger.getLogger(OrderItemsGUI.class);
+	static final Logger logger = Logger.getLogger(EditWindowGUI.class);
 
 	private ArrayList<IOrderItemsGuiListener> listeners;
 
@@ -50,61 +50,10 @@ public class OrderItemsGUI extends javax.swing.JDialog implements
 		listeners.remove(listener);
 	}
 
-	public void editOrderItem(OrderItemDTO orderItem) {
-		editedItem = orderItem;
 
-		cbProdukt.setSelectedIndex(-1);
-		if (editedItem != null) {
-			tbCount.setText(String.valueOf(editedItem.getQuantity()));
 
-			int i = 0;
-			if (products != null) {
-				for (ProductDTO product : products) {
-					if (product.getId().equals(editedItem.getProduct())) {
-						cbProdukt.setSelectedIndex(i);
-						break;
-					}
-					i++;
-				}
-			}
-		} else {
-			tbCount.setText("");
-		}
 
-	}
-
-	public OrderItemDTO getEditedOrderItem() {
-
-		if (editedItem == null) {
-			editedItem = new OrderItemDTO();
-		}
-		ComboBoxProductItem product = (ComboBoxProductItem) cbProdukt
-				.getSelectedItem();
-		if (product != null) {
-			editedItem.setProduct(product.getProduct().getId());
-		} else {
-			editedItem.setProduct((long) 0);
-		}
-		editedItem.setQuantity(Integer.parseInt(tbCount.getText()));
-
-		return editedItem;
-	}
-
-	public void setTableModel(BaseDataModel<?> model, List<ProductDTO> products, List<ProductVersionDTO> productVersions, List<WrappingTypeDTO> wrappings) {
-		this.baseDataModel = model;
-		this.products = products;
-		this.tableItems.setModel(model);
-
-		cbProdukt.removeAllItems();
-		if (products != null) {
-			for (ProductDTO product : products) {
-				cbProdukt.addItem(new ComboBoxProductItem(product));
-			}
-		}
-
-	}
-
-	public OrderItemsGUI() {
+	public EditWindowGUI() {
 		super();
 		listeners = new ArrayList<IOrderItemsGuiListener>();
 		initComponents();
@@ -113,7 +62,7 @@ public class OrderItemsGUI extends javax.swing.JDialog implements
 	/**
 	 * Creates new form DocumentWizard
 	 */
-	public OrderItemsGUI(java.awt.Frame parent, boolean modal) {
+	public EditWindowGUI(java.awt.Frame parent, boolean modal) {
 		super(parent, modal);
 		listeners = new ArrayList<IOrderItemsGuiListener>();
 		initComponents();
@@ -132,16 +81,9 @@ public class OrderItemsGUI extends javax.swing.JDialog implements
         jScrollPane1 = new javax.swing.JScrollPane();
         tableItems = new javax.swing.JTable();
         btnSave = new javax.swing.JButton();
-        cbProdukt = new javax.swing.JComboBox<ComboBoxProductItem>();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        tbCount = new javax.swing.JTextField();
         btnDelete = new javax.swing.JButton();
         btnNew = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
-        sarzeCB = new javax.swing.JComboBox();
-        jLabel4 = new javax.swing.JLabel();
-        druhBaleniCB = new javax.swing.JComboBox();
+        horniPanelJP = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -170,20 +112,6 @@ public class OrderItemsGUI extends javax.swing.JDialog implements
             }
         });
 
-        cbProdukt.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        cbProdukt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbProduktActionPerformed(evt);
-            }
-        });
-
-        jLabel1.setText("Produkt :");
-
-        jLabel2.setText("Počet :");
-        jLabel2.setToolTipText("");
-
-        tbCount.setText("0");
-
         btnDelete.setText("Smazat");
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -198,13 +126,16 @@ public class OrderItemsGUI extends javax.swing.JDialog implements
             }
         });
 
-        jLabel3.setText("Sarze :");
-
-        sarzeCB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jLabel4.setText("Druh baleni :");
-
-        druhBaleniCB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        org.jdesktop.layout.GroupLayout horniPanelJPLayout = new org.jdesktop.layout.GroupLayout(horniPanelJP);
+        horniPanelJP.setLayout(horniPanelJPLayout);
+        horniPanelJPLayout.setHorizontalGroup(
+            horniPanelJPLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 454, Short.MAX_VALUE)
+        );
+        horniPanelJPLayout.setVerticalGroup(
+            horniPanelJPLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 126, Short.MAX_VALUE)
+        );
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -223,40 +154,16 @@ public class OrderItemsGUI extends javax.swing.JDialog implements
                         .add(btnSave, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 85, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
             .add(layout.createSequentialGroup()
-                .add(48, 48, 48)
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jLabel1)
-                    .add(jLabel2)
-                    .add(jLabel3)
-                    .add(jLabel4))
-                .add(18, 18, 18)
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
-                    .add(cbProdukt, 0, 108, Short.MAX_VALUE)
-                    .add(tbCount)
-                    .add(sarzeCB, 0, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(druhBaleniCB, 0, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .add(35, 35, 35)
+                .add(horniPanelJP, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
-                .add(35, 35, 35)
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(cbProdukt, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(jLabel1))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(jLabel2)
-                    .add(tbCount, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(jLabel3)
-                    .add(sarzeCB, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(jLabel4)
-                    .add(druhBaleniCB, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 30, Short.MAX_VALUE)
+                .add(19, 19, 19)
+                .add(horniPanelJP, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 53, Short.MAX_VALUE)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(btnSave, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 39, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(btnDelete)
@@ -298,9 +205,6 @@ public class OrderItemsGUI extends javax.swing.JDialog implements
 		}
 	}// GEN-LAST:event_btnDeleteActionPerformed
 
-	private void btnNewActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnNewActionPerformed
-		editOrderItem(null);
-	}// GEN-LAST:event_btnNewActionPerformed
 
 	/**
 	 * @param args
@@ -325,16 +229,16 @@ public class OrderItemsGUI extends javax.swing.JDialog implements
 				}
 			}
 		} catch (ClassNotFoundException ex) {
-			java.util.logging.Logger.getLogger(OrderItemsGUI.class.getName())
+			java.util.logging.Logger.getLogger(EditWindowGUI.class.getName())
 					.log(java.util.logging.Level.SEVERE, null, ex);
 		} catch (InstantiationException ex) {
-			java.util.logging.Logger.getLogger(OrderItemsGUI.class.getName())
+			java.util.logging.Logger.getLogger(EditWindowGUI.class.getName())
 					.log(java.util.logging.Level.SEVERE, null, ex);
 		} catch (IllegalAccessException ex) {
-			java.util.logging.Logger.getLogger(OrderItemsGUI.class.getName())
+			java.util.logging.Logger.getLogger(EditWindowGUI.class.getName())
 					.log(java.util.logging.Level.SEVERE, null, ex);
 		} catch (javax.swing.UnsupportedLookAndFeelException ex) {
-			java.util.logging.Logger.getLogger(OrderItemsGUI.class.getName())
+			java.util.logging.Logger.getLogger(EditWindowGUI.class.getName())
 					.log(java.util.logging.Level.SEVERE, null, ex);
 		}
 		// </editor-fold>
@@ -342,7 +246,7 @@ public class OrderItemsGUI extends javax.swing.JDialog implements
 		/* Create and display the dialog */
 		java.awt.EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				OrderItemsGUI dialog = new OrderItemsGUI(
+				EditWindowGUI dialog = new EditWindowGUI(
 						new javax.swing.JFrame(), true);
 				dialog.addWindowListener(new java.awt.event.WindowAdapter() {
 					@Override
@@ -359,16 +263,21 @@ public class OrderItemsGUI extends javax.swing.JDialog implements
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnNew;
     private javax.swing.JButton btnSave;
-    private javax.swing.JComboBox<ComboBoxProductItem> cbProdukt;
-    private javax.swing.JComboBox druhBaleniCB;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JPanel horniPanelJP;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JComboBox sarzeCB;
     private javax.swing.JTable tableItems;
-    private javax.swing.JTextField tbCount;
     // End of variables declaration//GEN-END:variables
+
+    public void editOrderItem(OrderItemDTO orderItem) {
+	throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public void setTableModel(BaseDataModel<?> model, List<ProductDTO> products, List<ProductVersionDTO> productVersions, List<WrappingTypeDTO> wrappings) {
+	throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public OrderItemDTO getEditedOrderItem() {
+	throw new UnsupportedOperationException("Not supported yet.");
+    }
 
 }

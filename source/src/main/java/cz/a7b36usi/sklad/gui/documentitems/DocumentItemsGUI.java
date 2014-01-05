@@ -100,6 +100,9 @@ public class DocumentItemsGUI extends javax.swing.JDialog implements
 				cbProdukt.addItem(new ComboBoxProductItem(product));
 			}
 		}
+		
+		sarzeCB.removeAllItems();
+		if(productV)
 
 	}
 
