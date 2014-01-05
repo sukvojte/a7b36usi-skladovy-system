@@ -176,6 +176,10 @@ public class EditWindowGUI extends javax.swing.JDialog implements
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnNewActionPerformed
+
 	private void cbProduktActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_cbProduktActionPerformed
 		// TODO add your handling code here:
 	}// GEN-LAST:event_cbProduktActionPerformed

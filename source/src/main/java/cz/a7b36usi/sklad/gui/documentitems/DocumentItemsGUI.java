@@ -102,7 +102,17 @@ public class DocumentItemsGUI extends javax.swing.JDialog implements
 		}
 		
 		sarzeCB.removeAllItems();
-		if(productV)
+		if(productVersions != null){
+		    for (ProductVersionDTO pv : productVersions) {
+			sarzeCB.addItem(pv);
+		    }
+		}
+		druhBaleni.removeAllItems();
+		if(druhBaleni!= null){
+		    for (WrappingTypeDTO wt : wrappings) {
+			druhBaleni.addItem(wt);
+		    }
+		}
 
 	}
 
