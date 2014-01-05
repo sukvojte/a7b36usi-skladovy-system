@@ -4,7 +4,7 @@ import java.io.File;
 
 import org.apache.log4j.Logger;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.support.FileSystemXmlApplicationContext;
 
 import cz.a7b36usi.sklad.Controller.LoginController;
 
@@ -24,7 +24,9 @@ public class App {
 		logger.debug("Starting application at "
 				+ new File(".").toURI().toString());
 
-		ApplicationContext ctx = new ClassPathXmlApplicationContext(
+		
+		
+		ApplicationContext ctx = new FileSystemXmlApplicationContext(
 				"/applicationContext.xml");
 
 		LoginController login = ctx.getBean(LoginController.class);

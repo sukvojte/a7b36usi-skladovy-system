@@ -14,7 +14,7 @@ import cz.a7b36usi.sklad.DTO.OrderItemDTO;
 import cz.a7b36usi.sklad.Service.IOrderService;
 import cz.a7b36usi.sklad.Service.IProductService;
 import cz.a7b36usi.sklad.gui.orderitems.OrderItemsDataModel;
-import cz.a7b36usi.sklad.gui.orderitems.ifaces.IOrderItemsGUI;
+import cz.a7b36usi.sklad.gui.orderitems.ifaces.IEditWindowGUI;
 
 @Component
 public class OrdersItemState implements IOrdersItemState {
@@ -22,7 +22,7 @@ public class OrdersItemState implements IOrdersItemState {
 	static final Logger logger = Logger.getLogger(OrdersItemState.class);
 
 	@Autowired
-	private IOrderItemsGUI orderEditForm;
+	private IEditWindowGUI orderEditForm;
 
 	@Autowired
 	private IProductService productService;
@@ -65,7 +65,7 @@ public class OrdersItemState implements IOrdersItemState {
 		this.item = item;
 
 		if (updateModel()) {
-			orderEditForm.setTableModel(model, productService.getAllProducts());
+			orderEditForm.setTableModel(model, productService.getAllProducts(), productService.getAllProductVersions(), productService.getAllWrappingTypes());
 			orderEditForm.setVisible(true);
 		}
 	}

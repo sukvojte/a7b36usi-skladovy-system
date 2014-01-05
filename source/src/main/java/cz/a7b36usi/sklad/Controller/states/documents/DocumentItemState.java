@@ -26,7 +26,7 @@ public class DocumentItemState implements IDocumentItemState {
 
 	@Autowired
 	private IProductService productService;
-
+	
 	@Autowired
 	private IDocumentService documentService;
 
@@ -65,7 +65,7 @@ public class DocumentItemState implements IDocumentItemState {
 		this.item = item;
 
 		if (updateModel()) {
-			orderEditForm.setTableModel(model, productService.getAllProducts());
+			orderEditForm.setTableModel(model, productService.getAllProducts(), productService.getAllProductVersions(), productService.getAllWrappingTypes());
 			orderEditForm.setVisible(true);
 		}
 	}
