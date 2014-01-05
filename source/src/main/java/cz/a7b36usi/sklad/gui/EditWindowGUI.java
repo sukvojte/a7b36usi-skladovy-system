@@ -4,6 +4,7 @@
  */
 package cz.a7b36usi.sklad.gui;
 
+import java.awt.FlowLayout;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,8 +18,9 @@ import cz.a7b36usi.sklad.DTO.ProductDTO;
 import cz.a7b36usi.sklad.DTO.ProductVersionDTO;
 import cz.a7b36usi.sklad.DTO.WrappingTypeDTO;
 import cz.a7b36usi.sklad.gui.ComboBoxProductItem;
-import cz.a7b36usi.sklad.gui.orderitems.ifaces.IOrderItemsGUI;
+import cz.a7b36usi.sklad.gui.orderitems.ifaces.IEditWindowGUI;
 import cz.a7b36usi.sklad.gui.orderitems.ifaces.IOrderItemsGuiListener;
+import cz.a7b36usi.sklad.gui.panels.ProductVersionPanel;
 import cz.a7b36usi.sklad.tableutils.BaseDataModel;
 
 /**
@@ -27,7 +29,7 @@ import cz.a7b36usi.sklad.tableutils.BaseDataModel;
  */
 @Component
 public class EditWindowGUI extends javax.swing.JDialog implements
-		IOrderItemsGUI {
+		IEditWindowGUI {
 
 	/**
 	 * 
@@ -57,6 +59,9 @@ public class EditWindowGUI extends javax.swing.JDialog implements
 		super();
 		listeners = new ArrayList<IOrderItemsGuiListener>();
 		initComponents();
+		horniPanelJP.setLayout(new FlowLayout());
+		horniPanelJP.add(new ProductVersionPanel());
+		horniPanelJP.updateUI();
 	}
 
 	/**
@@ -66,6 +71,9 @@ public class EditWindowGUI extends javax.swing.JDialog implements
 		super(parent, modal);
 		listeners = new ArrayList<IOrderItemsGuiListener>();
 		initComponents();
+		horniPanelJP.setLayout(new FlowLayout());
+		horniPanelJP.add(new ProductVersionPanel());
+		horniPanelJP.updateUI();
 	}
 
 	/**
@@ -277,11 +285,12 @@ public class EditWindowGUI extends javax.swing.JDialog implements
     }
 
     public void setTableModel(BaseDataModel<?> model, List<ProductDTO> products, List<ProductVersionDTO> productVersions, List<WrappingTypeDTO> wrappings) {
-	throw new UnsupportedOperationException("Not supported yet.");
+    	logger.debug("setTableModel");
     }
 
     public OrderItemDTO getEditedOrderItem() {
-	throw new UnsupportedOperationException("Not supported yet.");
+    	logger.debug("getEditedOdrerItem");
+    	return null;
     }
 
 }
