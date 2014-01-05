@@ -662,11 +662,17 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Sarze"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="sarzeJBActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="druhBaleniJB">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Druh baleni"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="druhBaleniJBActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
