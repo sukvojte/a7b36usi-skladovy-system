@@ -448,6 +448,8 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
         errorJmenoSkladoveZasobyJL = new javax.swing.JLabel();
         errorKodSkladoveZasobyJL = new javax.swing.JLabel();
         errorMnozstviSkladoveZasobyJL = new javax.swing.JLabel();
+        sarzeJB = new javax.swing.JButton();
+        druhBaleniJB = new javax.swing.JButton();
         panelUsers = new TabsJPanel(Tabs.USERS);
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -724,27 +726,36 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
 
         errorMnozstviSkladoveZasobyJL.setText("error mnozstvi skladove zasoby");
 
+        sarzeJB.setText("Sarze");
+
+        druhBaleniJB.setText("Druh baleni");
+
         org.jdesktop.layout.GroupLayout panelWarehouseLayout = new org.jdesktop.layout.GroupLayout(panelWarehouse);
         panelWarehouse.setLayout(panelWarehouseLayout);
         panelWarehouseLayout.setHorizontalGroup(
             panelWarehouseLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(panelWarehouseLayout.createSequentialGroup()
-                .addContainerGap()
                 .add(panelWarehouseLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jLabel12)
-                    .add(jLabel11)
-                    .add(jLabel13))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(panelWarehouseLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
-                    .add(jmenoProduktuTF)
-                    .add(kodProduktuTF)
-                    .add(mnozstviProduktuTF, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE))
-                .add(18, 18, 18)
-                .add(panelWarehouseLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(errorJmenoSkladoveZasobyJL)
-                    .add(errorKodSkladoveZasobyJL)
-                    .add(errorMnozstviSkladoveZasobyJL))
-                .addContainerGap(309, Short.MAX_VALUE))
+                    .add(panelWarehouseLayout.createSequentialGroup()
+                        .add(3, 3, 3)
+                        .add(panelWarehouseLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(jLabel12)
+                            .add(jLabel11)
+                            .add(jLabel13))
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(panelWarehouseLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                            .add(jmenoProduktuTF)
+                            .add(kodProduktuTF)
+                            .add(mnozstviProduktuTF, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE))
+                        .add(18, 18, 18)
+                        .add(panelWarehouseLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(errorJmenoSkladoveZasobyJL)
+                            .add(errorKodSkladoveZasobyJL)
+                            .add(errorMnozstviSkladoveZasobyJL)))
+                    .add(panelWarehouseLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
+                        .add(org.jdesktop.layout.GroupLayout.LEADING, sarzeJB, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .add(org.jdesktop.layout.GroupLayout.LEADING, druhBaleniJB, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(312, Short.MAX_VALUE))
         );
         panelWarehouseLayout.setVerticalGroup(
             panelWarehouseLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -764,7 +775,11 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
                     .add(jLabel13)
                     .add(mnozstviProduktuTF, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(errorMnozstviSkladoveZasobyJL))
-                .addContainerGap(194, Short.MAX_VALUE))
+                .add(18, 18, 18)
+                .add(sarzeJB)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(druhBaleniJB)
+                .addContainerGap(112, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Skladové zásoby", panelWarehouse);
@@ -1111,6 +1126,7 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
     private datechooser.beans.DateChooserCombo dateChooserCombo1;
     private datechooser.beans.DateChooserCombo dateChooserCombo2;
     private javax.swing.JCheckBox dodavatelCB;
+    private javax.swing.JButton druhBaleniJB;
     private javax.swing.JLabel errorCisloDokladuJL;
     private javax.swing.JLabel errorCisloObjednavkyJL;
     private javax.swing.JLabel errorCisloPopJL;
@@ -1164,6 +1180,7 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
     private javax.swing.JComboBox<ComboBoxPartnerItem> partnersObjednavkyCB;
     private javax.swing.JTextField pscTF;
     private javax.swing.JComboBox roleJC;
+    private javax.swing.JButton sarzeJB;
     private javax.swing.JButton smazJB;
     private javax.swing.JTextField spolecnostTF;
     private javax.swing.JButton tiskObjednavkyJB;
