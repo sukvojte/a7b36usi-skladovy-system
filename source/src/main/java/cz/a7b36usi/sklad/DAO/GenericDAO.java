@@ -25,6 +25,8 @@ import cz.a7b36usi.sklad.BO.AbstractBO;
 @Component("genericDAO")
 public class GenericDAO implements IGenericDAO {
 
+    private final String UNCHECKED = "unchecked";
+    
 	@Autowired
 	protected EntityManagerFactory entityManagerfactory;
 
@@ -34,14 +36,14 @@ public class GenericDAO implements IGenericDAO {
 		return em;
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings(UNCHECKED)
 	public <ENTITY> List<ENTITY> getAll(Class<ENTITY> clazz) {
 		return getEntityManager().createQuery(
 				"SELECT e FROM " + clazz.getSimpleName() + " e")
 				.getResultList();
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings(UNCHECKED)
 	public <ENTITY> List<ENTITY> getAllOrderedDesc(String property,
 			Class<ENTITY> clazz) {
 		CriteriaQuery<ENTITY> query = getEntityManager().getCriteriaBuilder()
@@ -54,7 +56,7 @@ public class GenericDAO implements IGenericDAO {
 
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings(UNCHECKED)
 	public <ENTITY> List<ENTITY> getAllOrderedAsc(String property,
 			Class<ENTITY> clazz) {
 		CriteriaQuery<ENTITY> query = getEntityManager().getCriteriaBuilder()
@@ -66,7 +68,7 @@ public class GenericDAO implements IGenericDAO {
 		return getEntityManager().createQuery(query).getResultList();
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings(UNCHECKED)
 	public <ENTITY> List<ENTITY> getByProperty(String property, Object value,
 			Class<ENTITY> clazz) {
 		String queryString = "SELECT e FROM " + clazz.getSimpleName()
@@ -87,12 +89,12 @@ public class GenericDAO implements IGenericDAO {
 		getEntityManager().remove(o);
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings(UNCHECKED)
 	public <ENTITY> ENTITY getById(Long id, Class<ENTITY> clazz) {
 		return getEntityManager().find(clazz, id);
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings(UNCHECKED)
 	public <ENTITY> ENTITY loadById(long id, Class<ENTITY> clazz) {
 		return (ENTITY) ((Session) getEntityManager().getDelegate()).load(
 				clazz, id);

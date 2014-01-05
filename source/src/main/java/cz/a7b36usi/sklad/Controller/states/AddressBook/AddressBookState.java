@@ -18,82 +18,83 @@ import cz.a7b36usi.sklad.Service.IPartnerService;
 @Component
 public class AddressBookState implements IControllerState {
 
-	static final Logger logger = Logger.getLogger(AddressBookState.class);
+    static final Logger logger = Logger.getLogger(AddressBookState.class);
 
-	@Autowired
-	private IPartnerService zakaznikService;
+    @Autowired
+    private IPartnerService zakaznikService;
 
-	private AddressBookDataModel model;
+    private AddressBookDataModel model;
 
-	@PostConstruct
-	public void registerModel() {
-		model = new AddressBookDataModel(zakaznikService.getAllPartners());
-	}
+    @PostConstruct
+    public void registerModel() {
+        model = new AddressBookDataModel(zakaznikService.getAllPartners());
+    }
 
-	public void activated(MainController controller) {
-		logger.debug("Activated event");
+    public void activated(MainController controller) {
+        logger.debug("Activated event");
 
-		controller.getForm().setTableModel(model);
-	}
+        controller.getForm().setTableModel(model);
+    }
 
-	public void editFormSave(MainController controller) {
-		logger.debug("Save event");
+    public void editFormSave(MainController controller) {
+        logger.debug("Save event");
 
-		PartnerDTO customer = controller.getForm().getData().getPartnerData();
+        PartnerDTO customer = controller.getForm().getData().getPartnerData();
 
-		if (customer != null) {
-			logger.debug("Save customer " + customer.getId());
-			if (zakaznikService.savePartner(customer)) {
-				model.update(zakaznikService.getAllPartners());
-			} else {
-				logger.error("Customer " + customer.getId() + " was not saved");
-			}
-		} else {
-			logger.error("Can't save null customer");
-		}
+        if (customer != null) {
+            logger.debug("Save customer " + customer.getId());
+            if (zakaznikService.savePartner(customer)) {
+                model.update(zakaznikService.getAllPartners());
+            } else {
+                logger.error("Customer " + customer.getId() + " was not saved");
+            }
+        } else {
+            logger.error("Can't save null customer");
+        }
 
-	}
+    }
 
-	public void selectedItem(MainController controller, int index) {
+    public void selectedItem(MainController controller, int index) {
 
-		PartnerDTO customer = model.getRowByIndex(index);
+        PartnerDTO customer = model.getRowByIndex(index);
 
-		controller.getForm().editCustomer(customer);
-	}
+        controller.getForm().editCustomer(customer);
+    }
 
-	public void deleteItem(MainController controller) {
-		PartnerDTO customer = controller.getForm().getData().getPartnerData();
-		zakaznikService.removePartner(customer);
-		model.update(zakaznikService.getAllPartners());
-	}
+    public void deleteItem(MainController controller) {
+        PartnerDTO customer = controller.getForm().getData().getPartnerData();
+        zakaznikService.removePartner(customer);
+        model.update(zakaznikService.getAllPartners());
+    }
 
-	public boolean validate(MainController controller) {
-		boolean correct = true;
-		List<JTextField> list = controller.getForm().getTextFields()
-				.getAddressBookTextFields();
-		for (JTextField field : list) {
-			InputVerifier iv = field.getInputVerifier();
-			if (iv == null)
-				continue;
-			if (!iv.verify(field)) {
-				correct = false;
-			}
-		}
-		return correct;
-	}
+    public boolean validate(MainController controller) {
+        boolean correct = true;
+        List<JTextField> list = controller.getForm().getTextFields()
+                .getAddressBookTextFields();
+        for (JTextField field : list) {
+            InputVerifier iv = field.getInputVerifier();
+            if (iv == null) {
+                continue;
+            }
+            if (!iv.verify(field)) {
+                correct = false;
+            }
+        }
+        return correct;
+    }
 
-	public void itemDoubleClick(MainController controller, int index) {
-		// TODO dodelat
+    public void itemDoubleClick(MainController controller, int index) {
+        // TODO dodelat
 
-	}
+    }
 
-	public void print(int index) {
-		throw new UnsupportedOperationException("Not supported yet.");
-	}
+    public void print(int index) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 
-	public void deactivated(MainController controller) {
-		// TODO dodelat
+    public void deactivated(MainController controller) {
+        // TODO dodelat
 
-	}
+    }
 
 }

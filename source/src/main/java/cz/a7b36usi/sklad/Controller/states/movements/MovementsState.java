@@ -19,74 +19,75 @@ import cz.a7b36usi.sklad.Service.IDocumentService;
 @Component
 public class MovementsState implements IControllerState {
 
-	static final Logger logger = Logger.getLogger(MovementsState.class);
+    static final Logger logger = Logger.getLogger(MovementsState.class);
 
-	@Autowired
-	private IDocumentService documentService;
+    @Autowired
+    private IDocumentService documentService;
 
-	private MovementsDataModel model;
+    private MovementsDataModel model;
 
-	@PostConstruct
-	public void registerModel() {
-		model = new MovementsDataModel(documentService.getAllMovements());
-	}
+    @PostConstruct
+    public void registerModel() {
+        model = new MovementsDataModel(documentService.getAllMovements());
+    }
 
-	public void activated(MainController controller) {
-		logger.debug("Activated event");
+    public void activated(MainController controller) {
+        logger.debug("Activated event");
 
-		model.update(documentService.getAllMovements());
+        model.update(documentService.getAllMovements());
 
-		controller.getForm().setTableModel(model);
-	}
+        controller.getForm().setTableModel(model);
+    }
 
-	public void editFormSave(MainController controller) {
-		logger.debug("Save event");
-	}
+    public void editFormSave(MainController controller) {
+        logger.debug("Save event");
+    }
 
-	public void selectedItem(MainController controller, int index) {
+    public void selectedItem(MainController controller, int index) {
 
-		MovementDTO movement = model.getRowByIndex(index);
+        MovementDTO movement = model.getRowByIndex(index);
 		   //TODO: dodelat
-		// controller.getForm().editCustomer(customer);
-	}
+        // controller.getForm().editCustomer(customer);
+    }
 
-	public void deleteItem(MainController controller) {//TODO: dodelat
-		// MovementDTO movement =
-		// controller.getForm().getData().getMovementData();
-		//
-		// model.update(zakaznikService.getAllPartners());
-	}
+    public void deleteItem(MainController controller) {//TODO: dodelat
+        // MovementDTO movement =
+        // controller.getForm().getData().getMovementData();
+        //
+        // model.update(zakaznikService.getAllPartners());
+    }
 
-	public boolean validate(MainController controller) {
-		boolean correct = true;
-		List<JTextField> list = controller.getForm().getTextFields()
-				.getAddressBookTextFields();
-		for (JTextField field : list) {
-			InputVerifier iv = field.getInputVerifier();
-			if (iv == null)
-				continue;
-			if (!iv.verify(field)) {
-				correct = false;
-			}
-		}
-		return correct;
-	}
+    public boolean validate(MainController controller) {
+        boolean correct = true;
+        List<JTextField> list = controller.getForm().getTextFields()
+                .getAddressBookTextFields();
+        for (JTextField field : list) {
+            InputVerifier iv = field.getInputVerifier();
+            if (iv == null) {
+                continue;
+            }
+            if (!iv.verify(field)) {
+                correct = false;
+            }
+        }
+        return correct;
+    }
 
-	public void itemDoubleClick(MainController controller, int index) {
-		// TODO dodelat
+    public void itemDoubleClick(MainController controller, int index) {
+        // TODO dodelat
 
-	}
+    }
 
-	public void print(int index) {
-	}
+    public void print(int index) {
+    }
 
-	public void deactivated(MainController controller) {
-		// TODO dodelat
+    public void deactivated(MainController controller) {
+        // TODO dodelat
 
-	}
+    }
 
-	public void filterByProduct(ProductDTO product) {
-		model.update(documentService.getAllProductsMovements(product.getId()));
-	}
+    public void filterByProduct(ProductDTO product) {
+        model.update(documentService.getAllProductsMovements(product.getId()));
+    }
 
 }

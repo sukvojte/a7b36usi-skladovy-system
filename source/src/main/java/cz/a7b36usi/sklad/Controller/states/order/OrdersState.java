@@ -21,91 +21,92 @@ import cz.a7b36usi.sklad.Service.IPrintService;
 @Component
 public class OrdersState implements IControllerState {
 
-	static final Logger logger = Logger.getLogger(OrdersState.class);
+    static final Logger logger = Logger.getLogger(OrdersState.class);
 
-	@Autowired
-	private IOrderService orderService;
+    @Autowired
+    private IOrderService orderService;
 
-	@Autowired
-	IPrintService printService;
+    @Autowired
+    IPrintService printService;
 
-	@Autowired
-	private IPartnerService partnerService;
+    @Autowired
+    private IPartnerService partnerService;
 
-	@Autowired
-	private IOrdersItemState orderItemsState;
+    @Autowired
+    private IOrdersItemState orderItemsState;
 
-	private OrdersDataModel model;
+    private OrdersDataModel model;
 
-	@PostConstruct
-	public void registerModel() {
-		model = new OrdersDataModel(orderService.getAllOrders());
-	}
+    @PostConstruct
+    public void registerModel() {
+        model = new OrdersDataModel(orderService.getAllOrders());
+    }
 
-	public void activated(MainController controller) {
-		logger.debug("Activated event");
+    public void activated(MainController controller) {
+        logger.debug("Activated event");
 
-		controller.getForm().setTableModel(model);
-		controller.getForm().setPartnerList(partnerService.getAllPartners());
-	}
+        controller.getForm().setTableModel(model);
+        controller.getForm().setPartnerList(partnerService.getAllPartners());
+    }
 
-	public void deactivated(MainController controller) {
-		orderItemsState.deactivated(controller, this);
-	}
+    public void deactivated(MainController controller) {
+        orderItemsState.deactivated(controller, this);
+    }
 
-	public void editFormSave(MainController controller) {
-		logger.debug("Save event");
+    public void editFormSave(MainController controller) {
+        logger.debug("Save event");
 
-		OrderDTO order = controller.getForm().getData().getOrderData();
+        OrderDTO order = controller.getForm().getData().getOrderData();
 
-		if (order != null) {
-			logger.debug("Save order " + order.getId());
-			orderService.saveOrder(order);
-			model.update(orderService.getAllOrders());
-		} else {
-			logger.error("Can't save null customer");
-		}
-	}
+        if (order != null) {
+            logger.debug("Save order " + order.getId());
+            orderService.saveOrder(order);
+            model.update(orderService.getAllOrders());
+        } else {
+            logger.error("Can't save null customer");
+        }
+    }
 
-	public void selectedItem(MainController controller, int index) {
-		OrderDTO order = model.getRowByIndex(index);
+    public void selectedItem(MainController controller, int index) {
+        OrderDTO order = model.getRowByIndex(index);
 
-		controller.getForm().editOrder(order);
-	}
+        controller.getForm().editOrder(order);
+    }
 
-	public void deleteItem(MainController controller) {
-		OrderDTO order = controller.getForm().getData().getOrderData();
-		orderService.removeOrder(order);
-		model.update(orderService.getAllOrders());
-	}
+    public void deleteItem(MainController controller) {
+        OrderDTO order = controller.getForm().getData().getOrderData();
+        orderService.removeOrder(order);
+        model.update(orderService.getAllOrders());
+    }
 
-	public boolean validate(MainController controller) {
-		boolean correct = true;
-		List<JTextField> list = controller.getForm().getTextFields()
-				.getOrderTextFields();
-		for (JTextField field : list) {
-			InputVerifier iv = field.getInputVerifier();
-			if (iv == null)
-				continue;
-			if (!iv.verify(field)) {
-				correct = false;
-			}
-		}
-		return correct;
-	}
+    public boolean validate(MainController controller) {
+        boolean correct = true;
+        List<JTextField> list = controller.getForm().getTextFields()
+                .getOrderTextFields();
+        for (JTextField field : list) {
+            InputVerifier iv = field.getInputVerifier();
+            if (iv == null) {
+                continue;
+            }
+            if (!iv.verify(field)) {
+                correct = false;
+            }
+        }
+        return correct;
+    }
 
-	public void itemDoubleClick(MainController controller, int index) {
-		logger.debug("item double click");
+    public void itemDoubleClick(MainController controller, int index) {
+        logger.debug("item double click");
 
-		orderItemsState
-				.openDialog(controller, this, model.getRowByIndex(index));
-	}
+        orderItemsState
+                .openDialog(controller, this, model.getRowByIndex(index));
+    }
 
-	public void print(int index) {
-		if (!printService.printOrder(model.getRowByIndex(index).getId())) {
-			JOptionPane.showMessageDialog(null, "Problem s tiskem.",
-					"Tisk se nezdaril", JOptionPane.ERROR_MESSAGE);
-		}
-	}
+    public void print(int index) {
+        if (!printService.printOrder(model.getRowByIndex(index).getId())) {
+            JOptionPane.showMessageDialog(null, "Problem s tiskem.",
+                    "Tisk se nezdaril", JOptionPane.ERROR_MESSAGE);
+        }
+    }
 
 }

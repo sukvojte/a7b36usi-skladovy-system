@@ -17,92 +17,93 @@ import cz.a7b36usi.sklad.Service.IDocumentService;
 import cz.a7b36usi.sklad.Service.IPartnerService;
 
 /**
- * 
+ *
  * @author lewi
  */
 @Component
 public class DocumentsState implements IControllerState {
 
-	static final Logger logger = Logger.getLogger(DocumentsState.class);
+    static final Logger logger = Logger.getLogger(DocumentsState.class);
 
-	@Autowired
-	private IDocumentService documentService;
+    @Autowired
+    private IDocumentService documentService;
 
-	@Autowired
-	private IPartnerService partnerService;
+    @Autowired
+    private IPartnerService partnerService;
 
-	@Autowired
-	private IDocumentItemState itemState;
+    @Autowired
+    private IDocumentItemState itemState;
 
-	private DocumentsDataModel model;
+    private DocumentsDataModel model;
 
-	@PostConstruct
-	public void registerModel() {
-		model = new DocumentsDataModel(documentService.getAllDocuments());
-	}
+    @PostConstruct
+    public void registerModel() {
+        model = new DocumentsDataModel(documentService.getAllDocuments());
+    }
 
-	public void activated(MainController controller) {
-		logger.debug("Activated event");
+    public void activated(MainController controller) {
+        logger.debug("Activated event");
 
-		controller.getForm().setTableModel(model);
-		controller.getForm().setPartnerList(partnerService.getAllPartners());
-	}
+        controller.getForm().setTableModel(model);
+        controller.getForm().setPartnerList(partnerService.getAllPartners());
+    }
 
-	public void editFormSave(MainController controller) {
-		logger.debug("Save event");
+    public void editFormSave(MainController controller) {
+        logger.debug("Save event");
 
-		DocumentDTO document = controller.getForm().getData().getDocumentData();
+        DocumentDTO document = controller.getForm().getData().getDocumentData();
 
-		if (document != null) {
-			logger.debug("Save document " + document.getId());
-			documentService.saveDocument(document);
-			model.update(documentService.getAllDocuments());
-		} else {
-			logger.error("Can't save null document");
-		}
+        if (document != null) {
+            logger.debug("Save document " + document.getId());
+            documentService.saveDocument(document);
+            model.update(documentService.getAllDocuments());
+        } else {
+            logger.error("Can't save null document");
+        }
 
-	}
+    }
 
-	public void selectedItem(MainController controller, int index) {
+    public void selectedItem(MainController controller, int index) {
 
-		DocumentDTO document = model.getRowByIndex(index);
+        DocumentDTO document = model.getRowByIndex(index);
 
-		controller.getForm().editDocument(document);
-	}
+        controller.getForm().editDocument(document);
+    }
 
-	public void deleteItem(MainController controller) {
-		DocumentDTO document = controller.getForm().getData().getDocumentData();
-		documentService.removeDocument(document.getId());
-		model.update(documentService.getAllDocuments());
-	}
+    public void deleteItem(MainController controller) {
+        DocumentDTO document = controller.getForm().getData().getDocumentData();
+        documentService.removeDocument(document.getId());
+        model.update(documentService.getAllDocuments());
+    }
 
-	public boolean validate(MainController controller) {
-		boolean correct = true;
-		List<JTextField> list = controller.getForm().getTextFields()
-				.getDocumentTextFields();
-		for (JTextField field : list) {
-			InputVerifier iv = field.getInputVerifier();
-			if (iv == null)
-				continue;
-			if (!iv.verify(field)) {
-				correct = false;
-			}
-		}
-		return correct;
-	}
+    public boolean validate(MainController controller) {
+        boolean correct = true;
+        List<JTextField> list = controller.getForm().getTextFields()
+                .getDocumentTextFields();
+        for (JTextField field : list) {
+            InputVerifier iv = field.getInputVerifier();
+            if (iv == null) {
+                continue;
+            }
+            if (!iv.verify(field)) {
+                correct = false;
+            }
+        }
+        return correct;
+    }
 
-	public void itemDoubleClick(MainController controller, int index) {
-		logger.debug("item double click");
+    public void itemDoubleClick(MainController controller, int index) {
+        logger.debug("item double click");
 
-		itemState.openDialog(controller, this, model.getRowByIndex(index));
-	}
+        itemState.openDialog(controller, this, model.getRowByIndex(index));
+    }
 
-	public void print(int index) {
+    public void print(int index) {
 
-	}
+    }
 
-	public void deactivated(MainController controller) {
-		itemState.deactivated(controller, this);
-	}
+    public void deactivated(MainController controller) {
+        itemState.deactivated(controller, this);
+    }
 
 }
