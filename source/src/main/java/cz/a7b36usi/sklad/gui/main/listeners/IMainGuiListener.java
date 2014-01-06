@@ -17,4 +17,8 @@ public interface IMainGuiListener {
 	boolean validate();
 
 	void print(int index);
+
+	void productVersionEdit();
+
+	void wrappingTypeEdit();
 }

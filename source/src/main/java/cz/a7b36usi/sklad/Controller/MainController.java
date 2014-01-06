@@ -82,6 +82,16 @@ public class MainController implements IMainController {
 				logger.debug("Printing data");
 				state.print(index);
 			}
+
+			public void productVersionEdit() {
+				// TODO Auto-generated method stub
+				
+			}
+
+			public void wrappingTypeEdit() {
+				// TODO Auto-generated method stub
+				
+			}
 		});
 
 		state = stateFactory.getDefaultState();

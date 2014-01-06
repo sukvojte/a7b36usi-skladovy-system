@@ -971,11 +971,17 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
     }// </editor-fold>//GEN-END:initComponents
 
     private void sarzeJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sarzeJBActionPerformed
-        // TODO add your handling code here:
+    	// Fire event
+		for (IMainGuiListener ctrl : listeners) {
+			ctrl.productVersionEdit();
+		}
     }//GEN-LAST:event_sarzeJBActionPerformed
 
     private void druhBaleniJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_druhBaleniJBActionPerformed
-        // TODO add your handling code here:
+    	// Fire event
+		for (IMainGuiListener ctrl : listeners) {
+			ctrl.wrappingTypeEdit();
+		}
     }//GEN-LAST:event_druhBaleniJBActionPerformed
 
 	private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jMenuItem1ActionPerformed
