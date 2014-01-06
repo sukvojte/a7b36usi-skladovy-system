@@ -7,6 +7,11 @@ import cz.a7b36usi.sklad.Controller.states.order.OrdersState;
 import cz.a7b36usi.sklad.Controller.states.products.ProductsState;
 import cz.a7b36usi.sklad.Controller.states.users.UsersState;
 
+/**
+ * Used to store information about current Tab
+ * 
+ * @author Aleksandr
+ */
 public enum Tabs {
 	ADDRESS_BOOK(AddressBookState.class), ORDERS(OrdersState.class), MOVEMENTS(
 			MovementsState.class), DOCUMENTS(DocumentsState.class), WAREHOUSE(

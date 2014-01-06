@@ -59,21 +59,26 @@ public interface IOrderService {
 	public OrderItemDTO getOrderItemById(Long id);
 
 	/**
-	 * 
+	 * Returns all items, which belong to this order
+         * 
 	 * @param order
-	 * @return
+         *           order, containing items to return
+	 * @return items associated with the given order
 	 */
 	@Transactional(readOnly = true)
 	public List<OrderItemDTO> getAllOrderItems(OrderDTO order);
 
 	/**
-	 * 
+	 * Remove order item from the database
+         * 
 	 * @param item
+         *           order item to remove
 	 */
 	public void removeOrderItem(OrderItemDTO item);
 
 	/**
 	 * 
+         * 
 	 * @return
 	 */
 	public List<OrderItemDTO> getOrderItems(OrderDTO item);

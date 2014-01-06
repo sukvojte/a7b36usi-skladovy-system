@@ -18,9 +18,25 @@ public interface IUsersController {
 	 */
 	void deleteUser(UserDTO user);
 
-	void updateUser(UserDTO user);
+	/**
+         *
+         * @param user
+        */
+        void updateUser(UserDTO user);
+        
+        
+	/**
+        *
+        * @param user
+        * @param password
+        */
+       void updatePassword(UserDTO user, char[] password);
 
-	void updatePassword(UserDTO user, char[] password);
-
-	void createUser(String username, char[] password, UserRole acl);
+         /**
+         *
+         * @param username
+         * @param password
+         * @param acl
+         */
+        void createUser(String username, char[] password, UserRole acl);
 }
