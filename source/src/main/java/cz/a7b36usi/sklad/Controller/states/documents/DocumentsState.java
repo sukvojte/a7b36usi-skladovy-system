@@ -106,4 +106,14 @@ public class DocumentsState implements IControllerState {
         itemState.deactivated(controller, this);
     }
 
+	public void productVersionEdit(MainController ctrl, int index) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void wrappingTypeEdit(MainController ctrl, int index) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

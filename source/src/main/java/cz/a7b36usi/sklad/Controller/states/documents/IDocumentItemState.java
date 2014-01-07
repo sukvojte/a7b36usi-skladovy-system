@@ -2,14 +2,14 @@ package cz.a7b36usi.sklad.Controller.states.documents;
 
 import cz.a7b36usi.sklad.Controller.MainController;
 import cz.a7b36usi.sklad.DTO.DocumentDTO;
-import cz.a7b36usi.sklad.gui.orderitems.ifaces.IOrderItemsGuiListener;
+import cz.a7b36usi.sklad.gui.IEditItemsGuiListener;
 
 /**
  * Is responsible for controlling states on items
  * 
  * @author Aleksandr
  */
-public interface IDocumentItemState extends IOrderItemsGuiListener {
+public interface IDocumentItemState extends IEditItemsGuiListener {
 
 	/**
      *  Sets items window invisible

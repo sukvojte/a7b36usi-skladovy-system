@@ -48,7 +48,7 @@ public interface IMainGuiListener {
      */
     void print(int index);
 
-    void productVersionEdit();
+    void productVersionEdit(int index);
 
-    void wrappingTypeEdit();
+    void wrappingTypeEdit(int index);
 }

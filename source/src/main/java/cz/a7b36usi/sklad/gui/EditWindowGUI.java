@@ -13,7 +13,6 @@ import javax.swing.JTable;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
 
-import cz.a7b36usi.sklad.gui.orderitems.ifaces.IOrderItemsGuiListener;
 import cz.a7b36usi.sklad.gui.panels.ProductVersionPanel;
 import cz.a7b36usi.sklad.tableutils.BaseDataModel;
 
@@ -31,14 +30,14 @@ public class EditWindowGUI extends javax.swing.JDialog {
 
 	static final Logger logger = Logger.getLogger(EditWindowGUI.class);
 
-	private ArrayList<IOrderItemsGuiListener> listeners;	
+	private ArrayList<IEditItemsGuiListener> listeners;	
 	protected BaseDataModel<?> baseDataModel;
 	
-	public void addListeners(IOrderItemsGuiListener listener) {
+	public void addListeners(IEditItemsGuiListener listener) {
 		listeners.add(listener);
 	}
 
-	public void removeListeners(IOrderItemsGuiListener listener) {
+	public void removeListeners(IEditItemsGuiListener listener) {
 		listeners.remove(listener);
 	}
 
@@ -57,7 +56,7 @@ public class EditWindowGUI extends javax.swing.JDialog {
 	
 	public EditWindowGUI() {
 		super();
-		listeners = new ArrayList<IOrderItemsGuiListener>();
+		listeners = new ArrayList<IEditItemsGuiListener>();
 		initComponents();
 		horniPanelJP.setLayout(new FlowLayout());
 		afterInit();
@@ -68,7 +67,7 @@ public class EditWindowGUI extends javax.swing.JDialog {
 	 */
 	public EditWindowGUI(java.awt.Frame parent, boolean modal) {
 		super(parent, modal);
-		listeners = new ArrayList<IOrderItemsGuiListener>();
+		listeners = new ArrayList<IEditItemsGuiListener>();
 		initComponents();
 	}
 
@@ -199,7 +198,7 @@ public class EditWindowGUI extends javax.swing.JDialog {
 	}// GEN-LAST:event_cbProduktActionPerformed
 
 	private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnSaveActionPerformed
-		for (IOrderItemsGuiListener ctrl : listeners) {
+		for (IEditItemsGuiListener ctrl : listeners) {
 			ctrl.save();
 		}
 	}// GEN-LAST:event_btnSaveActionPerformed
@@ -211,14 +210,14 @@ public class EditWindowGUI extends javax.swing.JDialog {
 		if (table.getSelectedRowCount() == 1) {
 			int selected = table.getSelectedRow();
 
-			for (IOrderItemsGuiListener ctrl : listeners) {
+			for (IEditItemsGuiListener ctrl : listeners) {
 				ctrl.click(selected);
 			}
 		}
 	}// GEN-LAST:event_tableItemsMouseClicked
 
 	private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnDeleteActionPerformed
-		for (IOrderItemsGuiListener ctrl : listeners) {
+		for (IEditItemsGuiListener ctrl : listeners) {
 			ctrl.delete();
 		}
 	}// GEN-LAST:event_btnDeleteActionPerformed

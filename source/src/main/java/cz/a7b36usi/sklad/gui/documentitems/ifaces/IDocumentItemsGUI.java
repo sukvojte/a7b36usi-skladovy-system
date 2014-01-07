@@ -6,12 +6,12 @@ import cz.a7b36usi.sklad.DTO.MovementDTO;
 import cz.a7b36usi.sklad.DTO.ProductDTO;
 import cz.a7b36usi.sklad.DTO.ProductVersionDTO;
 import cz.a7b36usi.sklad.DTO.WrappingTypeDTO;
-import cz.a7b36usi.sklad.gui.orderitems.ifaces.IOrderItemsGuiListener;
+import cz.a7b36usi.sklad.gui.IEditItemsGuiListener;
 import cz.a7b36usi.sklad.ifaces.RecieveListener;
 import cz.a7b36usi.sklad.tableutils.BaseDataModel;
 
 public interface IDocumentItemsGUI extends
-		RecieveListener<IOrderItemsGuiListener> {
+		RecieveListener<IEditItemsGuiListener> {
 
 	void editMovementItem(MovementDTO orderItem);
 

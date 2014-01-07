@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 import cz.a7b36usi.sklad.Controller.MainController;
 import cz.a7b36usi.sklad.Controller.states.IControllerState;
+import cz.a7b36usi.sklad.Controller.states.documents.IDocumentItemState;
 import cz.a7b36usi.sklad.DTO.ProductDTO;
 import cz.a7b36usi.sklad.Service.IProductService;
 
@@ -22,7 +23,13 @@ public class ProductsState implements IControllerState {
 
     @Autowired
     private IProductService productService;// TODO: get all movements je kde ?
-
+    
+    @Autowired
+    private IProductVersionState productVersionState;
+    
+    @Autowired
+    private IWrappingTypeState wrappingTypeState;
+    
     private ProductsDataModel model;
 
     @PostConstruct
@@ -94,5 +101,13 @@ public class ProductsState implements IControllerState {
         // TODO Auto-generated method stub
 
     }
+
+	public void productVersionEdit(MainController controller, int index) {
+		productVersionState.openDialog(controller, this, model.getRowByIndex(index));
+	}
+
+	public void wrappingTypeEdit(MainController controller, int index) {
+		wrappingTypeState.openDialog(controller, this, model.getRowByIndex(index));
+	}
 
 }

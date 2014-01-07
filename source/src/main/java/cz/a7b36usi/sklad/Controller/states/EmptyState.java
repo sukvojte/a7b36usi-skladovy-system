@@ -66,4 +66,14 @@ public class EmptyState implements IControllerState {
 
 	}
 
+	public void productVersionEdit(MainController ctrl, int index) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void wrappingTypeEdit(MainController ctrl, int index) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

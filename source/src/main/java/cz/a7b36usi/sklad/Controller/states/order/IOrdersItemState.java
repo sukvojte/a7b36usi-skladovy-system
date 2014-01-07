@@ -2,13 +2,13 @@ package cz.a7b36usi.sklad.Controller.states.order;
 
 import cz.a7b36usi.sklad.Controller.MainController;
 import cz.a7b36usi.sklad.DTO.OrderDTO;
-import cz.a7b36usi.sklad.gui.orderitems.ifaces.IOrderItemsGuiListener;
+import cz.a7b36usi.sklad.gui.IEditItemsGuiListener;
 /**
  * Is responsible for controlling states on orders
  * 
  * @author Aleksandr
  */
-public interface IOrdersItemState extends IOrderItemsGuiListener {
+public interface IOrdersItemState extends IEditItemsGuiListener {
         /**
         *  Sets orders window invisible
         * @param controller

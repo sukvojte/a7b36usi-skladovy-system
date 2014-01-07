@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import cz.a7b36usi.sklad.DTO.ProductDTO;
 import cz.a7b36usi.sklad.DTO.ProductVersionDTO;
 import cz.a7b36usi.sklad.gui.EditWindowGUI;
+import cz.a7b36usi.sklad.gui.panels.ProductVersionPanel;
 import cz.a7b36usi.sklad.gui.panels.SubWindowPanel;
 import cz.a7b36usi.sklad.gui.productversion.ifaces.IProductVersionGUI;
 import cz.a7b36usi.sklad.tableutils.BaseDataModel;
@@ -20,14 +21,14 @@ public class ProductVersionGUI extends EditWindowGUI implements IProductVersionG
 	
 	private ProductVersionDTO editedItem;
 	
-	private SubWindowPanel panel;
+	private ProductVersionPanel panel;
 	private ProductDTO product;
 	
 
 	@Override
 	protected void afterInit(){
 		
-		panel = new SubWindowPanel();
+		panel = new ProductVersionPanel();
 		
 		getTopPanel().add(panel);
 	}
@@ -39,6 +40,16 @@ public class ProductVersionGUI extends EditWindowGUI implements IProductVersionG
 	
 	
 	public void editProductVersion(ProductVersionDTO productVersion) {
+		
+		if(productVersion != null){
+			panel.getJmenoTF().setText(editedItem.getName());
+			panel.getKodTF().setText(String.valueOf(editedItem.getCode()));
+		}else{
+			panel.getJmenoTF().setText("");
+			panel.getKodTF().setText("0");
+		}
+
+		
 		editedItem = productVersion;
 	}
 
@@ -51,6 +62,10 @@ public class ProductVersionGUI extends EditWindowGUI implements IProductVersionG
 		if(editedItem == null){
 			editedItem = new ProductVersionDTO();
 		}
+		
+		editedItem.setCode(Long.parseLong(panel.getKodTF().getText()));
+		editedItem.setName(panel.getJmenoTF().getText());
+		
 		editedItem.setProduct(this.product.getId());
 		
 		return editedItem;

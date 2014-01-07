@@ -83,14 +83,12 @@ public class MainController implements IMainController {
 				state.print(index);
 			}
 
-			public void productVersionEdit() {
-				// TODO Auto-generated method stub
-				
+			public void productVersionEdit(int index) {
+				state.productVersionEdit(ctrl,index);
 			}
 
-			public void wrappingTypeEdit() {
-				// TODO Auto-generated method stub
-				
+			public void wrappingTypeEdit(int index) {
+				state.wrappingTypeEdit(ctrl, index);
 			}
 		});
 

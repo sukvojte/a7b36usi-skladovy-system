@@ -90,4 +90,14 @@ public class MovementsState implements IControllerState {
         model.update(documentService.getAllProductsMovements(product.getId()));
     }
 
+	public void productVersionEdit(MainController ctrl, int index) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void wrappingTypeEdit(MainController ctrl, int index) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

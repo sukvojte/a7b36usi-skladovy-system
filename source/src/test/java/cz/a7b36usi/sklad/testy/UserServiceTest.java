@@ -41,8 +41,8 @@ public class UserServiceTest extends AbstractServiceTest {
 		assertFalse(userService.getAllUsers().isEmpty());
 		assertEquals(name, u1.getUsername());
 		assertEquals(name, u2.getUsername());
-		assertEquals(password, u1.getPassword());
-		assertEquals(password, u2.getPassword());
+		assertTrue(userService.logInUser(u1.getUsername(), password.toCharArray()));
+		assertTrue(userService.logInUser(u2.getUsername(), password.toCharArray()));
 		assertEquals(ur, u1.getAcl());
 		assertEquals(ur, u2.getAcl());
 		assertEquals(id, u1.getId());

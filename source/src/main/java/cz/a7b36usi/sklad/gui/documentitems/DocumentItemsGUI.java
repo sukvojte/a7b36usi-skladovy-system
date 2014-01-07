@@ -17,8 +17,8 @@ import cz.a7b36usi.sklad.DTO.ProductDTO;
 import cz.a7b36usi.sklad.DTO.ProductVersionDTO;
 import cz.a7b36usi.sklad.DTO.WrappingTypeDTO;
 import cz.a7b36usi.sklad.gui.ComboBoxProductItem;
+import cz.a7b36usi.sklad.gui.IEditItemsGuiListener;
 import cz.a7b36usi.sklad.gui.documentitems.ifaces.IDocumentItemsGUI;
-import cz.a7b36usi.sklad.gui.orderitems.ifaces.IOrderItemsGuiListener;
 import cz.a7b36usi.sklad.tableutils.BaseDataModel;
 
 /**
@@ -31,17 +31,17 @@ public class DocumentItemsGUI extends javax.swing.JDialog implements
 
 	static final Logger logger = Logger.getLogger(DocumentItemsGUI.class);
 
-	private ArrayList<IOrderItemsGuiListener> listeners;
+	private ArrayList<IEditItemsGuiListener> listeners;
 
 	private MovementDTO editedItem;
 	private List<ProductDTO> products;
 	private BaseDataModel<?> baseDataModel;
 
-	public void addListeners(IOrderItemsGuiListener listener) {
+	public void addListeners(IEditItemsGuiListener listener) {
 		listeners.add(listener);
 	}
 
-	public void removeListeners(IOrderItemsGuiListener listener) {
+	public void removeListeners(IEditItemsGuiListener listener) {
 		listeners.remove(listener);
 	}
 
@@ -118,7 +118,7 @@ public class DocumentItemsGUI extends javax.swing.JDialog implements
 
 	public DocumentItemsGUI() {
 		super();
-		listeners = new ArrayList<IOrderItemsGuiListener>();
+		listeners = new ArrayList<IEditItemsGuiListener>();
 		initComponents();
 	}
 
@@ -127,7 +127,7 @@ public class DocumentItemsGUI extends javax.swing.JDialog implements
 	 */
 	public DocumentItemsGUI(java.awt.Frame parent, boolean modal) {
 		super(parent, modal);
-		listeners = new ArrayList<IOrderItemsGuiListener>();
+		listeners = new ArrayList<IEditItemsGuiListener>();
 		initComponents();
 	}
 
@@ -298,7 +298,7 @@ public class DocumentItemsGUI extends javax.swing.JDialog implements
 	}// GEN-LAST:event_cbProduktActionPerformed
 
 	private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnSaveActionPerformed
-		for (IOrderItemsGuiListener ctrl : listeners) {
+		for (IEditItemsGuiListener ctrl : listeners) {
 			ctrl.save();
 		}
 	}// GEN-LAST:event_btnSaveActionPerformed
@@ -310,14 +310,14 @@ public class DocumentItemsGUI extends javax.swing.JDialog implements
 		if (table.getSelectedRowCount() == 1) {
 			int selected = table.getSelectedRow();
 
-			for (IOrderItemsGuiListener ctrl : listeners) {
+			for (IEditItemsGuiListener ctrl : listeners) {
 				ctrl.click(selected);
 			}
 		}
 	}// GEN-LAST:event_tableItemsMouseClicked
 
 	private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnDeleteActionPerformed
-		for (IOrderItemsGuiListener ctrl : listeners) {
+		for (IEditItemsGuiListener ctrl : listeners) {
 			ctrl.delete();
 		}
 	}// GEN-LAST:event_btnDeleteActionPerformed

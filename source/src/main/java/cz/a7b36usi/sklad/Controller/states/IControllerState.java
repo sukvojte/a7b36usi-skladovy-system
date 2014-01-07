@@ -66,4 +66,8 @@ public interface IControllerState {
 	 * @param index
 	 */
 	void print(int index);
+
+	void productVersionEdit(MainController controller, int index);
+
+	void wrappingTypeEdit(MainController controller, int index);
 }

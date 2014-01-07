@@ -6,10 +6,11 @@ import cz.a7b36usi.sklad.DTO.OrderItemDTO;
 import cz.a7b36usi.sklad.DTO.ProductDTO;
 import cz.a7b36usi.sklad.DTO.ProductVersionDTO;
 import cz.a7b36usi.sklad.DTO.WrappingTypeDTO;
+import cz.a7b36usi.sklad.gui.IEditItemsGuiListener;
 import cz.a7b36usi.sklad.ifaces.RecieveListener;
 import cz.a7b36usi.sklad.tableutils.BaseDataModel;
 
-public interface IOrderItemsGUI extends RecieveListener<IOrderItemsGuiListener> {
+public interface IOrderItemsGUI extends RecieveListener<IEditItemsGuiListener> {
 
 	void editOrderItem(OrderItemDTO orderItem);
 
