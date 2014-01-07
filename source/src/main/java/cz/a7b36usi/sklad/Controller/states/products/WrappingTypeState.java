@@ -75,8 +75,10 @@ public class WrappingTypeState implements IWrappingTypeState,IEditItemsGuiListen
 
 	public void delete() {
 		WrappingTypeDTO wt = wrappingTypeForm.getEditedWrappingType();
-		productService.removeWrappingType(wt.getId());
-		updateModel();
+		if(wt.getId() != null){
+		    productService.removeWrappingType(wt.getId());
+		    updateModel();
+		}
 	}
 	
 	private boolean updateModel() {

@@ -46,8 +46,8 @@ public class WrappingTypeGUI extends EditWindowGUI implements IWrappingTypeGUI {
 	public void editWrappingType(WrappingTypeDTO wrappingTypeDTO) {
 		
 		if(wrappingTypeDTO != null){
-			panel.getJmenoTF().setText(editedItem.getName());
-			panel.getMnozstviTF().setText(String.valueOf(editedItem.getQuantity()));
+			panel.getJmenoTF().setText(wrappingTypeDTO.getName());
+			panel.getMnozstviTF().setText(String.valueOf(wrappingTypeDTO.getQuantity()));
 		}else{
 			panel.getJmenoTF().setText("");
 			panel.getMnozstviTF().setText("0");

@@ -207,7 +207,7 @@ public class EditWindowGUI extends javax.swing.JDialog {
 
 		JTable table = (JTable) evt.getComponent();
 
-		if (table.getSelectedRowCount() == 1) {
+		if (table.getSelectedRowCount() == 1 && evt.getClickCount() == 1) {
 			int selected = table.getSelectedRow();
 
 			for (IEditItemsGuiListener ctrl : listeners) {

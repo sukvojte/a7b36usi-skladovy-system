@@ -78,8 +78,10 @@ public class ProductVersionState implements IProductVersionState,IEditItemsGuiLi
 
 	public void delete() {
 		ProductVersionDTO productVersion = productVersionForm.getEditedProductVersion();
-		productService.removeProductVersion(productVersion.getId());
-		updateModel();
+		if(productVersion.getId() != null){
+		    productService.removeProductVersion(productVersion.getId());
+		    updateModel();
+		}
 	}
 	
 	private boolean updateModel() {

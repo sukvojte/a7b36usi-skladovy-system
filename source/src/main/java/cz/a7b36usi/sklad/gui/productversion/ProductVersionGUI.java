@@ -42,8 +42,8 @@ public class ProductVersionGUI extends EditWindowGUI implements IProductVersionG
 	public void editProductVersion(ProductVersionDTO productVersion) {
 		
 		if(productVersion != null){
-			panel.getJmenoTF().setText(editedItem.getName());
-			panel.getKodTF().setText(String.valueOf(editedItem.getCode()));
+			panel.getJmenoTF().setText(productVersion.getName());
+			panel.getKodTF().setText(String.valueOf(productVersion.getCode()));
 		}else{
 			panel.getJmenoTF().setText("");
 			panel.getKodTF().setText("0");
