@@ -35,6 +35,7 @@ public class UserServiceTest extends AbstractServiceTest {
 		Long id = userService.addUser(name, password.toCharArray(), ur);
 		UserDTO u1 = userService.getUserById(id);
 		UserDTO u2 = userService.getUserByUsername(name);
+		userService.addUser("admin", "admin".toCharArray(), UserRole.VEDOUCI);
 		assertNotNull(u1);
 		assertNotNull(u2);
 		assertFalse(userService.getAllUsers().isEmpty());
@@ -46,7 +47,7 @@ public class UserServiceTest extends AbstractServiceTest {
 		assertEquals(ur, u2.getAcl());
 		assertEquals(id, u1.getId());
 		assertEquals(id, u2.getId());
-		userService.addUser("admin", "admin".toCharArray(), UserRole.VEDOUCI);
+		
 	}
 
 	@Test

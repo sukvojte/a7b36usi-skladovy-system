@@ -5,6 +5,7 @@
 package cz.a7b36usi.sklad.BO;
 
 import cz.a7b36usi.sklad.provider.IHashProvider;
+import cz.a7b36usi.sklad.provider.PasswordHasher;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -41,7 +42,7 @@ public class UserBO extends AbstractBO {
     @Enumerated(EnumType.STRING)
     UserRole acl;
 
-    @Autowired
+    //@Autowired
     private transient IHashProvider hasher;
 
     /**
@@ -49,6 +50,7 @@ public class UserBO extends AbstractBO {
      */
     public UserBO() {
         this.acl = UserRole.SKLADNIK;
+	hasher = new PasswordHasher();
     }
 
     public String getUsername() {
@@ -83,7 +85,7 @@ public class UserBO extends AbstractBO {
     public IHashProvider getHasher() {
 	return hasher;
     }
-
+    
     public void setHasher(IHashProvider hasher) {
 	this.hasher = hasher;
     }
