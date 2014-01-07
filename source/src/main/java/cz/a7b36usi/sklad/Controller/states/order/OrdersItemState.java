@@ -97,8 +97,10 @@ public class OrdersItemState implements IOrdersItemState {
 	public void delete() {
 		OrderItemDTO orderItem = orderEditForm.getEditedOrderItem();
 		logger.debug("Delete item " + orderItem.getId());
-		orderService.removeOrderItem(orderItem);
-		updateModel();
+		if(orderItem.getId() != null){
+		    orderService.removeOrderItem(orderItem);
+		    updateModel();
+		}
 	}
 
 }

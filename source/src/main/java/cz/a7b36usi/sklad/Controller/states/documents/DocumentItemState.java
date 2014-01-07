@@ -22,7 +22,7 @@ public class DocumentItemState implements IDocumentItemState {
 	static final Logger logger = Logger.getLogger(DocumentItemState.class);
 
 	@Autowired
-	private IDocumentItemsGUI orderEditForm;
+	private IDocumentItemsGUI documentEditForm;
 
 	@Autowired
 	private IProductService productService;
@@ -35,11 +35,11 @@ public class DocumentItemState implements IDocumentItemState {
 
 	@PostConstruct
 	public void registerModel() {
-		orderEditForm.addListeners(this);
+		documentEditForm.addListeners(this);
 	}
 
 	public void save() {
-		MovementDTO movement = orderEditForm.getEditedMovementItem();
+		MovementDTO movement = documentEditForm.getEditedMovementItem();
 
 		movement.setDocument(documentService.getDocumentById(item.getId()));
 
@@ -52,11 +52,11 @@ public class DocumentItemState implements IDocumentItemState {
 	public void click(int index) {
 		logger.debug("Edit item " + index);
 		MovementDTO orderItem = model.getRowByIndex(index);
-		orderEditForm.editMovementItem(orderItem);
+		documentEditForm.editMovementItem(orderItem);
 	}
 
 	public void deactivated(MainController controller, DocumentsState state) {
-		orderEditForm.setVisible(false);
+		documentEditForm.setVisible(false);
 	}
 
 	public void openDialog(MainController controller, DocumentsState state,
@@ -65,8 +65,8 @@ public class DocumentItemState implements IDocumentItemState {
 		this.item = item;
 
 		if (updateModel()) {
-			orderEditForm.setTableModel(model, productService.getAllProducts(), productService.getAllProductVersions(), productService.getAllWrappingTypes());
-			orderEditForm.setVisible(true);
+			documentEditForm.setTableModel(model, productService.getAllProducts(), productService.getAllProductVersions(), productService.getAllWrappingTypes());
+			documentEditForm.setVisible(true);
 		}
 	}
 
@@ -97,10 +97,12 @@ public class DocumentItemState implements IDocumentItemState {
 
 	public void delete() {
 
-		MovementDTO movement = orderEditForm.getEditedMovementItem();
+		MovementDTO movement = documentEditForm.getEditedMovementItem();
 		logger.debug("Delete item " + movement.getId());
-		documentService.removeMovement(movement.getId());
-		updateModel();
+		if(movement.getId() != null){
+		    documentService.removeMovement(movement.getId());
+		    updateModel();
+		}
 
 	}
 

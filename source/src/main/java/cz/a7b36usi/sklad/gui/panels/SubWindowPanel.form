@@ -78,7 +78,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jLabel2"/>
+        <Property name="text" type="java.lang.String" value="Pocet :"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JComboBox" name="cbProdukt">

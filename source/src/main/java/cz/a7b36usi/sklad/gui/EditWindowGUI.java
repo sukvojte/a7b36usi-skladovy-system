@@ -11,9 +11,6 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 
 import org.apache.log4j.Logger;
-import org.springframework.stereotype.Component;
-
-import cz.a7b36usi.sklad.gui.panels.ProductVersionPanel;
 import cz.a7b36usi.sklad.tableutils.BaseDataModel;
 
 /**

@@ -45,6 +45,11 @@ public class SubWindowPanel extends javax.swing.JPanel {
 		return tbCount;
 	}
 
+    public void refreshComponents(){
+	cbProdukt.updateUI();
+	druhBaleniCB.updateUI();
+	sarzeCB.updateUI();
+    }
 
 
 	/**
@@ -58,16 +63,16 @@ public class SubWindowPanel extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        cbProdukt = new javax.swing.JComboBox<ProductDTO>();
+        cbProdukt = new javax.swing.JComboBox();
         tbCount = new javax.swing.JTextField();
-        sarzeCB = new javax.swing.JComboBox<ProductVersionDTO>();
-        druhBaleniCB = new javax.swing.JComboBox<WrappingTypeDTO>();
+        sarzeCB = new javax.swing.JComboBox();
+        druhBaleniCB = new javax.swing.JComboBox();
         jLabel4 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
 
         jLabel1.setText("Produkt :");
 
-        jLabel2.setText("jLabel2");
+        jLabel2.setText("Pocet :");
 
         cbProdukt.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -127,13 +132,13 @@ public class SubWindowPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<ProductDTO> cbProdukt;
-    private javax.swing.JComboBox<WrappingTypeDTO> druhBaleniCB;
+    private javax.swing.JComboBox cbProdukt;
+    private javax.swing.JComboBox druhBaleniCB;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JComboBox<ProductVersionDTO> sarzeCB;
+    private javax.swing.JComboBox sarzeCB;
     private javax.swing.JTextField tbCount;
     // End of variables declaration//GEN-END:variables
 }

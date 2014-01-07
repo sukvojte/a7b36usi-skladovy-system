@@ -44,7 +44,6 @@ public class PrintService implements IPrintService {
 					new JRBeanCollectionDataSource(orderItems));
 			JasperPrintManager.printReport(jp, true);
 		} catch (JRException ex) {
-			ex.printStackTrace();
 			logger.error("Error while printing");
 			return false;
 		}

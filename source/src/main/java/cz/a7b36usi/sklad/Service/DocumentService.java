@@ -14,6 +14,8 @@ import cz.a7b36usi.sklad.BO.DocumentBO;
 import cz.a7b36usi.sklad.BO.MovementBO;
 import cz.a7b36usi.sklad.BO.PartnerBO;
 import cz.a7b36usi.sklad.BO.ProductBO;
+import cz.a7b36usi.sklad.BO.ProductVersionBO;
+import cz.a7b36usi.sklad.BO.WrappingTypeBO;
 import cz.a7b36usi.sklad.DTO.DocumentDTO;
 import cz.a7b36usi.sklad.DTO.MovementDTO;
 import cz.a7b36usi.sklad.DTO.PartnerDTO;
@@ -47,13 +49,12 @@ public class DocumentService extends AbstractService implements
 				DocumentBO.class));
 		ProductBO pbo = genericDAO.loadById(movement.getProdukt().getId(),
 				ProductBO.class);
-		bo.setProdukt(pbo);//TODO: UPRAVIT
-		// bo.setVersion(movement.getVersion() != null ?
-		// genericDAO.loadById(movement.getVersion(), ProductVersionBO.class) :
-		// null);
-		// bo.setWrapping(movement.getWrapping() != null ?
-		// genericDAO.loadById(movement.getWrapping(), WrappingTypeBO.class) :
-		// null);
+		bo.setProdukt(pbo);
+		 bo.setVersion(
+		 genericDAO.loadById(movement.getVersion(), ProductVersionBO.class));
+		 bo.setWrapping(
+		 genericDAO.loadById(movement.getWrapping(), WrappingTypeBO.class) 
+		 );
 		return genericDAO.saveOrUpdate(bo).getId();
 	}
 

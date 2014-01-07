@@ -35,6 +35,9 @@ public class DocumentItemsGUI extends javax.swing.JDialog implements
 
 	private MovementDTO editedItem;
 	private List<ProductDTO> products;
+	private List<WrappingTypeDTO> wrappingTypes;
+	private List<ProductVersionDTO> productVersions;
+	
 	private BaseDataModel<?> baseDataModel;
 
 	public void addListeners(IEditItemsGuiListener listener) {
@@ -66,8 +69,33 @@ public class DocumentItemsGUI extends javax.swing.JDialog implements
 					i++;
 				}
 			}
+			
+			i = 0;
+			if(productVersions != null){
+			    for (ProductVersionDTO pv : productVersions) {
+				if(pv.getId().equals(editedItem.getVersion())){
+				    sarzeCB.setSelectedIndex(i);
+				    break;
+				}
+				i++;
+			    }
+			}
+			i=0;
+			if(wrappingTypes != null){
+			    for (WrappingTypeDTO wt : wrappingTypes) {
+				if(wt.getId().equals(editedItem.getWrapping())){
+				    druhBaleni.setSelectedIndex(i);
+				    break;
+				}
+				i++;
+			    }
+			}
+			
 		} else {
-			tbCount.setText("");
+			tbCount.setText("0");
+			druhBaleni.setSelectedItem(null);
+			sarzeCB.setSelectedItem(null);
+			cbProdukt.setSelectedItem(null);
 		}
 
 	}
@@ -84,6 +112,13 @@ public class DocumentItemsGUI extends javax.swing.JDialog implements
 		} else {
 			editedItem.setProdukt(null);
 		}
+		WrappingTypeDTO druh = (WrappingTypeDTO) druhBaleni
+				.getSelectedItem();
+		
+		ProductVersionDTO sarze = (ProductVersionDTO) sarzeCB.getSelectedItem();
+		
+		editedItem.setVersion(sarze == null ? null : sarze.getId());
+		editedItem.setWrapping(druh == null ? null : druh.getId());
 		editedItem.setQuantity(Integer.parseInt(tbCount.getText()));
 
 		return editedItem;
@@ -92,6 +127,9 @@ public class DocumentItemsGUI extends javax.swing.JDialog implements
 	public void setTableModel(BaseDataModel<?> model, List<ProductDTO> products, List<ProductVersionDTO> productVersions, List<WrappingTypeDTO> wrappings) {
 		this.baseDataModel = model;
 		this.products = products;
+		this.productVersions = productVersions;
+		this.wrappingTypes = wrappings;
+		
 		this.tableItems.setModel(model);
 
 		cbProdukt.removeAllItems();
@@ -150,10 +188,10 @@ public class DocumentItemsGUI extends javax.swing.JDialog implements
         tbCount = new javax.swing.JTextField();
         btnDelete = new javax.swing.JButton();
         novyZaznamJB = new javax.swing.JButton();
-        sarzeCB = new javax.swing.JComboBox();
+        sarzeCB = new javax.swing.JComboBox<ProductVersionDTO>();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        druhBaleni = new javax.swing.JComboBox();
+        druhBaleni = new javax.swing.JComboBox<WrappingTypeDTO>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -290,7 +328,7 @@ public class DocumentItemsGUI extends javax.swing.JDialog implements
     }// </editor-fold>//GEN-END:initComponents
 
     private void novyZaznamJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_novyZaznamJBActionPerformed
-        // TODO add your handling code here:
+	editMovementItem(null);
     }//GEN-LAST:event_novyZaznamJBActionPerformed
 
 	private void cbProduktActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_cbProduktActionPerformed
@@ -383,14 +421,14 @@ public class DocumentItemsGUI extends javax.swing.JDialog implements
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnSave;
     private javax.swing.JComboBox<ComboBoxProductItem> cbProdukt;
-    private javax.swing.JComboBox druhBaleni;
+    private javax.swing.JComboBox<WrappingTypeDTO> druhBaleni;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton novyZaznamJB;
-    private javax.swing.JComboBox sarzeCB;
+    private javax.swing.JComboBox<ProductVersionDTO> sarzeCB;
     private javax.swing.JTable tableItems;
     private javax.swing.JTextField tbCount;
     // End of variables declaration//GEN-END:variables
