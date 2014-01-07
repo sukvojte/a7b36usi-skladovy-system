@@ -80,4 +80,20 @@ public class UserBO extends AbstractBO {
         return this.password.equals(this.hasher.computeHash(password, this.salt));
     }
 
+    public IHashProvider getHasher() {
+	return hasher;
+    }
+
+    public void setHasher(IHashProvider hasher) {
+	this.hasher = hasher;
+    }
+
+    public String getSalt() {
+	return salt;
+    }
+
+    public void setSalt(String salt) {
+	this.salt = salt;
+    }
+
 }
