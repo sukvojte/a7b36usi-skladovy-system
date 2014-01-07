@@ -42,7 +42,6 @@ public class UserBO extends AbstractBO {
     @Enumerated(EnumType.STRING)
     UserRole acl;
 
-    //@Autowired
     private transient IHashProvider hasher;
 
     /**
