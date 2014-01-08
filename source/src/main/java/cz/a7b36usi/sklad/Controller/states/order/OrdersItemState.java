@@ -15,6 +15,8 @@ import cz.a7b36usi.sklad.Service.IOrderService;
 import cz.a7b36usi.sklad.Service.IProductService;
 import cz.a7b36usi.sklad.gui.orderitems.OrderItemsDataModel;
 import cz.a7b36usi.sklad.gui.orderitems.ifaces.IOrderItemsGUI;
+import cz.a7b36usi.sklad.gui.panels.SubWindowPanel;
+import cz.a7b36usi.sklad.validators.CustomValidator;
 
 @Component
 public class OrdersItemState implements IOrdersItemState {
@@ -102,5 +104,16 @@ public class OrdersItemState implements IOrdersItemState {
 		    updateModel();
 		}
 	}
+
+    public boolean validate() {
+	SubWindowPanel swp = orderEditForm.getPanel();
+	if(swp.getCbProdukt().getSelectedItem() == null || swp.getSarzeCB().getSelectedItem() == null || swp.getDruhBaleniCB().getSelectedItem() == null){
+	    return false;
+	}
+	if(!CustomValidator.integerValidate(swp.getTbCount().getText())){
+	    return false;
+	}
+	return true;
+    }
 
 }

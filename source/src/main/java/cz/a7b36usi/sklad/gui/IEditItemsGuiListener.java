@@ -6,4 +6,6 @@ public interface IEditItemsGuiListener {
 	void click(int index);
 
 	void delete();
+	
+	boolean validate();
 }

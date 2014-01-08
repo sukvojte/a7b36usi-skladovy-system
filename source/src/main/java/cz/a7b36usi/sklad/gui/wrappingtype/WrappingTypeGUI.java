@@ -75,5 +75,9 @@ public class WrappingTypeGUI extends EditWindowGUI implements IWrappingTypeGUI {
 		return editedItem;
 	}
 
+    public WrappingTypePanel getPanel() {
+	return panel;
+    }
+
 
 }

@@ -20,4 +20,5 @@ public interface IDocumentItemsGUI extends
 	void setVisible(boolean visible);
 
 	MovementDTO getEditedMovementItem();
+	
 }

@@ -43,7 +43,6 @@ public class OrderItemsGUI extends EditWindowGUI implements IOrderItemsGUI {
 	if (orderItem != null) {
 	    panel.getCbProdukt().getModel().setSelectedItem(orderItem.getProduct());
 	    
-	    //panel.getDruhBaleniCB().getModel().setSelectedItem(orderItem.getWrappingType());
 	    ComboBoxModel<WrappingTypeDTO> wtm = panel.getDruhBaleniCB().getModel();
 	    for (int i = 0; i < wtm.getSize(); i++) {
 		if(orderItem.getWrappingType().equals(wtm.getElementAt(i).getId())){
@@ -51,7 +50,6 @@ public class OrderItemsGUI extends EditWindowGUI implements IOrderItemsGUI {
 		    break;
 		}
 	    }
-	    //panel.getSarzeCB().getModel().setSelectedItem(orderItem.getProductVersion());
 	    ComboBoxModel<ProductVersionDTO> pvm = panel.getSarzeCB().getModel();
 	    for (int i = 0; i < pvm.getSize(); i++) {
 		if(orderItem.getProductVersion().equals(pvm.getElementAt(i).getId())){
@@ -94,5 +92,9 @@ public class OrderItemsGUI extends EditWindowGUI implements IOrderItemsGUI {
 	editedItem.setQuantity(Integer.parseInt(panel.getTbCount().getText()));
 
 	return editedItem;
+    }
+
+    public SubWindowPanel getPanel() {
+	return panel;
     }
 }

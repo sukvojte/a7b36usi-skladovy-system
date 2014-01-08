@@ -106,4 +106,9 @@ public class DocumentItemState implements IDocumentItemState {
 
 	}
 
+    public boolean validate() {
+	return true;
+    }
+
+
 }

@@ -71,4 +71,7 @@ public class ProductVersionGUI extends EditWindowGUI implements IProductVersionG
 		return editedItem;
 	}
 
+	public ProductVersionPanel getPanel(){
+	    return panel;
+	}
 }

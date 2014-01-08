@@ -4,15 +4,19 @@ import cz.a7b36usi.sklad.DTO.ProductDTO;
 import cz.a7b36usi.sklad.DTO.ProductVersionDTO;
 import cz.a7b36usi.sklad.DTO.WrappingTypeDTO;
 import cz.a7b36usi.sklad.gui.IEditItemsGuiListener;
+import cz.a7b36usi.sklad.gui.panels.ProductVersionPanel;
 import cz.a7b36usi.sklad.ifaces.RecieveListener;
 import cz.a7b36usi.sklad.tableutils.BaseDataModel;
 
 public interface IProductVersionGUI extends RecieveListener<IEditItemsGuiListener> {
-	void editProductVersion(ProductVersionDTO productVersion);
 
-	void setTableModel(BaseDataModel<?> model, ProductDTO product);
+    void editProductVersion(ProductVersionDTO productVersion);
 
-	void setVisible(boolean visible);
+    void setTableModel(BaseDataModel<?> model, ProductDTO product);
 
-	ProductVersionDTO getEditedProductVersion();
+    void setVisible(boolean visible);
+
+    ProductVersionDTO getEditedProductVersion();
+
+    ProductVersionPanel getPanel();
 }

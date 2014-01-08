@@ -14,7 +14,9 @@ import cz.a7b36usi.sklad.DTO.ProductDTO;
 import cz.a7b36usi.sklad.DTO.ProductVersionDTO;
 import cz.a7b36usi.sklad.Service.IProductService;
 import cz.a7b36usi.sklad.gui.IEditItemsGuiListener;
+import cz.a7b36usi.sklad.gui.panels.ProductVersionPanel;
 import cz.a7b36usi.sklad.gui.productversion.ifaces.IProductVersionGUI;
+import cz.a7b36usi.sklad.validators.CustomValidator;
 
 @Component
 public class ProductVersionState implements IProductVersionState,IEditItemsGuiListener  {
@@ -103,5 +105,21 @@ public class ProductVersionState implements IProductVersionState,IEditItemsGuiLi
 
 		return true;
 	}
+
+    public boolean validate() {
+	ProductVersionPanel panel = productVersionForm.getPanel();
+	boolean test = true;
+	if(panel.getKodTF().getText() == null || panel.getJmenoTF().getText() == null){
+	    return false;
+	}
+		if(panel.getKodTF().getText().equals("") || panel.getJmenoTF().getText().equals("")){
+	    return false;
+	}
+	if(!CustomValidator.longValidate(panel.getKodTF().getText())){
+	    return false;
+	}
+	return true;
+	
+    }
 
 }

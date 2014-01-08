@@ -8,7 +8,10 @@ import cz.a7b36usi.sklad.DTO.ProductDTO;
 import cz.a7b36usi.sklad.DTO.WrappingTypeDTO;
 import cz.a7b36usi.sklad.Service.IProductService;
 import cz.a7b36usi.sklad.gui.IEditItemsGuiListener;
+import cz.a7b36usi.sklad.gui.panels.ProductVersionPanel;
+import cz.a7b36usi.sklad.gui.panels.WrappingTypePanel;
 import cz.a7b36usi.sklad.gui.wrappingtype.ifaces.IWrappingTypeGUI;
+import cz.a7b36usi.sklad.validators.CustomValidator;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import org.apache.log4j.Logger;
@@ -100,5 +103,20 @@ public class WrappingTypeState implements IWrappingTypeState,IEditItemsGuiListen
 
 		return true;
 	}
+
+    public boolean validate() {
+		WrappingTypePanel panel = wrappingTypeForm.getPanel();
+	boolean test = true;
+	if(panel.getMnozstviTF().getText() == null || panel.getJmenoTF().getText() == null){
+	    return false;
+	}
+		if(panel.getMnozstviTF().getText().equals("0") || panel.getMnozstviTF().getText().equals("") || panel.getJmenoTF().getText().equals("")){
+	    return false;
+	}
+	if(!CustomValidator.longValidate(panel.getMnozstviTF().getText())){
+	    return false;
+	}
+	return true;
+    }
 
 }

@@ -20,162 +20,175 @@ import cz.a7b36usi.sklad.gui.ComboBoxProductItem;
 import cz.a7b36usi.sklad.gui.IEditItemsGuiListener;
 import cz.a7b36usi.sklad.gui.documentitems.ifaces.IDocumentItemsGUI;
 import cz.a7b36usi.sklad.tableutils.BaseDataModel;
+import cz.a7b36usi.sklad.validators.CustomValidator;
+import javax.swing.JOptionPane;
 
 /**
- * 
+ *
  * @author Lukas Lowinger
  */
 @Component
 public class DocumentItemsGUI extends javax.swing.JDialog implements
-		IDocumentItemsGUI {
+	IDocumentItemsGUI {
 
-	static final Logger logger = Logger.getLogger(DocumentItemsGUI.class);
+    static final Logger logger = Logger.getLogger(DocumentItemsGUI.class);
+    private ArrayList<IEditItemsGuiListener> listeners;
+    private MovementDTO editedItem;
+    private List<ProductDTO> products;
+    private List<WrappingTypeDTO> wrappingTypes;
+    private List<ProductVersionDTO> productVersions;
+    private BaseDataModel<?> baseDataModel;
 
-	private ArrayList<IEditItemsGuiListener> listeners;
+    public void addListeners(IEditItemsGuiListener listener) {
+	listeners.add(listener);
+    }
 
-	private MovementDTO editedItem;
-	private List<ProductDTO> products;
-	private List<WrappingTypeDTO> wrappingTypes;
-	private List<ProductVersionDTO> productVersions;
-	
-	private BaseDataModel<?> baseDataModel;
+    public void removeListeners(IEditItemsGuiListener listener) {
+	listeners.remove(listener);
+    }
 
-	public void addListeners(IEditItemsGuiListener listener) {
-		listeners.add(listener);
-	}
+    public void editMovementItem(MovementDTO movementItem) {
+	editedItem = movementItem;
 
-	public void removeListeners(IEditItemsGuiListener listener) {
-		listeners.remove(listener);
-	}
+	cbProdukt.setSelectedIndex(-1);
+	if (editedItem != null) {
+	    try {
+		tbCount.setText(String.valueOf(editedItem.getQuantity()));
+	    } catch (RuntimeException ex) {
+		tbCount.setText("0");
+	    }
 
-	public void editMovementItem(MovementDTO movementItem) {
-		editedItem = movementItem;
-
-		cbProdukt.setSelectedIndex(-1);
-		if (editedItem != null) {
-			try {
-				tbCount.setText(String.valueOf(editedItem.getQuantity()));
-			} catch (RuntimeException ex) {
-				tbCount.setText("0");
-			}
-
-			int i = 0;
-			if (products != null) {
-				for (ProductDTO product : products) {
-					if (product.getId().equals(editedItem.getProdukt().getId())) {
-						cbProdukt.setSelectedIndex(i);
-						break;
-					}
-					i++;
-				}
-			}
-			
-			i = 0;
-			if(productVersions != null){
-			    for (ProductVersionDTO pv : productVersions) {
-				if(pv.getId().equals(editedItem.getVersion())){
-				    sarzeCB.setSelectedIndex(i);
-				    break;
-				}
-				i++;
-			    }
-			}
-			i=0;
-			if(wrappingTypes != null){
-			    for (WrappingTypeDTO wt : wrappingTypes) {
-				if(wt.getId().equals(editedItem.getWrapping())){
-				    druhBaleni.setSelectedIndex(i);
-				    break;
-				}
-				i++;
-			    }
-			}
-			
-		} else {
-			tbCount.setText("0");
-			druhBaleni.setSelectedItem(null);
-			sarzeCB.setSelectedItem(null);
-			cbProdukt.setSelectedItem(null);
-		}
-
-	}
-
-	public MovementDTO getEditedMovementItem() {
-
-		if (editedItem == null) {
-			editedItem = new MovementDTO();
-		}
-		ComboBoxProductItem product = (ComboBoxProductItem) cbProdukt
-				.getSelectedItem();
-		if (product != null) {
-			editedItem.setProdukt(product.getProduct());
-		} else {
-			editedItem.setProdukt(null);
-		}
-		WrappingTypeDTO druh = (WrappingTypeDTO) druhBaleni
-				.getSelectedItem();
-		
-		ProductVersionDTO sarze = (ProductVersionDTO) sarzeCB.getSelectedItem();
-		
-		editedItem.setVersion(sarze == null ? null : sarze.getId());
-		editedItem.setWrapping(druh == null ? null : druh.getId());
-		editedItem.setQuantity(Integer.parseInt(tbCount.getText()));
-
-		return editedItem;
-	}
-
-	public void setTableModel(BaseDataModel<?> model, List<ProductDTO> products, List<ProductVersionDTO> productVersions, List<WrappingTypeDTO> wrappings) {
-		this.baseDataModel = model;
-		this.products = products;
-		this.productVersions = productVersions;
-		this.wrappingTypes = wrappings;
-		
-		this.tableItems.setModel(model);
-
-		cbProdukt.removeAllItems();
-		if (products != null) {
-			for (ProductDTO product : products) {
-				cbProdukt.addItem(new ComboBoxProductItem(product));
-			}
-		}
-		
-		sarzeCB.removeAllItems();
-		if(productVersions != null){
-		    for (ProductVersionDTO pv : productVersions) {
-			sarzeCB.addItem(pv);
+	    int i = 0;
+	    if (products != null) {
+		for (ProductDTO product : products) {
+		    if (product.getId().equals(editedItem.getProdukt().getId())) {
+			cbProdukt.setSelectedIndex(i);
+			break;
 		    }
+		    i++;
 		}
-		druhBaleni.removeAllItems();
-		if(druhBaleni!= null){
-		    for (WrappingTypeDTO wt : wrappings) {
-			druhBaleni.addItem(wt);
+	    }
+
+	    i = 0;
+	    if (productVersions != null) {
+		for (ProductVersionDTO pv : productVersions) {
+		    if (pv.getId().equals(editedItem.getVersion())) {
+			sarzeCB.setSelectedIndex(i);
+			break;
 		    }
+		    i++;
 		}
+	    }
+	    i = 0;
+	    if (wrappingTypes != null) {
+		for (WrappingTypeDTO wt : wrappingTypes) {
+		    if (wt.getId().equals(editedItem.getWrapping())) {
+			druhBaleni.setSelectedIndex(i);
+			break;
+		    }
+		    i++;
+		}
+	    }
 
+	} else {
+	    tbCount.setText("0");
+	    druhBaleni.setSelectedItem(null);
+	    sarzeCB.setSelectedItem(null);
+	    cbProdukt.setSelectedItem(null);
 	}
 
-	public DocumentItemsGUI() {
-		super();
-		listeners = new ArrayList<IEditItemsGuiListener>();
-		initComponents();
+    }
+
+    public MovementDTO getEditedMovementItem() {
+
+	if (editedItem == null) {
+	    editedItem = new MovementDTO();
+	}
+	ComboBoxProductItem product = (ComboBoxProductItem) cbProdukt
+		.getSelectedItem();
+	if (product != null) {
+	    editedItem.setProdukt(product.getProduct());
+	} else {
+	    editedItem.setProdukt(null);
+	}
+	WrappingTypeDTO druh = (WrappingTypeDTO) druhBaleni
+		.getSelectedItem();
+
+	ProductVersionDTO sarze = (ProductVersionDTO) sarzeCB.getSelectedItem();
+
+	editedItem.setVersion(sarze == null ? null : sarze.getId());
+	editedItem.setWrapping(druh == null ? null : druh.getId());
+	editedItem.setQuantity(Integer.parseInt(tbCount.getText()));
+
+	return editedItem;
+    }
+
+    public void setTableModel(BaseDataModel<?> model, List<ProductDTO> products, List<ProductVersionDTO> productVersions, List<WrappingTypeDTO> wrappings) {
+	this.baseDataModel = model;
+	this.products = products;
+	this.productVersions = productVersions;
+	this.wrappingTypes = wrappings;
+
+	this.tableItems.setModel(model);
+
+	cbProdukt.removeAllItems();
+	if (products != null) {
+	    for (ProductDTO product : products) {
+		cbProdukt.addItem(new ComboBoxProductItem(product));
+	    }
 	}
 
-	/**
-	 * Creates new form DocumentWizard
-	 */
-	public DocumentItemsGUI(java.awt.Frame parent, boolean modal) {
-		super(parent, modal);
-		listeners = new ArrayList<IEditItemsGuiListener>();
-		initComponents();
+	sarzeCB.removeAllItems();
+	if (productVersions != null) {
+	    for (ProductVersionDTO pv : productVersions) {
+		sarzeCB.addItem(pv);
+	    }
+	}
+	druhBaleni.removeAllItems();
+	if (druhBaleni != null) {
+	    for (WrappingTypeDTO wt : wrappings) {
+		druhBaleni.addItem(wt);
+	    }
 	}
 
-	/**
-	 * This method is called from within the constructor to initialize the form.
-	 * WARNING: Do NOT modify this code. The content of this method is always
-	 * regenerated by the Form Editor.
-	 */
-	@SuppressWarnings("unchecked")
-	// <editor-fold defaultstate="collapsed"
+    }
+
+    private boolean validateFields() {
+	if (sarzeCB.getSelectedItem() == null || druhBaleni.getSelectedItem() == null || cbProdukt.getSelectedItem() == null) {
+	    return false;
+	}
+	if (tbCount.getText() != null) {
+	    if (tbCount.getText().equals("") || !CustomValidator.integerValidate(tbCount.getText())) {
+		return false;
+	    }
+	} else {
+	    return false;
+	}
+	return true;
+    }
+
+    public DocumentItemsGUI() {
+	super();
+	listeners = new ArrayList<IEditItemsGuiListener>();
+	initComponents();
+    }
+
+    /**
+     * Creates new form DocumentWizard
+     */
+    public DocumentItemsGUI(java.awt.Frame parent, boolean modal) {
+	super(parent, modal);
+	listeners = new ArrayList<IEditItemsGuiListener>();
+	initComponents();
+    }
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed"
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -331,92 +344,94 @@ public class DocumentItemsGUI extends javax.swing.JDialog implements
 	editMovementItem(null);
     }//GEN-LAST:event_novyZaznamJBActionPerformed
 
-	private void cbProduktActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_cbProduktActionPerformed
-		// TODO add your handling code here:
-	}// GEN-LAST:event_cbProduktActionPerformed
+    private void cbProduktActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_cbProduktActionPerformed
+	// TODO add your handling code here:
+    }// GEN-LAST:event_cbProduktActionPerformed
 
-	private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnSaveActionPerformed
-		for (IEditItemsGuiListener ctrl : listeners) {
-			ctrl.save();
-		}
-	}// GEN-LAST:event_btnSaveActionPerformed
-
-	private void tableItemsMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_tableItemsMouseClicked
-
-		JTable table = (JTable) evt.getComponent();
-
-		if (table.getSelectedRowCount() == 1) {
-			int selected = table.getSelectedRow();
-
-			for (IEditItemsGuiListener ctrl : listeners) {
-				ctrl.click(selected);
-			}
-		}
-	}// GEN-LAST:event_tableItemsMouseClicked
-
-	private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnDeleteActionPerformed
-		for (IEditItemsGuiListener ctrl : listeners) {
-			ctrl.delete();
-		}
-	}// GEN-LAST:event_btnDeleteActionPerformed
-
-	/**
-	 * @param args
-	 *            the command line arguments
-	 */
-	public static void main(String args[]) {
-		/* Set the Nimbus look and feel */
-		// <editor-fold defaultstate="collapsed"
-		// desc=" Look and feel setting code (optional) ">
-		/*
-		 * If Nimbus (introduced in Java SE 6) is not available, stay with the
-		 * default look and feel. For details see
-		 * http://download.oracle.com/javase
-		 * /tutorial/uiswing/lookandfeel/plaf.html
-		 */
-		try {
-			for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager
-					.getInstalledLookAndFeels()) {
-				if ("Nimbus".equals(info.getName())) {
-					javax.swing.UIManager.setLookAndFeel(info.getClassName());
-					break;
-				}
-			}
-		} catch (ClassNotFoundException ex) {
-			java.util.logging.Logger
-					.getLogger(DocumentItemsGUI.class.getName()).log(
-							java.util.logging.Level.SEVERE, null, ex);
-		} catch (InstantiationException ex) {
-			java.util.logging.Logger
-					.getLogger(DocumentItemsGUI.class.getName()).log(
-							java.util.logging.Level.SEVERE, null, ex);
-		} catch (IllegalAccessException ex) {
-			java.util.logging.Logger
-					.getLogger(DocumentItemsGUI.class.getName()).log(
-							java.util.logging.Level.SEVERE, null, ex);
-		} catch (javax.swing.UnsupportedLookAndFeelException ex) {
-			java.util.logging.Logger
-					.getLogger(DocumentItemsGUI.class.getName()).log(
-							java.util.logging.Level.SEVERE, null, ex);
-		}
-		// </editor-fold>
-
-		/* Create and display the dialog */
-		java.awt.EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				DocumentItemsGUI dialog = new DocumentItemsGUI(
-						new javax.swing.JFrame(), true);
-				dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-					@Override
-					public void windowClosing(java.awt.event.WindowEvent e) {
-						System.exit(0);
-					}
-				});
-				dialog.setVisible(true);
-			}
-		});
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnSaveActionPerformed
+	if(!validateFields()){
+	    JOptionPane.showMessageDialog(rootPane, "Chyba se zadanim udaju.", "Chyba se zadanim.", JOptionPane.ERROR_MESSAGE);
+	    return;
 	}
+	for (IEditItemsGuiListener ctrl : listeners) {
+	    ctrl.save();
+	}
+    }// GEN-LAST:event_btnSaveActionPerformed
 
+    private void tableItemsMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_tableItemsMouseClicked
+
+	JTable table = (JTable) evt.getComponent();
+
+	if (table.getSelectedRowCount() == 1) {
+	    int selected = table.getSelectedRow();
+
+	    for (IEditItemsGuiListener ctrl : listeners) {
+		ctrl.click(selected);
+	    }
+	}
+    }// GEN-LAST:event_tableItemsMouseClicked
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnDeleteActionPerformed
+	for (IEditItemsGuiListener ctrl : listeners) {
+	    ctrl.delete();
+	}
+    }// GEN-LAST:event_btnDeleteActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+	/* Set the Nimbus look and feel */
+	// <editor-fold defaultstate="collapsed"
+	// desc=" Look and feel setting code (optional) ">
+		/*
+	 * If Nimbus (introduced in Java SE 6) is not available, stay with the
+	 * default look and feel. For details see
+	 * http://download.oracle.com/javase
+	 * /tutorial/uiswing/lookandfeel/plaf.html
+	 */
+	try {
+	    for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager
+		    .getInstalledLookAndFeels()) {
+		if ("Nimbus".equals(info.getName())) {
+		    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+		    break;
+		}
+	    }
+	} catch (ClassNotFoundException ex) {
+	    java.util.logging.Logger
+		    .getLogger(DocumentItemsGUI.class.getName()).log(
+		    java.util.logging.Level.SEVERE, null, ex);
+	} catch (InstantiationException ex) {
+	    java.util.logging.Logger
+		    .getLogger(DocumentItemsGUI.class.getName()).log(
+		    java.util.logging.Level.SEVERE, null, ex);
+	} catch (IllegalAccessException ex) {
+	    java.util.logging.Logger
+		    .getLogger(DocumentItemsGUI.class.getName()).log(
+		    java.util.logging.Level.SEVERE, null, ex);
+	} catch (javax.swing.UnsupportedLookAndFeelException ex) {
+	    java.util.logging.Logger
+		    .getLogger(DocumentItemsGUI.class.getName()).log(
+		    java.util.logging.Level.SEVERE, null, ex);
+	}
+	// </editor-fold>
+
+	/* Create and display the dialog */
+	java.awt.EventQueue.invokeLater(new Runnable() {
+	    public void run() {
+		DocumentItemsGUI dialog = new DocumentItemsGUI(
+			new javax.swing.JFrame(), true);
+		dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+		    @Override
+		    public void windowClosing(java.awt.event.WindowEvent e) {
+			System.exit(0);
+		    }
+		});
+		dialog.setVisible(true);
+	    }
+	});
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnSave;
@@ -432,5 +447,4 @@ public class DocumentItemsGUI extends javax.swing.JDialog implements
     private javax.swing.JTable tableItems;
     private javax.swing.JTextField tbCount;
     // End of variables declaration//GEN-END:variables
-
 }
