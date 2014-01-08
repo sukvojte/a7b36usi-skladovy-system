@@ -18,6 +18,7 @@ import org.springframework.stereotype.Component;
 
 import cz.a7b36usi.sklad.DTO.OrderDTO;
 import cz.a7b36usi.sklad.DTO.OrderItemDTO;
+import java.util.Date;
 import org.apache.log4j.Logger;
 
 /**
@@ -37,7 +38,7 @@ public class PrintService implements IPrintService {
 			Map<String, Object> params = new HashMap<String, Object>();
 
 			List<OrderItemDTO> orderItems = orderService
-					.getAllOrderItems(new OrderDTO(orderId, null, null, null,
+					.getAllOrderItems(new OrderDTO(orderId, new Date(), null, null,
 							null));
 			jr = (JasperReport) JRLoader.loadObject(new File("order1.jasper"));
 			jp = JasperFillManager.fillReport(jr, params,
