@@ -1,18 +1,12 @@
 package cz.a7b36usi.sklad.gui.wrappingtype;
 
 
-import cz.a7b36usi.sklad.gui.productversion.*;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
-
 import cz.a7b36usi.sklad.DTO.ProductDTO;
-import cz.a7b36usi.sklad.DTO.ProductVersionDTO;
 import cz.a7b36usi.sklad.DTO.WrappingTypeDTO;
 import cz.a7b36usi.sklad.gui.EditWindowGUI;
-import cz.a7b36usi.sklad.gui.panels.ProductVersionPanel;
-import cz.a7b36usi.sklad.gui.panels.SubWindowPanel;
 import cz.a7b36usi.sklad.gui.panels.WrappingTypePanel;
-import cz.a7b36usi.sklad.gui.productversion.ifaces.IProductVersionGUI;
 import cz.a7b36usi.sklad.gui.wrappingtype.ifaces.IWrappingTypeGUI;
 import cz.a7b36usi.sklad.tableutils.BaseDataModel;
 

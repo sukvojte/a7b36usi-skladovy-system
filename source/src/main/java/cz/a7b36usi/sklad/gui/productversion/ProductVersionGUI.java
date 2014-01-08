@@ -8,7 +8,6 @@ import cz.a7b36usi.sklad.DTO.ProductDTO;
 import cz.a7b36usi.sklad.DTO.ProductVersionDTO;
 import cz.a7b36usi.sklad.gui.EditWindowGUI;
 import cz.a7b36usi.sklad.gui.panels.ProductVersionPanel;
-import cz.a7b36usi.sklad.gui.panels.SubWindowPanel;
 import cz.a7b36usi.sklad.gui.productversion.ifaces.IProductVersionGUI;
 import cz.a7b36usi.sklad.tableutils.BaseDataModel;
 

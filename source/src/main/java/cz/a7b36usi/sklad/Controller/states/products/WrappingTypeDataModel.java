@@ -1,8 +1,6 @@
 package cz.a7b36usi.sklad.Controller.states.products;
 
 import java.util.List;
-
-import cz.a7b36usi.sklad.DTO.ProductVersionDTO;
 import cz.a7b36usi.sklad.DTO.WrappingTypeDTO;
 import cz.a7b36usi.sklad.tableutils.BaseDataModel;
 import cz.a7b36usi.sklad.tableutils.Column;

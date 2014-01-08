@@ -2,7 +2,6 @@ package cz.a7b36usi.sklad.gui.productversion.ifaces;
 
 import cz.a7b36usi.sklad.DTO.ProductDTO;
 import cz.a7b36usi.sklad.DTO.ProductVersionDTO;
-import cz.a7b36usi.sklad.DTO.WrappingTypeDTO;
 import cz.a7b36usi.sklad.gui.IEditItemsGuiListener;
 import cz.a7b36usi.sklad.gui.panels.ProductVersionPanel;
 import cz.a7b36usi.sklad.ifaces.RecieveListener;

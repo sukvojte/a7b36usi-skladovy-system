@@ -15,7 +15,6 @@ import cz.a7b36usi.sklad.gui.orderitems.ifaces.IOrderItemsGUI;
 import cz.a7b36usi.sklad.gui.panels.SubWindowPanel;
 import cz.a7b36usi.sklad.tableutils.BaseDataModel;
 import javax.swing.ComboBoxModel;
-import javax.swing.SwingUtilities;
 
 @Component
 public class OrderItemsGUI extends EditWindowGUI implements IOrderItemsGUI {

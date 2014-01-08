@@ -5,14 +5,11 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.swing.InputVerifier;
 import javax.swing.JTextField;
-
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import cz.a7b36usi.sklad.Controller.MainController;
 import cz.a7b36usi.sklad.Controller.states.IControllerState;
-import cz.a7b36usi.sklad.Controller.states.documents.IDocumentItemState;
 import cz.a7b36usi.sklad.DTO.ProductDTO;
 import cz.a7b36usi.sklad.Service.IProductService;
 
@@ -22,7 +19,7 @@ public class ProductsState implements IControllerState {
     static final Logger logger = Logger.getLogger(ProductsState.class);
 
     @Autowired
-    private IProductService productService;// TODO: get all movements je kde ?
+    private IProductService productService;
     
     @Autowired
     private IProductVersionState productVersionState;

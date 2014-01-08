@@ -8,7 +8,6 @@ import cz.a7b36usi.sklad.DTO.ProductDTO;
 import cz.a7b36usi.sklad.DTO.WrappingTypeDTO;
 import cz.a7b36usi.sklad.Service.IProductService;
 import cz.a7b36usi.sklad.gui.IEditItemsGuiListener;
-import cz.a7b36usi.sklad.gui.panels.ProductVersionPanel;
 import cz.a7b36usi.sklad.gui.panels.WrappingTypePanel;
 import cz.a7b36usi.sklad.gui.wrappingtype.ifaces.IWrappingTypeGUI;
 import cz.a7b36usi.sklad.validators.CustomValidator;
