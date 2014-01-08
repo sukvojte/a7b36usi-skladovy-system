@@ -160,7 +160,7 @@ public class DocumentService extends AbstractService implements
 					(pbo.getCategory() != null ? pbo.getCategory().getId() : 0));
 
 			MovementDTO dto = new MovementDTO(movementBO.getId(),
-					movementBO.getPrice(), null, null, product,
+					movementBO.getPrice(), movementBO.getWrapping().getId(), movementBO.getVersion().getId(), product,
 					getDocumentById(movementBO.getDocument().getId()),
 					movementBO.getQuantity());
 			dtos.add(dto);
