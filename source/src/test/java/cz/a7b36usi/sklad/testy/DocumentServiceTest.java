@@ -85,8 +85,8 @@ public class DocumentServiceTest extends AbstractServiceTest {
 			if (movList.get(i).getId().equals(movId)) {
 				objDetected = true;
 				assertTrue(21.0 == movList.get(i).getPrice());//TODO: upravit
-				// assertEquals(wrap,movList.get(i).getWrapping());
-				// assertEquals(vers,movList.get(i).getVersion());
+				 assertEquals(wrap,movList.get(i).getWrapping());
+				 assertEquals(vers,movList.get(i).getVersion());
 				assertEquals(prod.getId(), movList.get(i).getProdukt().getId());
 				assertEquals(docId, movList.get(i).getDocument().getId());
 			}
@@ -118,7 +118,7 @@ public class DocumentServiceTest extends AbstractServiceTest {
 		Date d = new Date();
 		DocumentDTO doc = new DocumentDTO(null, DocumentType.VYDEJKA, partId,
 				5, d);
-		Long docId = documentService.saveDocument(doc);
+		documentService.saveDocument(doc);
 		doc = documentService.getAllDocuments().get(0);
 		ProductDTO prod = addProduct(addCategory().getId());
 		Long wrap = addWrap(prod.getId());
@@ -170,7 +170,7 @@ public class DocumentServiceTest extends AbstractServiceTest {
 
 	}
 
-	// @Test
+	 @Test
 	public void getAllMovements() {
 		PartnerDTO partId = addPartner();
 		Date d = new Date();
@@ -185,20 +185,19 @@ public class DocumentServiceTest extends AbstractServiceTest {
 		MovementDTO mov2 = new MovementDTO(null, 22.0, wrap, vers, prod, doc, 0);
 		Long mov1Id = documentService.saveMovement(mov);
 		Long mov2Id = documentService.saveMovement(mov2);
-		List<MovementDTO> movList = documentService.getAllMovements();//TODO: upravit
-		// assertEquals(2,movList.size());
+		List<MovementDTO> movList = documentService.getAllMovements();
 
 		assertEquals(mov1Id, movList.get(0).getId());
-		// assertTrue(21.0==movList.get(0).getPrice());
-		// assertEquals(wrap,movList.get(0).getWrapping());
-		// assertEquals(vers,movList.get(0).getVersion());
+		 assertTrue(21.0==movList.get(0).getPrice());
+		 assertEquals(wrap,movList.get(0).getWrapping());
+		 assertEquals(vers,movList.get(0).getVersion());
 		assertEquals(prod.getId(), movList.get(0).getProdukt().getId());
 		assertEquals(docId, movList.get(0).getDocument().getId());
 
 		assertEquals(mov2Id, movList.get(1).getId());
-		// assertTrue(22.0==movList.get(1).getPrice());
-		// assertEquals(wrap,movList.get(1).getWrapping());
-		// assertEquals(vers,movList.get(1).getVersion());
+		 assertTrue(22.0==movList.get(1).getPrice());
+		 assertEquals(wrap,movList.get(1).getWrapping());
+		 assertEquals(vers,movList.get(1).getVersion());
 		assertEquals(prod.getId(), movList.get(1).getProdukt().getId());
 		assertEquals(docId, movList.get(1).getDocument().getId());
 	}
@@ -220,10 +219,10 @@ public class DocumentServiceTest extends AbstractServiceTest {
 				.getAllDocumentsMovements(docId);
 		assertEquals(1, movList.size());
 
-		assertEquals(movId, movList.get(0).getId());//TODO: upravit
+		assertEquals(movId, movList.get(0).getId());
 		assertTrue(21.0 == movList.get(0).getPrice());
-		// assertEquals(wrap,movList.get(0).getWrapping());
-		// assertEquals(vers,movList.get(0).getVersion());
+		 assertEquals(wrap,movList.get(0).getWrapping());
+		 assertEquals(vers,movList.get(0).getVersion());
 		assertEquals(prod.getId(), movList.get(0).getProdukt().getId());
 		assertEquals(docId, movList.get(0).getDocument().getId());
 	}
@@ -240,7 +239,7 @@ public class DocumentServiceTest extends AbstractServiceTest {
 		Long vers = addVersion(prod.getId());
 		doc = documentService.getAllDocuments().get(0);
 		MovementDTO mov = new MovementDTO(null, 21.0, wrap, vers, prod, doc, 0);
-		Long movId = documentService.saveMovement(mov);
+		documentService.saveMovement(mov);
 		List<DocumentDTO> docList = documentService
 				.getAllPartnersDocuments(partId.getId());
 		assertEquals(1, docList.size());
@@ -269,9 +268,9 @@ public class DocumentServiceTest extends AbstractServiceTest {
 		assertEquals(1, movList.size());
 
 		assertEquals(movId, movList.get(0).getId());
-		assertTrue(21.0 == movList.get(0).getPrice());//TODO: upravit
-		// assertEquals(wrap,movList.get(0).getWrapping());
-		// assertEquals(vers,movList.get(0).getVersion());
+		assertTrue(21.0 == movList.get(0).getPrice());
+		 assertEquals(wrap,movList.get(0).getWrapping());
+		 assertEquals(vers,movList.get(0).getVersion());
 		assertEquals(prod.getId(), movList.get(0).getProdukt().getId());
 		assertEquals(docId, movList.get(0).getDocument().getId());
 	}

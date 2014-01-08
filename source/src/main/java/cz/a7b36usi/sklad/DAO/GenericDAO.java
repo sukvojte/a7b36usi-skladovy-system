@@ -25,7 +25,7 @@ import cz.a7b36usi.sklad.BO.AbstractBO;
 @Component("genericDAO")
 public class GenericDAO implements IGenericDAO {
 
-    private final String UNCHECKED = "unchecked";
+    private static final String UNCHECKED = "unchecked";
     
 	@Autowired
 	protected EntityManagerFactory entityManagerfactory;

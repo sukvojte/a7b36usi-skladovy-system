@@ -145,7 +145,7 @@ public class DocumentItemsGUI extends javax.swing.JDialog implements
 	    }
 	}
 	druhBaleni.removeAllItems();
-	if (druhBaleni != null) {
+	if (wrappings != null) {
 	    for (WrappingTypeDTO wt : wrappings) {
 		druhBaleni.addItem(wt);
 	    }

@@ -28,7 +28,7 @@ public class DocumentDTO extends AbstractDTO {
 		this.documentType = documentType;
 		this.partner = partner;
 		this.number = number;
-		this.date = date;
+		this.date = new Date(date.getTime());
 		this.id = id;
 	}
 
@@ -60,10 +60,10 @@ public class DocumentDTO extends AbstractDTO {
 	}
 
 	public Date getDate() {
-		return date;
+		return new Date(date.getTime());
 	}
 
 	public void setDate(Date date) {
-		this.date = date;
+		this.date = new Date(date.getTime());
 	}
 }

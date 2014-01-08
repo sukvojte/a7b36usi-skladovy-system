@@ -35,16 +35,14 @@ public class PasswordHasher implements IHashProvider{
     public String computeHash(String password, String salt) {
         MessageDigest md = null;
         String salted = password + ":salt:" + salt;
-        byte[] sha1hash = null;
         try {
             md = MessageDigest.getInstance("SHA-1");
 
-            sha1hash = new byte[40];
             md.update(salted.getBytes("utf8"), 0, salted.length());
         } catch (Exception ex) {
             throw new RuntimeException(ex);
         }
-        sha1hash = md.digest();
+        byte[] sha1hash = md.digest();
         return convertToHex(sha1hash);
     }
 }

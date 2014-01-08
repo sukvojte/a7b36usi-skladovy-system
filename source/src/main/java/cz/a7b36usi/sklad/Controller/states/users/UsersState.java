@@ -109,7 +109,6 @@ public class UsersState implements IControllerState {
     }
 
     public void deactivated(MainController controller) {
-        // TODO dodelat
 
     }
 

@@ -29,13 +29,11 @@ public class MovementBO extends AbstractBO {
 
 	@Column(nullable = false)
 	private double price;
-	   //TODO: UPRAVIT
+	   
 	@ManyToOne
-	// @JoinColumn(nullable = true)
 	private WrappingTypeBO wrapping;
 
 	@ManyToOne
-	// @JoinColumn(nullable = true)
 	private ProductVersionBO version;
 
 	@ManyToOne

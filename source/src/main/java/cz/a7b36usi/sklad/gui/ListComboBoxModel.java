@@ -59,7 +59,7 @@ public class ListComboBoxModel<T extends AbstractDTO> extends AbstractListModel<
 		if(selected != null){
 			return selected.getId();
 		}
-		return new Long(0);
+		return Long.valueOf(0);
 	}
 	
 

@@ -37,7 +37,7 @@ public class OrderDTO extends AbstractDTO {
 	 */
 	public OrderDTO(Long id, Date date, String number,
 			List<OrderItemDTO> items, PartnerDTO partner) {
-		this.date = date;
+		this.date = new Date(date.getTime());
 		this.items = items;
 		this.partner = partner;
 		this.id = id;
@@ -47,11 +47,11 @@ public class OrderDTO extends AbstractDTO {
 	// ***************** GETTER SETTER KILOMETER BY PETER
 	// ********************************
 	public Date getDate() {
-		return date;
+		return new Date(date.getTime());
 	}
 
 	public void setDate(Date date) {
-		this.date = date;
+		this.date = new Date(date.getTime());
 	}
 
 	public List<OrderItemDTO> getItems() {

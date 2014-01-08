@@ -14,6 +14,8 @@ import cz.a7b36usi.sklad.DTO.OrderDTO;
 import cz.a7b36usi.sklad.DTO.OrderItemDTO;
 import cz.a7b36usi.sklad.DTO.PartnerDTO;
 import cz.a7b36usi.sklad.DTO.ProductDTO;
+import cz.a7b36usi.sklad.DTO.ProductVersionDTO;
+import cz.a7b36usi.sklad.DTO.WrappingTypeDTO;
 import cz.a7b36usi.sklad.Service.IOrderService;
 import cz.a7b36usi.sklad.Service.IPartnerService;
 import cz.a7b36usi.sklad.Service.IProductService;
@@ -35,32 +37,30 @@ public class OrderServiceTest extends AbstractServiceTest {
 
 	@Test
 	public void testSaveOrderItemsAndGet() {
-		Long partner = partnerService.addPartner(true, false, "dsfsdfsd",
+		partnerService.addPartner(true, false, "dsfsdfsd",
 				"fdsfsdf", "NEJAKA", 333, 222);
 		PartnerDTO p1 = partnerService.getAllPartners().get(0);
 		Long cat = productService.saveCategory(new CategoryDTO(null,
 				"NEJAKA KATEGORIE", null));
 		Long product = productService.saveProduct(new ProductDTO(null,
 				"PRODUKT1", "nakej posranej kod", 200, cat));
+		Long sarze = productService.saveProductVersion(new ProductVersionDTO(null, 3434L, "name", product));
+		Long druh = productService.saveWrappingType(new WrappingTypeDTO(null, "sfsdfsdfa", 4343.04, product));
+		Long order1 = orderService.saveOrder(new OrderDTO(null, new Date(), "qwqewf3", null, p1));
 		List<OrderItemDTO> list = new ArrayList<OrderItemDTO>();
-		list.add(new OrderItemDTO(null, product, 500, null, null, 0L, ""));
-		list.add(new OrderItemDTO(null, product, 700, null, null, 0L, ""));
+		list.add(new OrderItemDTO(null, product, 500, druh, sarze, order1, ""));
+		list.add(new OrderItemDTO(null, product, 700, druh, sarze, order1, ""));
 
 		Long order = orderService.saveOrder(new OrderDTO(null, new Date(),
 				"aaaa", null, p1));
-		orderService.saveOrderItem(new OrderItemDTO(null, product, 500, null,
-				null, order, ""));
-		orderService.saveOrderItem(new OrderItemDTO(null, product, 500, null,
-				null, order, ""));
+		orderService.saveOrderItem(new OrderItemDTO(null, product, 500, druh,
+				sarze, order, ""));
+		orderService.saveOrderItem(new OrderItemDTO(null, product, 500, druh,
+				sarze, order, ""));
 
 		int size = orderService.getAllOrderItems(
-				new OrderDTO(order, null, null, null, null)).size();
+				new OrderDTO(order, new Date(), null, null, null)).size();
 		assertEquals(2, size);
-	}
-
-	@Test
-	public void test() {
-
 	}
 
 }

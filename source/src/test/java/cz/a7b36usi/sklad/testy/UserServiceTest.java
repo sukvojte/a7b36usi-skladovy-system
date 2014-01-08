@@ -35,7 +35,7 @@ public class UserServiceTest extends AbstractServiceTest {
 		Long id = userService.addUser(name, password.toCharArray(), ur);
 		UserDTO u1 = userService.getUserById(id);
 		UserDTO u2 = userService.getUserByUsername(name);
-		userService.addUser("admin", "admin".toCharArray(), UserRole.VEDOUCI);
+		//userService.addUser("admin", "admin".toCharArray(), UserRole.VEDOUCI);
 		assertNotNull(u1);
 		assertNotNull(u2);
 		assertFalse(userService.getAllUsers().isEmpty());
@@ -76,7 +76,6 @@ public class UserServiceTest extends AbstractServiceTest {
 		assertNotNull(u2);
 		assertEquals(name2, u2.getUsername());
 		assertEquals(id, u2.getId());
-		assertEquals(password, u2.getPassword());
 		assertEquals(ur, u2.getAcl());
 	}
 
@@ -90,8 +89,8 @@ public class UserServiceTest extends AbstractServiceTest {
 		String password2 = "nevim";
 		UserRole ur2 = UserRole.VEDOUCI;
 		Long id2 = userService.addUser(name2, password2.toCharArray(), ur2);
-		UserDTO u1 = userService.getUserById(id);
-		UserDTO u2 = userService.getUserById(id2);
+		userService.getUserById(id);
+		userService.getUserById(id2);
 		List<UserDTO> list = userService.getAllUsers();
 		assertFalse(list.isEmpty());
 		boolean det1 = false;
@@ -101,14 +100,12 @@ public class UserServiceTest extends AbstractServiceTest {
 				UserDTO u = list.get(i);
 				assertEquals(name, u.getUsername());
 				assertEquals(id, u.getId());
-				assertEquals(password, u.getPassword());
 				assertEquals(ur, u.getAcl());
 				det1 = true;
 			} else if (list.get(i).getId().equals(id2)) {
 				UserDTO u = list.get(i);
 				assertEquals(name2, u.getUsername());
 				assertEquals(id2, u.getId());
-				assertEquals(password2, u.getPassword());
 				assertEquals(ur, u.getAcl());
 				det2 = true;
 			}
@@ -131,7 +128,6 @@ public class UserServiceTest extends AbstractServiceTest {
 		assertNotNull(u2);
 		assertEquals(name, u2.getUsername());
 		assertEquals(id, u2.getId());
-		assertEquals(password2, u2.getPassword());
 		assertEquals(ur, u2.getAcl());
 	}
 
@@ -140,7 +136,7 @@ public class UserServiceTest extends AbstractServiceTest {
 		String name = "lojza" + System.currentTimeMillis();
 		String password = "nevim";
 		UserRole ur = UserRole.VEDOUCI;
-		Long id = userService.addUser(name, password.toCharArray(), ur);
+		userService.addUser(name, password.toCharArray(), ur);
 		assertTrue(userService.logInUser(name, password.toCharArray()));
 	}
 

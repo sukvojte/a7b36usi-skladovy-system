@@ -94,11 +94,10 @@ public class OrderService extends AbstractService implements IOrderService {
 				genericDAO.loadById(order.getId(), OrderBO.class),
 				OrderItemBO.class);
 		List<OrderItemDTO> ordersDTO = new ArrayList<OrderItemDTO>();
-		for (OrderItemBO orderItemBO : bos) {// TODO: NULLY PRYC, pouze kvuli
-												// tisku
+		for (OrderItemBO orderItemBO : bos) {
 			ordersDTO.add(new OrderItemDTO(orderItemBO.getId(), orderItemBO
-					.getProduct().getId(), orderItemBO.getQuantity(), null,
-					null, orderItemBO.getOrder().getId(), orderItemBO
+					.getProduct().getId(), orderItemBO.getQuantity(), orderItemBO.getWrappingType().getId(),
+					orderItemBO.getProductVersion().getId(), orderItemBO.getOrder().getId(), orderItemBO
 							.getProduct().getName()));
 
 		}

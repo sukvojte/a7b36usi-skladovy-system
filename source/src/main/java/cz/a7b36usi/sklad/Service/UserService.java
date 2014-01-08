@@ -90,7 +90,7 @@ public class UserService extends AbstractService implements IUserService {
 		u.setPassword(new String(password));
 		genericDAO.saveOrUpdate(u);
 
-		Arrays.fill(password, (char) 0);//TODO: Proc to tu je ?
+		Arrays.fill(password, (char) 0);
 	}
 
 	public UserDTO getUserByUsername(String username) {

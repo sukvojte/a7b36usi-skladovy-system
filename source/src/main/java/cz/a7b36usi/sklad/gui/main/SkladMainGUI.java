@@ -136,13 +136,7 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
 				return new OrderDTO((id != 0 ? id : null), dateChooserCombo1
 						.getSelectedDate().getTime(),
 						cisloObjednavkaTF.getText(), null,
-						 ((ComboBoxPartnerItem)partnersObjednavkyCB.getSelectedItem()).getProduct());// TODO: list orderitemu je null
-																				// id
-																				// partnera
-																				// ?
-																				// list
-																				// orderItemu
-																				// ?
+						 ((ComboBoxPartnerItem)partnersObjednavkyCB.getSelectedItem()).getProduct());
 			}
 
 			public DocumentDTO getDocumentData() {
@@ -332,7 +326,6 @@ public class SkladMainGUI extends javax.swing.JFrame implements ISkladMainGUI {
 				TabsJPanel panel = (TabsJPanel) source.getSelectedComponent();
 				Tabs selectedTab = panel.getTab();
 
-				// TODO: akce pri zmene panelu
 				nullForms();
 
 				// Fire event tabChanged

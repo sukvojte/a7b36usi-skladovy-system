@@ -25,58 +25,7 @@ public class ProductBO extends AbstractBO {
 
 	@ManyToOne
 	private CategoryBO category;
-	   //TODO: tady nevim co se stalo
-	// public List<MovementBO> getPohyby() {
-	// return pohyby;
-	// }
-	//
-	// public void setPohyby(List<MovementBO> pohyby) {
-	// this.pohyby = pohyby;
-	// }
-	//
-	// public List<ProductVersionBO> getSarze() {
-	// return sarze;
-	// }
-	//
-	// public void setSarze(List<ProductVersionBO> sarze) {
-	// this.sarze = sarze;
-	// }
-	//
-	// public List<WrappingTypeBO> getDruhyBaleni() {
-	// return druhyBaleni;
-	// }
-	//
-	// public void setDruhyBaleni(List<WrappingTypeBO> druhyBaleni) {
-	// this.druhyBaleni = druhyBaleni;
-	// }
-	//
-	// public List<OrderItemBO> getPolozky() {
-	// return polozky;
-	// }
-	//
-	// public void setPolozky(List<OrderItemBO> polozky) {
-	// this.polozky = polozky;
-	// }
 
-	// @OneToMany(cascade = {CascadeType.ALL})
-	// private List<MovementBO> pohyby;
-	//
-	// @OneToMany(cascade = {CascadeType.ALL})
-	// private List<ProductVersionBO> sarze;
-	//
-	// @OneToMany(cascade = {CascadeType.ALL})
-	// private List<WrappingTypeBO> druhyBaleni;
-	//
-	// @OneToMany(cascade = {CascadeType.ALL})
-	// private List<OrderItemBO> polozky;
-	// public void addPohyb(MovementBO pohyb){
-	// if(pohyby == null){
-	// pohyby = new ArrayList<MovementBO>();
-	// }
-	// if(!pohyby.contains(pohyb)){
-	// pohyby.add(pohyb);
-	// }
-	// }
 	public String getName() {
 		return name;
 	}
